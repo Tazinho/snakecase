@@ -14,8 +14,17 @@ Usage
 -----
 
 ``` r
-snakecase::to_snake_case(c("smallCamelCase", "BigCamelCase", "mixed_Case",
-                           "BIGGY BIGGY BIGGY", NA))
+library(snakecase)
+
+to_snake_case(c("smallCamelCase", "BigCamelCase", "mixed_Case", "BIGGY BIGGY BIGGY", NA))
 ## [1] "small_camel_case"  "big_camel_case"    "mixed_case"       
 ## [4] "biggy_biggy_biggy" NA
+
+to_small_camel_case(c("smallCamelCase", "BigCamelCase", "mixed_Case", "BIGGY BIGGY BIGGY", NA))
+## [1] "smallCamelCase"  "bigCamelCase"    "mixedCase"       "biggyBiggyBiggy"
+## [5] NA
+
+to_big_camel_case(c("smallCamelCase", "BigCamelCase", "mixed_Case", "BIGGY BIGGY BIGGY", NA))
+## [1] "SmallCamelCase"  "BigCamelCase"    "MixedCase"       "BiggyBiggyBiggy"
+## [5] NA
 ```
