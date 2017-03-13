@@ -1,0 +1,15 @@
+Package: snakecase
+Version: 0.1
+Date: 2017-03-12
+Title: snakecase
+Description: Functions to convert column names to snake or camel case.
+Author: Malte Grosser <malte.grosser@gmail.com>
+Maintainer: Malte Grosser <malte.grosser@gmail.com>
+Depends:
+    R (>= 3.3.3)
+Imports:
+    stringr,
+    purrr,
+    magrittr
+License: GPL-3
+RoxygenNote: 6.0.1
