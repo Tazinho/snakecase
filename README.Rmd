@@ -11,5 +11,7 @@ devtools::install_github("Tazinho/snakecase")
 ## Usage
 
 ```{r, results='asis'}
-snakecase::to_snake_case(c("smallCamelCase", "BigCamelCase", "mixed_Case"))
+snakecase::to_snake_case(c("smallCamelCase", "BigCamelCase",
+                           "mixed_Case", "BIGGY BIGGY BIGGY", 
+                           NA))
 ```
