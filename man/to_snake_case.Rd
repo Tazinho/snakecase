@@ -7,7 +7,7 @@
 to_snake_case(camelcases)
 }
 \arguments{
-\item{camelcases}{Character string indicating some column names of a data.frame.}
+\item{camelcases}{Character string indicating column names of a data.frame.}
 }
 \value{
 Vector of character strings in snake_case
