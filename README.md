@@ -15,7 +15,6 @@ Usage
 
 ``` r
 snakecase::to_snake_case(c("smallCamelCase", "BigCamelCase", "mixed_Case", "BIGGY BIGGY BIGGY", NA))
+## [1] "small_camel_case"  "big_camel_case"    "mixed_case"       
+## [4] "biggy_biggy_biggy" NA
 ```
-
-\[1\] "small\_camel\_case" "big\_camel\_case" "mixed\_case"
-\[4\] "biggy\_biggy\_biggy" NA
