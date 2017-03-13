@@ -1,4 +1,7 @@
-# snakecase
+---
+title: "snakecase"
+output: html_document
+---
 A small package with functions to convert columnnames of data.frames (or strings
 in general) to snake_case, smallCamel- and BigCamelCase.
 
@@ -11,7 +14,5 @@ devtools::install_github("Tazinho/snakecase")
 ## Usage
 
 ```{r, results='asis'}
-snakecase::to_snake_case(c("smallCamelCase", "BigCamelCase",
-                           "mixed_Case", "BIGGY BIGGY BIGGY", 
-                           NA))
+snakecase::to_snake_case(c("smallCamelCase", "BigCamelCase", "mixed_Case", "BIGGY BIGGY BIGGY", NA))
 ```
