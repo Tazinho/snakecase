@@ -1,6 +1,6 @@
 # snakecase
 A small package with functions to convert columnnames of data.frames (or strings
-in general) to snake_case, smallCamel- and BigCamelCase
+in general) to snake_case, smallCamel- and BigCamelCase.
 
 ## Install
 
