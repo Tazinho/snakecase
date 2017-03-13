@@ -1,6 +1,6 @@
 #' Functions to convert column names to snake_case
 #'
-#' @param camelcases Character string indicating some column names of a data.frame.
+#' @param camelcases Character string indicating column names of a data.frame.
 #'
 #' @return Vector of character strings in snake_case
 #'
