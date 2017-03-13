@@ -1,6 +1,6 @@
 #' Functions to convert column names to smallCamelCase
 #'
-#' @param camelcases Character string indicating column names of a data.frame.
+#' @param snake_case Character string indicating column names of a data.frame.
 #'
 #' @return Vector of character strings in smallCamelCase
 #'
