@@ -1,8 +1,8 @@
 ---
 title: "snakecase"
-output: html_document
+output: rmarkdown::github_document
 ---
-A small package with functions to convert columnnames of data.frames (or strings
+A small package with functions to convert column names of data.frames (or strings
 in general) to snake_case, smallCamel- and BigCamelCase.
 
 ## Install
