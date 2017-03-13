@@ -34,8 +34,8 @@ to_big_camel_case(strings)
 ## [5] NA
 ```
 
-Current behaviour
------------------
+Current behaviour (this part is work in progress)
+-------------------------------------------------
 
 Conversion to camel case is not always obvious. Below you can see the current bahaviour. Those examples that behave as intended (X) will be stable in the future. Others might be considered to be changed.
 
