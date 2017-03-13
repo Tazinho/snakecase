@@ -11,5 +11,7 @@ Imports:
     stringr,
     purrr,
     magrittr
+Suggests:
+    testthat
 License: GPL-3
 RoxygenNote: 6.0.1
