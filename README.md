@@ -47,42 +47,42 @@ where `to_A` and to `to_B` can be `to_snake_case`, `to_small_camel_case` and `to
 
 However, note equality in this equation is only one criterion and it still doesn't imply a unique solution on how to translate an initial string argument to snake or camel case. (Note that also `to_xxx(string) = to_xxx(string)` seems desirable).
 
-|   nr| examples          | snake\_case          | smallCamelCase | BigCamelCase   | As intended?                                                                                                                          |
-|----:|:------------------|:---------------------|:---------------|:---------------|:--------------------------------------------------------------------------------------------------------------------------------------|
-|    1| NA                | NA                   | NA             | NA             | X, \*Td\*                                                                                                                             |
-|    2| snake\_case       | snake\_case          | snakeCase      | SnakeCase      | X, \*Td\*                                                                                                                             |
-|    3| snakeCase         | snake\_case          | snakeCase      | SnakeCase      | X, \*Td\*                                                                                                                             |
-|    4| SnakeCase         | snake\_case          | snakeCase      | SnakeCase      | X, \*Td\*                                                                                                                             |
-|    5| \_                |                      |                |                |                                                                                                                                       |
-|    6| snake\_Case       | snake\_case          | snakeCase      | SnakeCase      | X, \*Td\*                                                                                                                             |
-|    7| \_                |                      |                |                |                                                                                                                                       |
-|    8| SNake             | s\_nake              | sNake          | SNake          | ? would be ok, but maybe sn\_ake or s\_nake...-&gt; must be s\_nake, because of 10                                                    |
-|    9| Snake             | snake                | snake          | Snake          | X, \*Td\*                                                                                                                             |
-|   10| s\_nake           | s\_nake              | sNake          | SNake          | X, \*Td\* this one is correct, but it implies that 8 has to be translated to s\_nake (otherwise the equation above does not hold)     |
-|   11| sn\_ake           | sn\_ake              | snAke          | SnAke          | X, \*Td\*                                                                                                                             |
-|   12| \_                |                      |                |                |                                                                                                                                       |
-|   13| SNaKE             | s\_na\_ke            | sNaKe          | SNaKe          | ? the equation holds, but...hm.., better s\_na\_ke (would be consistent with 8 and 10 and still allow for capital letter stuff below) |
-|   14| SNaKEr            | s\_na\_k\_er         | sNaKEr         | SNaKEr         | ? the equation holds, but better s\_na\_k\_er, to be consistent with changes (8,10,13)                                                |
-|   15| s\_na\_k\_er      | s\_na\_k\_er         | sNaKEr         | SNaKEr         | X, \*Td\* (the equation will also hold for this one, with a change to 14)                                                             |
-|   16| \_                |                      |                |                |                                                                                                                                       |
-|   17| SNAKE SNAKE CASE  | snake\_snake\_case   | snakeSnakeCase | SnakeSnakeCase | X \*Td\*                                                                                                                              |
-|   18| \_                |                      |                |                |                                                                                                                                       |
-|   19| snakeSnakECase    | snake\_snak\_e\_case | snakeSnakECase | SnakeSnakECase | ? should be snake\_snak\_e\_case                                                                                                      |
-|   20| SNAKE snakE\_case | snake\_snak\_e\_case | snakeSnakECase | SnakeSnakECase | \_ ?                                                                                                                                  |
-|   21| \_                |                      |                |                |                                                                                                                                       |
-|   22| bangBooMBang      | bang\_boo\_m\_bang   | bangBooMBang   | BangBooMBang   | \_ X                                                                                                                                  |
-|   23| upPER             | up\_per              | upPer          | UpPer          | \_ X                                                                                                                                  |
-|   24| CId               | c\_id                | cId            | CId            | \_ ? (maybe c\_id)                                                                                                                    |
-|   25| \_                |                      |                |                | \_ ?                                                                                                                                  |
-|   26| \_\_\_            |                      |                |                | \_ ?                                                                                                                                  |
-|   27| .                 |                      |                |                | \_ ?                                                                                                                                  |
-|   28| ...               |                      |                |                | \_ ?                                                                                                                                  |
-|   29| Sepal.Width       | sepal\_width         | sepalWidth     | SepalWidth     | \_ X                                                                                                                                  |
-|   30| Var 1             | var\_1               | var1           | Var1           | \_ ? (maybe var1)                                                                                                                     |
-|   31| Var-2             | var\_-2              | var-2          | Var-2          | \_ ?                                                                                                                                  |
-|   32| Var.3             | var\_3               | var3           | Var3           | \_ ? (maybe var3)                                                                                                                     |
-|   33| Var4              | var\_4               | var4           | Var4           | \_ X                                                                                                                                  |
-|   34| SnakeCase         | snake\_case          | snakeCase      | SnakeCase      |                                                                                                                                       |
-|   35| Snake-Case        | snake\_-\_case       | snake-Case     | Snake-Case     |                                                                                                                                       |
-|   36| Snake Case        | snake\_case          | snakeCase      | SnakeCase      |                                                                                                                                       |
-|   37| Snake - Case      | snake\_-\_case       | snake-Case     | Snake-Case     |                                                                                                                                       |
+|   nr| examples          | snake\_case          | smallCamelCase | BigCamelCase   | As intended?       |
+|----:|:------------------|:---------------------|:---------------|:---------------|:-------------------|
+|    1| NA                | NA                   | NA             | NA             | \*Td\*, X          |
+|    2| snake\_case       | snake\_case          | snakeCase      | SnakeCase      | \*Td\*, X          |
+|    3| snakeCase         | snake\_case          | snakeCase      | SnakeCase      | \*Td\*, X          |
+|    4| SnakeCase         | snake\_case          | snakeCase      | SnakeCase      | \*Td\*, X          |
+|    5| \_                |                      |                |                |                    |
+|    6| snake\_Case       | snake\_case          | snakeCase      | SnakeCase      | \*Td\*, X          |
+|    7| \_                |                      |                |                |                    |
+|    8| SNake             | s\_nake              | sNake          | SNake          | \*Td\*, ?          |
+|    9| Snake             | snake                | snake          | Snake          | \*Td\*, X          |
+|   10| s\_nake           | s\_nake              | sNake          | SNake          | \*Td\*, X          |
+|   11| sn\_ake           | sn\_ake              | snAke          | SnAke          | \*Td\*, X          |
+|   12| \_                |                      |                |                |                    |
+|   13| SNaKE             | s\_na\_ke            | sNaKe          | SNaKe          | \*Td\*, ?          |
+|   14| SNaKEr            | s\_na\_k\_er         | sNaKEr         | SNaKEr         | \*Td\*, ?          |
+|   15| s\_na\_k\_er      | s\_na\_k\_er         | sNaKEr         | SNaKEr         | \*Td\*, X          |
+|   16| \_                |                      |                |                |                    |
+|   17| SNAKE SNAKE CASE  | snake\_snake\_case   | snakeSnakeCase | SnakeSnakeCase | X \*Td\*           |
+|   18| \_                |                      |                |                |                    |
+|   19| snakeSnakECase    | snake\_snak\_e\_case | snakeSnakECase | SnakeSnakECase | , \*Td\*           |
+|   20| SNAKE snakE\_case | snake\_snak\_e\_case | snakeSnakECase | SnakeSnakECase | \_ ?               |
+|   21| \_                |                      |                |                |                    |
+|   22| bangBooMBang      | bang\_boo\_m\_bang   | bangBooMBang   | BangBooMBang   | \_ X               |
+|   23| upPER             | up\_per              | upPer          | UpPer          | \_ X               |
+|   24| CId               | c\_id                | cId            | CId            | \_ ? (maybe c\_id) |
+|   25| \_                |                      |                |                | \_ ?               |
+|   26| \_\_\_            |                      |                |                | \_ ?               |
+|   27| .                 |                      |                |                | \_ ?               |
+|   28| ...               |                      |                |                | \_ ?               |
+|   29| Sepal.Width       | sepal\_width         | sepalWidth     | SepalWidth     | \_ X               |
+|   30| Var 1             | var\_1               | var1           | Var1           | \_ ? (maybe var1)  |
+|   31| Var-2             | var\_-2              | var-2          | Var-2          | \_ ?               |
+|   32| Var.3             | var\_3               | var3           | Var3           | \_ ? (maybe var3)  |
+|   33| Var4              | var\_4               | var4           | Var4           | \_ X               |
+|   34| SnakeCase         | snake\_case          | snakeCase      | SnakeCase      |                    |
+|   35| Snake-Case        | snake\_-\_case       | snake-Case     | Snake-Case     |                    |
+|   36| Snake Case        | snake\_case          | snakeCase      | SnakeCase      |                    |
+|   37| Snake - Case      | snake\_-\_case       | snake-Case     | Snake-Case     |                    |
