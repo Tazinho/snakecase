@@ -40,8 +40,9 @@ In general it might be desirable to have at least sth. like "pairwise inversity"
 
 where `to_A` and to `to_B` can be `to_snake_case`, `to_small_camel_case` and `to_big_camel_case`.
 
-However, note equality in this equation is only one criterion and it still doesn't
-imply a unique solution on how to translate an initial string argument to snake or camel case. (Note that also `to_xxx(string) = to_xxx(string)` seems desirable).
+Note that equality in this equation is only one criterion and it still doesn't
+imply a unique solution on how to translate an initial string argument to snake or camel case. (Note that also `to_xxx(string) = to_xxx(string)` seems desirable). However, for the 
+following testcases, also these two equations are tested.
 
 ```{r, echo = FALSE}
 cases <- c(NA,
