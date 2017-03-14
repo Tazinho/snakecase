@@ -37,7 +37,7 @@ to_big_camel_case(strings)
 Current behaviour (this part is work in progress)
 -------------------------------------------------
 
-Conversion to camel case is not always obvious. Below you can see the current bahaviour. Those examples that behave as intended (X) will be stable in the future. Others might be considered to be changed.
+Conversion to camel case is not always obvious. Below you can see the current bahaviour. Those examples that behave as intended (X) and are also tested (`*Td*`) will be stable in the future. Others might be considered to be changed.
 
 In general it might be desirable to have at least sth. like "pairwise inversity" of the three `to_xxx` functions on the space of `to_xxx(string)`. So it might be a good criterion if the following equation holds for any input string:
 
@@ -49,12 +49,12 @@ However, note equality in this equation is only one criterion and it still doesn
 
 |   nr| examples          | snake\_case          | smallCamelCase | BigCamelCase   | As intended?                                                                                                                          |
 |----:|:------------------|:---------------------|:---------------|:---------------|:--------------------------------------------------------------------------------------------------------------------------------------|
-|    1| NA                | NA                   | NA             | NA             | X                                                                                                                                     |
-|    2| snake\_case       | snake\_case          | snakeCase      | SnakeCase      | X                                                                                                                                     |
-|    3| snakeCase         | snake\_case          | snakeCase      | SnakeCase      | X                                                                                                                                     |
-|    4| SnakeCase         | snake\_case          | snakeCase      | SnakeCase      | X                                                                                                                                     |
+|    1| NA                | NA                   | NA             | NA             | X, \*Td\*                                                                                                                             |
+|    2| snake\_case       | snake\_case          | snakeCase      | SnakeCase      | X, \*Td\*                                                                                                                             |
+|    3| snakeCase         | snake\_case          | snakeCase      | SnakeCase      | X, \*Td\*                                                                                                                             |
+|    4| SnakeCase         | snake\_case          | snakeCase      | SnakeCase      | X, \*Td\*                                                                                                                             |
 |    5| \_                |                      |                |                |                                                                                                                                       |
-|    6| snake\_Case       | snake\_case          | snakeCase      | SnakeCase      | X                                                                                                                                     |
+|    6| snake\_Case       | snake\_case          | snakeCase      | SnakeCase      | X, \*Td\*                                                                                                                             |
 |    7| \_                |                      |                |                |                                                                                                                                       |
 |    8| SNake             | snake                | snake          | Snake          | ? would be ok, but maybe sn\_ake or s\_nake...-&gt; must be s\_nake, because of 10                                                    |
 |    9| Snake             | snake                | snake          | Snake          | X                                                                                                                                     |
