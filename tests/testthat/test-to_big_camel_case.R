@@ -17,6 +17,8 @@ test_that("basic usage", {
                 "13",
                 "14",
                 "s_na_k_er",
+                "_",
+                "SNAKE SNAKE CASE",
                 "_"
   )
   
@@ -35,6 +37,8 @@ test_that("basic usage", {
                       "13",
                       "14",
                       "SNaKEr",
+                      "",
+                      "SnakeSnakeCase",
                       "")
   
   expect_equal(to_big_camel_case(examples),

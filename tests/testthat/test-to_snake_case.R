@@ -17,6 +17,8 @@ test_that("basic usage", {
                 "13",
                 "14",
                 "s_na_k_er",
+                "_",
+                "SNAKE SNAKE CASE",
                 "_"
                 )
   
@@ -35,7 +37,10 @@ test_that("basic usage", {
                   "13",
                   "14",
                   "s_na_k_er",
-                  "")
+                  "",
+                  "snake_snake_case",
+                  ""
+                  )
   
   expect_equal(to_snake_case(examples),
                snake_case)
