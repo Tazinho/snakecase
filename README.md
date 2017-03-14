@@ -41,7 +41,7 @@ Conversion to camel case is not always obvious. Below you can see the current ba
 
 In general it might be desirable to have at least sth. like "pairwise inversity" of the three `to_xxx` functions on the space of `to_xxx(string)`. So it might be a good criterion if the following equation holds for any input string:
 
-1.  `to_A(to_B(to_A(string))) = to_A(string)`,
+1.  `to_A(to_B(to_A(string))) = to_A(string)`, (note that this might be equivalent to `to_A(to_B(string))) = to_A(string)`)
 
 where `to_A` and to `to_B` can be `to_snake_case`, `to_small_camel_case` and `to_big_camel_case`.
 
@@ -82,3 +82,7 @@ However, note equality in this equation is only one criterion and it still doesn
 |   31| Var-2             | var-2                | var-2          | Var-2          | \_ ?                                                                                                                                  |
 |   32| Var.3             | var\_3               | var3           | Var3           | \_ ? (maybe var3)                                                                                                                     |
 |   33| Var4              | var4                 | var4           | Var4           | \_ X                                                                                                                                  |
+|   34| SnakeCase         | snake\_case          | snakeCase      | SnakeCase      |                                                                                                                                       |
+|   35| Snake-Case        | snake-\_case         | snake-Case     | Snake-Case     |                                                                                                                                       |
+|   36| Snake Case        | snake\_case          | snakeCase      | SnakeCase      |                                                                                                                                       |
+|   37| Snake - Case      | snake\_-\_case       | snake-Case     | Snake-Case     |                                                                                                                                       |

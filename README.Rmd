@@ -36,7 +36,7 @@ Others might be considered to be changed.
 
 In general it might be desirable to have at least sth. like "pairwise inversity" of the three `to_xxx` functions on the space of `to_xxx(string)`. So it might be a good criterion if the following equation holds for any input string:
 
-1. `to_A(to_B(to_A(string))) = to_A(string)`,
+1. `to_A(to_B(to_A(string))) = to_A(string)`, (note that this might be equivalent to `to_A(to_B(string))) = to_A(string)`)
 
 where `to_A` and to `to_B` can be `to_snake_case`, `to_small_camel_case` and `to_big_camel_case`.
 
@@ -44,7 +44,8 @@ However, note equality in this equation is only one criterion and it still doesn
 imply a unique solution on how to translate an initial string argument to snake or camel case. (Note that also `to_xxx(string) = to_xxx(string)` seems desirable).
 
 ```{r, echo = FALSE}
-cases <- c(NA, "snake_case", "snakeCase",
+cases <- c(NA,
+           "snake_case", "snakeCase",
            "SnakeCase", "_", "snake_Case", 
            "_", "SNake", "Snake",
            "s_nake", "sn_ake", "_",
@@ -55,14 +56,19 @@ cases <- c(NA, "snake_case", "snakeCase",
            "upPER", "CId", "_",
            "___", ".", "...",
            "Sepal.Width", "Var 1", "Var-2",
-           "Var.3", "Var4")
+           "Var.3", "Var4",
+           "SnakeCase",
+           "Snake-Case",
+           "Snake Case",
+           "Snake  -  Case")
 
 knitr::kable(tibble::tibble(nr = seq_along(cases),
                             examples = cases,
                             snake_case = snakecase::to_snake_case(cases),
                             smallCamelCase = snakecase::to_small_camel_case(cases),
                             BigCamelCase = snakecase::to_big_camel_case(cases),
-                            `As intended?` = c("X", "X", "X", 
+                            `As intended?` = c("X",
+                                               "X", "X", 
                                                "X", "", "X",
                                                "", "? would be ok, but maybe sn_ake or s_nake...-> must be s_nake, because of 10", "X",
                                                "X this one is correct, but it implies that 8 has to be translated to s_nake (otherwise the equation above does not hold)", "X",
@@ -75,6 +81,7 @@ knitr::kable(tibble::tibble(nr = seq_along(cases),
                                                "_ X", "_ ? (maybe c_id)", "_ ?",
                                                "_ ?", "_ ?", "_ ?",
                                                "_ X", "_ ? (maybe var1)", "_ ?", 
-                                               "_ ? (maybe var3)", "_ X"))
+                                               "_ ? (maybe var3)", "_ X",
+                                               "","","",""))
              )
 ```
