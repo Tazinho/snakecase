@@ -8,7 +8,7 @@ test_that("basic usage", {
                 "SnakeCase",
                 "snake_Case")
   
-  snake_case <- c("NA",
+  snake_case <- c(NA,
                   "snake_case",
                   "snake_case",
                   "snake_case",
