@@ -10,7 +10,14 @@ test_that("basic usage", {
                 "snake_Case",
                 "_",
                 "8",
-                "Snake"
+                "Snake",
+                "s_nake",
+                "sn_ake",
+                "_",
+                "13",
+                "14",
+                "s_na_k_er",
+                "_"
   )
   
   small_camel_case <- c(NA, 
@@ -21,7 +28,14 @@ test_that("basic usage", {
                         "snakeCase",
                         "",
                         "8",
-                        "snake")
+                        "snake",
+                        "sNake",
+                        "snAke",
+                        "",
+                        "13",
+                        "14",
+                        "sNaKEr",
+                        "")
   
   expect_equal(to_small_camel_case(examples),
                small_camel_case)
