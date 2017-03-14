@@ -6,13 +6,22 @@ test_that("basic usage", {
                 "snake_case",
                 "snakeCase",
                 "SnakeCase",
-                "snake_Case")
+                "_",
+                "snake_Case",
+                "_",
+                "8",
+                "Snake"
+                )
   
   snake_case <- c(NA,
                   "snake_case",
                   "snake_case",
                   "snake_case",
-                  "snake_case")
+                  "",
+                  "snake_case",
+                  "",
+                  "8",
+                  "snake")
   
   expect_equal(to_snake_case(examples),
                snake_case)
