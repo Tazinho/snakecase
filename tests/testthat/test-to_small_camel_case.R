@@ -43,5 +43,11 @@ test_that("basic usage", {
   
   expect_equal(to_small_camel_case(examples),
                small_camel_case)
+  expect_equal(to_small_camel_case(to_small_camel_case(examples)),
+               to_small_camel_case(examples))
   
+  expect_equal(to_small_camel_case(to_snake_case(to_small_camel_case(examples))),
+               to_small_camel_case(examples))
+  expect_equal(to_small_camel_case(to_big_camel_case(to_small_camel_case(examples))),
+               to_small_camel_case(examples))
 })
