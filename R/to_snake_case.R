@@ -21,7 +21,7 @@
 #'
 #' @export
 #'
-to_snake_case_dev <- function(camelcases){
+to_snake_case <- function(camelcases){
   # catch some input that should be handled like underscores too
   camelcases <- stringr::str_replace_all(camelcases, "\\s+|\\.+", "_")
   # Changes behaviour of the function. Cases like RStudio will be converted

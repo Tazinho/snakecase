@@ -2,5 +2,5 @@
 
 export(to_big_camel_case)
 export(to_small_camel_case)
-export(to_snake_case_dev)
+export(to_snake_case)
 importFrom(magrittr,"%>%")
