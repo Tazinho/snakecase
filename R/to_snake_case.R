@@ -23,8 +23,8 @@
 #'
 to_snake_case <- function(string){
   # check for valid input 
-  if(missing(string)){"argument string is missing, with no default"}
-  if(!(is.character(string)|all(is.na(string) == TRUE))){"argument string has to be an atomic of type character"}
+  if(missing(string)){stop("argument string is missing, with no default")}
+  if(!(is.character(string)|all(is.na(string) == TRUE))){stop("argument string has to be an atomic of type character")}
   # catch some input that should be handled like underscores too
   string <- stringr::str_replace_all(string, "\\s+|\\.+", "_")
   # Changes behaviour of the function. Cases like RStudio will be converted
