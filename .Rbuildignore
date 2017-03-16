@@ -6,3 +6,4 @@
 ^README\.Rmd$
 ^appveyor\.yml$
 ^codecov\.yml$
+^NEWS\.md$
