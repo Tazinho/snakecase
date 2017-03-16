@@ -19,19 +19,20 @@ Usage
 ``` r
 library(snakecase)
 
-strings <- c("smallCamelCase", "BigCamelCase", "mixed_Case", "BIGGY BIGGY BIGGY", NA)
+strings <- c("smallCamelCase", "BigCamelCase", "mixed_Case", "RRRStudioRRStudio", 
+             "BIGGY BIGGY BIGGY", NA)
 
 to_snake_case(strings)
-## [1] "small_camel_case"  "big_camel_case"    "mixed_case"       
-## [4] "biggy_biggy_biggy" NA
+## [1] "small_camel_case"     "big_camel_case"       "mixed_case"          
+## [4] "rrr_studio_rr_studio" "biggy_biggy_biggy"    NA
 
 to_small_camel_case(strings)
-## [1] "smallCamelCase"  "bigCamelCase"    "mixedCase"       "biggyBiggyBiggy"
-## [5] NA
+## [1] "smallCamelCase"    "bigCamelCase"      "mixedCase"        
+## [4] "rrrStudioRrStudio" "biggyBiggyBiggy"   NA
 
 to_big_camel_case(strings)
-## [1] "SmallCamelCase"  "BigCamelCase"    "MixedCase"       "BiggyBiggyBiggy"
-## [5] NA
+## [1] "SmallCamelCase"    "BigCamelCase"      "MixedCase"        
+## [4] "RrrStudioRrStudio" "BiggyBiggyBiggy"   NA
 ```
 
 Current behaviour (this part is work in progress)

@@ -20,7 +20,8 @@ devtools::install_github("Tazinho/snakecase", ref = "devversion-01")
 ```{r, collapse=TRUE}
 library(snakecase)
 
-strings <- c("smallCamelCase", "BigCamelCase", "mixed_Case", "BIGGY BIGGY BIGGY", NA)
+strings <- c("smallCamelCase", "BigCamelCase", "mixed_Case", "RRRStudioRRStudio", 
+             "BIGGY BIGGY BIGGY", NA)
 
 to_snake_case(strings)
 
