@@ -42,13 +42,13 @@ test_that("basic usage1", {
                   ""
   )
   
-  expect_equal(to_snake_case(examples),
+  expect_equal(to_snake_case_dev2(examples),
                snake_case)
-  expect_equal(to_snake_case(to_snake_case(examples)),
-               to_snake_case(examples))
+  expect_equal(to_snake_case_dev2(to_snake_case_dev2(examples)),
+               to_snake_case_dev2(examples))
   
-  expect_equal(to_snake_case(to_small_camel_case(to_snake_case(examples))),
-               to_snake_case(examples))
-  expect_equal(to_snake_case(to_big_camel_case(to_snake_case(examples))),
-               to_snake_case(examples))
+  expect_equal(to_snake_case_dev2(to_small_camel_case(to_snake_case_dev2(examples))),
+               to_snake_case_dev2(examples))
+  expect_equal(to_snake_case_dev2(to_big_camel_case(to_snake_case_dev2(examples))),
+               to_snake_case_dev2(examples))
 })
