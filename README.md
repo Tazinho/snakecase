@@ -10,7 +10,8 @@ Install
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("Tazinho/snakecase", ref = "devversion-01", force = TRUE)
+# devtools::install_github("Tazinho/snakecase", ref = "devversion-01")
+devtools::install_github("Tazinho/snakecase")
 ```
 
 Usage
@@ -90,19 +91,19 @@ Note that equality in this equation is only one criterion and it still doesn't i
 |   17| SNAKE SNAKE CASE  | snake\_snake\_case   | snakeSnakeCase | SnakeSnakeCase | X \*Td\*           |
 |   18| \_                |                      |                |                |                    |
 |   19| snakeSnakECase    | snake\_snak\_e\_case | snakeSnakECase | SnakeSnakECase | , \*Td\*           |
-|   20| SNAKE snakE\_case | snake\_snake\_case   | snakeSnakeCase | SnakeSnakeCase | \_ ?               |
+|   20| SNAKE snakE\_case | snake\_snak\_e\_case | snakeSnakECase | SnakeSnakECase | \_ ?               |
 |   21| \_                |                      |                |                |                    |
 |   22| bangBooMBang      | bang\_boo\_m\_bang   | bangBooMBang   | BangBooMBang   | \_ X               |
 |   23| upPER             | up\_per              | upPer          | UpPer          | \_ X               |
 |   24| CId               | c\_id                | cId            | CId            | \_ ? (maybe c\_id) |
 |   25| \_                |                      |                |                | \_ ?               |
 |   26| \_\_\_            |                      |                |                | \_ ?               |
-|   27| .                 |                      |                |                | \_ ?               |
-|   28| ...               |                      |                |                | \_ ?               |
-|   29| Sepal.Width       | sepal\_width         | sepalWidth     | SepalWidth     | \_ X               |
+|   27| .                 | .                    | .              | .              | \_ ?               |
+|   28| ...               | ...                  | ...            | ...            | \_ ?               |
+|   29| Sepal.Width       | sepal\_.\_width      | sepal.Width    | Sepal.Width    | \_ X               |
 |   30| Var 1             | var\_1               | var1           | Var1           | \_ ? (maybe var1)  |
 |   31| Var-2             | var\_-2              | var-2          | Var-2          | \_ ?               |
-|   32| Var.3             | var\_3               | var3           | Var3           | \_ ? (maybe var3)  |
+|   32| Var.3             | var\_.3              | var.3          | Var.3          | \_ ? (maybe var3)  |
 |   33| Var4              | var\_4               | var4           | Var4           | \_ X               |
 |   34| SnakeCase         | snake\_case          | snakeCase      | SnakeCase      |                    |
 |   35| Snake-Case        | snake\_-\_case       | snake-Case     | Snake-Case     |                    |
