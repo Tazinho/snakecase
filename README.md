@@ -1,7 +1,7 @@
 snakecase
 ================
 
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/Tazinho/snakecase?branch=master&svg=true)](https://ci.appveyor.com/project/Tazinho/snakecase)[![Travis-CI Build Status](https://travis-ci.org/Tazinho/snakecase.svg?branch=master)](https://travis-ci.org/Tazinho/snakecase)[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/snakecase)](https://cran.r-project.org/package=snakecase)[![Coverage Status](https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg)](https://codecov.io/github/Tazinho/snakecase?branch=master)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/Tazinho/snakecase?branch=master&svg=true)](https://ci.appveyor.com/project/Tazinho/snakecase) [![Travis-CI Build Status](https://travis-ci.org/Tazinho/snakecase.svg?branch=master)](https://travis-ci.org/Tazinho/snakecase) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/snakecase)](https://cran.r-project.org/package=snakecase) [![Coverage Status](https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg)](https://codecov.io/github/Tazinho/snakecase?branch=master)
 
 A small package with functions to convert column names of data.frames (or strings in general) to snake\_case, smallCamel- and BigCamelCase.
 
@@ -10,7 +10,7 @@ Install
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("Tazinho/snakecase")
+devtools::install_github("Tazinho/snakecase", ref = "devversion-01", force = TRUE)
 ```
 
 Usage
@@ -22,6 +22,7 @@ library(snakecase)
 strings <- c("smallCamelCase", "BigCamelCase", "mixed_Case", 
              "RRRStudioRRStudio", "BIGGY BIGGY BIGGY", NA)
 
+# conversion
 to_snake_case(strings)
 ## [1] "small_camel_case"     "big_camel_case"       "mixed_case"          
 ## [4] "rrr_studio_rr_studio" "biggy_biggy_biggy"    NA
@@ -33,6 +34,26 @@ to_small_camel_case(strings)
 to_big_camel_case(strings)
 ## [1] "SmallCamelCase"    "BigCamelCase"      "MixedCase"        
 ## [4] "RrrStudioRrStudio" "BiggyBiggyBiggy"   NA
+
+# test if your names are a valid case (consistent with this package)
+# for example smallCamelCase
+strings == to_small_camel_case(strings)
+## [1]  TRUE FALSE FALSE FALSE FALSE    NA
+
+# compare input and output
+library(dplyr)
+
+tibble(inp = strings, outp = to_small_camel_case(strings)) %>% 
+  mutate(compare = inp == outp)
+## # A tibble: 6 × 3
+##                 inp              outp compare
+##               <chr>             <chr>   <lgl>
+## 1    smallCamelCase    smallCamelCase    TRUE
+## 2      BigCamelCase      bigCamelCase   FALSE
+## 3        mixed_Case         mixedCase   FALSE
+## 4 RRRStudioRRStudio rrrStudioRrStudio   FALSE
+## 5 BIGGY BIGGY BIGGY   biggyBiggyBiggy   FALSE
+## 6              <NA>              <NA>      NA
 ```
 
 Current behaviour (this part is work in progress)
