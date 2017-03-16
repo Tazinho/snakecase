@@ -1,6 +1,6 @@
 #' Functions to convert column names to smallCamelCase
 #'
-#' @param snake_case Character string indicating column names of a data.frame.
+#' @param string Character string indicating column names of a data.frame.
 #'
 #' @return Vector of character strings in smallCamelCase
 #'
@@ -21,8 +21,8 @@
 #'
 #' @export
 #'
-to_small_camel_case <- function(snake_case){
-  out <- to_big_camel_case(snake_case)
+to_small_camel_case <- function(string){
+  out <- to_big_camel_case(string)
   out <- stringr::str_c(stringr::str_sub(out, 1, 1) %>% stringr::str_to_lower(),
                         stringr::str_sub(out, 2))
   out

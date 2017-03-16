@@ -4,10 +4,10 @@
 \alias{to_big_camel_case}
 \title{Functions to convert column names to BigCamelCase}
 \usage{
-to_big_camel_case(snake_case)
+to_big_camel_case(string)
 }
 \arguments{
-\item{snake_case}{Character string indicating column names of a data.frame.}
+\item{string}{Character string indicating column names of a data.frame.}
 }
 \value{
 Vector of character strings in BigCamelCase

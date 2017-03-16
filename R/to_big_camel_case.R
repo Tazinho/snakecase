@@ -1,6 +1,6 @@
 #' Functions to convert column names to BigCamelCase
 #'
-#' @param snake_case Character string indicating column names of a data.frame.
+#' @param string Character string indicating column names of a data.frame.
 #'
 #' @return Vector of character strings in BigCamelCase
 #'
@@ -21,8 +21,8 @@
 #'
 #' @export
 #'
-to_big_camel_case <- function(snake_case){
-  to_snake_case(snake_case) %>% 
+to_big_camel_case <- function(string){
+  to_snake_case(string) %>% 
     stringr::str_split("_") %>% 
     purrr::map(stringr::str_to_title) %>% 
     purrr::map_chr(stringr::str_c, collapse = "")

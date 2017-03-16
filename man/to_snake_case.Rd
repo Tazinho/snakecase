@@ -4,10 +4,10 @@
 \alias{to_snake_case}
 \title{Functions to convert column names to snake_case}
 \usage{
-to_snake_case(camelcases)
+to_snake_case(string)
 }
 \arguments{
-\item{camelcases}{Character string indicating column names of a data.frame.}
+\item{string}{Character string indicating column names of a data.frame.}
 }
 \value{
 Vector of character strings in snake_case
