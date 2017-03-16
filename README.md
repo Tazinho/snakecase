@@ -1,7 +1,7 @@
 snakecase
 ================
 
-[![Travis-CI Build Status](https://travis-ci.org/Tazinho/snakecase.svg?branch=master)](https://travis-ci.org/Tazinho/snakecase)
+[![Travis-CI Build Status](https://travis-ci.org/Tazinho/snakecase.svg?branch=master)](https://travis-ci.org/Tazinho/snakecase) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/Tazinho/snakecase?branch=master&svg=true)](https://ci.appveyor.com/project/Tazinho/snakecase)
 
 A small package with functions to convert column names of data.frames (or strings in general) to snake\_case, smallCamel- and BigCamelCase.
 
@@ -68,7 +68,7 @@ Note that equality in this equation is only one criterion and it still doesn't i
 |   17| SNAKE SNAKE CASE  | snake\_snake\_case   | snakeSnakeCase | SnakeSnakeCase | X \*Td\*           |
 |   18| \_                |                      |                |                |                    |
 |   19| snakeSnakECase    | snake\_snak\_e\_case | snakeSnakECase | SnakeSnakECase | , \*Td\*           |
-|   20| SNAKE snakE\_case | snake\_snak\_e\_case | snakeSnakECase | SnakeSnakECase | \_ ?               |
+|   20| SNAKE snakE\_case | snake\_snake\_case   | snakeSnakeCase | SnakeSnakeCase | \_ ?               |
 |   21| \_                |                      |                |                |                    |
 |   22| bangBooMBang      | bang\_boo\_m\_bang   | bangBooMBang   | BangBooMBang   | \_ X               |
 |   23| upPER             | up\_per              | upPer          | UpPer          | \_ X               |
