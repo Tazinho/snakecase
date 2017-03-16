@@ -19,7 +19,9 @@ test_that("basic usage1", {
                 "s_na_k_er",
                 "_",
                 "SNAKE SNAKE CASE",
-                "_"
+                "_",
+                "ssRRss",
+                "ssRRRR"
   )
   
   snake_case <- c(NA,
@@ -39,7 +41,9 @@ test_that("basic usage1", {
                   "s_na_k_er",
                   "",
                   "snake_snake_case",
-                  ""
+                  "",
+                  "ss_r_rss",
+                  "ss_rrrr"
   )
   
   expect_equal(to_snake_case(examples),

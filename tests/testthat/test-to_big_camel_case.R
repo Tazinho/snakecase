@@ -19,7 +19,9 @@ test_that("basic usage", {
                 "s_na_k_er",
                 "_",
                 "SNAKE SNAKE CASE",
-                "_"
+                "_",
+                "ssRRss",
+                "ssRRRR"
   )
   
   big_camel_case <- c(NA, 
@@ -39,7 +41,9 @@ test_that("basic usage", {
                       "SNaKEr",
                       "",
                       "SnakeSnakeCase",
-                      "")
+                      "",
+                      "SsRRss",
+                      "SsRrrr")
   
   expect_equal(to_big_camel_case(examples),
                big_camel_case)

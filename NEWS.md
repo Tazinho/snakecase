@@ -1,3 +1,7 @@
+# Snakecase 0.2.1
+
+* fixed bug: `to_snake_case_dev(c("ssRRss"))` returns now `ss_r_rss` instead of`"ss_r_r_ss"`
+
 # snakecase 0.2.0
 
 * renamed the single input parameters consistent to `string` (without deprecating
