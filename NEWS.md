@@ -1,6 +1,9 @@
 # Snakecase 0.2.1
 
 * fixed bug: `to_snake_case_dev(c("ssRRss"))` returns now `ss_r_rss` instead of`"ss_r_r_ss"`
+* `to_snake_case()` now treats only spaces like underscores now (not dots anymore)
+* functionality to treat different stuff like dots will be added via a new function:  
+`to_any_case()`, which will wrap the other three and will have pre- and postprocess arguments
 
 # snakecase 0.2.0
 
