@@ -19,8 +19,8 @@ Usage
 ``` r
 library(snakecase)
 
-strings <- c("smallCamelCase", "BigCamelCase", "mixed_Case", "RRRStudioRRStudio", 
-             "BIGGY BIGGY BIGGY", NA)
+strings <- c("smallCamelCase", "BigCamelCase", "mixed_Case", 
+             "RRRStudioRRStudio", "BIGGY BIGGY BIGGY", NA)
 
 to_snake_case(strings)
 ## [1] "small_camel_case"     "big_camel_case"       "mixed_case"          
