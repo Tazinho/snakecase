@@ -25,7 +25,8 @@ to_snake_case <- function(string){
   # catch some input that should be handled like underscores too
   string <- stringr::str_replace_all(string, "\\s+|\\.+", "_")
   # Changes behaviour of the function. Cases like RStudio will be converted
-  # to r_studio and not to rstudio anymore
+  # to r_studio and not to rstudio anymore. Inserts underscores around groups
+  # of big letters with following small letters
   string <- stringr::str_replace_all(string, "([A-Z][a-z]+)", "_\\1_")
   # Inserts underscores around all capital letter groups with length >= 2
   string <- stringr::str_replace_all(string, "([A-Z]{2,})", "_\\1_")
