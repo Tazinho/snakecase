@@ -31,7 +31,7 @@ to_snake_case <- function(string){
   # Inserts underscores around all capital letter groups with length >= 2
   string <- stringr::str_replace_all(string, "([A-Z]{2,})", "_\\1_")
   # Inserts underscores around all capital letter groups with length = 1 that
-  # don't have a capital letter in front of them
+  # don't have a capital letter in front of them and a capital or small letter behind them
   string <- stringr::str_replace_all(string, "([A-Z]*[A-Z]{1}[A-Za-z]*)", "_\\1_")
   # customize the output to snake case
   # - applying tolower, remove more than one "_" and starting/ending "_"
