@@ -15,14 +15,14 @@
 #'
 #' @examples
 #' camelCases <- c("smallCamelCase", "BigCamelCase", "mixed_Case", "snake_case", "_camel_case__")
-#' to_ana_case(camelCases)
+#' to_any_case(camelCases)
 #' to_any_case_dev("fsdf.d-sf", preprocess = "\\.|-")
 #'
 #' @importFrom magrittr "%>%"
 #'
 #' @export
 #'
-to_any_case_dev <- function(string, case = c("snake", "small_camel", "big_camel"), preprocess = "\\s+", postprocess = "_"){
+to_any_case <- function(string, case = c("snake", "small_camel", "big_camel"), preprocess = "\\s+", postprocess = "_"){
   preprocess <- stringr::str_c("\\s+|", preprocess)
   # catch some input that should be handled like underscores too (only spaces!)
   string <- stringr::str_replace_all(string, preprocess, "_")
