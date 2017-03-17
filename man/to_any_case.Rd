@@ -28,7 +28,7 @@ Functions to convert column names to snake_case
 \examples{
 camelCases <- c("smallCamelCase", "BigCamelCase", "mixed_Case", "snake_case", "_camel_case__")
 to_any_case(camelCases)
-to_any_case_dev("fsdf.d-sf", preprocess = "\\\\.|-")
+to_any_case("fsdf.d-sf", preprocess = "\\\\.|-")
 
 }
 \author{
