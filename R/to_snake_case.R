@@ -27,12 +27,12 @@ to_snake_case <- function(string){
   # Changes behaviour of the function. Cases like RStudio will be converted
   # to r_studio and not to rstudio anymore. Inserts underscores around groups
   # of big letters with following small letters
-  string <- stringr::str_replace_all(string, "([A-Z][a-z]+)", "_\\1_")
+  string <- stringr::str_replace_all(string, "([A-ZÄÖÜ][a-zäöüß]+)", "_\\1_")
   # Inserts underscores around all capital letter groups with length >= 2
-  string <- stringr::str_replace_all(string, "([A-Z]{2,})", "_\\1_")
+  string <- stringr::str_replace_all(string, "([A-ZÄÖÜ]{2,})", "_\\1_")
   # Inserts underscores around all capital letter groups with length = 1 that
   # don't have a capital letter in front of them and a capital or small letter behind them
-  string <- stringr::str_replace_all(string, "([A-Z]*[A-Z]{1}[A-Za-z]*)", "_\\1_")
+  string <- stringr::str_replace_all(string, "([A-ZÄÖÜ]*[A-ZÄÖÜ]{1}[A-ZÄÖÜa-zäöüß]*)", "_\\1_")
   # customize the output to snake case
   # - applying tolower, remove more than one "_" and starting/ending "_"
   string <- string %>% purrr::map_chr(stringr::str_to_lower) %>% 
