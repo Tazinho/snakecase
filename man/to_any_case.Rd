@@ -4,8 +4,9 @@
 \alias{to_any_case}
 \title{Functions to convert column names to snake_case}
 \usage{
-to_any_case(string, case = c("snake", "small_camel", "big_camel"),
-  preprocess = "\\\\s+", postprocess = "_")
+to_any_case(string, case = c("snake", "small_camel", "big_camel",
+  "screamin_snake"), preprocess = "\\\\s+", postprocess = "_",
+  prefix = "", postfix = "", replace_special_characters = FALSE)
 }
 \arguments{
 \item{string}{Character string indicating column names of a data.frame.}
@@ -18,6 +19,12 @@ treated like underscore. This is useful and gives flexibility to customize conve
 of strings that contain also dots, hyphens and/or other special characters.}
 
 \item{postprocess}{Character string indicating column names of a data.frame.}
+
+\item{prefix}{prefix}
+
+\item{postfix}{postfix}
+
+\item{replace_special_characters}{if `TRUE`, special characters will be translated to characters which are more likely to be understood by different programs. For example german umlauts will be translated to ae, oe, ue etc.}
 }
 \value{
 character
@@ -27,8 +34,8 @@ Functions to convert column names to snake_case
 }
 \examples{
 camelCases <- c("smallCamelCase", "BigCamelCase", "mixed_Case", "snake_case", "_camel_case__")
-to_any_case(camelCases)
-to_any_case("fsdf.d-sf", preprocess = "\\\\.|-")
+to_any_case(camelCases, case = "snake")
+to_any_case("fsdf.d-sf", case = "snake", preprocess = "\\\\.|-")
 
 }
 \author{

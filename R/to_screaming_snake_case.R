@@ -1,8 +1,8 @@
 #' Functions to convert column names to snake_case
 #'
-#' @inheritParams to_snake_case_internal
+#' @param string Character string indicating column names of a data.frame.
 #'
-#' @return Vector of character strings in snake_case
+#' @return Vector of character strings in SCREAMING_SNAKE_CASE
 #'
 #' @author Malte Grosser, \email{malte.grosser@@gmail.com}
 #' @keywords utilities
@@ -22,5 +22,6 @@
 #' @export
 #'
 to_snake_case <- function(string){
-  to_snake_case_internal(string)
+  to_snake_case_internal(string) %>%
+    stringr::str_to_upper()
 }
