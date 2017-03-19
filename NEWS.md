@@ -1,3 +1,7 @@
+# snakecase 0.2.3
+
+* supports behaviour for german umlauts
+
 # snakecase 0.2.2
 
 * introduced `to_any_case()` (all functionality and documentation provided, but implementation has to be cleaned and also tests have to be written)

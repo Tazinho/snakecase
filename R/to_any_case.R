@@ -7,6 +7,9 @@
 #' treated like underscore. This is useful and gives flexibility to customize conversion
 #' of strings that contain also dots, hyphens and/or other special characters.
 #' @param postprocess Character string indicating column names of a data.frame.
+#' @param prefix prefix
+#' @param postfix postfix
+#' @param replace_special_characters if `TRUE`, special characters will be translated to characters which are more likely to be understood by different programs. For example german umlauts will be translated to ae, oe, ue etc.
 #'
 #' @return character
 #'
@@ -15,32 +18,17 @@
 #'
 #' @examples
 #' camelCases <- c("smallCamelCase", "BigCamelCase", "mixed_Case", "snake_case", "_camel_case__")
-#' to_any_case(camelCases)
-#' to_any_case("fsdf.d-sf", preprocess = "\\.|-")
+#' to_any_case(camelCases, case = "snake")
+#' to_any_case("fsdf.d-sf", case = "snake", preprocess = "\\.|-")
 #'
 #' @importFrom magrittr "%>%"
 #'
 #' @export
 #'
-to_any_case <- function(string, case = c("snake", "small_camel", "big_camel"), preprocess = "\\s+", postprocess = "_"){
-  preprocess <- stringr::str_c("\\s+|", preprocess)
-  # catch some input that should be handled like underscores too (only spaces!)
-  string <- stringr::str_replace_all(string, preprocess, "_")
-  # Changes behaviour of the function. Cases like RStudio will be converted
-  # to r_studio and not to rstudio anymore. Inserts underscores around groups
-  # of big letters with following small letters
-  string <- stringr::str_replace_all(string, "([A-Z][a-z]+)", "_\\1_")
-  # Inserts underscores around all capital letter groups with length >= 2
-  string <- stringr::str_replace_all(string, "([A-Z]{2,})", "_\\1_")
-  # Inserts underscores around all capital letter groups with length = 1 that
-  # don't have a capital letter in front of them
-  string <- stringr::str_replace_all(string, "([A-Z]*[A-Z]{1}[A-Za-z]*)", "_\\1_")
-  # customize the output to snake case
-  # - applying tolower, remove more than one "_" and starting/ending "_"
-  string <- string %>% purrr::map_chr(stringr::str_to_lower) %>% 
-    purrr::map_chr(~ stringr::str_replace_all(.x, "_+", "_")) %>% 
-    purrr::map_chr(~ stringr::str_replace_all(.x, "^_|_$", ""))
-  # caseconversion to small-/big camel case with postprocessing
+to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screamin_snake"), preprocess = "\\s+", postprocess = "_", prefix = "", postfix = "", replace_special_characters = FALSE){
+  string <- to_snake_case_internal(string, preprocess = preprocess)
+  ## postprocessing
+  # caseconversion to small-/big camel case
   if(case == "small_camel" | case == "big_camel"){
     string <- string %>% 
       stringr::str_split("_") %>% 
@@ -52,9 +40,26 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel"), p
       stringr::str_c(stringr::str_sub(string, 1, 1) %>% stringr::str_to_lower(),
                      stringr::str_sub(string, 2))
   }
-  # postprocessing
-  if(case == "snake"){
+  # snake- and screaming_snake
+  if(case == "snake" | case == "screaming_snake"){
     string <- purrr::map_chr(string, ~ stringr::str_replace_all(.x, "_", postprocess))
   }
+  ## pre and postfix
+  string <- stringr::str_c(prefix, string, postfix)
+  ## replace Special Characters
+  if(replace_special_characters){
+    string <- string %>% purrr::map_chr(~ stringr::str_replace_all(c("\u00C4" = "Ae", 
+                                                                     "\u00D6" = "Oe",
+                                                                     "\u00DC" = "Ue",
+                                                                     "\u00E4" = "ae",
+                                                                     "\u00F6" = "oe",
+                                                                     "\u00FC" = "ue",
+                                                                     "\u00DF" = "ss")))
+  }
+  ## screaming_snake
+  if(case == "screaming_snake"){
+    string <- string %>% stringr::str_to_upper()
+  }
+  ## return
   string
 }
