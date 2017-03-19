@@ -21,7 +21,7 @@
 #'
 #' @export
 #'
-to_snake_case <- function(string){
+to_screaming_snake_case <- function(string){
   to_snake_case_internal(string) %>%
     stringr::str_to_upper()
 }
