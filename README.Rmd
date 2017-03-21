@@ -6,7 +6,7 @@ output: rmarkdown::github_document
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/Tazinho/snakecase?branch=master&svg=true)](https://ci.appveyor.com/project/Tazinho/snakecase) [![Travis-CI Build Status](https://travis-ci.org/Tazinho/snakecase.svg?branch=master)](https://travis-ci.org/Tazinho/snakecase) [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/snakecase)](https://cran.r-project.org/package=snakecase) [![Coverage Status](https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg)](https://codecov.io/github/Tazinho/snakecase?branch=master)
 
 A small package with functions to convert column names of data.frames (or strings
-in general) to snake_case, smallCamel- and BigCamelCase.
+in general) to different cases like snake_case, smallCamel- and BigCamelCase among others.
 
 ## Install
 
@@ -20,8 +20,8 @@ devtools::install_github("Tazinho/snakecase", ref = "devversion-01", force = TRU
 ```{r, collapse=TRUE, message=FALSE}
 library(snakecase)
 
-strings <- c("smallCamelCase", "BigCamelCase", "mixed_Case", 
-             "RRRStudioRRStudio", "BIGGY BIGGY BIGGY", NA)
+strings <- c("smallCamelCase", "BigCamelCase", "SCREAMING_SNAKE_CASE",
+             "RRRProjectRRProject", "große Männer_1.2_3-4/5", NA)
 
 # conversion
 to_snake_case(strings)
@@ -29,6 +29,21 @@ to_snake_case(strings)
 to_small_camel_case(strings)
 
 to_big_camel_case(strings)
+
+to_screaming_snake_case(strings)
+
+to_any_case(strings,
+            case = "big_camel", 
+            preprocess = "\\.|-|/", 
+            replace_special_characters = TRUE)
+
+to_any_case(strings,
+            case = "screaming_snake",
+            preprocess = "\\.|-|/",
+            postprocess = "/",
+            prefix = "USER/",
+            postfix = ".exe",
+            replace_special_characters = TRUE)
 
 # test if your names are a valid case (consistent with this package)
 # for example smallCamelCase
@@ -41,10 +56,40 @@ tibble(inp = strings, outp = to_small_camel_case(strings)) %>%
   mutate(compare = inp == outp)
 ```
 
-## Current behaviour (this part is work in progress)
+## Design Philosophy
 
-Conversion to camel case is not always obvious. Below you can see the current bahaviour. Those examples that behave as intended (X) and are also tested (`*Td*`) will be stable in the future.
+# Practical influences
+
+Conversion to a specific target case is not always obvious or unique. In general a clean conversion
+can only be guaranted, when the input-string is meaningful.
+
+Take for example a situation where you have IDs for some customers. Instead of calling the column "CustomerID" you abbreviate it to "CID". Without further knowledge about the meaning of CID it will be impossible to know that it should be converted to "c_id", when using `to_snake_case()`. Instead it will be converted to:
+
+```{r, collapse=TRUE}
+to_snake_case("CID")
+```
+
+We could have also converted to "c_i_d" and if we don't know the meaning of "CID", we can't decide which one is the better solution. However it is easy to exclude specific approaches by counterexamples. So in practice it might be nicer to convert "SCREAMING_SNAKE_CASE" to "screaming_snake_case" instead of "s_c_r_e_a_m_i_n_g_s_n_a_k_e_c_a_s_e", which means that also "cid" is preferable to "c_i_d".
+
+Since the computer can't know, that we want "c_id" by himself. It is easiest, if we provide him with the right information (here in form of a valid PascalCase syntax):
+
+```{r, collapse=TRUE}
+to_snake_case("CId")
+```
+
+In this way it is guaranteed to get the correct conversion and the only chance of an error lies in an accidentally wrong provided input string or a bug in the converter function `to_snake_case()`.
+
+## Consistent behaviour
+
+However there are two advantages for the first solution.
+
+1. Often it seams more practical to use the first solution. Cases like "SCREAMING_SNAKE_CASE" seem to be more
+2. In this and many other examples you can conclude from a specific logic (which we will introduce next), that 
+
+Below you can see the current bahaviour. Those examples that behave as intended (X) and are also tested (`*Td*`) will be stable in the future.
 Others might be considered to be changed.
+
+## Three rules of consistency
 
 In general it might be desirable to have at least sth. like "pairwise inversity" of the three `to_xxx` functions on the space of `to_xxx(string)`. So it might be a good criterion if the following equation holds for any input string:
 
@@ -55,6 +100,8 @@ where `to_A` and to `to_B` can be `to_snake_case`, `to_small_camel_case` and `to
 Note that equality in this equation is only one criterion and it still doesn't
 imply a unique solution on how to translate an initial string argument to snake or camel case. (Note that also `to_xxx(string) = to_xxx(string)` seems desirable). However, for the 
 following testcases, also these two equations are tested.
+
+# Tests
 
 ```{r, echo = FALSE}
 cases <- c(NA,
