@@ -112,24 +112,26 @@ Consistent behaviour
 
 In many scenarios the analyst doesn't have a big influence on naming conventions and sometimes there might occur situations where it is not possible to find out the exact meaning of a variable name, even if we ask the original author. In some cases data might also have been named by a machine and the results can be relatively technically. So in general it is a good idea to compare the input of the case converter functions with their output, to see if the intended meanings at least seem to be preserved.
 
-To make this as painless as possible, it is best to provide a logic that is robust and can handle also relatively complex cases. Note for example the string "RStudio". How should one convert it to snake case? We have seen a similar example with "CId", but for now we focus on sth. different. In case of "RStudio", we could convert to
+To make this as painless as possible, it is best to provide a logic that is robust and can handle also relatively complex cases. Note for example the string "RStudio". How should one convert it to snake case? We have seen a similar example with "CId", but for now we focus on sth. different. In case of "RStudio", we could convert to:
 
 1.  "r\_s\_tudio",
 2.  "rs\_tudio" or
 3.  "r\_studio".
 
-If we are conservative about any assumptions on the meaning of "RStudio", we can't decide which is the correct conversion. It is also not valid to assume that "RStudio" was intentionally written in PascalCase. Of course we know that "r\_studio" is the correct solution, but we can get there also via different considerations. Let us try to convert our three possible translations back to PascalCase and from there back to snake case. What should the ouput look like?
+If we are conservative about any assumptions on the meaning of "RStudio", we can't decide which is the correct conversion. It is also not valid to assume that "RStudio" was intentionally written in PascalCase. Of course we know that "r\_studio" is the correct solution, but we can get there also via different considerations. Let us try to convert our three possible translations (back) to PascalCase and from there back to snake case. What should the ouput look like?
 
 1.  r\_s\_tudio -&gt; RSTudio -&gt; r\_s\_t\_udio
 2.  rs\_tudio -&gt; RsTudio -&gt; rs\_tudio
 3.  r\_studio -&gt; RStudio -&gt; r\_studio
 
-Both of the first two alternatives can't be consistently converted back to a valid Pascal case input ("RStudio") and with the first logic the further snake case conversion seems to be complete nonsense. Only the latter case is consistent, when converting back to PascalCase, which is the case of the input ("RStudio"). It is also consistent to itself, when converting from PascalCase back to snake\_case. In this way, we can get a good starting point on how to convert specifc strings to valid snake\_case. Once we have a clean snake\_case conversion, we can easily convert further to smallCamelCase, BigCamelCase, SCREAMING\_SNAKE\_CASE or anything else.
+Both of the first two alternatives can't be consistently converted back to a valid Pascal case input ("RStudio") and with the first logic the further snake case conversion seems to be complete nonsense. Only the latter case is consistent, when converting back to PascalCase, which is the case of the input "RStudio". It is also consistent to itself, when converting from PascalCase back to snake\_case.
 
-To be consistent regarding the conversion between different cases, we can introduce some conversion equations which should always hold, when switching from one to another case.
+In this way, we can get a good starting point on how to convert specifc strings to valid snake\_case. Once we have a clean snake\_case conversion, we can easily convert further to smallCamelCase, BigCamelCase, SCREAMING\_SNAKE\_CASE or anything else.
 
 Three rules of consistency
 --------------------------
+
+To be consistent regarding the conversion between different cases, we can introduce some conversion equations which should always hold, when switching from one to another case.
 
 Below you can see the current bahaviour. Those examples that behave as intended (X) and are also tested (`*Td*`) will be stable in the future. Others might be considered to be changed.
 
