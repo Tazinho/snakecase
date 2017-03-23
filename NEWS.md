@@ -1,3 +1,8 @@
+# snakecase 0.3.1
+
+* started testing `to_any_case` and removed a bug.
+* added vignette
+
 # snakecase 0.3.0
 
 * supports behaviour for german umlauts on all platforms
