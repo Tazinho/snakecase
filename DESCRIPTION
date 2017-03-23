@@ -14,6 +14,9 @@ Imports:
 Suggests:
     testthat,
     covr,
-    tibble
+    tibble,
+    knitr,
+    rmarkdown
 License: GPL-3
 RoxygenNote: 6.0.1
+VignetteBuilder: knitr

@@ -1,0 +1,44 @@
+---
+title: "Caseconverters"
+author: "Malte Grosser"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Caseconverters}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The snakecase package contains four specific caseconverter functions and one more general highlevel function with added functionality.
+
+## Specific caseconverters
+
+```{r, collapse=TRUE}
+# devtools::install_github("Tazinho/snakecase")
+library(snakecase)
+strings <- c("this Is a Strage_string", "AND THIS ANOTHER_One")
+
+to_snake_case(strings)
+
+to_small_camel_case(strings)
+
+to_big_camel_case(strings)
+
+to_screaming_snake_case(strings)
+```
+
+## Highlevel casesconverter
+
+The funtion `to_any_case()` can do everything that the others can and also adds some extra highlevel functionaliy.
+
+### Default usage
+
+```{r, collapse=TRUE}
+to_any_case(strings, case = "snake")
+
+to_any_case(strings, case = "small_camel")
+
+to_any_case(strings, case = "to_big_camel")
+
+to_any_case(strings, case = "screaming_snake")
+```
