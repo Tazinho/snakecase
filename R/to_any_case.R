@@ -40,9 +40,8 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
     }
   }
   if(case == "small_camel"){
-    string <- string %>% 
-      stringr::str_c(stringr::str_sub(string, 1, 1) %>% stringr::str_to_lower(),
-                     stringr::str_sub(string, 2))
+    string <- stringr::str_c(stringr::str_sub(string, 1, 1) %>% stringr::str_to_lower(),
+                             stringr::str_sub(string, 2))
   }
   # snake- and screaming_snake
   if(case == "snake" | case == "screaming_snake"){
