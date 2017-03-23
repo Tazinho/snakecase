@@ -44,11 +44,9 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
   if(case == "snake" | case == "screaming_snake"){
     string <- purrr::map_chr(string, ~ stringr::str_replace_all(.x, "_", postprocess))
   }
-  ## pre and postfix
-  string <- stringr::str_c(prefix, string, postfix)
   ## replace Special Characters
   if(replace_special_characters){
-    string <- string %>% purrr::map_chr(~ stringr::str_replace_all(c("\u00C4" = "Ae", 
+    string <- string %>% purrr::map_chr(~ stringr::str_replace_all(.x, c("\u00C4" = "Ae", 
                                                                      "\u00D6" = "Oe",
                                                                      "\u00DC" = "Ue",
                                                                      "\u00E4" = "ae",
@@ -60,6 +58,8 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
   if(case == "screaming_snake"){
     string <- string %>% stringr::str_to_upper()
   }
+  ## pre and postfix
+  string <- stringr::str_c(prefix, string, postfix)
   ## return
   string
 }
