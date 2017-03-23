@@ -25,7 +25,7 @@
 #'
 #' @export
 #'
-to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screamin_snake"), preprocess = "\\s+", postprocess = "_", prefix = "", postfix = "", replace_special_characters = FALSE){
+to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake"), preprocess = "\\s+", postprocess = "_", prefix = "", postfix = "", replace_special_characters = FALSE){
   string <- to_snake_case_internal(string, preprocess = preprocess)
   ## postprocessing
   # caseconversion to small-/big camel case
