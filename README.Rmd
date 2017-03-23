@@ -117,11 +117,11 @@ During the development of this package I recognized three specific rules that se
 
     `to_x(to_y(to_x(string))) = to_x(string)`  
 
-Note that it can easily be shown, that rule three follow from the first and the second rule. However, it seems reasonable to express each by its own, since they all have an interpretation and together they give a really good intuition about the properties of the converter functions.
+Note that it can easily be shown, that rule three follows from the first and the second rule. However, it seems reasonable to express each by its own, since they all have an interpretation and together they give a really good intuition about the properties of the converter functions.
 
 # Testing
 
-To give a meaningful conversion for different cases, we systematically designed meaningful testcases for conversion to snake, small- and big camel case.
+To give a meaningful conversion for different cases, we systematically designed meaningful testcases for conversion to snake, small- and big camel case among others.
 To be consistent regarding the conversion between different cases, we also test the rules above on all example input strings, which are shown below.
 <!--Note that equality in this equation is only one criterion and it still doesn't
 imply a unique solution on how to translate an initial string argument to snake or camel case. (Note that also `to_xxx(string) = to_xxx(string)` seems desirable). However, for the 
