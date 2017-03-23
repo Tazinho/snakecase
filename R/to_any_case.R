@@ -1,7 +1,7 @@
 #' Functions to convert column names to snake_case
 #'
 #' @param string Character string indicating column names of a data.frame.
-#' @param case Character string ("snake", "small_camel" or "big_camel"), indicating 
+#' @param case Character string ("snake", "small_camel", "big_camel" or "screaming_snake"), indicating 
 #' case should be the target case, that the string should be converted into.
 #' @param preprocess Character string that will be wrapped internally into stringr::regex. All matches will be
 #' treated like underscore. This is useful and gives flexibility to customize conversion

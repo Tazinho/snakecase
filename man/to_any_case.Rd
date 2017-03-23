@@ -5,13 +5,13 @@
 \title{Functions to convert column names to snake_case}
 \usage{
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
-  "screamin_snake"), preprocess = "\\\\s+", postprocess = "_",
+  "screaming_snake"), preprocess = "\\\\s+", postprocess = "_",
   prefix = "", postfix = "", replace_special_characters = FALSE)
 }
 \arguments{
 \item{string}{Character string indicating column names of a data.frame.}
 
-\item{case}{Character string ("snake", "small_camel" or "big_camel"), indicating 
+\item{case}{Character string ("snake", "small_camel", "big_camel" or "screaming_snake"), indicating 
 case should be the target case, that the string should be converted into.}
 
 \item{preprocess}{Character string that will be wrapped internally into stringr::regex. All matches will be
