@@ -25,15 +25,19 @@
 #'
 #' @export
 #'
-to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake"), preprocess = "\\s+", postprocess = "_", prefix = "", postfix = "", replace_special_characters = FALSE){
+to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake"), preprocess = "\\s+", postprocess = NULL, prefix = "", postfix = "", replace_special_characters = FALSE){
   string <- to_snake_case_internal(string, preprocess = preprocess)
   ## postprocessing
   # caseconversion to small-/big camel case
   if(case == "small_camel" | case == "big_camel"){
     string <- string %>% 
       stringr::str_split("_") %>% 
-      purrr::map(stringr::str_to_title) %>% 
-      purrr::map_chr(stringr::str_c, collapse = postprocess)
+      purrr::map(stringr::str_to_title)
+    if(is.null(postprocess)){
+      string <- string %>% purrr::map_chr(stringr::str_c, collapse = "")
+    } else {
+      string <- string %>% purrr::map_chr(stringr::str_c, collapse = postprocess)
+    }
   }
   if(case == "small_camel"){
     string <- string %>% 
@@ -42,17 +46,21 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
   }
   # snake- and screaming_snake
   if(case == "snake" | case == "screaming_snake"){
-    string <- purrr::map_chr(string, ~ stringr::str_replace_all(.x, "_", postprocess))
+    if(is.null(postprocess)){
+      string <- purrr::map_chr(string, ~ stringr::str_replace_all(.x, "_", "_"))
+    } else {
+      string <- purrr::map_chr(string, ~ stringr::str_replace_all(.x, "_", postprocess))
+    }
   }
   ## replace Special Characters
   if(replace_special_characters){
     string <- string %>% purrr::map_chr(~ stringr::str_replace_all(.x, c("\u00C4" = "Ae", 
-                                                                     "\u00D6" = "Oe",
-                                                                     "\u00DC" = "Ue",
-                                                                     "\u00E4" = "ae",
-                                                                     "\u00F6" = "oe",
-                                                                     "\u00FC" = "ue",
-                                                                     "\u00DF" = "ss")))
+                                                                         "\u00D6" = "Oe",
+                                                                         "\u00DC" = "Ue",
+                                                                         "\u00E4" = "ae",
+                                                                         "\u00F6" = "oe",
+                                                                         "\u00FC" = "ue",
+                                                                         "\u00DF" = "ss")))
   }
   ## screaming_snake
   if(case == "screaming_snake"){

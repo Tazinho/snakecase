@@ -5,7 +5,7 @@
 \title{Functions to convert column names to snake_case}
 \usage{
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
-  "screaming_snake"), preprocess = "\\\\s+", postprocess = "_",
+  "screaming_snake"), preprocess = "\\\\s+", postprocess = NULL,
   prefix = "", postfix = "", replace_special_characters = FALSE)
 }
 \arguments{
