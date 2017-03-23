@@ -1,58 +1,23 @@
 context("to_snake_case")
 
-test_that("basic usage1", {
-  
-  examples <- c(NA,
-                "snake_case",
-                "snakeCase",
-                "SnakeCase",
-                "_",
-                "snake_Case",
-                "_",
-                "SNake",
-                "Snake",
-                "s_nake",
-                "sn_ake",
-                "_",
-                "SNaKE",
-                "SNaKEr",
-                "s_na_k_er",
-                "_",
-                "SNAKE SNAKE CASE",
-                "_",
-                "ssRRss",
-                "ssRRRR"
+test_that("examples", {
+  expect_equal(to_snake_case(cases[["examples"]]),
+               cases[["snake_case"]])}
   )
+
+test_that("rules",{
+  examples <- cases[["examples"]]
   
-  snake_case <- c(NA,
-                  "snake_case",
-                  "snake_case",
-                  "snake_case",
-                  "",
-                  "snake_case",
-                  "",
-                  "s_nake",
-                  "snake",
-                  "s_nake",
-                  "sn_ake",
-                  "",
-                  "s_na_ke",
-                  "s_na_k_er",
-                  "s_na_k_er",
-                  "",
-                  "snake_snake_case",
-                  "",
-                  "ss_r_rss",
-                  "ss_rrrr"
-  )
-  
-  expect_equal(to_snake_case(examples),
-               snake_case)
   expect_equal(to_snake_case(to_snake_case(examples)),
-               to_snake_case(examples))
-  
-  expect_equal(to_snake_case(to_small_camel_case(to_snake_case(examples))),
-               to_snake_case(examples))
-  expect_equal(to_snake_case(to_big_camel_case(to_snake_case(examples))),
-               to_snake_case(examples))
+               to_snake_case(examples)
+               ) 
+  expect_equal(to_snake_case(to_small_camel_case(examples)),
+               to_snake_case(examples)
+  ) 
+  expect_equal(to_snake_case(to_big_camel_case(examples)),
+               to_snake_case(examples)
+  ) 
+  expect_equal(to_snake_case(to_screaming_snake_case(examples)),
+               to_snake_case(examples)
+  ) 
 })
