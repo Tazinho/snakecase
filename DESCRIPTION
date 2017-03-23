@@ -13,6 +13,7 @@ Imports:
     magrittr
 Suggests:
     testthat,
-    covr
+    covr,
+    tibble
 License: GPL-3
 RoxygenNote: 6.0.1
