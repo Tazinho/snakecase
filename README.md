@@ -156,45 +156,31 @@ To give a meaningful conversion for different cases, we systematically designed 
 imply a unique solution on how to translate an initial string argument to snake or camel case. (Note that also `to_xxx(string) = to_xxx(string)` seems desirable). However, for the 
 following testcases, also these two equations are tested.-->
 
-|   nr| examples          | snake\_case          | smallCamelCase | BigCamelCase   | As intended?       |
-|----:|:------------------|:---------------------|:---------------|:---------------|:-------------------|
-|    1| NA                | NA                   | NA             | NA             | yes                |
-|    2| snake\_case       | snake\_case          | snakeCase      | SnakeCase      | yes                |
-|    3| snakeCase         | snake\_case          | snakeCase      | SnakeCase      | yes                |
-|    4| SnakeCase         | snake\_case          | snakeCase      | SnakeCase      | yes                |
-|    5| \_                |                      |                |                |                    |
-|    6| snake\_Case       | snake\_case          | snakeCase      | SnakeCase      | yes                |
-|    7| \_                |                      |                |                |                    |
-|    8| SNake             | s\_nake              | sNake          | SNake          | yes                |
-|    9| Snake             | snake                | snake          | Snake          | yes                |
-|   10| s\_nake           | s\_nake              | sNake          | SNake          | yes                |
-|   11| sn\_ake           | sn\_ake              | snAke          | SnAke          | yes                |
-|   12| \_                |                      |                |                |                    |
-|   13| SNaKE             | s\_na\_ke            | sNaKe          | SNaKe          | yes                |
-|   14| SNaKEr            | s\_na\_k\_er         | sNaKEr         | SNaKEr         | yes                |
-|   15| s\_na\_k\_er      | s\_na\_k\_er         | sNaKEr         | SNaKEr         | yes                |
-|   16| \_                |                      |                |                |                    |
-|   17| SNAKE SNAKE CASE  | snake\_snake\_case   | snakeSnakeCase | SnakeSnakeCase | yes                |
-|   18| \_                |                      |                |                | yes                |
-|   19| snakeSnakECase    | snake\_snak\_e\_case | snakeSnakECase | SnakeSnakECase | yes                |
-|   20| SNAKE snakE\_case | snake\_snak\_e\_case | snakeSnakECase | SnakeSnakECase |                    |
-|   21| \_                |                      |                |                | yes                |
-|   22| bangBooMBang      | bang\_boo\_m\_bang   | bangBooMBang   | BangBooMBang   | \_ ?               |
-|   23| upPER             | up\_per              | upPer          | UpPer          |                    |
-|   24| CId               | c\_id                | cId            | CId            | \_ X               |
-|   25| \_                |                      |                |                | \_ X               |
-|   26| \_\_\_            |                      |                |                | \_ ? (maybe c\_id) |
-|   27| .                 | .                    | .              | .              | \_ ?               |
-|   28| ...               | ...                  | ...            | ...            | \_ ?               |
-|   29| Sepal.Width       | sepal\_.\_width      | sepal.Width    | Sepal.Width    | \_ ?               |
-|   30| Var 1             | var\_1               | var1           | Var1           | \_ ?               |
-|   31| Var-2             | var\_-2              | var-2          | Var-2          | \_ X               |
-|   32| Var.3             | var\_.3              | var.3          | Var.3          | \_ ? (maybe var1)  |
-|   33| Var4              | var\_4               | var4           | Var4           | \_ ?               |
-|   34| SnakeCase         | snake\_case          | snakeCase      | SnakeCase      | \_ ? (maybe var3)  |
-|   35| Snake-Case        | snake\_-\_case       | snake-Case     | Snake-Case     | \_ X               |
-|   36| Snake Case        | snake\_case          | snakeCase      | SnakeCase      |                    |
-|   37| Snake - Case      | snake\_-\_case       | snake-Case     | Snake-Case     |                    |
+|   nr| examples          | snake\_case          | smallCamelCase | BigCamelCase   |
+|----:|:------------------|:---------------------|:---------------|:---------------|
+|    1| NA                | NA                   | NA             | NA             |
+|    2| snake\_case       | snake\_case          | snakeCase      | SnakeCase      |
+|    3| snakeCase         | snake\_case          | snakeCase      | SnakeCase      |
+|    4| SnakeCase         | snake\_case          | snakeCase      | SnakeCase      |
+|    5| \_                |                      |                |                |
+|    6| snake\_Case       | snake\_case          | snakeCase      | SnakeCase      |
+|    7| \_                |                      |                |                |
+|    8| SNake             | s\_nake              | sNake          | SNake          |
+|    9| Snake             | snake                | snake          | Snake          |
+|   10| s\_nake           | s\_nake              | sNake          | SNake          |
+|   11| sn\_ake           | sn\_ake              | snAke          | SnAke          |
+|   12| \_                |                      |                |                |
+|   13| SNaKE             | s\_na\_ke            | sNaKe          | SNaKe          |
+|   14| SNaKEr            | s\_na\_k\_er         | sNaKEr         | SNaKEr         |
+|   15| s\_na\_k\_er      | s\_na\_k\_er         | sNaKEr         | SNaKEr         |
+|   16| \_                |                      |                |                |
+|   17| SNAKE SNAKE CASE  | snake\_snake\_case   | snakeSnakeCase | SnakeSnakeCase |
+|   18| \_                |                      |                |                |
+|   19| snakeSnakECase    | snake\_snak\_e\_case | snakeSnakECase | SnakeSnakECase |
+|   20| SNAKE snakE\_case | snake\_snak\_e\_case | snakeSnakECase | SnakeSnakECase |
+|   21| \_                |                      |                |                |
+|   22| ssRRss            | ss\_r\_rss           | ssRRss         | SsRRss         |
+|   23| ssRRRR            | ss\_rrrr             | ssRrrr         | SsRrrr         |
 
 Related Resources
 =================

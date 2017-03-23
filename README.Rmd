@@ -1,33 +1,7 @@
 ---
 title: "snakecase"
-date: "`r Sys.Date()`"
-output:
-  rmdformats::readthedown:
-    highlight: kate
+output: rmarkdown::github_document
 ---
-
-
-```{r knitr_init, echo=FALSE, cache=FALSE}
-library(knitr)
-library(rmdformats)
-
-## Global options
-options(max.print="80")
-opts_chunk$set(echo=TRUE,
-	           #  cache=TRUE,
-              # prompt=FALSE,
-              # tidy=TRUE,
-              # comment=NA,
-               message=FALSE,
-               warning=FALSE)
-#opts_knit$set(width=75)
-#---
-#title: "snakecase"
-#output: rmarkdown::github_document
-#---
-
-```
-
 
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/Tazinho/snakecase?branch=master&svg=true)](https://ci.appveyor.com/project/Tazinho/snakecase) [![Travis-CI Build Status](https://travis-ci.org/Tazinho/snakecase.svg?branch=master)](https://travis-ci.org/Tazinho/snakecase) [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/snakecase)](https://cran.r-project.org/package=snakecase) [![Coverage Status](https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg)](https://codecov.io/github/Tazinho/snakecase?branch=master)
 
@@ -43,7 +17,7 @@ devtools::install_github("Tazinho/snakecase", ref = "devversion-01", force = TRU
 
 ## Usage
 
-```{r, collapse=TRUE, message=FALSE, echo = TRUE}
+```{r, collapse=TRUE, message=FALSE}
 library(snakecase)
 
 strings <- c("smallCamelCase", "BigCamelCase", "SCREAMING_SNAKE_CASE",
@@ -82,9 +56,9 @@ tibble(inp = strings, outp = to_small_camel_case(strings)) %>%
   mutate(compare = inp == outp)
 ```
 
-# Design Philosophy
+## Design Philosophy
 
-## Practical influences
+# Practical influences
 
 Conversion to a specific target case is not always obvious or unique. In general a clean conversion
 can only be guaranted, when the input-string is meaningful.
