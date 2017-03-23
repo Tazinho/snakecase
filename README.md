@@ -3,7 +3,7 @@ snakecase
 
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/Tazinho/snakecase?branch=master&svg=true)](https://ci.appveyor.com/project/Tazinho/snakecase) [![Travis-CI Build Status](https://travis-ci.org/Tazinho/snakecase.svg?branch=master)](https://travis-ci.org/Tazinho/snakecase) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/snakecase)](https://cran.r-project.org/package=snakecase) [![Coverage Status](https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg)](https://codecov.io/github/Tazinho/snakecase?branch=master)
 
-A small package with functions to convert column names of data.frames (or strings in general) to different cases like snake\_case, smallCamel- and BigCamelCase among others. Also high level features for more advanced case conversions are provided.
+A small package with functions to convert column names of data.frames (or strings in general) to different cases like snake\_case, smallCamel- and BigCamelCase among others. Also high level features for more advanced case conversions are provided via `to_any_case()`.
 
 Install
 -------
@@ -96,7 +96,7 @@ to_snake_case("CID")
 ## [1] "cid"
 ```
 
-We could have also converted to "c\_i\_d" and if we don't know the meaning of "CID", we can't decide which one is the better solution. However it is easy to exclude specific approaches by counterexamples. So in practice it might be nicer to convert "SCREAMING\_SNAKE\_CASE" to "screaming\_snake\_case" instead of "s\_c\_r\_e\_a\_m\_i\_n\_g\_s\_n\_a\_k\_e\_c\_a\_s\_e", which means that also "cid" is preferable to "c\_i\_d".
+We could have also converted to "c\_i\_d" and if we don't know the meaning of "CID", we can't decide which one is the better solution. However it is easy to exclude specific approaches by counterexamples. So in practice it might be nicer to convert "SCREAMING\_SNAKE\_CASE" to "screaming\_snake\_case" instead of "s\_c\_r\_e\_a\_m\_i\_n\_g\_s\_n\_a\_k\_e\_c\_a\_s\_e" (or "screamin\_g\_snak\_e\_cas\_e" or "s\_creaming\_s\_nake\_c\_ase"), which means that also "cid" is preferable to "c\_i\_d" (or "c\_id" or "ci\_d") without further knowledge.
 
 Since the computer can't know, that we want "c\_id" by himself. It is easiest, if we provide him with the right information (here in form of a valid PascalCase syntax):
 
@@ -131,57 +131,75 @@ In this way, we can get a good starting point on how to convert specifc strings 
 Three rules of consistency
 --------------------------
 
-To be consistent regarding the conversion between different cases, we can introduce some conversion equations which should always hold, when switching from one to another case.
+In the last sections we have seen, that it is reasonable to bring a specific conversion from an input string to some standardized case into question. We have also seen, that it is helpful to introduce some tests on the behaviour of a specific conversion pattern in related cases. The latter can help to detect inappropriate conversions and also establishes a consistent behaviour when converting exotic cases or switching between standardized cases. Maybe we can generalize some of these tests and introduce some kind of consisteny patterns. This would enable us that whenever inappropriate or non-unique possibilities for conversions appear, we have rules that help us to deal with this situation and help to exclude some inconsistent conversion alternatives.
 
-Below you can see the current bahaviour. Those examples that behave as intended (X) and are also tested (`*Td*`) will be stable in the future. Others might be considered to be changed.
+During the development of this package I recognized three specific rules that seem reasonable to be valid whenever cases are converted. To be more general we just use `to_x()` and `to_y()` to refer to any two differing converter functions from this package.
 
-In general it might be desirable to have at least sth. like "pairwise inversity" of the three `to_xxx` functions on the space of `to_xxx(string)`. So it might be a good criterion if the following equation holds for any input string:
+1.  When we have converted to a standardized case, a new conversion to the case should not change the output:
 
-1.  `to_A(to_B(to_A(string))) = to_A(string)`, (note that this might be equivalent to `to_A(to_B(string))) = to_A(string)`)
+    `to_x(to_x(string)) = to_x(string)`
 
-where `to_A` and to `to_B` can be `to_snake_case`, `to_small_camel_case` and `to_big_camel_case`.
+2.  When converting to a specific case, it should not matter if a conversion to another case happened already:
 
-Note that equality in this equation is only one criterion and it still doesn't imply a unique solution on how to translate an initial string argument to snake or camel case. (Note that also `to_xxx(string) = to_xxx(string)` seems desirable). However, for the following testcases, also these two equations are tested.
+    `to_y(to_x(string)) = to_y(string)`
 
-Tests
-=====
+3.  It should always be possible to switch between different cases, without any loss of information:
+
+    `to_x(to_y(to_x(string))) = to_x(string)`
+
+Note that it can easily be shown, that rule three follow from the first and the second rule. However, it seems reasonable to express each by its own, since they all have an interpretation and together they give a really good intuition about the properties of the converter functions.
+
+Testing
+=======
+
+To give a meaningful conversion for different cases, we systematically designed meaningful testcases for conversion to snake, small- and big camel case. To be consistent regarding the conversion between different cases, we also test the rules above on all example input strings, which are shown below. <!--Note that equality in this equation is only one criterion and it still doesn't
+imply a unique solution on how to translate an initial string argument to snake or camel case. (Note that also `to_xxx(string) = to_xxx(string)` seems desirable). However, for the 
+following testcases, also these two equations are tested.-->
 
 |   nr| examples          | snake\_case          | smallCamelCase | BigCamelCase   | As intended?       |
 |----:|:------------------|:---------------------|:---------------|:---------------|:-------------------|
-|    1| NA                | NA                   | NA             | NA             | \*Td\*, X          |
-|    2| snake\_case       | snake\_case          | snakeCase      | SnakeCase      | \*Td\*, X          |
-|    3| snakeCase         | snake\_case          | snakeCase      | SnakeCase      | \*Td\*, X          |
-|    4| SnakeCase         | snake\_case          | snakeCase      | SnakeCase      | \*Td\*, X          |
+|    1| NA                | NA                   | NA             | NA             | yes                |
+|    2| snake\_case       | snake\_case          | snakeCase      | SnakeCase      | yes                |
+|    3| snakeCase         | snake\_case          | snakeCase      | SnakeCase      | yes                |
+|    4| SnakeCase         | snake\_case          | snakeCase      | SnakeCase      | yes                |
 |    5| \_                |                      |                |                |                    |
-|    6| snake\_Case       | snake\_case          | snakeCase      | SnakeCase      | \*Td\*, X          |
+|    6| snake\_Case       | snake\_case          | snakeCase      | SnakeCase      | yes                |
 |    7| \_                |                      |                |                |                    |
-|    8| SNake             | s\_nake              | sNake          | SNake          | \*Td\*, ?          |
-|    9| Snake             | snake                | snake          | Snake          | \*Td\*, X          |
-|   10| s\_nake           | s\_nake              | sNake          | SNake          | \*Td\*, X          |
-|   11| sn\_ake           | sn\_ake              | snAke          | SnAke          | \*Td\*, X          |
+|    8| SNake             | s\_nake              | sNake          | SNake          | yes                |
+|    9| Snake             | snake                | snake          | Snake          | yes                |
+|   10| s\_nake           | s\_nake              | sNake          | SNake          | yes                |
+|   11| sn\_ake           | sn\_ake              | snAke          | SnAke          | yes                |
 |   12| \_                |                      |                |                |                    |
-|   13| SNaKE             | s\_na\_ke            | sNaKe          | SNaKe          | \*Td\*, ?          |
-|   14| SNaKEr            | s\_na\_k\_er         | sNaKEr         | SNaKEr         | \*Td\*, ?          |
-|   15| s\_na\_k\_er      | s\_na\_k\_er         | sNaKEr         | SNaKEr         | \*Td\*, X          |
+|   13| SNaKE             | s\_na\_ke            | sNaKe          | SNaKe          | yes                |
+|   14| SNaKEr            | s\_na\_k\_er         | sNaKEr         | SNaKEr         | yes                |
+|   15| s\_na\_k\_er      | s\_na\_k\_er         | sNaKEr         | SNaKEr         | yes                |
 |   16| \_                |                      |                |                |                    |
-|   17| SNAKE SNAKE CASE  | snake\_snake\_case   | snakeSnakeCase | SnakeSnakeCase | X \*Td\*           |
-|   18| \_                |                      |                |                |                    |
-|   19| snakeSnakECase    | snake\_snak\_e\_case | snakeSnakECase | SnakeSnakECase | , \*Td\*           |
-|   20| SNAKE snakE\_case | snake\_snak\_e\_case | snakeSnakECase | SnakeSnakECase | \_ ?               |
-|   21| \_                |                      |                |                |                    |
-|   22| bangBooMBang      | bang\_boo\_m\_bang   | bangBooMBang   | BangBooMBang   | \_ X               |
-|   23| upPER             | up\_per              | upPer          | UpPer          | \_ X               |
-|   24| CId               | c\_id                | cId            | CId            | \_ ? (maybe c\_id) |
-|   25| \_                |                      |                |                | \_ ?               |
-|   26| \_\_\_            |                      |                |                | \_ ?               |
+|   17| SNAKE SNAKE CASE  | snake\_snake\_case   | snakeSnakeCase | SnakeSnakeCase | yes                |
+|   18| \_                |                      |                |                | yes                |
+|   19| snakeSnakECase    | snake\_snak\_e\_case | snakeSnakECase | SnakeSnakECase | yes                |
+|   20| SNAKE snakE\_case | snake\_snak\_e\_case | snakeSnakECase | SnakeSnakECase |                    |
+|   21| \_                |                      |                |                | yes                |
+|   22| bangBooMBang      | bang\_boo\_m\_bang   | bangBooMBang   | BangBooMBang   | \_ ?               |
+|   23| upPER             | up\_per              | upPer          | UpPer          |                    |
+|   24| CId               | c\_id                | cId            | CId            | \_ X               |
+|   25| \_                |                      |                |                | \_ X               |
+|   26| \_\_\_            |                      |                |                | \_ ? (maybe c\_id) |
 |   27| .                 | .                    | .              | .              | \_ ?               |
 |   28| ...               | ...                  | ...            | ...            | \_ ?               |
-|   29| Sepal.Width       | sepal\_.\_width      | sepal.Width    | Sepal.Width    | \_ X               |
-|   30| Var 1             | var\_1               | var1           | Var1           | \_ ? (maybe var1)  |
-|   31| Var-2             | var\_-2              | var-2          | Var-2          | \_ ?               |
-|   32| Var.3             | var\_.3              | var.3          | Var.3          | \_ ? (maybe var3)  |
-|   33| Var4              | var\_4               | var4           | Var4           | \_ X               |
-|   34| SnakeCase         | snake\_case          | snakeCase      | SnakeCase      |                    |
-|   35| Snake-Case        | snake\_-\_case       | snake-Case     | Snake-Case     |                    |
+|   29| Sepal.Width       | sepal\_.\_width      | sepal.Width    | Sepal.Width    | \_ ?               |
+|   30| Var 1             | var\_1               | var1           | Var1           | \_ ?               |
+|   31| Var-2             | var\_-2              | var-2          | Var-2          | \_ X               |
+|   32| Var.3             | var\_.3              | var.3          | Var.3          | \_ ? (maybe var1)  |
+|   33| Var4              | var\_4               | var4           | Var4           | \_ ?               |
+|   34| SnakeCase         | snake\_case          | snakeCase      | SnakeCase      | \_ ? (maybe var3)  |
+|   35| Snake-Case        | snake\_-\_case       | snake-Case     | Snake-Case     | \_ X               |
 |   36| Snake Case        | snake\_case          | snakeCase      | SnakeCase      |                    |
 |   37| Snake - Case      | snake\_-\_case       | snake-Case     | Snake-Case     |                    |
+
+Related Resources
+=================
+
+-   [The state of naming conventions in R, Bååth 2012, R Journal](https://lup.lub.lu.se/search/publication/e324f252-1d1c-4416-ad1f-284d4ba84bf9) [Download article](journal.r-project.org/archive/2012-2/RJournal_2012-2_Baaaath.pdf)
+-   [Consistent naming conventions in R, Lovelace 2014, RBloggers](https://www.r-bloggers.com/consistent-naming-conventions-in-r/)
+-   [What is your preferred style for naming variables in R?, Stackoverflowquestion 2009](http://stackoverflow.com/questions/1944910/what-is-your-preferred-style-for-naming-variables-in-r)
+-   [Are there any official naming conventions in R?, stackoverflowquestion 2012](http://stackoverflow.com/questions/10013545/are-there-any-official-naming-conventions-for-r)

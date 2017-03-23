@@ -6,7 +6,7 @@ output: rmarkdown::github_document
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/Tazinho/snakecase?branch=master&svg=true)](https://ci.appveyor.com/project/Tazinho/snakecase) [![Travis-CI Build Status](https://travis-ci.org/Tazinho/snakecase.svg?branch=master)](https://travis-ci.org/Tazinho/snakecase) [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/snakecase)](https://cran.r-project.org/package=snakecase) [![Coverage Status](https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg)](https://codecov.io/github/Tazinho/snakecase?branch=master)
 
 A small package with functions to convert column names of data.frames (or strings
-in general) to different cases like snake_case, smallCamel- and BigCamelCase among others. Also high level features for more advanced case conversions are provided.
+in general) to different cases like snake_case, smallCamel- and BigCamelCase among others. Also high level features for more advanced case conversions are provided via `to_any_case()`.
 
 ## Install
 
@@ -69,7 +69,7 @@ Take for example a situation where you have IDs for some customers. Instead of c
 to_snake_case("CID")
 ```
 
-We could have also converted to "c_i_d" and if we don't know the meaning of "CID", we can't decide which one is the better solution. However it is easy to exclude specific approaches by counterexamples. So in practice it might be nicer to convert "SCREAMING_SNAKE_CASE" to "screaming_snake_case" instead of "s_c_r_e_a_m_i_n_g_s_n_a_k_e_c_a_s_e", which means that also "cid" is preferable to "c_i_d".
+We could have also converted to "c_i_d" and if we don't know the meaning of "CID", we can't decide which one is the better solution. However it is easy to exclude specific approaches by counterexamples. So in practice it might be nicer to convert "SCREAMING_SNAKE_CASE" to "screaming_snake_case" instead of "s_c_r_e_a_m_i_n_g_s_n_a_k_e_c_a_s_e" (or "screamin_g_snak_e_cas_e" or "s_creaming_s_nake_c_ase"), which means that also "cid" is preferable to "c_i_d" (or "c_id" or "ci_d") without further knowledge.
 
 Since the computer can't know, that we want "c_id" by himself. It is easiest, if we provide him with the right information (here in form of a valid PascalCase syntax):
 
@@ -101,24 +101,32 @@ In this way, we can get a good starting point on how to convert specifc strings 
 
 ## Three rules of consistency
 
-To be consistent regarding the conversion between different cases, we can introduce some conversion equations which should always hold, when switching from one to another case.
+In the last sections we have seen, that it is reasonable to bring a specific conversion from an input string to some standardized case into question. We have also seen, that it is helpful to introduce some tests on the behaviour of a specific conversion pattern in related cases. The latter can help to detect inappropriate conversions and also establishes a consistent behaviour when converting exotic cases or switching between standardized cases. Maybe we can generalize some of these tests and introduce some kind of consisteny patterns. This would enable us that whenever inappropriate or non-unique possibilities for conversions appear, we have rules that help us to deal with this situation and help to exclude some inconsistent conversion alternatives.
 
-Below you can see the current bahaviour. Those examples that behave as intended (X) and are also tested (`*Td*`) will be stable in the future.
-Others might be considered to be changed.
+During the development of this package I recognized three specific rules that seem reasonable to be valid whenever cases are converted. To be more general we just use `to_x()` and `to_y()` to refer to any two differing converter functions from this package.
 
+1. When we have converted to a standardized case, a new conversion to the case should not change the output:
 
+    `to_x(to_x(string)) = to_x(string)`  
 
-In general it might be desirable to have at least sth. like "pairwise inversity" of the three `to_xxx` functions on the space of `to_xxx(string)`. So it might be a good criterion if the following equation holds for any input string:
+1. When converting to a specific case, it should not matter if a conversion to another case happened already:
 
-1. `to_A(to_B(to_A(string))) = to_A(string)`, (note that this might be equivalent to `to_A(to_B(string))) = to_A(string)`)
+    `to_y(to_x(string)) = to_y(string)`  
 
-where `to_A` and to `to_B` can be `to_snake_case`, `to_small_camel_case` and `to_big_camel_case`.
+1. It should always be possible to switch between different cases, without any loss of information:  
 
-Note that equality in this equation is only one criterion and it still doesn't
+    `to_x(to_y(to_x(string))) = to_x(string)`  
+
+Note that it can easily be shown, that rule three follow from the first and the second rule. However, it seems reasonable to express each by its own, since they all have an interpretation and together they give a really good intuition about the properties of the converter functions.
+
+# Testing
+
+To give a meaningful conversion for different cases, we systematically designed meaningful testcases for conversion to snake, small- and big camel case.
+To be consistent regarding the conversion between different cases, we also test the rules above on all example input strings, which are shown below.
+<!--Note that equality in this equation is only one criterion and it still doesn't
 imply a unique solution on how to translate an initial string argument to snake or camel case. (Note that also `to_xxx(string) = to_xxx(string)` seems desirable). However, for the 
-following testcases, also these two equations are tested.
+following testcases, also these two equations are tested.-->
 
-# Tests
 
 ```{r, echo = FALSE}
 cases <- c(NA,
@@ -145,21 +153,26 @@ knitr::kable(tibble::tibble(nr = seq_along(cases),
                             #snake_case_dev = snakecase::to_snake_case_dev(cases),
                             smallCamelCase = snakecase::to_small_camel_case(cases),
                             BigCamelCase = snakecase::to_big_camel_case(cases),
-                            `As intended?` = c("\\*Td\\*, X", "\\*Td\\*, X", "\\*Td\\*, X",
-                                               "\\*Td\\*, X", "", "\\*Td\\*, X",
-                                               "", "\\*Td\\*, ?", "\\*Td\\*, X",
-                                               "\\*Td\\*, X", "\\*Td\\*, X",
-                                               "", "\\*Td\\*, ?", "\\*Td\\*, ?",
-                                               "\\*Td\\*, X",
-                                               "", "X \\*Td\\*",
-                                               "",
-                                               ", \\*Td\\*",
+                            `As intended?` = c("yes", "yes", "yes",
+                                               "yes", "", "yes",
+                                               "", "yes", "yes",
+                                               "yes", "yes", "",
+                                               "yes", "yes", "yes",
+                                               "", "yes", "yes",
+                                               "yes", "", "yes",
                                                "_ ?", "",
                                                "_ X",
                                                "_ X", "_ ? (maybe c_id)", "_ ?",
                                                "_ ?", "_ ?", "_ ?",
                                                "_ X", "_ ? (maybe var1)", "_ ?", 
                                                "_ ? (maybe var3)", "_ X",
-                                               "","","",""))
+                                               "",""))
              )
 ```
+
+# Related Resources
+
+* [The state of naming conventions in R, Bååth 2012, R Journal](https://lup.lub.lu.se/search/publication/e324f252-1d1c-4416-ad1f-284d4ba84bf9) [Download article](journal.r-project.org/archive/2012-2/RJournal_2012-2_Baaaath.pdf)
+* [Consistent naming conventions in R, Lovelace 2014, RBloggers](https://www.r-bloggers.com/consistent-naming-conventions-in-r/)
+* [What is your preferred style for naming variables in R?, Stackoverflowquestion 2009](http://stackoverflow.com/questions/1944910/what-is-your-preferred-style-for-naming-variables-in-r)
+* [Are there any official naming conventions in R?, stackoverflowquestion 2012](http://stackoverflow.com/questions/10013545/are-there-any-official-naming-conventions-for-r)
