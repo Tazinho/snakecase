@@ -3,6 +3,4 @@ library("tibble")
 library("snakecase")
 
 
-
 test_check("snakecase")
-
