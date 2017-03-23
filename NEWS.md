@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-# snakecase 0.3.0
-||||||| merged common ancestors
-# snakecase 0.2.3
-=======
-# snakecase 0.3
->>>>>>> master
 #snakecase 0.3
 
 * supports behaviour for german umlauts on all platforms
