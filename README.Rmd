@@ -15,7 +15,7 @@ in general) to different cases like snake_case, smallCamel- and BigCamelCase amo
 devtools::install_github("Tazinho/snakecase", ref = "devversion-01", force = TRUE)
 ```
 
-## Usage
+## Usage 
 
 ```{r, collapse=TRUE, message=FALSE}
 library(snakecase)
