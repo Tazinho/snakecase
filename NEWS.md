@@ -1,9 +1,11 @@
 # snakecase 0.2.3
 
 * supports behaviour for german umlauts on all platforms
-* intoduced internal function `to_snake_case_internal()` which does the preprocessing and simplifies `to_any_case()` a little bit.
+* intoduced internal function `to_snake_case_internal()` which does the preprocessing and simplifies all other functions (especially `to_any_case()`) a little bit.
 * introduced `to_screaming_snake_case()`
 * added arguments prefix, postfix and replace_special_characters to `to_any_case()`.
+* completely renewed readme
+* updated tests and highly modularized all tests. (just to_any_case lacks some tests now and in general more examples testcases have to be written)
 
 # snakecase 0.2.2
 

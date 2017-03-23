@@ -129,44 +129,55 @@ following testcases, also these two equations are tested.-->
 
 
 ```{r, echo = FALSE}
-cases <- c(NA,
-           "snake_case", "snakeCase",
-           "SnakeCase", "_", "snake_Case", 
+cases <- c(NA, "snake_case", "snakeCase",
+           "SnakeCase", "_", "snake_Case",
            "_", "SNake", "Snake",
-           "s_nake", "sn_ake", "_",
-           "SNaKE", "SNaKEr", "s_na_k_er", "_",
-           "SNAKE SNAKE CASE", "_",
+           "s_nake", "sn_ake",  "_",
+           "SNaKE", "SNaKEr", "s_na_k_er",
+           "_", "SNAKE SNAKE CASE", "_",
            "snakeSnakECase", "SNAKE snakE_case", "_",
-           "bangBooMBang",
-           "upPER", "CId", "_",
-           "___", ".", "...",
-           "Sepal.Width", "Var 1", "Var-2",
-           "Var.3", "Var4",
-           "SnakeCase",
-           "Snake-Case",
-           "Snake Case",
-           "Snake  -  Case")
+           "ssRRss", "ssRRRR")            
+
+# cases <- c(NA,
+#            "snake_case", "snakeCase",
+#            "SnakeCase", "_", "snake_Case", 
+#            "_", "SNake", "Snake",
+#            "s_nake", "sn_ake", "_",
+#            "SNaKE", "SNaKEr", "s_na_k_er", "_",
+#            "SNAKE SNAKE CASE", "_",
+#            "snakeSnakECase", "SNAKE snakE_case", "_",
+#            "bangBooMBang",
+#            "upPER", "CId", "_",
+#            "___", ".", "...",
+#            "Sepal.Width", "Var 1", "Var-2",
+#            "Var.3", "Var4",
+#            "SnakeCase",
+#            "Snake-Case",
+#            "Snake Case",
+#            "Snake  -  Case")
+# 
+# `As intended?` = c("yes", "yes", "yes",
+#                                                "yes", "", "yes",
+#                                                "", "yes", "yes",
+#                                                "yes", "yes", "",
+#                                                "yes", "yes", "yes",
+#                                                "", "yes", "yes",
+#                                                "yes", "", "yes",
+#                                                "_ ?", "",
+#                                                "_ X",
+#                                                "_ X", "_ ? (maybe c_id)", "_ ?",
+#                                                "_ ?", "_ ?", "_ ?",
+#                                                "_ X", "_ ? (maybe var1)", "_ ?", 
+#                                                "_ ? (maybe var3)", "_ X",
+#                                                "","")
 
 knitr::kable(tibble::tibble(nr = seq_along(cases),
                             examples = cases,
                             snake_case = snakecase::to_snake_case(cases),
                             #snake_case_dev = snakecase::to_snake_case_dev(cases),
                             smallCamelCase = snakecase::to_small_camel_case(cases),
-                            BigCamelCase = snakecase::to_big_camel_case(cases),
-                            `As intended?` = c("yes", "yes", "yes",
-                                               "yes", "", "yes",
-                                               "", "yes", "yes",
-                                               "yes", "yes", "",
-                                               "yes", "yes", "yes",
-                                               "", "yes", "yes",
-                                               "yes", "", "yes",
-                                               "_ ?", "",
-                                               "_ X",
-                                               "_ X", "_ ? (maybe c_id)", "_ ?",
-                                               "_ ?", "_ ?", "_ ?",
-                                               "_ X", "_ ? (maybe var1)", "_ ?", 
-                                               "_ ? (maybe var3)", "_ X",
-                                               "",""))
+                            BigCamelCase = snakecase::to_big_camel_case(cases)
+                            )
              )
 ```
 
