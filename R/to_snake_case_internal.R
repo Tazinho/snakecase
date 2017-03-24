@@ -16,8 +16,6 @@ to_snake_case_internal <- function(string, preprocess = "\\s+"){
   # preprocessing: catch some input that should be handled like underscores
   # too (only spaces by default)
   string <- stringr::str_replace_all(string, preprocess, "_")
-  # catch some input that should be handled like underscores too (only spaces!)
-  string <- stringr::str_replace_all(string, "\\s+", "_")
   # Changes behaviour of the function. Cases like RStudio will be converted
   # to r_studio and not to rstudio anymore. Inserts underscores around groups
   # of big letters with following small letters (and ÄÖÜ, äöüß)

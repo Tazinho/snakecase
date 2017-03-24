@@ -1,3 +1,7 @@
+# snakecase 0.3.2
+
+* finished vignette (title: Caseconverters)
+
 # snakecase 0.3.1
 
 * started testing `to_any_case` and removed a bug.
