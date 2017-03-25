@@ -5,8 +5,8 @@
 \title{Functions to convert column names to snake_case}
 \usage{
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
-  "screaming_snake"), preprocess = "\\\\s+", postprocess = NULL,
-  prefix = "", postfix = "", replace_special_characters = FALSE)
+  "screaming_snake"), preprocess = NULL, postprocess = NULL, prefix = "",
+  postfix = "", replace_special_characters = FALSE)
 }
 \arguments{
 \item{string}{Character string indicating column names of a data.frame.}
@@ -18,7 +18,8 @@ case should be the target case, that the string should be converted into.}
 treated like underscore. This is useful and gives flexibility to customize conversion
 of strings that contain also dots, hyphens and/or other special characters.}
 
-\item{postprocess}{Character string indicating column names of a data.frame.}
+\item{postprocess}{Character string that will be the separator between different words. When `case == "snake"`
+it will replace the underscore.}
 
 \item{prefix}{prefix}
 

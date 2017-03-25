@@ -6,7 +6,8 @@
 #' @param preprocess Character string that will be wrapped internally into stringr::regex. All matches will be
 #' treated like underscore. This is useful and gives flexibility to customize conversion
 #' of strings that contain also dots, hyphens and/or other special characters.
-#' @param postprocess Character string indicating column names of a data.frame.
+#' @param postprocess Character string that will be the separator between different words. When `case == "snake"`
+#' it will replace the underscore.
 #' @param prefix prefix
 #' @param postfix postfix
 #' @param replace_special_characters if `TRUE`, special characters will be translated to characters which are more likely to be understood by different programs. For example german umlauts will be translated to ae, oe, ue etc.
@@ -25,7 +26,7 @@
 #'
 #' @export
 #'
-to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake"), preprocess = "\\s+", postprocess = NULL, prefix = "", postfix = "", replace_special_characters = FALSE){
+to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake"), preprocess = NULL, postprocess = NULL, prefix = "", postfix = "", replace_special_characters = FALSE){
   string <- to_snake_case_internal(string, preprocess = preprocess)
   ## postprocessing
   # caseconversion to small-/big camel case
