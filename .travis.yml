@@ -1,7 +1,20 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+os:
+- linux
+- osx
+
+r:
+- release
+- oldrelease
+- devel
 
 language: R
 sudo: false
 cache: packages
 after_success:
   - Rscript -e 'covr::codecov()'
+  
+addons:
+  apt:
+    packages:
+- qpdf
