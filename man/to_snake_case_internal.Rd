@@ -4,7 +4,7 @@
 \alias{to_snake_case_internal}
 \title{Functions to convert column names to snake_case}
 \usage{
-to_snake_case_internal(string, preprocess = "\\\\s+")
+to_snake_case_internal(string, preprocess = NULL)
 }
 \arguments{
 \item{string}{Character string indicating column names of a data.frame.}
