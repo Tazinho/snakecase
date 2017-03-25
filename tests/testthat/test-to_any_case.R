@@ -38,5 +38,5 @@ test_that("complex strings", {
   strings2 <- c("this - Is_-: a Strange_string", "\u00C4ND THIS ANOTHER_One")
   
   expect_equal(to_any_case(strings2, case = "snake", preprocess = "-|\\:"),
-               c("this _ _is_ a _strange_string", "\u00E4nd_ _this_ _another_one"))
+               c("this_is_a_strange_string", "\u00E4nd_this_another_one"))
 })

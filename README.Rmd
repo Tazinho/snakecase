@@ -5,8 +5,9 @@ output: rmarkdown::github_document
 
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/Tazinho/snakecase?branch=master&svg=true)](https://ci.appveyor.com/project/Tazinho/snakecase) [![Travis-CI Build Status](https://travis-ci.org/Tazinho/snakecase.svg?branch=master)](https://travis-ci.org/Tazinho/snakecase) [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/snakecase)](https://cran.r-project.org/package=snakecase) [![Coverage Status](https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg)](https://codecov.io/github/Tazinho/snakecase?branch=master)
 
-A small package with functions to convert column names of data.frames (or strings
-in general) to different cases like snake_case, smallCamel- and BigCamelCase among others. Also high level features for more advanced case conversions are provided via `to_any_case()`.
+<!--A small package with functions to convert column names of data.frames (or strings
+in general) to different cases like snake_case, smallCamel- and BigCamelCase among others. Also high level features for more advanced case conversions are provided via `to_any_case()`.-->
+The snakecase package contains four specific caseconverter functions and one more general highlevel function with added functionality.
 
 ## Install
 
@@ -15,8 +16,79 @@ in general) to different cases like snake_case, smallCamel- and BigCamelCase amo
 devtools::install_github("Tazinho/snakecase", ref = "devversion-01", force = TRUE)
 ```
 
-## Usage 
+# Usage 
 
+## Specific caseconverters
+
+```{r, collapse=TRUE}
+# devtools::install_github("Tazinho/snakecase")
+library(snakecase)
+strings <- c("this Is a Strange_string", "AND THIS ANOTHER_One")
+
+to_snake_case(strings)
+
+to_small_camel_case(strings)
+
+to_big_camel_case(strings)
+
+to_screaming_snake_case(strings)
+```
+
+## Highlevel casesconverter
+
+The funtion `to_any_case()` can do everything that the others can and also adds some extra highlevel functionaliy.
+
+### Default usage
+
+```{r, collapse=TRUE}
+to_any_case(strings, case = "snake")
+
+to_any_case(strings, case = "small_camel")
+
+to_any_case(strings, case = "big_camel")
+
+to_any_case(strings, case = "screaming_snake")
+```
+
+### Pre -and postprocessing
+
+By default only whitespaces, underscores and some patterns of mixed lower/upper case letter combinations are recognized as word boundaries. You can specify anything as a word boundary which is a valid stringr regular expression:
+
+```{r, collapse=TRUE}
+strings2 <- c("this - Is_-: a Strange_string", "ÄND THIS ANOTHER_One")
+
+to_snake_case(strings2)
+
+to_any_case(strings2, case = "snake", preprocess = "-|\\:")
+```
+
+You can also specify a different separator than `"_"` or `""` via `postprocess`:
+
+```{r, collapse = TRUE}
+to_any_case(strings2, case = "snake", preprocess = "-|\\:", postprocess = " ")
+
+to_any_case(strings2, case = "big_camel", preprocess = "-|\\:", postprocess = "//")
+```
+
+### Pre -and postfix
+
+You can set pre -and suffixes:
+
+```{r, collapse=TRUE}
+to_any_case(strings2, case = "big_camel", preprocess = "-|\\:", postprocess = "//",
+            prefix = "USER://", postfix = ".exe")
+```
+
+### Special characters
+
+If you have problems with special characters on your plattform, you can replace them via `replace_special_characters = TRUE`:
+
+```{r, collapse = TRUE}
+strings3 <- c("ßüss üß ä stränge sträng", "unrealistisch aber nützich")
+
+to_any_case(strings3, case = "screaming_snake", replace_special_characters = TRUE)
+```
+<!--
 ```{r, collapse=TRUE, message=FALSE}
 library(snakecase)
 
@@ -55,10 +127,11 @@ library(dplyr)
 tibble(inp = strings, outp = to_small_camel_case(strings)) %>% 
   mutate(compare = inp == outp)
 ```
+-->
 
-## Design Philosophy
+# Design Philosophy
 
-# Practical influences
+## Practical influences
 
 Conversion to a specific target case is not always obvious or unique. In general a clean conversion
 can only be guaranted, when the input-string is meaningful.
