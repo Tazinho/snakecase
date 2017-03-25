@@ -3,7 +3,6 @@
 * finished vignette (title: Caseconverters) and replaced the usage part in readme with it.
 * changed behaviour in snake_case_internal to always treat whitespaces as underscores.
 for whitespaces in output postprocess = " " is recommended.
-* added more integrated testing on macos
 
 # snakecase 0.3.1
 
