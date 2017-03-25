@@ -1,5 +1,5 @@
 Package: snakecase
-Version: 0.3.1
+Version: 0.3.2
 Date: 2017-03-12
 Title: snakecase
 Description: Functions to convert column names to snake or camel case.
