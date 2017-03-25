@@ -52,15 +52,15 @@ strings2 <- c("this - Is_-: a Strange_string", "ÄND THIS ANOTHER_One")
 
 to_snake_case(strings2)
 
-to_any_case(strings2, case = "snake", preprocess = "-|\\:")
+to_any_case(strings2, case = "snake", preprocess = "\\s|-|\\:")
 ```
 
 You can also specify a different separator than `"_"` or `""` via `postprocess`:
 
 ```{r, collapse = TRUE}
-to_any_case(strings2, case = "snake", preprocess = "-|\\:", postprocess = "+++")
+to_any_case(strings2, case = "snake", preprocess = "\\s|-|\\:", postprocess = "+++")
 
-to_any_case(strings2, case = "big_camel", preprocess = "-|\\:", postprocess = "//")
+to_any_case(strings2, case = "big_camel", preprocess = "\\s|-|\\:", postprocess = "//")
 ```
 
 ### Pre -and postfix
@@ -68,7 +68,7 @@ to_any_case(strings2, case = "big_camel", preprocess = "-|\\:", postprocess = "/
 You can set pre -and suffixes:
 
 ```{r, collapse=TRUE}
-to_any_case(strings2, case = "big_camel", preprocess = "-|\\:", postprocess = "//",
+to_any_case(strings2, case = "big_camel", preprocess = "\\s|-|\\:", postprocess = "//",
             prefix = "USER://", postfix = ".exe")
 ```
 
