@@ -20,4 +20,7 @@ test_that("rules",{
   expect_equal(to_big_camel_case(to_screaming_snake_case(examples)),
                to_big_camel_case(examples)
   ) 
+  expect_equal(to_big_camel_case(to_parsed_case(examples)),
+               to_big_camel_case(examples)
+  ) 
 })
