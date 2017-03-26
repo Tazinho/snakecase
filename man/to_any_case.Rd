@@ -36,6 +36,10 @@ A character vector according the specified parameters above.
 \description{
 Function to convert strings to any case
 }
+\note{
+\code{to_any_case()} is vectorised over \code{postprocess}, \code{prefix} and \code{postfix}.
+\code{postprocess} might follow in the future.
+}
 \examples{
 ### Default usage
 strings <- c("this Is a Strange_string", "AND THIS ANOTHER_One")

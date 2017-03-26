@@ -19,6 +19,8 @@
 #'
 #' @return A character vector according the specified parameters above.
 #'
+#' @note \code{to_any_case()} is vectorised over \code{postprocess}, \code{prefix} and \code{postfix}.
+#' \code{postprocess} might follow in the future.
 #' @author Malte Grosser, \email{malte.grosser@@gmail.com}
 #' @keywords utilities
 #'
@@ -58,7 +60,7 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
   # parsecase with postprocessing
   if(case == "parsed" & !is.null(postprocess)){
     string <- string %>%
-      purrr::map_chr(., ~ stringr::str_replace_all(.x, "_", postprocess))}
+      purrr::map2_chr(., postprocess, ~ stringr::str_replace_all(.x, "_", .y))}
   # other cases
   if(case %in% c("snake", "small_camel", "big_camel", "screaming_snake")){
     string <- string %>% purrr::map_chr(stringr::str_to_lower)
@@ -72,7 +74,8 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
     if(is.null(postprocess)){
       string <- string %>% purrr::map_chr(stringr::str_c, collapse = "")
     } else {
-      string <- string %>% purrr::map_chr(stringr::str_c, collapse = postprocess)
+      string <- string %>% purrr::map_chr(stringr::str_c, collapse = postprocess) %>% 
+        purrr::map2_chr(., postprocess, ~ stringr::str_replace_all(.x, "_", .y))  
     }
   }
   if(case == "small_camel"){
@@ -84,7 +87,8 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
     if(is.null(postprocess)){
       string <- purrr::map_chr(string, ~ stringr::str_replace_all(.x, "_", "_"))
     } else {
-      string <- purrr::map_chr(string, ~ stringr::str_replace_all(.x, "_", postprocess))
+      string <- string %>% 
+        purrr::map2_chr(., postprocess, ~ stringr::str_replace_all(.x, "_", .y))
     }
   }
   ## replace Special Characters
