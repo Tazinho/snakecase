@@ -2,6 +2,7 @@
 
 * introduced case = "parsed" in to_any_case()
 * introduced to_parsed_case()
+* any_case() is now vectorised over pre-/postprocess, pre-/postfix for all case arguments
 
 # snakecase 0.3.2
 
