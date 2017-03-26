@@ -12,7 +12,7 @@
 #'
 #' @importFrom magrittr "%>%"
 #'
-to_snake_case_internal <- function(string, preprocess = NULL){
+to_parsed_case_internal <- function(string, preprocess = NULL){
   # preprocessing: catch some input that should be handled like underscores
   # too (only spaces by default)
   if(!is.null(preprocess)){
@@ -24,9 +24,9 @@ to_snake_case_internal <- function(string, preprocess = NULL){
     # to r_studio and not to rstudio anymore. Inserts underscores around groups
     # of big letters with following small letters (and ÄÖÜ, äöüß)
     parse1_pat_cap_smalls <- function(string){
-    pat_cap_smalls <- "([A-Z\u00C4\u00D6\u00DC][a-z\u00E4\u00F6\u00FC\u00DF]+)"
-    string <- stringr::str_replace_all(string, pat_cap_smalls, "_\\1_")
-    string})
+      pat_cap_smalls <- "([A-Z\u00C4\u00D6\u00DC][a-z\u00E4\u00F6\u00FC\u00DF]+)"
+      string <- stringr::str_replace_all(string, pat_cap_smalls, "_\\1_")
+      string})
   string <- parse1_pat_cap_smalls(string)
   # Inserts underscores around all capital letter groups with length >= 2
   pat_caps2 <- "([A-Z\u00C4\u00D6\u00DC]{2,})"

@@ -28,7 +28,7 @@
 #' @export
 #'
 to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake", "parse"), preprocess = NULL, postprocess = NULL, prefix = "", postfix = "", replace_special_characters = FALSE){
-  string <- to_snake_case_internal(string, preprocess = preprocess)
+  string <- to_parsed_case_internal(string, preprocess = preprocess)
   # parsecase with postprocessing
   if(case == "parse" & !is.null(postprocess)){
     string <- string %>%

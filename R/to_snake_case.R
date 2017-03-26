@@ -22,6 +22,6 @@
 #' @export
 #'
 to_snake_case <- function(string){
-  to_snake_case_internal(string) %>% 
+  to_parsed_case_internal(string) %>% 
     purrr::map_chr(stringr::str_to_lower)
 }
