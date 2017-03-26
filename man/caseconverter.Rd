@@ -7,7 +7,7 @@
 \alias{to_big_camel_case}
 \alias{to_screaming_snake_case}
 \alias{to_parsed_case}
-\title{caseconverter}
+\title{Specific case converter shortcuts}
 \usage{
 to_snake_case(string)
 

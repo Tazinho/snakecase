@@ -2,43 +2,49 @@
 % Please edit documentation in R/to_any_case.R
 \name{to_any_case}
 \alias{to_any_case}
-\title{Functions to convert column names to snake_case}
+\title{General case conversion}
 \usage{
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
   "screaming_snake", "parsed"), preprocess = NULL, postprocess = NULL,
   prefix = "", postfix = "", replace_special_characters = FALSE)
 }
 \arguments{
-\item{string}{Character string indicating column names of a data.frame.}
+\item{string}{A string (for example names of a data frame).}
 
-\item{case}{Character string ("snake", "small_camel", "big_camel" or "screaming_snake", "parsed"), indicating 
-case should be the target case, that the string should be converted into. case = "parsed" returns the
-just the parsed string separated by "_", without any adjustments regarding small or capital letters.}
+\item{case}{The desired target case, provided as one of \code{"snake"}, \code{"small_camel"}, \code{"big_camel"}, 
+\code{"screaming_snake"} or \code{"parsed"}. The latter one is not really a case, but is helpful since it
+returns the parsed input string, separated by underscores, without any further modification.}
 
-\item{preprocess}{Character string that will be wrapped internally into stringr::regex. All matches will be
-treated like underscore. This is useful and gives flexibility to customize conversion
-of strings that contain also dots, hyphens and/or other special characters.}
+\item{preprocess}{String that will be wrapped internally into \code{stringr::regex()}. 
+All matches will be treated as additional splitting parameters besides the default ones 
+(\code{"_"} and \code{" "}), when parsing the input string.}
 
-\item{postprocess}{Character string that will be the separator between different words. When `case == "snake"`
-it will replace the underscore.}
+\item{postprocess}{String that will be used as separator. The defaults are \code{"_"} 
+and \code{""}, regarding the specified \code{case}.}
 
-\item{prefix}{prefix}
+\item{prefix}{prefix (string).}
 
-\item{postfix}{postfix}
+\item{postfix}{postfix (string).}
 
-\item{replace_special_characters}{if `TRUE`, special characters will be translated to characters which are more likely to be understood by different programs. For example german umlauts will be translated to ae, oe, ue etc.}
+\item{replace_special_characters}{Logical, if \code{TRUE}, special characters 
+will be translated to characters which are more likely to be understood by 
+different programs. For example german umlauts will be translated to ae, oe, ue etc.}
 }
 \value{
-character
+A character vector according the specified parameters above.
 }
 \description{
-Functions to convert column names to snake_case
+Function to convert strings to any case
 }
 \examples{
 camelCases <- c("smallCamelCase", "BigCamelCase", "mixed_Case", "snake_case", "_camel_case__")
 to_any_case(camelCases, case = "snake")
 to_any_case("fsdf.d-sf", case = "snake", preprocess = "\\\\.|-")
 
+}
+\seealso{
+\href{https://github.com/Tazinho/snakecase}{snakecase on github} or 
+\code{\link{caseconverter}} for some handy shortcuts.
 }
 \author{
 Malte Grosser, \email{malte.grosser@gmail.com}

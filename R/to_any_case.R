@@ -1,19 +1,23 @@
-#' Functions to convert column names to snake_case
+#' General case conversion
+#' 
+#' Function to convert strings to any case
 #'
-#' @param string Character string indicating column names of a data.frame.
-#' @param case Character string ("snake", "small_camel", "big_camel" or "screaming_snake", "parsed"), indicating 
-#' case should be the target case, that the string should be converted into. case = "parsed" returns the
-#' just the parsed string separated by "_", without any adjustments regarding small or capital letters.
-#' @param preprocess Character string that will be wrapped internally into stringr::regex. All matches will be
-#' treated like underscore. This is useful and gives flexibility to customize conversion
-#' of strings that contain also dots, hyphens and/or other special characters.
-#' @param postprocess Character string that will be the separator between different words. When `case == "snake"`
-#' it will replace the underscore.
-#' @param prefix prefix
-#' @param postfix postfix
-#' @param replace_special_characters if `TRUE`, special characters will be translated to characters which are more likely to be understood by different programs. For example german umlauts will be translated to ae, oe, ue etc.
+#' @param string A string (for example names of a data frame).
+#' @param case The desired target case, provided as one of \code{"snake"}, \code{"small_camel"}, \code{"big_camel"}, 
+#' \code{"screaming_snake"} or \code{"parsed"}. The latter one is not really a case, but is helpful since it
+#' returns the parsed input string, separated by underscores, without any further modification.
+#' @param preprocess String that will be wrapped internally into \code{stringr::regex()}. 
+#' All matches will be treated as additional splitting parameters besides the default ones 
+#' (\code{"_"} and \code{" "}), when parsing the input string.
+#' @param postprocess String that will be used as separator. The defaults are \code{"_"} 
+#' and \code{""}, regarding the specified \code{case}.
+#' @param prefix prefix (string).
+#' @param postfix postfix (string).
+#' @param replace_special_characters Logical, if \code{TRUE}, special characters 
+#' will be translated to characters which are more likely to be understood by 
+#' different programs. For example german umlauts will be translated to ae, oe, ue etc.
 #'
-#' @return character
+#' @return A character vector according the specified parameters above.
 #'
 #' @author Malte Grosser, \email{malte.grosser@@gmail.com}
 #' @keywords utilities
@@ -24,6 +28,9 @@
 #' to_any_case("fsdf.d-sf", case = "snake", preprocess = "\\.|-")
 #'
 #' @importFrom magrittr "%>%"
+#'
+#' @seealso \href{https://github.com/Tazinho/snakecase}{snakecase on github} or 
+#' \code{\link{caseconverter}} for some handy shortcuts.
 #'
 #' @export
 #'

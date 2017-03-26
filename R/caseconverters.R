@@ -1,5 +1,5 @@
-#' caseconverter
-#'
+#' Specific case converter shortcuts
+#' 
 #' These functions allow you to parse and convert a string to a specific case.
 #'
 #' @param string A string.
