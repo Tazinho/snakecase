@@ -3,19 +3,26 @@
 #' These functions allow you to parse and convert a string to a specific case.
 #'
 #' @param string A string.
-#' @name caseconverter_shortcuts
-#' @return A character vector according the specified case.
+#' @name caseconverter
+#' @return A character vector according the specified target case.
+#' 
+#' @author Malte Grosser, \email{malte.grosser@@gmail.com}
+#' @keywords utilities
+#' 
 #' @examples
 #' strings <- c("this Is a Strange_string", "AND THIS ANOTHER_One", NA)
+#' 
 #' to_snake_case(strings)
 #' to_small_camel_case(strings)
 #' to_big_camel_case(strings)
 #' to_screaming_snake_case(strings)
+#' to_parsed_case(strings)
 #' 
 #' @importFrom magrittr "%>%"
 NULL
 
-#' @rdname caseconverter_shortcuts
+#' @rdname caseconverter
+#' @seealso \code{\link{to_any_case}} for flexible high level conversion with a lot of additional functionality.
 #' @export
 
 to_snake_case <- function(string){
@@ -23,7 +30,7 @@ to_snake_case <- function(string){
     purrr::map_chr(stringr::str_to_lower)
 }
 
-#' @rdname caseconverter_shortcuts
+#' @rdname caseconverter
 #' @export
 
 to_small_camel_case <- function(string){
@@ -33,7 +40,7 @@ to_small_camel_case <- function(string){
   out
 }
 
-#' @rdname caseconverter_shortcuts
+#' @rdname caseconverter
 #' @export
 
 to_big_camel_case <- function(string){
@@ -44,7 +51,7 @@ to_big_camel_case <- function(string){
     purrr::map_chr(stringr::str_c, collapse = "")
 }
 
-#' @rdname caseconverter_shortcuts
+#' @rdname caseconverter
 #' @export 
 
 to_screaming_snake_case <- function(string){
@@ -52,7 +59,7 @@ to_screaming_snake_case <- function(string){
     stringr::str_to_upper()
 }
 
-#' @rdname caseconverter_shortcuts
+#' @rdname caseconverter
 #' @export
 
 to_parsed_case <- function(string){
