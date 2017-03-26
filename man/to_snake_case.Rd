@@ -6,9 +6,6 @@
 \usage{
 to_snake_case(string)
 }
-\arguments{
-\item{string}{Character string indicating column names of a data.frame.}
-}
 \value{
 Vector of character strings in snake_case
 }

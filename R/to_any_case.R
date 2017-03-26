@@ -1,8 +1,8 @@
 #' Functions to convert column names to snake_case
 #'
 #' @param string Character string indicating column names of a data.frame.
-#' @param case Character string ("snake", "small_camel", "big_camel" or "screaming_snake", "parse"), indicating 
-#' case should be the target case, that the string should be converted into. case = "parse" returns the
+#' @param case Character string ("snake", "small_camel", "big_camel" or "screaming_snake", "parsed"), indicating 
+#' case should be the target case, that the string should be converted into. case = "parsed" returns the
 #' just the parsed string separated by "_", without any adjustments regarding small or capital letters.
 #' @param preprocess Character string that will be wrapped internally into stringr::regex. All matches will be
 #' treated like underscore. This is useful and gives flexibility to customize conversion
@@ -27,10 +27,10 @@
 #'
 #' @export
 #'
-to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake", "parse"), preprocess = NULL, postprocess = NULL, prefix = "", postfix = "", replace_special_characters = FALSE){
+to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake", "parsed"), preprocess = NULL, postprocess = NULL, prefix = "", postfix = "", replace_special_characters = FALSE){
   string <- to_parsed_case_internal(string, preprocess = preprocess)
   # parsecase with postprocessing
-  if(case == "parse" & !is.null(postprocess)){
+  if(case == "parsed" & !is.null(postprocess)){
     string <- string %>%
       purrr::map_chr(., ~ stringr::str_replace_all(.x, "_", postprocess))}
   # other cases
