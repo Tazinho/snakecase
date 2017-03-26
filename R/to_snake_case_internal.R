@@ -33,7 +33,7 @@ to_snake_case_internal <- function(string, preprocess = NULL){
   string <- stringr::str_replace_all(string, pat_cap_lonely, "_\\1_")
   # customize the output to snake case
   # - applying tolower, remove more than one "_" and starting/ending "_"
-  string <- string %>% purrr::map_chr(stringr::str_to_lower) %>% 
+  string <- string %>%
     purrr::map_chr(~ stringr::str_replace_all(.x, "_+", "_")) %>% 
     purrr::map_chr(~ stringr::str_replace_all(.x, "^_|_$", ""))
   # return

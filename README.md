@@ -5,7 +5,7 @@ snakecase
 
 <!--A small package with functions to convert column names of data.frames (or strings
 in general) to different cases like snake_case, smallCamel- and BigCamelCase among others. Also high level features for more advanced case conversions are provided via `to_any_case()`.-->
-The snakecase package contains four specific caseconverter functions and one more general highlevel function with added functionality.
+The snakecase package contains four specific caseconverter functions and one more general highlevel function with additional functionality.
 
 Install
 -------
@@ -40,8 +40,8 @@ to_screaming_snake_case(strings)
 ## [1] "THIS_IS_A_STRANGE_STRING" "AND_THIS_ANOTHER_ONE"
 ```
 
-Highlevel casesconverter
-------------------------
+Highlevel caseconverter
+-----------------------
 
 The funtion `to_any_case()` can do everything that the others can and also adds some extra highlevel functionaliy.
 
@@ -281,3 +281,5 @@ Related Resources
 -   [Consistent naming conventions in R, Lovelace 2014, RBloggers](https://www.r-bloggers.com/consistent-naming-conventions-in-r/)
 -   [What is your preferred style for naming variables in R?, Stackoverflowquestion 2009](http://stackoverflow.com/questions/1944910/what-is-your-preferred-style-for-naming-variables-in-r)
 -   [Are there any official naming conventions in R?, stackoverflowquestion 2012](http://stackoverflow.com/questions/10013545/are-there-any-official-naming-conventions-for-r)
+-   [`clean_names()` function()](https://github.com/sfirke/janitor/blob/master/R/clean_names.R) from the [janitor package](https://github.com/sfirke/janitor)
+-   [`to_camel` function()](https://github.com/Rapporter/rapportools/blob/master/R/utils.R) from the [rapporttools package](https://github.com/Rapporter/rapportools)

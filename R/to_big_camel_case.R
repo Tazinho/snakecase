@@ -23,6 +23,7 @@
 #'
 to_big_camel_case <- function(string){
   to_snake_case_internal(string) %>% 
+    purrr::map_chr(stringr::str_to_lower) %>% 
     stringr::str_split("_") %>% 
     purrr::map(stringr::str_to_title) %>% 
     purrr::map_chr(stringr::str_c, collapse = "")
