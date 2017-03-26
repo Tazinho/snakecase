@@ -2,22 +2,22 @@
 % Please edit documentation in R/caseconverters.R
 \name{caseconverter_shortcuts}
 \alias{caseconverter_shortcuts}
-\alias{to_snake_case2}
-\alias{to_small_camel_case2}
-\alias{to_big_camel_case2}
-\alias{to_screaming_snake_case2}
-\alias{to_parsed_case2}
-\title{caseconverter shortcuts}
+\alias{to_snake_case}
+\alias{to_small_camel_case}
+\alias{to_big_camel_case}
+\alias{to_screaming_snake_case}
+\alias{to_parsed_case}
+\title{caseconverter}
 \usage{
-to_snake_case2(string)
+to_snake_case(string)
 
-to_small_camel_case2(string)
+to_small_camel_case(string)
 
-to_big_camel_case2(string)
+to_big_camel_case(string)
 
-to_screaming_snake_case2(string)
+to_screaming_snake_case(string)
 
-to_parsed_case2(string)
+to_parsed_case(string)
 }
 \arguments{
 \item{string}{A string.}

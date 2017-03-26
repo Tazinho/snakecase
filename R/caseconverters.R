@@ -1,4 +1,4 @@
-#' caseconverter shortcuts
+#' caseconverter
 #'
 #' These functions allow you to parse and convert a string to a specific case.
 #'
@@ -18,7 +18,7 @@ NULL
 #' @rdname caseconverter_shortcuts
 #' @export
 
-to_snake_case2 <- function(string){
+to_snake_case <- function(string){
   to_parsed_case_internal(string) %>% 
     purrr::map_chr(stringr::str_to_lower)
 }
@@ -26,8 +26,8 @@ to_snake_case2 <- function(string){
 #' @rdname caseconverter_shortcuts
 #' @export
 
-to_small_camel_case2 <- function(string){
-  out <- to_big_camel_case2(string)
+to_small_camel_case <- function(string){
+  out <- to_big_camel_case(string)
   out <- stringr::str_c(stringr::str_sub(out, 1, 1) %>% stringr::str_to_lower(),
                         stringr::str_sub(out, 2))
   out
@@ -36,7 +36,7 @@ to_small_camel_case2 <- function(string){
 #' @rdname caseconverter_shortcuts
 #' @export
 
-to_big_camel_case2 <- function(string){
+to_big_camel_case <- function(string){
   to_parsed_case_internal(string) %>% 
     purrr::map_chr(stringr::str_to_lower) %>% 
     stringr::str_split("_") %>% 
@@ -47,7 +47,7 @@ to_big_camel_case2 <- function(string){
 #' @rdname caseconverter_shortcuts
 #' @export 
 
-to_screaming_snake_case2 <- function(string){
+to_screaming_snake_case <- function(string){
   to_parsed_case_internal(string) %>%
     stringr::str_to_upper()
 }
@@ -55,6 +55,6 @@ to_screaming_snake_case2 <- function(string){
 #' @rdname caseconverter_shortcuts
 #' @export
 
-to_parsed_case2 <- function(string){
+to_parsed_case <- function(string){
   to_parsed_case_internal(string)
 }
