@@ -45,8 +45,7 @@
 #' to_any_case(strings2, case = "big_camel", preprocess = "-|\\:", postprocess = "//",
 #'             prefix = "USER://", postfix = ".exe")
 #' 
-#' ### Special characters like german umlauts for example can be replaced via
-#' \code{replace_special_characters = TRUE}
+#' ### Special characters like german umlauts for example can be replaced via replace_special_characters = TRUE
 #'
 #' @importFrom magrittr "%>%"
 #'
