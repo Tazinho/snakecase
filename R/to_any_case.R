@@ -23,9 +23,28 @@
 #' @keywords utilities
 #'
 #' @examples
-#' camelCases <- c("smallCamelCase", "BigCamelCase", "mixed_Case", "snake_case", "_camel_case__")
-#' to_any_case(camelCases, case = "snake")
-#' to_any_case("fsdf.d-sf", case = "snake", preprocess = "\\.|-")
+#' ### Default usage
+#' strings <- c("this Is a Strange_string", "AND THIS ANOTHER_One")
+#' to_any_case(strings, case = "snake")
+#' to_any_case(strings, case = "small_camel")
+#' to_any_case(strings, case = "big_camel")
+#' to_any_case(strings, case = "screaming_snake")
+#' to_any_case(strings, case = "parsed")
+#' 
+#' ### Pre -and postprocessing
+#' strings2 <- c("this - Is_-: a Strange_string", "AND THIS ANOTHER_One")
+#' to_snake_case(strings2)
+#' to_any_case(strings2, case = "snake", preprocess = "-|\\:")
+#' 
+#' to_any_case(strings2, case = "snake", preprocess = "-|\\:", postprocess = " ")
+#' to_any_case(strings2, case = "big_camel", preprocess = "-|\\:", postprocess = "//")
+#' 
+#' ### Pre -and postfix
+#' to_any_case(strings2, case = "big_camel", preprocess = "-|\\:", postprocess = "//",
+#'             prefix = "USER://", postfix = ".exe")
+#' 
+#' ### Special characters like german umlauts for example can be replaced via
+#' \code{replace_special_characters = TRUE}
 #'
 #' @importFrom magrittr "%>%"
 #'

@@ -39,7 +39,7 @@ to_parsed_case(strings)
 
 }
 \seealso{
-\code{\link{to_any_case}} for flexible high level conversion with a lot of additional functionality.
+\href{https://github.com/Tazinho/snakecase}{snakecase on github}, \code{\link{to_any_case}} for flexible high level conversion.
 }
 \author{
 Malte Grosser, \email{malte.grosser@gmail.com}

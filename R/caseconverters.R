@@ -22,7 +22,7 @@
 NULL
 
 #' @rdname caseconverter
-#' @seealso \code{\link{to_any_case}} for flexible high level conversion with a lot of additional functionality.
+#' @seealso \href{https://github.com/Tazinho/snakecase}{snakecase on github}, \code{\link{to_any_case}} for flexible high level conversion.
 #' @export
 
 to_snake_case <- function(string){
