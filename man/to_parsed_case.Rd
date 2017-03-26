@@ -10,7 +10,7 @@ to_parsed_case(string)
 \item{string}{Character string indicating column names of a data.frame.}
 }
 \value{
-Vector of character strings, parsed for conversion to snake_case, separated by "_"
+Vector of character strings, parsed for conversion to snake_case, separated by "_".
 }
 \description{
 Functions to convert column names to snake_case

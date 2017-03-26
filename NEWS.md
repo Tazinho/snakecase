@@ -1,6 +1,7 @@
 # snakecase 0.3.3
 
-* introduced case = "parse" in to_any_case()
+* introduced case = "parsed" in to_any_case()
+* introduced to_parsed_case()
 
 # snakecase 0.3.2
 

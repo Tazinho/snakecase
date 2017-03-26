@@ -2,7 +2,7 @@
 #'
 #' @inheritParams to_parsed_case_internal
 #'
-#' @return Vector of character strings, parsed for conversion to snake_case, separated by "_"
+#' @return Vector of character strings, parsed for conversion to snake_case, separated by "_".
 #'
 #' @author Malte Grosser, \email{malte.grosser@@gmail.com}
 #' @keywords utilities
