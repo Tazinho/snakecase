@@ -113,7 +113,9 @@ to_any_case(strings3, case = "screaming_snake", replace_special_characters = TRU
 ## [1] "SSUESS_UESS_AE_STRAENGE_STRAENG" "UNREALISTISCH_ABER_NUETZICH"
 ```
 
-<!--
+### Vectorisation
+
+`to_any_case()` is vectorised over `preprocess`, `postprocess`, `prefix` and `postfix`. <!--
 
 ```r
 library(snakecase)
@@ -179,6 +181,7 @@ tibble(inp = strings, outp = to_small_camel_case(strings)) %>%
 ## 6                   <NA>                <NA>      NA
 ```
 -->
+
 Design Philosophy
 =================
 
