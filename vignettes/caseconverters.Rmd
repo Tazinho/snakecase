@@ -9,7 +9,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-The snakecase package contains four specific caseconverter functions and one more general highlevel function with added functionality.
+The snakecase package contains five specific caseconverter functions and one more general highlevel function with added functionality.
 
 ## Specific caseconverters
 
@@ -25,6 +25,8 @@ to_small_camel_case(strings)
 to_big_camel_case(strings)
 
 to_screaming_snake_case(strings)
+
+to_parsed_case(strings)
 ```
 
 ## Highlevel casesconverter
@@ -41,6 +43,8 @@ to_any_case(strings, case = "small_camel")
 to_any_case(strings, case = "big_camel")
 
 to_any_case(strings, case = "screaming_snake")
+
+to_any_case(strings, case = "parsed")
 ```
 
 ### Pre -and postprocessing

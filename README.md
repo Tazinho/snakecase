@@ -5,7 +5,7 @@ snakecase
 
 <!--A small package with functions to convert column names of data.frames (or strings
 in general) to different cases like snake_case, smallCamel- and BigCamelCase among others. Also high level features for more advanced case conversions are provided via `to_any_case()`.-->
-The snakecase package contains four specific caseconverter functions and one more general highlevel function with additional functionality.
+The snakecase package contains five specific caseconverter functions and one more general highlevel function with additional functionality.
 
 Install
 -------
@@ -38,6 +38,9 @@ to_big_camel_case(strings)
 
 to_screaming_snake_case(strings)
 ## [1] "THIS_IS_A_STRANGE_STRING" "AND_THIS_ANOTHER_ONE"
+
+to_parsed_case(strings)
+## [1] "this_Is_a_Strange_string" "AND_THIS_ANOTHER_One"
 ```
 
 Highlevel caseconverter
@@ -59,6 +62,9 @@ to_any_case(strings, case = "big_camel")
 
 to_any_case(strings, case = "screaming_snake")
 ## [1] "THIS_IS_A_STRANGE_STRING" "AND_THIS_ANOTHER_ONE"
+
+to_any_case(strings, case = "parsed")
+## [1] "this_Is_a_Strange_string" "AND_THIS_ANOTHER_One"
 ```
 
 ### Pre -and postprocessing

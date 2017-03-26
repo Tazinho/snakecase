@@ -7,7 +7,7 @@ output: rmarkdown::github_document
 
 <!--A small package with functions to convert column names of data.frames (or strings
 in general) to different cases like snake_case, smallCamel- and BigCamelCase among others. Also high level features for more advanced case conversions are provided via `to_any_case()`.-->
-The snakecase package contains four specific caseconverter functions and one more general highlevel function with additional functionality.
+The snakecase package contains five specific caseconverter functions and one more general highlevel function with additional functionality.
 
 ## Install
 
@@ -33,6 +33,8 @@ to_small_camel_case(strings)
 to_big_camel_case(strings)
 
 to_screaming_snake_case(strings)
+
+to_parsed_case(strings)
 ```
 
 ## Highlevel caseconverter
@@ -49,6 +51,8 @@ to_any_case(strings, case = "small_camel")
 to_any_case(strings, case = "big_camel")
 
 to_any_case(strings, case = "screaming_snake")
+
+to_any_case(strings, case = "parsed")
 ```
 
 ### Pre -and postprocessing
