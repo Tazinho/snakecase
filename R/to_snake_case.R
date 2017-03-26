@@ -1,6 +1,6 @@
 #' Functions to convert column names to snake_case
 #'
-#' @inheritParams to_snake_case_internal
+#' @inheritParams to_parsed_case_internal
 #'
 #' @return Vector of character strings in snake_case
 #'
