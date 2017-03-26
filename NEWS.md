@@ -1,3 +1,7 @@
+# snakecase 0.3.3
+
+* introduced case = "parse" in to_any_case()
+
 # snakecase 0.3.2
 
 * finished vignette (title: Caseconverters) and replaced the usage part in readme with it.
