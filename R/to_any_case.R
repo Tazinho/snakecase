@@ -45,7 +45,8 @@
 #' to_any_case(strings2, case = "big_camel", preprocess = "-|\\:", postprocess = "//",
 #'             prefix = "USER://", postfix = ".exe")
 #' 
-#' ### Special characters like german umlauts for example can be replaced via replace_special_characters = TRUE
+#' ### Special characters like german umlauts for example can be replaced via 
+#' # replace_special_characters = TRUE
 #'
 #' @importFrom magrittr "%>%"
 #'
@@ -58,8 +59,7 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
   string <- to_parsed_case_internal(string, preprocess = preprocess)
   # parsecase with postprocessing
   if(case == "parsed" & !is.null(postprocess)){
-    string <- string %>%
-      purrr::map2_chr(., postprocess, ~ stringr::str_replace_all(.x, "_", .y))}
+    string <- purrr::map2_chr(string, postprocess, ~ stringr::str_replace_all(.x, "_", .y))}
   # other cases
   if(case %in% c("snake", "small_camel", "big_camel", "screaming_snake")){
     string <- string %>% purrr::map_chr(stringr::str_to_lower)
@@ -73,8 +73,8 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
     if(is.null(postprocess)){
       string <- string %>% purrr::map_chr(stringr::str_c, collapse = "")
     } else {
-      string <- string %>% purrr::map_chr(stringr::str_c, collapse = postprocess) %>% 
-        purrr::map2_chr(., postprocess, ~ stringr::str_replace_all(.x, "_", .y))  
+      string <- string %>% purrr::map_chr(stringr::str_c, collapse = "_")
+      string <- purrr::map2_chr(string, postprocess, ~ stringr::str_replace_all(.x, "_", .y))  
     }
   }
   if(case == "small_camel"){
@@ -86,8 +86,7 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
     if(is.null(postprocess)){
       string <- purrr::map_chr(string, ~ stringr::str_replace_all(.x, "_", "_"))
     } else {
-      string <- string %>% 
-        purrr::map2_chr(., postprocess, ~ stringr::str_replace_all(.x, "_", .y))
+      string <- purrr::map2_chr(string, postprocess, ~ stringr::str_replace_all(.x, "_", .y))
     }
   }
   ## replace Special Characters
