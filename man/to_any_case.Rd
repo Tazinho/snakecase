@@ -31,7 +31,10 @@ and \code{""}, regarding the specified \code{case}.}
 will be translated to characters which are more likely to be understood by 
 different programs. For example german umlauts will be translated to ae, oe, ue etc.}
 
-\item{protect}{just testing this}
+\item{protect}{A string which is a valid \code{stringr::regex()}. Matches within the output
+won't have any "_" beside. Note that \code{preprocess} has a higher precedence than protect, 
+which means that it doesn't make sense to protect sth. which is already replaced
+via \code{preprocess}. Note also that}
 }
 \value{
 A character vector according the specified parameters above.
@@ -66,6 +69,12 @@ to_any_case(strings2, case = "big_camel", preprocess = "-|\\\\:", postprocess = 
 
 ### Special characters like german umlauts for example can be replaced via 
 # replace_special_characters = TRUE
+
+### Protect anything that shouldn't have an underscore beside in the output
+strings3 <- c("var12", "var1.2", "va.r.1.2")
+to_any_case(strings3, case = "snake")
+to_any_case(strings3, case = "snake", protect = "\\\\d")
+to_any_case(strings3, case = "snake", protect = "\\\\d|\\\\.")
 
 }
 \seealso{
