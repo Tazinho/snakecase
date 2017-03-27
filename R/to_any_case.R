@@ -117,9 +117,9 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
   }
   ## protect
   if(!is.null(protect)){
-    protect <- stringr::str_c("[", protect, "]")
-    infront <- stringr::str_c("(_+)", protect)
-    behind <- stringr::str_c(protect, "(_+)")
+    protect <- stringr::str_c("([", protect, "])")
+    infront <- stringr::str_c("_+", protect)
+    behind <- stringr::str_c(protect, "_+")
     string <- stringr::str_replace_all(string, infront, "\\1") %>% 
       stringr::str_replace_all(behind, "\\1")
   }
