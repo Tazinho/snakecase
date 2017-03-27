@@ -32,7 +32,7 @@ will be translated to characters which are more likely to be understood by
 different programs. For example german umlauts will be translated to ae, oe, ue etc.}
 
 \item{protect}{A string which is a valid \code{stringr::regex()}. Matches within the output
-won't have any "_" beside. Note that \code{preprocess} has a higher precedence than protect, 
+won't have any "_" (or artifacts of \code{preprocess}) beside. Note that \code{preprocess} has a higher precedence than protect, 
 which means that it doesn't make sense to protect sth. which is already replaced
 via \code{preprocess}. Note also that}
 }

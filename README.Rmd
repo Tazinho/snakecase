@@ -7,19 +7,19 @@ output: rmarkdown::github_document
 
 <!--A small package with functions to convert column names of data.frames (or strings
 in general) to different cases like snake_case, smallCamel- and BigCamelCase among others. Also high level features for more advanced case conversions are provided via `to_any_case()`.-->
-The snakecase package contains five specific caseconverter functions and one more general highlevel function with additional functionality.
+The snakecase package contains five specific case converter functions and one more general high level function with additional functionality.
 
 ## Install
 
 ```{r, results='hide', message=FALSE}
 # install.packages("devtools")
-# devtools::install_github("Tazinho/snakecase", ref = "devversion-01", force = TRUE)
-devtools::install_github("Tazinho/snakecase")
+devtools::install_github("Tazinho/snakecase", ref = "devversion-01", force = TRUE)
+#devtools::install_github("Tazinho/snakecase")
 ```
 
 # Usage 
 
-## Specific caseconverters
+## Specific case converters
 
 ```{r, collapse=TRUE}
 # devtools::install_github("Tazinho/snakecase")
@@ -37,9 +37,9 @@ to_screaming_snake_case(strings)
 to_parsed_case(strings)
 ```
 
-## Highlevel caseconverter
+## Highlevel case converter
 
-The funtion `to_any_case()` can do everything that the others can and also adds some extra highlevel functionaliy.
+The function `to_any_case()` can do everything that the others can and also adds some extra high level functionality.
 
 ### Default usage
 
@@ -86,7 +86,7 @@ to_any_case(strings2, case = "big_camel", preprocess = "-|\\:", postprocess = "/
 
 ### Special characters
 
-If you have problems with special characters on your plattform, you can replace them via `replace_special_characters = TRUE`:
+If you have problems with special characters on your platform, you can replace them via `replace_special_characters = TRUE`:
 
 ```{r, collapse = TRUE, eval = FALSE}
 strings3 <- c("ßüss üß ä stränge sträng", "unrealistisch aber nützich")
@@ -95,9 +95,42 @@ to_any_case(strings3, case = "screaming_snake", replace_special_characters = TRU
 ## [1] "SSUESS_UESS_AE_STRAENGE_STRAENG" "UNREALISTISCH_ABER_NUETZICH"
 ```
 
+### Protect anything
+
+If you see unwanted underscores around specific pattern, which you don't want to delete
+via `preprocess`, just use `protect`:
+
+```{r, collapse=TRUE}
+strings4 <- c("var12", "var1.2", "va.r.1.2")
+
+to_any_case(strings4, case = "snake")
+to_any_case(strings4, case = "snake", protect = "\\d")
+to_any_case(strings4, case = "snake", protect = "\\d|\\.")
+```
+
 ### Vectorisation
 
-`to_any_case()` is vectorised over `preprocess`, `postprocess`, `prefix` and `postfix`.
+`to_any_case()` is vectorised over `string`, `preprocess`, `postprocess`, `prefix`,
+`postfix` and `protect`.
+
+### More complex stuff
+
+Since `preprocess` and `protect` allow to use regular expressions, `to_any_case()` becomes
+very flexible and can achieve complex operations. Lets assume, that you want to translate
+a string, which contains dots and decimal numbers, into snakecase. You want that the dots 
+are treated as `"_"` in the output, but not if they are the separator of a decimal.
+
+You can achieve this, while passing a regex (a lookaround) to the `preprocess` argument,
+which only translates those dots into `"_"`, that don't have a digit in front. The resulting
+underscores between the digits can be cleaned via `protect = "\\d"`
+
+```{}
+to_any_case(c("va.riable.1.2"), case = "snake", preprocess = "(?<!\\d)\\.", protect = "\\d")
+[1] "va_riable1.2"
+
+#you could also use a postprocess in between
+to_any_case(c("va.riable.1.2"), case = "snake", preprocess = "(?<!\\d)\\.", postprocess = "//", protect = "\\d")
+```
 <!--
 ```{r, collapse=TRUE, message=FALSE}
 library(snakecase)
@@ -144,7 +177,7 @@ tibble(inp = strings, outp = to_small_camel_case(strings)) %>%
 ## Practical influences
 
 Conversion to a specific target case is not always obvious or unique. In general a clean conversion
-can only be guaranted, when the input-string is meaningful.
+can only be guaranteed, when the input-string is meaningful.
 
 Take for example a situation where you have IDs for some customers. Instead of calling the column "CustomerID" you abbreviate it to "CID". Without further knowledge about the meaning of CID it will be impossible to know that it should be converted to "c_id", when using `to_snake_case()`. Instead it will be converted to:
 
@@ -172,7 +205,7 @@ To make this as painless as possible, it is best to provide a logic that is robu
 1. "rs_tudio" or
 1. "r_studio".
 
-If we are conservative about any assumptions on the meaning of "RStudio", we can't decide which is the correct conversion. It is also not valid to assume that "RStudio" was intentionally written in PascalCase. Of course we know that "r_studio" is the correct solution, but we can get there also via different considerations. Let us try to convert our three possible translations (back) to PascalCase and from there back to snake case. What should the ouput look like?
+If we are conservative about any assumptions on the meaning of "RStudio", we can't decide which is the correct conversion. It is also not valid to assume that "RStudio" was intentionally written in PascalCase. Of course we know that "r_studio" is the correct solution, but we can get there also via different considerations. Let us try to convert our three possible translations (back) to PascalCase and from there back to snake case. What should the output look like?
 
 1. r_s_tudio -> RSTudio -> r_s_t_udio
 1. rs_tudio  -> RsTudio -> rs_tudio
@@ -180,11 +213,11 @@ If we are conservative about any assumptions on the meaning of "RStudio", we can
 
 Both of the first two alternatives can't be consistently converted back to a valid Pascal case input ("RStudio") and with the first logic the further snake case conversion seems to be complete nonsense. Only the latter case is consistent, when converting back to PascalCase, which is the case of the input "RStudio". It is also consistent to itself, when converting from PascalCase back to snake_case.  
 
-In this way, we can get a good starting point on how to convert specifc strings to valid snake_case. Once we have a clean snake_case conversion, we can easily convert further to smallCamelCase, BigCamelCase, SCREAMING_SNAKE_CASE or anything else.
+In this way, we can get a good starting point on how to convert specific strings to valid snake_case. Once we have a clean snake_case conversion, we can easily convert further to smallCamelCase, BigCamelCase, SCREAMING_SNAKE_CASE or anything else.
 
 ## Three rules of consistency
 
-In the last sections we have seen, that it is reasonable to bring a specific conversion from an input string to some standardized case into question. We have also seen, that it is helpful to introduce some tests on the behaviour of a specific conversion pattern in related cases. The latter can help to detect inappropriate conversions and also establishes a consistent behaviour when converting exotic cases or switching between standardized cases. Maybe we can generalize some of these tests and introduce some kind of consisteny patterns. This would enable us that whenever inappropriate or non-unique possibilities for conversions appear, we have rules that help us to deal with this situation and help to exclude some inconsistent conversion alternatives.
+In the last sections we have seen, that it is reasonable to bring a specific conversion from an input string to some standardized case into question. We have also seen, that it is helpful to introduce some tests on the behavior of a specific conversion pattern in related cases. The latter can help to detect inappropriate conversions and also establishes a consistent behavior when converting exotic cases or switching between standardized cases. Maybe we can generalize some of these tests and introduce some kind of consistency patterns. This would enable us that whenever inappropriate or non-unique possibilities for conversions appear, we have rules that help us to deal with this situation and help to exclude some inconsistent conversion alternatives.
 
 During the development of this package I recognized three specific rules that seem reasonable to be valid whenever cases are converted. To be more general we just use `to_x()` and `to_y()` to refer to any two differing converter functions from this package.
 
@@ -204,7 +237,7 @@ Note that it can easily be shown, that rule three follows from the first and the
 
 # Testing
 
-To give a meaningful conversion for different cases, we systematically designed meaningful testcases for conversion to snake, small- and big camel case among others.
+To give a meaningful conversion for different cases, we systematically designed meaningful test-cases for conversion to snake, small- and big camel case among others.
 To be consistent regarding the conversion between different cases, we also test the rules above on all example input strings, which are shown below.
 <!--Note that equality in this equation is only one criterion and it still doesn't
 imply a unique solution on how to translate an initial string argument to snake or camel case. (Note that also `to_xxx(string) = to_xxx(string)` seems desirable). However, for the 
