@@ -1,11 +1,10 @@
 #' Functions to convert column names to snake_case
 #'
-#' @param string Character string indicating column names of a data.frame.
-#' @param preprocess Character string that will be wrapped internally into stringr::regex. All matches will be
-#' treated like underscore. This is useful and gives flexibility to customize conversion
-#' of strings that contain also dots, hyphens and/or other special characters.
-#'
-#' @return Vector of character strings in snake_case
+#' @param string A string.
+#' @param preprocess Character string that will be wrapped internally into stringr::regex. 
+#' All matches will be padded with underscores.
+#' 
+#' @return A character vector separated by underscores, containing the parsed string.
 #'
 #' @author Malte Grosser, \email{malte.grosser@@gmail.com}
 #' @keywords utilities
