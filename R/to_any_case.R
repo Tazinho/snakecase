@@ -16,6 +16,10 @@
 #' @param replace_special_characters Logical, if \code{TRUE}, special characters 
 #' will be translated to characters which are more likely to be understood by 
 #' different programs. For example german umlauts will be translated to ae, oe, ue etc.
+#' @param protect A string which is a valid \code{stringr::regex()}. Matches within the output
+#' won't have any "_" beside. Note that \code{preprocess} has a higher precedence than protect, 
+#' which means that it doesn't make sense to protect sth. which is already replaced
+#' via \code{preprocess}. Note also that 
 #'
 #' @return A character vector according the specified parameters above.
 #'
@@ -47,7 +51,13 @@
 #' 
 #' ### Special characters like german umlauts for example can be replaced via 
 #' # replace_special_characters = TRUE
-#'
+#' 
+#' ### Protect anything that shouldn't have an underscore beside in the output
+#' strings3 <- c("var12", "var1.2", "va.r.1.2")
+#' to_any_case(strings3, case = "snake")
+#' to_any_case(strings3, case = "snake", protect = "\\d")
+#' to_any_case(strings3, case = "snake", protect = "\\d|\\.")
+#' 
 #' @importFrom magrittr "%>%"
 #'
 #' @seealso \href{https://github.com/Tazinho/snakecase}{snakecase on github} or 
@@ -55,7 +65,7 @@
 #'
 #' @export
 #'
-to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake", "parsed"), preprocess = NULL, postprocess = NULL, prefix = "", postfix = "", replace_special_characters = FALSE){
+to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake", "parsed"), preprocess = NULL, postprocess = NULL, prefix = "", postfix = "", replace_special_characters = FALSE, protect = NULL){
   case <- match.arg(case)
   
   string <- to_parsed_case_internal(string, preprocess = preprocess)
@@ -104,6 +114,13 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
   ## screaming_snake
   if(case == "screaming_snake"){
     string <- string %>% stringr::str_to_upper()
+  }
+  ## protect
+  if(!is.null(protect)){
+    protect <- stringr::str_c("[", protect, "]")
+    infront <- stringr::str_c("(_+)", protect)
+    behing <- stringr::str_c(protect, "(_+)")
+    string <- stringr::str_replace_all(string, stringr::str_c(infront, "|", behind), "\\1")
   }
   ## pre and postfix
   string <- stringr::str_c(prefix, string, postfix)

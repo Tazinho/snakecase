@@ -6,7 +6,8 @@
 \usage{
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
   "screaming_snake", "parsed"), preprocess = NULL, postprocess = NULL,
-  prefix = "", postfix = "", replace_special_characters = FALSE)
+  prefix = "", postfix = "", replace_special_characters = FALSE,
+  protect = NULL)
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
@@ -29,6 +30,8 @@ and \code{""}, regarding the specified \code{case}.}
 \item{replace_special_characters}{Logical, if \code{TRUE}, special characters 
 will be translated to characters which are more likely to be understood by 
 different programs. For example german umlauts will be translated to ae, oe, ue etc.}
+
+\item{protect}{just testing this}
 }
 \value{
 A character vector according the specified parameters above.
