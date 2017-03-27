@@ -37,10 +37,9 @@ to_parsed_case_internal <- function(string, preprocess = NULL){
       pat_cap_lonely <- "([A-Z\u00C4\u00D6\u00DC]*[A-Z\u00C4\u00D6\u00DC]{1}[A-Z\u00C4\u00D6\u00DCa-z\u00E4\u00F6\u00FC\u00DF]*)"
       string <- stringr::str_replace_all(string, pat_cap_lonely, "_\\1_")
       string},
-    # Inserts an "_" in front each letter that doesn'T have a small letter or big letter) in front.
-    # And also inserts an "_" behind each of those.
+    # Inserts an "_" everywhere except between combinations of small and capital letters.
     parse4_separate_non_characters = function(string){
-      sep_signs_around <- "([A-Z\u00C4\u00D6\u00DC|[a-z]\u00E4\u00F6\u00FC\u00DF|_]*)"
+      sep_signs_around <- "([A-Z\u00C4\u00D6\u00DC[a-z]\u00E4\u00F6\u00FC\u00DF]*)"
       string <- stringr::str_replace_all(string, sep_signs_around, "_\\1")
       string})
   string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
