@@ -124,11 +124,10 @@ You can achieve this, while passing a regex (a lookaround) to the `preprocess` a
 which only translates those dots into `"_"`, that don't have a digit in front. The resulting
 underscores between the digits can be cleaned via `protect = "\\d"`
 
-```{}
+```{r, collapse=TRUE}
 to_any_case(c("va.riable.1.2"), case = "snake", preprocess = "(?<!\\d)\\.", protect = "\\d")
-[1] "va_riable1.2"
 
-#you could also use a postprocess in between
+# you could also use a postprocess in between
 to_any_case(c("va.riable.1.2"), case = "snake", preprocess = "(?<!\\d)\\.", postprocess = "//", protect = "\\d")
 ```
 <!--

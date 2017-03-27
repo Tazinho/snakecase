@@ -138,11 +138,14 @@ Since `preprocess` and `protect` allow to use regular expressions, `to_any_case(
 
 You can achieve this, while passing a regex (a lookaround) to the `preprocess` argument, which only translates those dots into `"_"`, that don't have a digit in front. The resulting underscores between the digits can be cleaned via `protect = "\\d"`
 
-    to_any_case(c("va.riable.1.2"), case = "snake", preprocess = "(?<!\\d)\\.", protect = "\\d")
-    [1] "va_riable1.2"
+``` r
+to_any_case(c("va.riable.1.2"), case = "snake", preprocess = "(?<!\\d)\\.", protect = "\\d")
+## [1] "va_riable1.2"
 
-    #you could also use a postprocess in between
-    to_any_case(c("va.riable.1.2"), case = "snake", preprocess = "(?<!\\d)\\.", postprocess = "//", protect = "\\d")
+# you could also use a postprocess in between
+to_any_case(c("va.riable.1.2"), case = "snake", preprocess = "(?<!\\d)\\.", postprocess = "//", protect = "\\d")
+## [1] "va//riable1.2"
+```
 
 <!--
 
