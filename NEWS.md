@@ -4,6 +4,7 @@
 * introduced to_parsed_case()
 * any_case() is now vectorised over pre-/postprocess, pre-/postfix for all case arguments
 * introduces protect as (vectorised) argument to to_any_case(). it accepts regular expressions and cleans "_" or whatever the preprocessing did, between matches.
+* some more tests, documentation and fixes.
 
 # snakecase 0.3.2
 
