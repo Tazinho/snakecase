@@ -36,12 +36,18 @@ to_parsed_case_internal <- function(string, preprocess = NULL){
     parse3_pat_cap_lonely = function(string){
       pat_cap_lonely <- "([A-Z\u00C4\u00D6\u00DC]*[A-Z\u00C4\u00D6\u00DC]{1}[A-Z\u00C4\u00D6\u00DCa-z\u00E4\u00F6\u00FC\u00DF]*)"
       string <- stringr::str_replace_all(string, pat_cap_lonely, "_\\1_")
+      string},
+    # Inserts an "_" in front each letter that doesn'T have a small letter or big letter) in front.
+    # And also inserts an "_" behind each of those.
+    parse4_separate_non_characters = function(string){
+      sep_signs_around <- "([A-Z\u00C4\u00D6\u00DC|[a-z]\u00E4\u00F6\u00FC\u00DF|_]*)"
+      string <- stringr::str_replace_all(string, sep_signs_around, "_\\1")
       string})
   string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
   string <- parsing_functions[["parse2_pat_caps2"]](string)
   string <- parsing_functions[["parse3_pat_cap_lonely"]](string)
-  # customize the output to snake case
-  # - applying tolower, remove more than one "_" and starting/ending "_"
+  string <- parsing_functions[["parse4_separate_non_characters"]](string)
+  # customize the output: remove more than one "_" and starting/ending "_"
   string <- string %>%
     purrr::map_chr(~ stringr::str_replace_all(.x, "_+", "_")) %>% 
     purrr::map_chr(~ stringr::str_replace_all(.x, "^_|_$", ""))
