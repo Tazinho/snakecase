@@ -23,9 +23,11 @@ Specific case converters
 ------------------------
 
 ``` r
-# devtools::install_github("Tazinho/snakecase")
 library(snakecase)
 strings <- c("this Is a Strange_string", "AND THIS ANOTHER_One")
+
+to_parsed_case(strings)
+## [1] "this_Is_a_Strange_string" "AND_THIS_ANOTHER_One"
 
 to_snake_case(strings)
 ## [1] "this_is_a_strange_string" "and_this_another_one"
@@ -38,9 +40,6 @@ to_big_camel_case(strings)
 
 to_screaming_snake_case(strings)
 ## [1] "THIS_IS_A_STRANGE_STRING" "AND_THIS_ANOTHER_ONE"
-
-to_parsed_case(strings)
-## [1] "this_Is_a_Strange_string" "AND_THIS_ANOTHER_One"
 ```
 
 Highlevel case converter
@@ -51,6 +50,9 @@ The function `to_any_case()` can do everything that the others can and also adds
 ### Default usage
 
 ``` r
+to_any_case(strings, case = "parsed")
+## [1] "this_Is_a_Strange_string" "AND_THIS_ANOTHER_One"
+
 to_any_case(strings, case = "snake")
 ## [1] "this_is_a_strange_string" "and_this_another_one"
 
@@ -62,9 +64,6 @@ to_any_case(strings, case = "big_camel")
 
 to_any_case(strings, case = "screaming_snake")
 ## [1] "THIS_IS_A_STRANGE_STRING" "AND_THIS_ANOTHER_ONE"
-
-to_any_case(strings, case = "parsed")
-## [1] "this_Is_a_Strange_string" "AND_THIS_ANOTHER_One"
 ```
 
 ### Pre -and postprocessing
@@ -136,7 +135,7 @@ to_any_case(strings4, case = "snake", protect = "\\d|\\.")
 
 Since `preprocess` and `protect` allow to use regular expressions, `to_any_case()` becomes very flexible and can achieve complex operations. Lets assume, that you want to translate a string, which contains dots and decimal numbers, into snakecase. You want that the dots are treated as `"_"` in the output, but not if they are the separator of a decimal.
 
-You can achieve this, while passing a regex (a lookaround) to the `preprocess` argument, which only translates those dots into `"_"`, that don't have a digit in front. The resulting underscores between the digits can be cleaned via `protect = "\\d"`
+You can achieve this, while passing a regex (in this case a lookaround) to the `preprocess` argument, which only translates those dots into `"_"`, that don't have a digit in front. The resulting underscores between the digits can be cleaned via `protect = "\\d"`:
 
 ``` r
 to_any_case(c("va.riable.1.2"), case = "snake", preprocess = "(?<!\\d)\\.", protect = "\\d")
@@ -284,35 +283,9 @@ Note that it can easily be shown, that rule three follows from the first and the
 Testing
 =======
 
-To give a meaningful conversion for different cases, we systematically designed meaningful test-cases for conversion to snake, small- and big camel case among others. To be consistent regarding the conversion between different cases, we also test the rules above on all example input strings, which are shown below. <!--Note that equality in this equation is only one criterion and it still doesn't
+To give a meaningful conversion for different cases, we systematically designed test-cases for conversion to snake, small- and big camel case among others. To be consistent regarding the conversion between different cases, we also test the rules above on all test-cases. <!--Note that equality in this equation is only one criterion and it still doesn't
 imply a unique solution on how to translate an initial string argument to snake or camel case. (Note that also `to_xxx(string) = to_xxx(string)` seems desirable). However, for the 
 following testcases, also these two equations are tested.-->
-
-|   nr| examples          | snake\_case          | smallCamelCase | BigCamelCase   |
-|----:|:------------------|:---------------------|:---------------|:---------------|
-|    1| NA                | NA                   | NA             | NA             |
-|    2| snake\_case       | snake\_case          | snakeCase      | SnakeCase      |
-|    3| snakeCase         | snake\_case          | snakeCase      | SnakeCase      |
-|    4| SnakeCase         | snake\_case          | snakeCase      | SnakeCase      |
-|    5| \_                |                      |                |                |
-|    6| snake\_Case       | snake\_case          | snakeCase      | SnakeCase      |
-|    7| \_                |                      |                |                |
-|    8| SNake             | s\_nake              | sNake          | SNake          |
-|    9| Snake             | snake                | snake          | Snake          |
-|   10| s\_nake           | s\_nake              | sNake          | SNake          |
-|   11| sn\_ake           | sn\_ake              | snAke          | SnAke          |
-|   12| \_                |                      |                |                |
-|   13| SNaKE             | s\_na\_ke            | sNaKe          | SNaKe          |
-|   14| SNaKEr            | s\_na\_k\_er         | sNaKEr         | SNaKEr         |
-|   15| s\_na\_k\_er      | s\_na\_k\_er         | sNaKEr         | SNaKEr         |
-|   16| \_                |                      |                |                |
-|   17| SNAKE SNAKE CASE  | snake\_snake\_case   | snakeSnakeCase | SnakeSnakeCase |
-|   18| \_                |                      |                |                |
-|   19| snakeSnakECase    | snake\_snak\_e\_case | snakeSnakECase | SnakeSnakECase |
-|   20| SNAKE snakE\_case | snake\_snak\_e\_case | snakeSnakECase | SnakeSnakECase |
-|   21| \_                |                      |                |                |
-|   22| ssRRss            | ss\_r\_rss           | ssRRss         | SsRRss         |
-|   23| ssRRRR            | ss\_rrrr             | ssRrrr         | SsRrrr         |
 
 Related Resources
 =================
@@ -321,5 +294,5 @@ Related Resources
 -   [Consistent naming conventions in R, Lovelace 2014, RBloggers](https://www.r-bloggers.com/consistent-naming-conventions-in-r/)
 -   [What is your preferred style for naming variables in R?, Stackoverflowquestion 2009](http://stackoverflow.com/questions/1944910/what-is-your-preferred-style-for-naming-variables-in-r)
 -   [Are there any official naming conventions in R?, stackoverflowquestion 2012](http://stackoverflow.com/questions/10013545/are-there-any-official-naming-conventions-for-r)
--   [`clean_names()` function()](https://github.com/sfirke/janitor/blob/master/R/clean_names.R) from the [janitor package](https://github.com/sfirke/janitor)
--   [`to_camel` function()](https://github.com/Rapporter/rapportools/blob/master/R/utils.R) from the [rapporttools package](https://github.com/Rapporter/rapportools)
+-   [`clean_names()` function](https://github.com/sfirke/janitor/blob/master/R/clean_names.R) from the [janitor package](https://github.com/sfirke/janitor)
+-   [`to_camel()` function](https://github.com/Rapporter/rapportools/blob/master/R/utils.R) from the [rapporttools package](https://github.com/Rapporter/rapportools)

@@ -22,9 +22,10 @@ devtools::install_github("Tazinho/snakecase")
 ## Specific case converters
 
 ```{r, collapse=TRUE}
-# devtools::install_github("Tazinho/snakecase")
 library(snakecase)
 strings <- c("this Is a Strange_string", "AND THIS ANOTHER_One")
+
+to_parsed_case(strings)
 
 to_snake_case(strings)
 
@@ -33,8 +34,6 @@ to_small_camel_case(strings)
 to_big_camel_case(strings)
 
 to_screaming_snake_case(strings)
-
-to_parsed_case(strings)
 ```
 
 ## Highlevel case converter
@@ -44,6 +43,8 @@ The function `to_any_case()` can do everything that the others can and also adds
 ### Default usage
 
 ```{r, collapse=TRUE}
+to_any_case(strings, case = "parsed")
+
 to_any_case(strings, case = "snake")
 
 to_any_case(strings, case = "small_camel")
@@ -51,8 +52,6 @@ to_any_case(strings, case = "small_camel")
 to_any_case(strings, case = "big_camel")
 
 to_any_case(strings, case = "screaming_snake")
-
-to_any_case(strings, case = "parsed")
 ```
 
 ### Pre -and postprocessing
@@ -120,9 +119,9 @@ very flexible and can achieve complex operations. Lets assume, that you want to 
 a string, which contains dots and decimal numbers, into snakecase. You want that the dots 
 are treated as `"_"` in the output, but not if they are the separator of a decimal.
 
-You can achieve this, while passing a regex (a lookaround) to the `preprocess` argument,
+You can achieve this, while passing a regex (in this case a lookaround) to the `preprocess` argument,
 which only translates those dots into `"_"`, that don't have a digit in front. The resulting
-underscores between the digits can be cleaned via `protect = "\\d"`
+underscores between the digits can be cleaned via `protect = "\\d"`:
 
 ```{r, collapse=TRUE}
 to_any_case(c("va.riable.1.2"), case = "snake", preprocess = "(?<!\\d)\\.", protect = "\\d")
@@ -236,14 +235,12 @@ Note that it can easily be shown, that rule three follows from the first and the
 
 # Testing
 
-To give a meaningful conversion for different cases, we systematically designed meaningful test-cases for conversion to snake, small- and big camel case among others.
-To be consistent regarding the conversion between different cases, we also test the rules above on all example input strings, which are shown below.
+To give a meaningful conversion for different cases, we systematically designed test-cases for conversion to snake, small- and big camel case among others.
+To be consistent regarding the conversion between different cases, we also test the rules above on all test-cases.
 <!--Note that equality in this equation is only one criterion and it still doesn't
 imply a unique solution on how to translate an initial string argument to snake or camel case. (Note that also `to_xxx(string) = to_xxx(string)` seems desirable). However, for the 
 following testcases, also these two equations are tested.-->
-
-
-```{r, echo = FALSE}
+```{r, echo = FALSE, include = FALSE}
 cases <- c(NA, "snake_case", "snakeCase",
            "SnakeCase", "_", "snake_Case",
            "_", "SNake", "Snake",
@@ -302,5 +299,5 @@ knitr::kable(tibble::tibble(nr = seq_along(cases),
 * [Consistent naming conventions in R, Lovelace 2014, RBloggers](https://www.r-bloggers.com/consistent-naming-conventions-in-r/)
 * [What is your preferred style for naming variables in R?, Stackoverflowquestion 2009](http://stackoverflow.com/questions/1944910/what-is-your-preferred-style-for-naming-variables-in-r)
 * [Are there any official naming conventions in R?, stackoverflowquestion 2012](http://stackoverflow.com/questions/10013545/are-there-any-official-naming-conventions-for-r)
-* [`clean_names()` function()](https://github.com/sfirke/janitor/blob/master/R/clean_names.R) from the [janitor package](https://github.com/sfirke/janitor)
-* [`to_camel` function()](https://github.com/Rapporter/rapportools/blob/master/R/utils.R) from the [rapporttools package](https://github.com/Rapporter/rapportools)
+* [`clean_names()` function](https://github.com/sfirke/janitor/blob/master/R/clean_names.R) from the [janitor package](https://github.com/sfirke/janitor)
+* [`to_camel()` function](https://github.com/Rapporter/rapportools/blob/master/R/utils.R) from the [rapporttools package](https://github.com/Rapporter/rapportools)
