@@ -18,6 +18,8 @@ The snakecase package contains five specific case converter functions and one mo
 library(snakecase)
 strings <- c("this Is a Strange_string", "AND THIS ANOTHER_One")
 
+to_parsed_case(strings)
+
 to_snake_case(strings)
 
 to_small_camel_case(strings)
@@ -25,8 +27,6 @@ to_small_camel_case(strings)
 to_big_camel_case(strings)
 
 to_screaming_snake_case(strings)
-
-to_parsed_case(strings)
 ```
 
 ## Highlevel case converter
@@ -36,6 +36,8 @@ The function `to_any_case()` can do everything that the others can and also adds
 ### Default usage
 
 ```{r, collapse=TRUE}
+to_any_case(strings, case = "parsed")
+
 to_any_case(strings, case = "snake")
 
 to_any_case(strings, case = "small_camel")
@@ -43,8 +45,6 @@ to_any_case(strings, case = "small_camel")
 to_any_case(strings, case = "big_camel")
 
 to_any_case(strings, case = "screaming_snake")
-
-to_any_case(strings, case = "parsed")
 ```
 
 ### Pre -and postprocessing
