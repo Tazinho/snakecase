@@ -1,9 +1,14 @@
+# snakecase 0.4
+
 * any local special characters are now supported.
 * added 2 arguments to `to_any_case()`: empty_fill, which allows to fill strings
 matching to "" with the supplied string. unique_sep adds an integer suffix separated
 with the supplied string, when not `NULL`.
 * fixed a bug in to_snake_case_internal(). groups of digits are not separated in
 between anymore.
+* digits that are not direct next to each other, will be split via "_" in both camel case
+versions. This is a meaningful exception. Otherwise information would be lost and
+also the consistency rules in the readme wouldn't hold in this case.
 
 # snakecase 0.3.4
 
