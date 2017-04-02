@@ -1,4 +1,4 @@
-# snakecase 0.4
+# snakecase 0.3.5
 
 * any local special characters are now supported.
 * added 2 arguments to `to_any_case()`: empty_fill, which allows to fill strings
