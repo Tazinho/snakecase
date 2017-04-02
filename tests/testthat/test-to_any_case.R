@@ -81,22 +81,22 @@ test_that("stackoverflow answers", {
 })
 
 test_that("expand.grid", {
-  string <- c(NA, "_", "s_na_k_er", "SNAKE SNAKE CASE", "snakeSnakECase",
-              "SNAKE snakE_case", "ssRRss", "ssRRRR", "thisIsSomeCamelCase",
-              "this.text", "final count", "BobDylanUSA", "MikhailGorbachevUSSR",
-              "HelpfulStackOverflowPeople", "ImATallDrinkOfWater", "ICUDays", "SexCode",
-              "MAX_of_MLD", "Age.Group")
-  case <- c("parsed", "snake", "small_camel", "big_camel", "screaming_snake")
-  prefix <- c("", "start.")
-  postfix <- c("", ".end")
-  replace_special_characters <- c(TRUE, FALSE)
-  
-  dat <- expand.grid(string = string,
-                     case = case,
-                     postfix = postfix,
-                     prefix = prefix,
-                     replace_special_characters = replace_special_characters,
-                     stringsAsFactors = FALSE)
+  # string <- c(NA, "_", "s_na_k_er", "SNAKE SNAKE CASE", "snakeSnakECase",
+  #             "SNAKE snakE_case", "ssRRss", "ssRRRR", "thisIsSomeCamelCase",
+  #             "this.text", "final count", "BobDylanUSA", "MikhailGorbachevUSSR",
+  #             "HelpfulStackOverflowPeople", "ImATallDrinkOfWater", "ICUDays", "SexCode",
+  #             "MAX_of_MLD", "Age.Group")
+  # case <- c("parsed", "snake", "small_camel", "big_camel", "screaming_snake")
+  # prefix <- c("", "start.")
+  # postfix <- c("", ".end")
+  # replace_special_characters <- c(TRUE, FALSE)
+  # 
+  # dat <- expand.grid(string = string,
+  #                    case = case,
+  #                    postfix = postfix,
+  #                    prefix = prefix,
+  #                    replace_special_characters = replace_special_characters,
+  #                    stringsAsFactors = FALSE)
   expect_equal(purrr::invoke_rows(snakecase::to_any_case, dat,
                      preprocess = NULL,
                      postprocess = NULL,

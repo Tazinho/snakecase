@@ -1,3 +1,4 @@
+# cases for examples
 cases <-
   tibble::tribble(
     ~nr, ~ examples                  ,~parsed_case                    , ~snake_case                  , ~small_camel_case            , ~big_camel_case              , ~screaming_snake_case ,
@@ -42,3 +43,67 @@ cases <-
     38 , "ThisText"                  , "This_Text"                    , "this_text"                    , "thisText"                   , "ThisText"                   , "THIS_TEXT",
     39 , "NextText"                  , "Next_Text"                    , "next_text"                    , "nextText"                   , "NextText"                   , "NEXT_TEXT"
     )
+
+# dat for arguments of to_any_case(). test non NULL arguments via dat. 
+# test other three special case via specific examples
+string <- c(NA, "_", "s_na_k_er", "SNAKE SNAKE CASE", "snakeSnakECase",
+            "SNAKE snakE_case", "ssRRss", "ssRRRR", "thisIsSomeCamelCase",
+            "this.text", "final count", "BobDylanUSA", "MikhailGorbachevUSSR",
+            "HelpfulStackOverflowPeople", "ImATallDrinkOfWater", "ICUDays", "SexCode",
+            "MAX_of_MLD", "Age.Group")
+case <- c("parsed", "snake", "small_camel", "big_camel", "screaming_snake")
+prefix <- c("", "start.")
+postfix <- c("", ".end")
+replace_special_characters <- c(TRUE, FALSE)
+  
+dat <- expand.grid(string = string,
+                     case = case,
+                     postfix = postfix,
+                     prefix = prefix,
+                     replace_special_characters = replace_special_characters,
+                     stringsAsFactors = FALSE)
+
+# code to generate new results.
+# purrr::invoke_rows(snakecase::to_any_case, dat,
+#                    preprocess = NULL,
+#                    postprocess = NULL,
+#                    protect = NULL,
+#                    .collate = "cols",
+#                    .to = "output") %>% .$output, %>% dput
+
+# Some Benchmarks:
+# devtools::install_github("Tazinho/snakecase", force = TRUE)
+# library(snakecase)
+# 
+# string_gen <- function(times){paste0("str", 1:times)}
+# other_gen <- function(times){paste0("other", 1:times)}
+# 
+# str10 <- string_gen(10)
+# str1000 <- string_gen(1000)
+# oth10 <- other_gen(10)
+# oth1000 <- other_gen(1000)
+# 
+# microbenchmark::microbenchmark(
+#   to_any_case(string = str10, case = "snake", preprocess = oth10),
+#   to_any_case(string = str1000, case = "snake", preprocess = oth1000)
+# )
+# 
+# microbenchmark::microbenchmark(
+#   to_any_case(string = str10, case = "snake", postprocess = oth10),
+#   to_any_case(string = str1000, case = "snake", postprocess = oth1000)
+# )
+# 
+# microbenchmark::microbenchmark(
+#   to_any_case(string = str10, case = "snake",   prefix = oth10),
+#   to_any_case(string = str1000, case = "snake", prefix = oth1000)
+# )
+# 
+# microbenchmark::microbenchmark(
+#   to_any_case(string = str10, case = "snake"  , postfix = oth10),
+#   to_any_case(string = str1000, case = "snake", postfix = oth1000)
+# )
+# 
+# microbenchmark::microbenchmark(
+#   to_any_case(string = str10, case = "snake"  , protect = oth10),
+#   to_any_case(string = str1000, case = "snake", protect = oth1000)
+# )
