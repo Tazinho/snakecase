@@ -1,3 +1,10 @@
+* any local special characters are now supported.
+* added 2 arguments to `to_any_case()`: empty_fill, which allows to fill strings
+matching to "" with the supplied string. unique_sep adds an integer suffix separated
+with the supplied string, when not `NULL`.
+* fixed a bug in to_snake_case_internal(). groups of digits are not separated in
+between anymore.
+
 # snakecase 0.3.4
 
 * any_case() is now vectorised over pre-/postprocess, pre-/postfix for all case arguments

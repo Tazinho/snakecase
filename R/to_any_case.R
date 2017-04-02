@@ -84,7 +84,7 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
   # caseconversion to small-/big camel case
   if(case == "small_camel" | case == "big_camel"){
     string <- string %>% 
-      stringr::str_split("_") %>% 
+      stringr::str_split("(?<!\\d)_|_(?!\\d)") %>% 
       purrr::map(stringr::str_to_title)
     if(is.null(postprocess)){
       string <- string %>% purrr::map_chr(stringr::str_c, collapse = "")

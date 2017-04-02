@@ -41,7 +41,8 @@ cases <-
     36 , "MAX_of_MLD"                , "MAX_of_MLD"                   , "max_of_mld"                   , "maxOfMld"                   , "MaxOfMld"                   , "MAX_OF_MLD",
     37 , "Age.Group"                 , "Age_._Group"                  , "age_._group"                  , "age.Group"                  , "Age.Group"                  , "AGE_._GROUP",
     38 , "ThisText"                  , "This_Text"                    , "this_text"                    , "thisText"                   , "ThisText"                   , "THIS_TEXT",
-    39 , "NextText"                  , "Next_Text"                    , "next_text"                    , "nextText"                   , "NextText"                   , "NEXT_TEXT"
+    39 , "NextText"                  , "Next_Text"                    , "next_text"                    , "nextText"                   , "NextText"                   , "NEXT_TEXT",
+    40 , "test_123_ 1 1"             , "test_123_1_1"                 , "test_123_1_1"                 , "test123_1_1"                , "Test123_1_1"                , "TEST_123_1_1"
     )
 
 # dat for arguments of to_any_case(). test non NULL arguments via dat. 

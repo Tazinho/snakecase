@@ -46,7 +46,7 @@ to_small_camel_case <- function(string){
 to_big_camel_case <- function(string){
   to_parsed_case_internal(string) %>% 
     purrr::map_chr(stringr::str_to_lower) %>% 
-    stringr::str_split("_") %>% 
+    stringr::str_split("(?<!\\d)_|_(?!\\d)") %>% 
     purrr::map(stringr::str_to_title) %>% 
     purrr::map_chr(stringr::str_c, collapse = "")
 }

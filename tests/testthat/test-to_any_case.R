@@ -36,6 +36,10 @@ test_that("examples", {
 #   ) 
 # })
 
+test_that("random examples", 
+          expect_equal(to_any_case("string123", case = "snake"),
+                       "string_123"))
+
 test_that("complex strings", {
   strings2 <- c("this - Is_-: a Strange_string", "\u00C4ND THIS ANOTHER_One")
   
