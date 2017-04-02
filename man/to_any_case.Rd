@@ -7,7 +7,7 @@
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
   "screaming_snake", "parsed"), preprocess = NULL, postprocess = NULL,
   prefix = "", postfix = "", replace_special_characters = FALSE,
-  protect = NULL)
+  protect = NULL, unique_sep = NULL, empty_fill = NULL)
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
@@ -34,7 +34,13 @@ different programs. For example german umlauts will be translated to ae, oe, ue 
 \item{protect}{A string which is a valid \code{stringr::regex()}. Matches within the output
 won't have any "_" (or artifacts of \code{preprocess}) beside. Note that \code{preprocess} has a higher precedence than protect, 
 which means that it doesn't make sense to protect sth. which is already replaced
-via \code{preprocess}. Note also that}
+via \code{preprocess}.}
+
+\item{unique_sep}{A string. If it is supplied, then duplicated names will get a suffix integer
+in the order of their appearance. The suffix is separated by the supplied string to this argument.}
+
+\item{empty_fill}{A string. If it is supplied, then each entry that matches "" will be replaced
+by the supplied string to this argument.}
 }
 \value{
 A character vector according the specified parameters above.

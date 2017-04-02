@@ -19,7 +19,11 @@
 #' @param protect A string which is a valid \code{stringr::regex()}. Matches within the output
 #' won't have any "_" (or artifacts of \code{preprocess}) beside. Note that \code{preprocess} has a higher precedence than protect, 
 #' which means that it doesn't make sense to protect sth. which is already replaced
-#' via \code{preprocess}. Note also that 
+#' via \code{preprocess}.
+#' @param empty_fill A string. If it is supplied, then each entry that matches "" will be replaced
+#' by the supplied string to this argument.
+#' @param unique_sep A string. If it is supplied, then duplicated names will get a suffix integer
+#' in the order of their appearance. The suffix is separated by the supplied string to this argument.
 #'
 #' @return A character vector according the specified parameters above.
 #'
@@ -65,7 +69,7 @@
 #'
 #' @export
 #'
-to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake", "parsed"), preprocess = NULL, postprocess = NULL, prefix = "", postfix = "", replace_special_characters = FALSE, protect = NULL){
+to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake", "parsed"), preprocess = NULL, postprocess = NULL, prefix = "", postfix = "", replace_special_characters = FALSE, protect = NULL, unique_sep = NULL, empty_fill = NULL){
   case <- match.arg(case)
   
   string <- to_parsed_case_internal(string, preprocess = preprocess)
@@ -101,20 +105,12 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
       string <- purrr::map2_chr(string, postprocess, ~ stringr::str_replace_all(.x, "_", .y))
     }
   }
-  ## replace Special Characters
-  if(replace_special_characters){
-    string <- string %>% purrr::map_chr(~ stringr::str_replace_all(.x, c("\u00C4" = "Ae", 
-                                                                         "\u00D6" = "Oe",
-                                                                         "\u00DC" = "Ue",
-                                                                         "\u00E4" = "ae",
-                                                                         "\u00F6" = "oe",
-                                                                         "\u00FC" = "ue",
-                                                                         "\u00DF" = "ss")))
-  }
+  
   ## screaming_snake
   if(case == "screaming_snake"){
     string <- string %>% stringr::str_to_upper()
   }
+
   ## protect
   postprocess_protector <- if(is.null(postprocess)){
     "_"
@@ -127,8 +123,30 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
     string <- stringr::str_replace_all(string, infront, "\\1") %>% 
       stringr::str_replace_all(behind, "\\1")
   }
+    
+  ## replace Special Characters
+  if(replace_special_characters){
+    string <- string %>% purrr::map_chr(~ stringr::str_replace_all(.x, c("\u00C4" = "Ae", 
+                                                                         "\u00D6" = "Oe",
+                                                                         "\u00DC" = "Ue",
+                                                                         "\u00E4" = "ae",
+                                                                         "\u00F6" = "oe",
+                                                                         "\u00FC" = "ue",
+                                                                         "\u00DF" = "ss",
+                                                                         "\u0025" = "percent",
+                                                                         "\\`" = "",
+                                                                         "\\'" = "", 
+                                                                         "\\@" = "at")))
+  }
+  
   ## pre and postfix
   string <- stringr::str_c(prefix, string, postfix)
+  ## fill empty strings
+  if(!is.null(empty_fill))
+  string[string == ""] <- empty_fill
+  ## make unique
+  if(!is.null(unique_sep))
+  string <- make.unique(string, sep = unique_sep)
   ## return
   string
 }

@@ -17,29 +17,29 @@ to_parsed_case_internal <- function(string, preprocess = NULL){
   if(!is.null(preprocess)){
     string <- stringr::str_replace_all(string, preprocess, "_")
   }
-  string <- stringr::str_replace_all(string, "\\s", "_")
+  string <- stringr::str_replace_all(string, "[:blank:]", "_")
   parsing_functions <- list(
     # Changes behaviour of the function. Cases like RStudio will be converted
     # to r_studio and not to rstudio anymore. Inserts underscores around groups
     # of big letters with following small letters (and ÄÖÜ, äöüß)
     parse1_pat_cap_smalls = function(string){
-      pat_cap_smalls <- "([A-Z\u00C4\u00D6\u00DC][a-z\u00E4\u00F6\u00FC\u00DF]+)"
+      pat_cap_smalls <- "([\u00C4\u00D6\u00DC[:upper:][A-Z]][\u00E4\u00F6\u00FC\u00DF[:lower:][a-z]]+)"
       string <- stringr::str_replace_all(string, pat_cap_smalls, "_\\1_")
       string},
     # Inserts underscores around all capital letter groups with length >= 2
     parse2_pat_caps2 = function(string){
-      pat_caps2 <- "([A-Z\u00C4\u00D6\u00DC]{2,})"
+      pat_caps2 <- "([[:upper:][A-Z]\u00C4\u00D6\u00DC]{2,})"
       string <- stringr::str_replace_all(string, pat_caps2, "_\\1_")
       string},
     # Inserts underscores around all capital letter groups with length = 1 that
     # don't have a capital letter in front of them and a capital or small letter behind them
     parse3_pat_cap_lonely = function(string){
-      pat_cap_lonely <- "([A-Z\u00C4\u00D6\u00DC]*[A-Z\u00C4\u00D6\u00DC]{1}[A-Z\u00C4\u00D6\u00DCa-z\u00E4\u00F6\u00FC\u00DF]*)"
+      pat_cap_lonely <- "([\u00C4\u00D6\u00DC[:upper:][A-Z]]*[\u00C4\u00D6\u00DC[:upper:][A-Z]]{1}[\u00C4\u00D6\u00DC[:upper:][A-Z]\u00E4\u00F6\u00FC\u00DF[:lower:][a-z]]*)"
       string <- stringr::str_replace_all(string, pat_cap_lonely, "_\\1_")
       string},
-    # Inserts an "_" everywhere except between combinations of small and capital letters.
+    # Inserts an "_" everywhere except between combinations of small and capital letters and groups of digits.
     parse4_separate_non_characters = function(string){
-      sep_signs_around <- "([A-Z\u00C4\u00D6\u00DC[a-z]\u00E4\u00F6\u00FC\u00DF]*)"
+      sep_signs_around <- "([\u00C4\u00D6\u00DC[:upper:][A-Z]\u00E4\u00F6\u00FC\u00DF[:lower:][a-z]\\d]*)"
       string <- stringr::str_replace_all(string, sep_signs_around, "_\\1")
       string})
   string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
