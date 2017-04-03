@@ -1,6 +1,6 @@
 
-snakecase <img src="./logo_snakecase.png" height="175" align="right">
-=====================================================================
+snakecase <img src="./snakecase02.png" height="175" align="right">
+==================================================================
 
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/Tazinho/snakecase?branch=master&svg=true)](https://ci.appveyor.com/project/Tazinho/snakecase) [![Travis-CI Build Status](https://travis-ci.org/Tazinho/snakecase.svg?branch=master)](https://travis-ci.org/Tazinho/snakecase) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/snakecase)](https://cran.r-project.org/package=snakecase) [![Coverage Status](https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg)](https://codecov.io/github/Tazinho/snakecase?branch=master)
 
@@ -124,7 +124,7 @@ If you see unwanted underscores around specific pattern, which you don't want to
 strings4 <- c("var12", "var1.2", "va.r.1.2")
 
 to_any_case(strings4, case = "snake")
-## [1] "var_1_2"        "var_1_._2"      "va_._r_._1_._2"
+## [1] "var_12"         "var_1_._2"      "va_._r_._1_._2"
 to_any_case(strings4, case = "snake", protect = "\\d")
 ## [1] "var12"       "var1.2"      "va_._r_.1.2"
 to_any_case(strings4, case = "snake", protect = "\\d|\\.")
@@ -165,12 +165,12 @@ to_snake_case(strings)
 ## [5] "große_männer_1_._2_3_-_4_/_5" NA
 
 to_small_camel_case(strings)
-## [1] "smallCamelCase"      "bigCamelCase"        "screamingSnakeCase" 
-## [4] "rrrProjectRrProject" "großeMänner1.23-4/5" NA
+## [1] "smallCamelCase"       "bigCamelCase"         "screamingSnakeCase"  
+## [4] "rrrProjectRrProject"  "großeMänner1.2_3-4/5" NA
 
 to_big_camel_case(strings)
-## [1] "SmallCamelCase"      "BigCamelCase"        "ScreamingSnakeCase" 
-## [4] "RrrProjectRrProject" "GroßeMänner1.23-4/5" NA
+## [1] "SmallCamelCase"       "BigCamelCase"         "ScreamingSnakeCase"  
+## [4] "RrrProjectRrProject"  "GroßeMänner1.2_3-4/5" NA
 
 to_screaming_snake_case(strings)
 ## [1] "SMALL_CAMEL_CASE"              "BIG_CAMEL_CASE"               
@@ -181,8 +181,9 @@ to_any_case(strings,
             case = "big_camel", 
             preprocess = "\\.|-|/", 
             replace_special_characters = TRUE)
-## [1] "SmallCamelCase"      "BigCamelCase"        "ScreamingSnakeCase" 
-## [4] "RrrProjectRrProject" "GrosseMaenner12345"  NA
+## [1] "SmallCamelCase"         "BigCamelCase"          
+## [3] "ScreamingSnakeCase"     "RrrProjectRrProject"   
+## [5] "GrosseMaenner1_2_3_4_5" NA
 
 to_any_case(strings,
             case = "screaming_snake",
@@ -193,7 +194,7 @@ to_any_case(strings,
             replace_special_characters = TRUE)
 ## [1] "USER/SMALL/CAMEL/CASE.exe"         "USER/BIG/CAMEL/CASE.exe"          
 ## [3] "USER/SCREAMING/SNAKE/CASE.exe"     "USER/RRR/PROJECT/RR/PROJECT.exe"  
-## [5] "USER/GROSSE/MAENNER/1/2/3/4/5.exe" NA
+## [5] "USER/GROSSE/MAeNNER/1/2/3/4/5.exe" NA
 
 # test if your names are a valid case (consistent with this package)
 # for example smallCamelCase
@@ -206,14 +207,14 @@ library(dplyr)
 tibble(inp = strings, outp = to_small_camel_case(strings)) %>% 
   mutate(compare = inp == outp)
 ## # A tibble: 6 × 3
-##                      inp                outp compare
-##                    <chr>               <chr>   <lgl>
-## 1         smallCamelCase      smallCamelCase    TRUE
-## 2           BigCamelCase        bigCamelCase   FALSE
-## 3   SCREAMING_SNAKE_CASE  screamingSnakeCase   FALSE
-## 4    RRRProjectRRProject rrrProjectRrProject   FALSE
-## 5 große Männer_1.2_3-4/5 großeMänner1.23-4/5   FALSE
-## 6                   <NA>                <NA>      NA
+##                      inp                 outp compare
+##                    <chr>                <chr>   <lgl>
+## 1         smallCamelCase       smallCamelCase    TRUE
+## 2           BigCamelCase         bigCamelCase   FALSE
+## 3   SCREAMING_SNAKE_CASE   screamingSnakeCase   FALSE
+## 4    RRRProjectRRProject  rrrProjectRrProject   FALSE
+## 5 große Männer_1.2_3-4/5 großeMänner1.2_3-4/5   FALSE
+## 6                   <NA>                 <NA>      NA
 ```
 -->
 Design Philosophy
