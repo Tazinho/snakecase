@@ -101,7 +101,7 @@ test_that("expand.grid", {
   #                    prefix = prefix,
   #                    replace_special_characters = replace_special_characters,
   #                    stringsAsFactors = FALSE)
-  expect_equal(purrr::invoke_rows(snakecase::to_any_case, dat,
+  expect_equal(purrrlyr::invoke_rows(snakecase::to_any_case, dat,
                      preprocess = NULL,
                      postprocess = NULL,
                      protect = NULL,

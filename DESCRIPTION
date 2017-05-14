@@ -1,6 +1,6 @@
 Package: snakecase
-Version: 0.3.5
-Date: 2017-03-28
+Version: 0.3.5.1
+Date: 2017-05-15
 Title: snakecase
 Description: Functions to convert column names to snake or camel case.
 Author: Malte Grosser <malte.grosser@gmail.com>
@@ -15,6 +15,7 @@ Suggests:
     testthat,
     covr,
     tibble,
+    purrrlyr,
     knitr,
     rmarkdown
 License: GPL-3
