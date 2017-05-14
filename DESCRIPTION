@@ -6,7 +6,7 @@ Description: Functions to convert column names to snake or camel case.
 Author: Malte Grosser <malte.grosser@gmail.com>
 Maintainer: Malte Grosser <malte.grosser@gmail.com>
 Depends:
-    R (>= 3.3.2)
+    R (>= 3.4.0)
 Imports:
     stringr,
     purrr,
