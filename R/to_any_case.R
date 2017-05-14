@@ -105,11 +105,6 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
       string <- purrr::map2_chr(string, postprocess, ~ stringr::str_replace_all(.x, "_", .y))
     }
   }
-  
-  ## screaming_snake
-  if(case == "screaming_snake"){
-    string <- string %>% stringr::str_to_upper()
-  }
 
   ## protect
   postprocess_protector <- if(is.null(postprocess)){
@@ -137,6 +132,11 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
                                                                          "\\`" = "",
                                                                          "\\'" = "", 
                                                                          "\\@" = "at")))
+  }
+  
+  ## screaming_snake
+  if(case == "screaming_snake"){
+    string <- string %>% stringr::str_to_upper()
   }
   
   ## pre and postfix
