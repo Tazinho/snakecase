@@ -1,3 +1,7 @@
+# snakecase 0.3.5.1
+
+* fixed bug in replace_special_characters combined with screaming snake case.
+
 # snakecase 0.3.5
 
 * any local special characters are now supported.
