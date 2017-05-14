@@ -1,6 +1,6 @@
 PackratFormat: 1.4
 PackratVersion: 0.4.8.12
-RVersion: 3.3.3
+RVersion: 3.4.0
 Repos: BioCsoft=https://bioconductor.org/packages/3.4/bioc,
     BioCann=https://bioconductor.org/packages/3.4/data/annotation,
     BioCexp=https://bioconductor.org/packages/3.4/data/experiment,
@@ -15,23 +15,23 @@ Hash: 14dfb3e8ffe20996118306ff4de1fab2
 
 Package: DBI
 Source: CRAN
-Version: 0.6
-Hash: c1a897fa11e50c1f70258830fc50b1f3
+Version: 0.6-1
+Hash: 4aef5bda70897c1663d5b8bae2f4419a
 
 Package: R6
 Source: CRAN
-Version: 2.2.0
-Hash: 712773a3439bd32db5c40938e1a9aac2
+Version: 2.2.1
+Hash: 530f0b839551f96ec991ce4f93156ee1
 
 Package: Rcpp
 Source: CRAN
-Version: 0.12.9
-Hash: 7ab41cbe74918de8de87e435ef17e92d
+Version: 0.12.10
+Hash: 6cf65d0dd6a92f2d43c8d4805d33efe9
 
 Package: assertthat
 Source: CRAN
-Version: 0.1
-Hash: 0afb92b59b02593c70ff8046700ba9d3
+Version: 0.2.0
+Hash: e8805df54c65ac96d50235c44a82615c
 
 Package: backports
 Source: CRAN
@@ -75,8 +75,8 @@ Hash: 576a9d297a567d6a5ebd164ca5221590
 
 Package: curl
 Source: CRAN
-Version: 2.3
-Hash: 9a0b969942c61511002e103f7b047b98
+Version: 2.6
+Hash: 8162b82ca4809c0d63c30aedbd7348e0
 
 Package: desc
 Source: CRAN
@@ -85,8 +85,8 @@ Hash: 346d3477f87b89692dd1379eaed1a1be
 
 Package: devtools
 Source: CRAN
-Version: 1.12.0
-Hash: bbad95109ae75cbb14099281cda43af2
+Version: 1.13.1
+Hash: 8dadb6c6a916c8312dddc7b4d394c9f3
 
 Package: digest
 Source: CRAN
@@ -96,7 +96,7 @@ Hash: e53fb8c58673df868183697e39a6a4d6
 Package: dplyr
 Source: CRAN
 Version: 0.5.0
-Hash: 884482baf4ab273f2af5e641469f9ea4
+Hash: 673660fd0b947477dab1044abc8b2c95
 
 Package: evaluate
 Source: CRAN
@@ -105,8 +105,8 @@ Hash: c3601a10c987d439e0c63ec635234a76
 
 Package: formatR
 Source: CRAN
-Version: 1.4
-Hash: b2a47a2b91737978cf50ba95825a9cd1
+Version: 1.5
+Hash: 258cf79a8dbeedf1c981cdb53837d2af
 
 Package: git2r
 Source: CRAN
@@ -120,8 +120,8 @@ Hash: aa3d5b7912b5fed4b546ed5cd2a1760b
 
 Package: htmltools
 Source: CRAN
-Version: 0.3.5
-Hash: 6c7e3a96d9034d3ba8e6a07f7e2a333d
+Version: 0.3.6
+Hash: fb62c5ebb577da9b27b9a0b660ba7fc4
 
 Package: httr
 Source: CRAN
@@ -130,8 +130,8 @@ Hash: 7de1f8f760441881804af7c1ff324340
 
 Package: jsonlite
 Source: CRAN
-Version: 1.3
-Hash: b9cc3c97b7a6cd513e9b516fe881d6c9
+Version: 1.4
+Hash: 24cc0ffeb1771d710173d9803a131870
 
 Package: knitr
 Source: CRAN
@@ -150,13 +150,13 @@ Hash: bdc4d48c3135e8f3b399536ddf160df4
 
 Package: markdown
 Source: CRAN
-Version: 0.7.7
-Hash: fea2343a1119d61b0cc5c0a950d103a3
+Version: 0.8
+Hash: 045d7c594d503b41f1c28946d076c8aa
 
 Package: memoise
 Source: CRAN
-Version: 1.0.0
-Hash: 56e7087c3559eb7ba72a9afb349bf896
+Version: 1.1.0
+Hash: 410fcd334bc626db100237cc1370f2e9
 
 Package: mime
 Source: CRAN
@@ -184,8 +184,8 @@ Hash: 77da8f1df873a4b91e5c4a68fe2fb1b6
 
 Package: purrr
 Source: CRAN
-Version: 0.2.2
-Hash: e06b50a541f3a0965edd8e8533ff28ac
+Version: 0.2.2.2
+Hash: faada139260184912fea03f3fea13842
 
 Package: rex
 Source: CRAN
@@ -194,13 +194,13 @@ Hash: 69e208c6283398d235e507a658ba8079
 
 Package: rmarkdown
 Source: CRAN
-Version: 1.3
-Hash: d8f0cf248116dbdfc23f35991d0ed3f7
+Version: 1.5
+Hash: b37fc27c2604de97b4981eeae7a00879
 
 Package: roxygen2
 Source: CRAN
 Version: 6.0.1
-Hash: 3e17305cfd5f3a51f7ca450c08afec94
+Hash: 7a75b821e00443c60a239fa4070b4117
 
 Package: rprojroot
 Source: CRAN
@@ -214,8 +214,8 @@ Hash: fd256f8bfb9a64cc35f98b0decb1a79f
 
 Package: stringi
 Source: CRAN
-Version: 1.1.2
-Hash: 1ad6b1cc11d982ac233bf2fa2f7c9684
+Version: 1.1.5
+Hash: b6308e49357a0b475f433599e0d8b5eb
 
 Package: stringr
 Source: CRAN
@@ -229,8 +229,8 @@ Hash: 88d5291104227f9dc2e7c7c1d0eb6c74
 
 Package: tibble
 Source: CRAN
-Version: 1.2
-Hash: 3857905737a164648031462bed6aa2ef
+Version: 1.3.0
+Hash: 8de64ed3345488e66b676875ed1ebdce
 
 Package: whisker
 Source: CRAN
@@ -245,7 +245,7 @@ Hash: 774eb7be9087cdc24b53b74e5359cfac
 Package: xml2
 Source: CRAN
 Version: 1.1.1
-Hash: b913af17a4e43c2fb83f3b60b5353a27
+Hash: 19ad10ef8e73cb435eb49f9d5d259980
 
 Package: yaml
 Source: CRAN
