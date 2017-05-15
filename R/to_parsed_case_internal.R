@@ -24,23 +24,23 @@ to_parsed_case_internal <- function(string, preprocess = NULL){
     # of big letters with following small letters (and ÄÖÜ, äöüß)
     # and also around every group of digits
     parse1_pat_cap_smalls = function(string){
-      pat_cap_smalls <- "([\u00C4\u00D6\u00DC[:upper:][A-Z]][\u00E4\u00F6\u00FC\u00DF[:lower:][a-z]]+|\\d+)"
+      pat_cap_smalls <- "([\u00C4\u00D6\u00DC[:upper:]][\u00E4\u00F6\u00FC\u00DF[:lower:]]+|\\d+)"
       string <- stringr::str_replace_all(string, pat_cap_smalls, "_\\1_")
       string},
     # Inserts underscores around all capital letter groups with length >= 2
     parse2_pat_caps2 = function(string){
-      pat_caps2 <- "([[:upper:][A-Z]\u00C4\u00D6\u00DC]{2,})"
+      pat_caps2 <- "([[:upper:]\u00C4\u00D6\u00DC]{2,})"
       string <- stringr::str_replace_all(string, pat_caps2, "_\\1_")
       string},
     # Inserts underscores around all capital letter groups with length = 1 that
     # don't have a capital letter in front of them and a capital or small letter behind them
     parse3_pat_cap_lonely = function(string){
-      pat_cap_lonely <- "([\u00C4\u00D6\u00DC[:upper:][A-Z]]*[\u00C4\u00D6\u00DC[:upper:][A-Z]]{1}[\u00C4\u00D6\u00DC[:upper:][A-Z]\u00E4\u00F6\u00FC\u00DF[:lower:][a-z]]*)"
+      pat_cap_lonely <- "([\u00C4\u00D6\u00DC[:upper:]]*[\u00C4\u00D6\u00DC[:upper:]]{1}[\u00C4\u00D6\u00DC[:upper:]\u00E4\u00F6\u00FC\u00DF[:lower:]]*)"
       string <- stringr::str_replace_all(string, pat_cap_lonely, "_\\1_")
       string},
     # Inserts an "_" everywhere except between combinations of small and capital letters and groups of digits.
     parse4_separate_non_characters = function(string){
-      sep_signs_around <- "([\u00C4\u00D6\u00DC[:upper:][A-Z]\u00E4\u00F6\u00FC\u00DF[:lower:][a-z]\\d]*)"
+      sep_signs_around <- "([\u00C4\u00D6\u00DC[:upper:]\u00E4\u00F6\u00FC\u00DF[:lower:]\\d]*)"
       string <- stringr::str_replace_all(string, sep_signs_around, "_\\1")
       string})
   string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
