@@ -4,7 +4,6 @@
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^README\.Rmd$
-^logo\.png$
 ^appveyor\.yml$
 ^codecov\.yml$
 ^NEWS\.md$

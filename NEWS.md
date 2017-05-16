@@ -1,3 +1,7 @@
+# snakecase 0.3.5.2
+
+* fixed bug for combinatino of protect and postprocess. Therefore clarified and rewrote the internal order of `to_any_case()`
+
 # snakecase 0.3.5.1
 
 * fixed bug in replace_special_characters combined with screaming snake case.
