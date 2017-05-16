@@ -2,7 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
-^logo$
 packrat/lib*/
 inst/doc
 packrat/src/
