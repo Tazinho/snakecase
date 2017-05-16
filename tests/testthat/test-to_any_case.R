@@ -45,6 +45,13 @@ test_that("complex strings", {
   
   expect_equal(to_any_case(strings2, case = "snake", preprocess = "-|\\:"),
                c("this_is_a_strange_string", "\u00E4nd_this_another_one"))
+  
+  expect_equal(to_any_case("MERKWUERDIGER-VariablenNAME mit.VIELENMustern_version: 3.7.4",
+                           case = "snake",
+                           preprocess = "-|:|(?<!\\d)\\.",
+                           protect = "\\.",
+                           postprocess = "."),
+               "merkwuerdiger.variablen.name.mit.vielen.mustern.version.3.7.4")
 })
 
 test_that("stackoverflow answers", {

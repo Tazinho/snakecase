@@ -86,18 +86,43 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
       stringr::str_replace_all(behind, "\\1")
   }
   
-  # parsecase with postprocessing 
+  ### replace Special Characters
+  if(replace_special_characters){
+    string <- string %>%
+      purrr::map_chr(
+        ~ stringr::str_replace_all(.x, c("\u00C4" = "Ae",
+                                         "\u00D6" = "Oe",
+                                         "\u00DC" = "Ue",
+                                         "\u00E4" = "ae",
+                                         "\u00F6" = "oe",
+                                         "\u00FC" = "ue",
+                                         "\u00DF" = "ss",
+                                         "\u0025" = "percent",
+                                         "\\`" = "",
+                                         "\\'" = "",
+                                         "\\@" = "at")
+                                   )
+        )
+  }
+  
+  ### cases and postprocessing
+  
+  # parsedcase with postprocessing 
   if(case == "parsed" & !is.null(postprocess)){
-    string <- purrr::map2_chr(string, postprocess, ~ stringr::str_replace_all(.x, "_", .y))}
-  # other cases
+    string <- purrr::map2_chr(string,
+                              postprocess,
+                              ~ stringr::str_replace_all(.x, "_", .y))}
+  
+  ## other cases without postprocessing
   if(case %in% c("snake", "small_camel", "big_camel", "screaming_snake")){
     string <- string %>% purrr::map_chr(stringr::str_to_lower)
   }
-  ## postprocessing
+  
+  ## postprocessing and further conversion for other cases
   # caseconversion to small-/big camel case
   if(case == "small_camel" | case == "big_camel"){
     string <- string %>% 
-      stringr::str_split("(?<!\\d)_|_(?!\\d)") %>% 
+      stringr::str_split(pattern = "(?<!\\d)_|_(?!\\d)") %>% 
       purrr::map(stringr::str_to_title)
     if(is.null(postprocess)){
       string <- string %>% purrr::map_chr(stringr::str_c, collapse = "")
@@ -107,31 +132,19 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
     }
   }
   if(case == "small_camel"){
-    string <- stringr::str_c(stringr::str_sub(string, 1, 1) %>% stringr::str_to_lower(),
+    string <- stringr::str_c(stringr::str_sub(string, 1, 1) %>%
+                               stringr::str_to_lower(),
                              stringr::str_sub(string, 2))
   }
   # snake- and screaming_snake
   if(case == "snake" | case == "screaming_snake"){
     if(is.null(postprocess)){
-      string <- purrr::map_chr(string, ~ stringr::str_replace_all(.x, "_", "_"))
+      string <- purrr::map_chr(string,
+                               ~ stringr::str_replace_all(.x, "_", "_"))
     } else {
-      string <- purrr::map2_chr(string, postprocess, ~ stringr::str_replace_all(.x, "_", .y))
+      string <- purrr::map2_chr(string, 
+                                postprocess, ~ stringr::str_replace_all(.x, "_", .y))
     }
-  }
-    
-  ## replace Special Characters
-  if(replace_special_characters){
-    string <- string %>% purrr::map_chr(~ stringr::str_replace_all(.x, c("\u00C4" = "Ae", 
-                                                                         "\u00D6" = "Oe",
-                                                                         "\u00DC" = "Ue",
-                                                                         "\u00E4" = "ae",
-                                                                         "\u00F6" = "oe",
-                                                                         "\u00FC" = "ue",
-                                                                         "\u00DF" = "ss",
-                                                                         "\u0025" = "percent",
-                                                                         "\\`" = "",
-                                                                         "\\'" = "", 
-                                                                         "\\@" = "at")))
   }
   
   ## screaming_snake
