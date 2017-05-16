@@ -8,3 +8,4 @@
 ^codecov\.yml$
 ^NEWS\.md$
 ^cran-comments\.md$
+^travis-tool\.sh\.cmd$
