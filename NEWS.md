@@ -1,5 +1,9 @@
 # snakecase 0.3.5.2
 
+* changed order of the customizing arguments of `to_any_case()`
+
+# snakecase 0.3.5.2
+
 * fixed bug for combination of protect and postprocess. Therefore clarified and rewrote the internal order of `to_any_case()`
 * resolved all internal build warnings and notes
 
