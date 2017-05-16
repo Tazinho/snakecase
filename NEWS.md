@@ -1,3 +1,7 @@
+# snakecase 0.4.0
+
+* CRAN submission
+
 # snakecase 0.3.5.3
 
 * changed order of the customizing arguments of `to_any_case()`
