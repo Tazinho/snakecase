@@ -7,3 +7,4 @@
 ^appveyor\.yml$
 ^codecov\.yml$
 ^NEWS\.md$
+^cran-comments\.md$
