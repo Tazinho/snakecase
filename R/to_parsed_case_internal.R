@@ -21,7 +21,7 @@ to_parsed_case_internal <- function(string, preprocess = NULL){
   parsing_functions <- list(
     # Changes behaviour of the function. Cases like RStudio will be converted
     # to r_studio and not to rstudio anymore. Inserts underscores around groups
-    # of big letters with following small letters (and ÄÖÜ, äöüß)
+    # of big letters with following small letters 
     # and also around every group of digits
     parse1_pat_cap_smalls = function(string){
       pat_cap_smalls <- "([\u00C4\u00D6\u00DC[:upper:]][\u00E4\u00F6\u00FC\u00DF[:lower:]]+|\\d+)"

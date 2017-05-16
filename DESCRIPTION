@@ -1,7 +1,7 @@
 Package: snakecase
 Version: 0.4.0
 Date: 2017-05-15
-Title: snakecase
+Title: This package provides a flexible way to convert strings into any case.
 Description: Functions to convert column names to snake or camel case.
 Author: Malte Grosser <malte.grosser@gmail.com>
 Maintainer: Malte Grosser <malte.grosser@gmail.com>
