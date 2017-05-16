@@ -72,8 +72,20 @@
 to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake", "parsed"), preprocess = NULL, postprocess = NULL, prefix = "", postfix = "", replace_special_characters = FALSE, protect = NULL, unique_sep = NULL, empty_fill = NULL){
   case <- match.arg(case)
   
-  
+  ### preprocess and parsing
   string <- to_parsed_case_internal(string, preprocess = preprocess)
+  
+  ### protect
+  if(!is.null(protect)){
+    postprocess_protector <- "_"
+    
+    protect <- stringr::str_c("([", protect, "])")
+    infront <- stringr::str_c(postprocess_protector , "+", protect)
+    behind <- stringr::str_c(protect, postprocess_protector, "+")
+    string <- stringr::str_replace_all(string, infront, "\\1") %>% 
+      stringr::str_replace_all(behind, "\\1")
+  }
+  
   # parsecase with postprocessing 
   if(case == "parsed" & !is.null(postprocess)){
     string <- purrr::map2_chr(string, postprocess, ~ stringr::str_replace_all(.x, "_", .y))}
@@ -105,20 +117,6 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
     } else {
       string <- purrr::map2_chr(string, postprocess, ~ stringr::str_replace_all(.x, "_", .y))
     }
-  }
-
-  ## protect (the protector is needed to clean up the separator around the 
-  # protected field)
-  postprocess_protector <- if(is.null(postprocess)){
-    "_"
-  } else {postprocess}
-  
-  if(!is.null(protect)){
-    protect <- stringr::str_c("([", protect, "])")
-    infront <- stringr::str_c(postprocess_protector , "+", protect)
-    behind <- stringr::str_c(protect, postprocess_protector, "+")
-    string <- stringr::str_replace_all(string, infront, "\\1") %>% 
-      stringr::str_replace_all(behind, "\\1")
   }
     
   ## replace Special Characters
