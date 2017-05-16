@@ -106,7 +106,8 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
     }
   }
 
-  ## protect
+  ## protect (the protector is needed to clean up the separator around the 
+  # protected field)
   postprocess_protector <- if(is.null(postprocess)){
     "_"
   } else {postprocess}
