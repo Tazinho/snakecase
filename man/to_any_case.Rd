@@ -5,9 +5,9 @@
 \title{General case conversion}
 \usage{
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
-  "screaming_snake", "parsed"), preprocess = NULL, postprocess = NULL,
-  prefix = "", postfix = "", replace_special_characters = FALSE,
-  protect = NULL, unique_sep = NULL, empty_fill = NULL)
+  "screaming_snake", "parsed"), preprocess = NULL, protect = NULL,
+  replace_special_characters = FALSE, postprocess = NULL, prefix = "",
+  postfix = "", unique_sep = NULL, empty_fill = NULL)
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
@@ -20,21 +20,21 @@ returns the parsed input string, separated by underscores, without any further m
 All matches will be treated as additional splitting parameters besides the default ones 
 (\code{"_"} and \code{" "}), when parsing the input string.}
 
+\item{protect}{A string which is a valid \code{stringr::regex()}. Matches within the output
+won't have any "_" (or artifacts of \code{preprocess}) beside. Note that \code{preprocess} has a higher precedence than protect, 
+which means that it doesn't make sense to protect sth. which is already replaced
+via \code{preprocess}.}
+
+\item{replace_special_characters}{Logical, if \code{TRUE}, special characters 
+will be translated to characters which are more likely to be understood by 
+different programs. For example german umlauts will be translated to ae, oe, ue etc.}
+
 \item{postprocess}{String that will be used as separator. The defaults are \code{"_"} 
 and \code{""}, regarding the specified \code{case}.}
 
 \item{prefix}{prefix (string).}
 
 \item{postfix}{postfix (string).}
-
-\item{replace_special_characters}{Logical, if \code{TRUE}, special characters 
-will be translated to characters which are more likely to be understood by 
-different programs. For example german umlauts will be translated to ae, oe, ue etc.}
-
-\item{protect}{A string which is a valid \code{stringr::regex()}. Matches within the output
-won't have any "_" (or artifacts of \code{preprocess}) beside. Note that \code{preprocess} has a higher precedence than protect, 
-which means that it doesn't make sense to protect sth. which is already replaced
-via \code{preprocess}.}
 
 \item{unique_sep}{A string. If it is supplied, then duplicated names will get a suffix integer
 in the order of their appearance. The suffix is separated by the supplied string to this argument.}

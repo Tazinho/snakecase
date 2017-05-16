@@ -9,17 +9,17 @@
 #' @param preprocess String that will be wrapped internally into \code{stringr::regex()}. 
 #' All matches will be treated as additional splitting parameters besides the default ones 
 #' (\code{"_"} and \code{" "}), when parsing the input string.
-#' @param postprocess String that will be used as separator. The defaults are \code{"_"} 
-#' and \code{""}, regarding the specified \code{case}.
-#' @param prefix prefix (string).
-#' @param postfix postfix (string).
-#' @param replace_special_characters Logical, if \code{TRUE}, special characters 
-#' will be translated to characters which are more likely to be understood by 
-#' different programs. For example german umlauts will be translated to ae, oe, ue etc.
 #' @param protect A string which is a valid \code{stringr::regex()}. Matches within the output
 #' won't have any "_" (or artifacts of \code{preprocess}) beside. Note that \code{preprocess} has a higher precedence than protect, 
 #' which means that it doesn't make sense to protect sth. which is already replaced
 #' via \code{preprocess}.
+#' @param replace_special_characters Logical, if \code{TRUE}, special characters 
+#' will be translated to characters which are more likely to be understood by 
+#' different programs. For example german umlauts will be translated to ae, oe, ue etc.
+#' @param postprocess String that will be used as separator. The defaults are \code{"_"} 
+#' and \code{""}, regarding the specified \code{case}.
+#' @param prefix prefix (string).
+#' @param postfix postfix (string).
 #' @param empty_fill A string. If it is supplied, then each entry that matches "" will be replaced
 #' by the supplied string to this argument.
 #' @param unique_sep A string. If it is supplied, then duplicated names will get a suffix integer
@@ -69,7 +69,7 @@
 #'
 #' @export
 #'
-to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake", "parsed"), preprocess = NULL, postprocess = NULL, prefix = "", postfix = "", replace_special_characters = FALSE, protect = NULL, unique_sep = NULL, empty_fill = NULL){
+to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake", "parsed"), preprocess = NULL, protect = NULL, replace_special_characters = FALSE, postprocess = NULL, prefix = "", postfix = "", unique_sep = NULL, empty_fill = NULL){
   case <- match.arg(case)
   
   ### preprocess and parsing
