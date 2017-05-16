@@ -1,8 +1,4 @@
-# snakecase 0.4
-
-* snakecase on CRAN!
-
-# snakecase 0.3.5.2
+# snakecase 0.3.5.3
 
 * changed order of the customizing arguments of `to_any_case()`
 
