@@ -1,6 +1,6 @@
 
-snakecase <img src="./snakecase05.png" height="200" align="right">
-==================================================================
+snakecase <img src="./logo/snakecase05.png" height="200" align="right">
+=======================================================================
 
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/Tazinho/snakecase?branch=master&svg=true)](https://ci.appveyor.com/project/Tazinho/snakecase) [![Travis-CI Build Status](https://travis-ci.org/Tazinho/snakecase.svg?branch=master)](https://travis-ci.org/Tazinho/snakecase) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/snakecase)](https://cran.r-project.org/package=snakecase) [![Coverage Status](https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg)](https://codecov.io/github/Tazinho/snakecase?branch=master)
 
@@ -194,7 +194,7 @@ to_any_case(strings,
             replace_special_characters = TRUE)
 ## [1] "USER/SMALL/CAMEL/CASE.exe"         "USER/BIG/CAMEL/CASE.exe"          
 ## [3] "USER/SCREAMING/SNAKE/CASE.exe"     "USER/RRR/PROJECT/RR/PROJECT.exe"  
-## [5] "USER/GROSSE/MAeNNER/1/2/3/4/5.exe" NA
+## [5] "USER/GROSSE/MAENNER/1/2/3/4/5.exe" NA
 
 # test if your names are a valid case (consistent with this package)
 # for example smallCamelCase
