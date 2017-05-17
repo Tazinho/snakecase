@@ -4,6 +4,7 @@
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^README\.Rmd$
+^README\.md$
 ^appveyor\.yml$
 ^codecov\.yml$
 ^cran-comments\.md$
