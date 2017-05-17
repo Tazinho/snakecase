@@ -133,6 +133,11 @@ Source: CRAN
 Version: 2.4
 Hash: 3313fc81685884aa42b95248a284ef6e
 
+Package: installr
+Source: CRAN
+Version: 0.19.0
+Hash: 5b02af2e8d5904eca4cbf85e68d33499
+
 Package: jsonlite
 Source: CRAN
 Version: 1.4
