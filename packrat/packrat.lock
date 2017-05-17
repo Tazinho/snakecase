@@ -128,6 +128,11 @@ Source: CRAN
 Version: 1.2.1
 Hash: 7de1f8f760441881804af7c1ff324340
 
+Package: hunspell
+Source: CRAN
+Version: 2.4
+Hash: 3313fc81685884aa42b95248a284ef6e
+
 Package: jsonlite
 Source: CRAN
 Version: 1.4
@@ -187,6 +192,11 @@ Source: CRAN
 Version: 0.2.2.2
 Hash: faada139260184912fea03f3fea13842
 
+Package: purrrlyr
+Source: CRAN
+Version: 0.0.2
+Hash: 59130743d7914c2c1e6d1cc025288a66
+
 Package: rex
 Source: CRAN
 Version: 1.1.1
@@ -211,6 +221,11 @@ Package: rstudioapi
 Source: CRAN
 Version: 0.6
 Hash: fd256f8bfb9a64cc35f98b0decb1a79f
+
+Package: rversions
+Source: CRAN
+Version: 1.0.3
+Hash: 44837671df6bf1d0b863dc6f83f42a16
 
 Package: stringi
 Source: CRAN
