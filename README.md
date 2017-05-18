@@ -2,7 +2,7 @@
 snakecase <img src="man/figures/snakecase05.png" height="200" align="right">
 ============================================================================
 
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/Tazinho/snakecase?branch=master&svg=true)](https://ci.appveyor.com/project/Tazinho/snakecase) [![Travis-CI Build Status](https://travis-ci.org/Tazinho/snakecase.svg?branch=master)](https://travis-ci.org/Tazinho/snakecase) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/snakecase)](https://cran.r-project.org/package=snakecase) [![Coverage Status](https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg)](https://codecov.io/github/Tazinho/snakecase?branch=master)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/Tazinho/snakecase?branch=master&svg=true)](https://ci.appveyor.com/project/Tazinho/snakecase) [![Travis-CI Build Status](https://travis-ci.org/Tazinho/snakecase.svg?branch=master)](https://travis-ci.org/Tazinho/snakecase) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/snakecase)](https://cran.r-project.org/package=snakecase) [![Coverage Status](https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg)](https://codecov.io/github/Tazinho/snakecase?branch=master) [![downloads](http://cranlogs.r-pkg.org/badges/snakecase)](http://cranlogs.r-pkg.org/) [![total](http://cranlogs.r-pkg.org/badges/grand-total/snakecase)](http://cranlogs.r-pkg.org/)
 
 Overview
 --------
@@ -15,10 +15,26 @@ Install
 -------
 
 ``` r
+# development version
 # install.packages("devtools")
-# devtools::install_github("Tazinho/snakecase", ref = "devversion-01", force = TRUE, build_vignettes = TRUE)
-devtools::install_github("Tazinho/snakecase")
+# devtools::install_github("Tazinho/snakecase")
+# devtools::install_github("Tazinho/snakecase")
+
+# cran version
+install.packages("snakecase")
 ```
+
+    ## Warning: unable to access index for repository https://bioconductor.org/packages/3.4/bioc/bin/windows/contrib/3.4:
+    ##   kann URL 'https://bioconductor.org/packages/3.4/bioc/bin/windows/contrib/3.4/PACKAGES' nicht öffnen
+
+    ## Warning: unable to access index for repository https://bioconductor.org/packages/3.4/data/experiment/bin/windows/contrib/3.4:
+    ##   kann URL 'https://bioconductor.org/packages/3.4/data/experiment/bin/windows/contrib/3.4/PACKAGES' nicht öffnen
+
+    ## Warning: unable to access index for repository https://bioconductor.org/packages/3.4/extra/bin/windows/contrib/3.4:
+    ##   kann URL 'https://bioconductor.org/packages/3.4/extra/bin/windows/contrib/3.4/PACKAGES' nicht öffnen
+
+    ## Warning: package 'snakecase' is not available (as a binary package for R
+    ## version 3.4.0)
 
 Usage
 =====
