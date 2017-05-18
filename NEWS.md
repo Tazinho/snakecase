@@ -1,3 +1,7 @@
+# snakecase 0.4.0.9000
+
+* This is the (stable) development version now. You can find snakecase on cran [here](https://cran.r-project.org/web/packages/snakecase/index.html)
+
 # snakecase 0.4.0
 
 * CRAN submission
