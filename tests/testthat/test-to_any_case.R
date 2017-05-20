@@ -99,10 +99,13 @@ test_that("parsing cases", {
                "RRR_Studio")
 
   expect_equal(to_any_case("RRRStudio", case = "parsed", parsingoption = 2), 
-               "R_R_R_Studio")
-  
-  expect_equal(to_any_case("RRRStudio", case = "parsed", parsingoption = 3), 
                "RRRS_tudio")
+  
+  expect_equal(check_design_rule("RRRStudio", parsingoption = 1),
+               TRUE)
+  
+  expect_equal(check_design_rule("RRRStudio", parsingoption = 2),
+               TRUE)
   })
 
 test_that("expand.grid", {
