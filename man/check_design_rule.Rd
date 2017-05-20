@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_design_rule.R
 \name{check_design_rule}
 \alias{check_design_rule}
-\title{Functions to convert column names to snake_case}
+\title{Internal helper to test the design rules for any string and setting of \code{to_any_case()}}
 \usage{
 check_design_rule(string, preprocess = NULL, protect = NULL,
   replace_special_characters = FALSE, postprocess = NULL, prefix = "",
@@ -46,7 +46,7 @@ If another integer is supplied, no parsing regarding the pattern of upper- and l
 A character vector separated by underscores, containing the parsed string.
 }
 \description{
-Functions to convert column names to snake_case
+Internal helper to test the design rules for any string and setting of \code{to_any_case()}
 }
 \author{
 Malte Grosser, \email{malte.grosser@gmail.com}

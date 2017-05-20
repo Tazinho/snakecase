@@ -1,4 +1,4 @@
-#' Functions to convert column names to snake_case
+#' Internal helper to test the design rules for any string and setting of \code{to_any_case()}
 #'
 #' @param string A string (for example names of a data frame).
 #' @param preprocess String that will be wrapped internally into \code{stringr::regex()}. 

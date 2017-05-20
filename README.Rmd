@@ -15,7 +15,7 @@ The snakecase package contains five specific case converter functions and one mo
 
 ## Install
 
-```{r, results='hide', message=FALSE}
+```{r, results='hide', message=FALSE, warning=FALSE}
 # (stable) development version
 # install.packages("devtools")
 # devtools::install_github("Tazinho/snakecase")

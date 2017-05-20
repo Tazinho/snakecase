@@ -23,18 +23,6 @@ Install
 install.packages("snakecase")
 ```
 
-    ## Warning: unable to access index for repository https://bioconductor.org/packages/3.4/bioc/bin/windows/contrib/3.4:
-    ##   kann URL 'https://bioconductor.org/packages/3.4/bioc/bin/windows/contrib/3.4/PACKAGES' nicht öffnen
-
-    ## Warning: unable to access index for repository https://bioconductor.org/packages/3.4/data/experiment/bin/windows/contrib/3.4:
-    ##   kann URL 'https://bioconductor.org/packages/3.4/data/experiment/bin/windows/contrib/3.4/PACKAGES' nicht öffnen
-
-    ## Warning: unable to access index for repository https://bioconductor.org/packages/3.4/extra/bin/windows/contrib/3.4:
-    ##   kann URL 'https://bioconductor.org/packages/3.4/extra/bin/windows/contrib/3.4/PACKAGES' nicht öffnen
-
-    ## Warning: package 'snakecase' is not available (as a binary package for R
-    ## version 3.4.0)
-
 Usage
 =====
 
