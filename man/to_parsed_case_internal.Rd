@@ -14,8 +14,7 @@ All matches will be padded with underscores.}
 
 \item{parsingoption}{An integer (1 (default), 2 or 3) that will determine the parsingoption.
 1: RRRStudio -> RRR_Studio
-2: RRRStudio -> R_R_R_Studio
-3: RRRStudio -> RRRS_tudio
+2: RRRStudio -> RRRS_tudio
 if another integer is supplied, no parsing regarding the pattern of upper- and lowercase will appear.}
 }
 \value{

@@ -5,8 +5,7 @@
 #' All matches will be padded with underscores.
 #' @param parsingoption An integer (1 (default), 2 or 3) that will determine the parsingoption.
 #' 1: RRRStudio -> RRR_Studio
-#' 2: RRRStudio -> R_R_R_Studio
-#' 3: RRRStudio -> RRRS_tudio
+#' 2: RRRStudio -> RRRS_tudio
 #' if another integer is supplied, no parsing regarding the pattern of upper- and lowercase will appear.
 #' 
 #' @return A character vector separated by underscores, containing the parsed string.
@@ -50,11 +49,17 @@ to_parsed_case_internal <- function(string, preprocess = NULL, parsingoption = 1
       sep_signs_around <- "([\u00C4\u00D6\u00DC[:upper:]\u00E4\u00F6\u00FC\u00DF[:lower:]\\d]*)"
       string <- stringr::str_replace_all(string, sep_signs_around, "_\\1")
       string},
-    # Inserts underscores around each Capital letter (neede for 2nd option)
+    # Inserts underscores before each capital letter (needed for 2nd option)
     parse5_pat_caps1 = function(string){
-      pat_caps1 <- "((([:upper:]|\u00C4|\u00D6|\u00DC])(?![:lower:])){1})"
-      string <- stringr::str_replace_all(string, pat_caps1, "_\\1_")
-      string})
+      pat_caps1 <- "([:upper:]|\u00C4|\u00D6|\u00DC]{1})" #((([:upper:]|\u00C4|\u00D6|\u00DC])(?![:lower:])){1})
+      string <- stringr::str_replace_all(string, pat_caps1, "_\\1")
+      string},
+    # Inserts underscores before capital letters which have a lowercase letter behind
+    parse6_pat_caps_after_lower = function(string){
+      pat_caps_after_lower <- "([:upper:](?=[:lower:]))"
+      string <- stringr::str_replace_all(string, pat_caps_after_lower, "_\\1")
+      string}
+  )
   
   ### applying parsing functions
   # case: 1 RRRStudio -> RRR_Studio
@@ -63,16 +68,10 @@ to_parsed_case_internal <- function(string, preprocess = NULL, parsingoption = 1
     string <- parsing_functions[["parse2_pat_caps2"]](string)
     string <- parsing_functions[["parse3_pat_cap_lonely"]](string)
     string <- parsing_functions[["parse4_separate_non_characters"]](string)}
-  # case: 2 RRRStudio -> R_R_R_Studio
+  # case: 2 RRRStudio -> RRRS_tudio
   if(parsingoption == 2){
-    string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
-    # string <- parsing_functions[["parse2_pat_caps2"]](string)
-    string <- parsing_functions[["parse5_pat_caps1"]](string)
-    string <- parsing_functions[["parse4_separate_non_characters"]](string)}
-  # case: 3 RRRStudio -> RRRS_tudio
-  if(parsingoption == 3){
-    # string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
     string <- parsing_functions[["parse2_pat_caps2"]](string)
+    string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
     string <- parsing_functions[["parse3_pat_cap_lonely"]](string)
     string <- parsing_functions[["parse4_separate_non_characters"]](string)}
   
