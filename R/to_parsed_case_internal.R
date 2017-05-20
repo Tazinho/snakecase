@@ -1,4 +1,4 @@
-#' Functions to convert column names to snake_case
+#' Internal parser, which is relevant for preprocessing, parsing and parsingoptions
 #'
 #' @param string A string.
 #' @param preprocess Character string that will be wrapped internally into stringr::regex. 
@@ -48,16 +48,6 @@ to_parsed_case_internal <- function(string, preprocess = NULL, parsingoption = 1
     parse4_separate_non_characters = function(string){
       sep_signs_around <- "([\u00C4\u00D6\u00DC[:upper:]\u00E4\u00F6\u00FC\u00DF[:lower:]\\d]*)"
       string <- stringr::str_replace_all(string, sep_signs_around, "_\\1")
-      string},
-    # Inserts underscores before each capital letter (needed for 2nd option)
-    parse5_pat_caps1 = function(string){
-      pat_caps1 <- "([:upper:]|\u00C4|\u00D6|\u00DC]{1})" #((([:upper:]|\u00C4|\u00D6|\u00DC])(?![:lower:])){1})
-      string <- stringr::str_replace_all(string, pat_caps1, "_\\1")
-      string},
-    # Inserts underscores before capital letters which have a lowercase letter behind
-    parse6_pat_caps_after_lower = function(string){
-      pat_caps_after_lower <- "([:upper:](?=[:lower:]))"
-      string <- stringr::str_replace_all(string, pat_caps_after_lower, "_\\1")
       string}
   )
   
