@@ -1,9 +1,14 @@
+# snakecase 0.4.0.9002
+
+* implemented `check_design_rule()` (not exported)
+* resolved bugs in other design options (also deleted one which is not valid for
+screaming snake case)
+
 # snakecase 0.4.0.9001
 
 * included several parsingoptions for `to_any_case()`.  
   __1:__ "RRRStudio" -> "RRR_Studio" stays as default  
-  __2:__ "RRRStudio" -> "R_R_R_Studio"  
-  __3:__ "RRRStudio -> RRRS_tudio"  
+  __2:__ "RRRStudio -> RRRS_tudio"  
   __any other number__ will suppress the parsing (only spaces will be converted into "_")
 
 # snakecase 0.4.0.9000
