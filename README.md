@@ -15,9 +15,8 @@ Install
 -------
 
 ``` r
-# development version
+# (stable) development version
 # install.packages("devtools")
-# devtools::install_github("Tazinho/snakecase")
 # devtools::install_github("Tazinho/snakecase")
 
 # cran version
