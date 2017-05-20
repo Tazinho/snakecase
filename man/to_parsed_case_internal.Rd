@@ -2,7 +2,7 @@
 % Please edit documentation in R/to_parsed_case_internal.R
 \name{to_parsed_case_internal}
 \alias{to_parsed_case_internal}
-\title{Functions to convert column names to snake_case}
+\title{Internal parser, which is relevant for preprocessing, parsing and parsingoptions}
 \usage{
 to_parsed_case_internal(string, preprocess = NULL, parsingoption = 1L)
 }
@@ -21,7 +21,7 @@ if another integer is supplied, no parsing regarding the pattern of upper- and l
 A character vector separated by underscores, containing the parsed string.
 }
 \description{
-Functions to convert column names to snake_case
+Internal parser, which is relevant for preprocessing, parsing and parsingoptions
 }
 \author{
 Malte Grosser, \email{malte.grosser@gmail.com}
