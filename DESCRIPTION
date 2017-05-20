@@ -3,6 +3,8 @@ Version: 0.4.0.9000
 Date: 2017-05-15
 Title: Convert Strings into any Case
 Description: A consistent, flexible and easy to use tool to parse and convert strings into cases like snake or camel among others.
+Authors@R: c(
+    person("Malte", "Grosser", , "malte.grosser@gmail.com", role = c("aut", "cre")))
 Author: Malte Grosser <malte.grosser@gmail.com>
 Maintainer: Malte Grosser <malte.grosser@gmail.com>
 Depends:
