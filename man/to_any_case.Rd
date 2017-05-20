@@ -7,7 +7,7 @@
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
   "screaming_snake", "parsed"), preprocess = NULL, protect = NULL,
   replace_special_characters = FALSE, postprocess = NULL, prefix = "",
-  postfix = "", unique_sep = NULL, empty_fill = NULL)
+  postfix = "", unique_sep = NULL, empty_fill = NULL, parsingoption = 1)
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
@@ -41,6 +41,12 @@ in the order of their appearance. The suffix is separated by the supplied string
 
 \item{empty_fill}{A string. If it is supplied, then each entry that matches "" will be replaced
 by the supplied string to this argument.}
+
+\item{parsingoption}{An integer (1 (default), 2 or 3) that will determine the parsingoption.
+1: RRRStudio -> RRR_Studio
+2: RRRStudio -> R_R_R_Studio
+3: RRRStudio -> RRRS_tudio
+if another integer is supplied, no parsing regarding the pattern of upper- and lowercase will appear.}
 }
 \value{
 A character vector according the specified parameters above.

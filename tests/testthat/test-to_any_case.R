@@ -91,6 +91,20 @@ test_that("stackoverflow answers", {
                c("ThisText", "NextText"))
 })
 
+test_that("parsing cases", {
+  expect_equal(to_any_case("RRRStudio", case = "parsed"), 
+               "RRR_Studio")
+  
+  expect_equal(to_any_case("RRRStudio", case = "parsed", parsingoption = 1), 
+               "RRR_Studio")
+
+  expect_equal(to_any_case("RRRStudio", case = "parsed", parsingoption = 2), 
+               "R_R_R_Studio")
+  
+  expect_equal(to_any_case("RRRStudio", case = "parsed", parsingoption = 3), 
+               "RRRS_tudio")
+  })
+
 test_that("expand.grid", {
   # string <- c(NA, "_", "s_na_k_er", "SNAKE SNAKE CASE", "snakeSnakECase",
   #             "SNAKE snakE_case", "ssRRss", "ssRRRR", "thisIsSomeCamelCase",

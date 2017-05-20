@@ -4,13 +4,19 @@
 \alias{to_parsed_case_internal}
 \title{Functions to convert column names to snake_case}
 \usage{
-to_parsed_case_internal(string, preprocess = NULL)
+to_parsed_case_internal(string, preprocess = NULL, parsingoption = 1L)
 }
 \arguments{
 \item{string}{A string.}
 
 \item{preprocess}{Character string that will be wrapped internally into stringr::regex. 
 All matches will be padded with underscores.}
+
+\item{parsingoption}{An integer (1 (default), 2 or 3) that will determine the parsingoption.
+1: RRRStudio -> RRR_Studio
+2: RRRStudio -> R_R_R_Studio
+3: RRRStudio -> RRRS_tudio
+if another integer is supplied, no parsing regarding the pattern of upper- and lowercase will appear.}
 }
 \value{
 A character vector separated by underscores, containing the parsed string.

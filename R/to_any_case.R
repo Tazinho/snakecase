@@ -24,7 +24,12 @@
 #' by the supplied string to this argument.
 #' @param unique_sep A string. If it is supplied, then duplicated names will get a suffix integer
 #' in the order of their appearance. The suffix is separated by the supplied string to this argument.
-#'
+#' @param parsingoption An integer (1 (default), 2 or 3) that will determine the parsingoption.
+#' 1: RRRStudio -> RRR_Studio
+#' 2: RRRStudio -> R_R_R_Studio
+#' 3: RRRStudio -> RRRS_tudio
+#' if another integer is supplied, no parsing regarding the pattern of upper- and lowercase will appear.
+#' 
 #' @return A character vector according the specified parameters above.
 #'
 #' @note \code{to_any_case()} is vectorised over \code{postprocess}, \code{prefix} and \code{postfix}.
@@ -69,11 +74,11 @@
 #'
 #' @export
 #'
-to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake", "parsed"), preprocess = NULL, protect = NULL, replace_special_characters = FALSE, postprocess = NULL, prefix = "", postfix = "", unique_sep = NULL, empty_fill = NULL){
+to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake", "parsed"), preprocess = NULL, protect = NULL, replace_special_characters = FALSE, postprocess = NULL, prefix = "", postfix = "", unique_sep = NULL, empty_fill = NULL, parsingoption = 1){
   case <- match.arg(case)
   
   ### preprocess and parsing
-  string <- to_parsed_case_internal(string, preprocess = preprocess)
+  string <- to_parsed_case_internal(string, preprocess = preprocess, parsingoption = parsingoption)
   
   ### protect
   if(!is.null(protect)){
