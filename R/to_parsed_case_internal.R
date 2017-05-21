@@ -16,6 +16,8 @@
 #' @importFrom magrittr "%>%"
 #'
 to_parsed_case_internal <- function(string, preprocess = NULL, parsingoption = 1L){
+  ### Encoding (experimentally)
+  string <- enc2utf8(string) 
   ### preprocessing:
   # catch everything that should be handled like underscores
   # (only spaces by default)
