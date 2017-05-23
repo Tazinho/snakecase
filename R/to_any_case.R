@@ -101,10 +101,10 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
                                          "\u00F6" = "oe",
                                          "\u00FC" = "ue",
                                          "\u00DF" = "ss",
-                                         "\u0025" = "percent",
+                                         "\u0025" = "_percent_",
                                          "\\`" = "",
                                          "\\'" = "",
-                                         "\\@" = "at")
+                                         "\\@" = "_at_")
                                    )
         )
   }
