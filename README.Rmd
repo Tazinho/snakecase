@@ -16,12 +16,12 @@ The snakecase package introduces a fresh and straightforward approach on case co
 ## Install
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
-# (stable) development version
+#  install snakecase from cran
+install.packages("snakecase")
+
+# or the (stable) development version hosted on github
 # install.packages("devtools")
 # devtools::install_github("Tazinho/snakecase")
-
-#  cran version
-install.packages("snakecase")
 ```
 
 ## Easy cases
