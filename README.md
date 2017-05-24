@@ -2,14 +2,14 @@
 snakecase <img src="man/figures/snakecase05.png" height="200" align="right">
 ============================================================================
 
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/Tazinho/snakecase?branch=master&svg=true)](https://ci.appveyor.com/project/Tazinho/snakecase) [![Travis-CI Build Status](https://travis-ci.org/Tazinho/snakecase.svg?branch=master)](https://travis-ci.org/Tazinho/snakecase) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/snakecase)](https://cran.r-project.org/package=snakecase) [![Coverage Status](https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg)](https://codecov.io/github/Tazinho/snakecase?branch=master) [![downloads](http://cranlogs.r-pkg.org/badges/snakecase)](http://cranlogs.r-pkg.org/) [![total](http://cranlogs.r-pkg.org/badges/grand-total/snakecase)](http://cranlogs.r-pkg.org/)
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/Tazinho/snakecase?branch=master&svg=true)](https://ci.appveyor.com/project/Tazinho/snakecase) [![Travis-CI Build Status](https://travis-ci.org/Tazinho/snakecase.svg?branch=master)](https://travis-ci.org/Tazinho/snakecase) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/snakecase)](https://cran.r-project.org/package=snakecase) [![downloads](http://cranlogs.r-pkg.org/badges/snakecase)](http://cranlogs.r-pkg.org/) [![total](http://cranlogs.r-pkg.org/badges/grand-total/snakecase)](http://cranlogs.r-pkg.org/)
 
 Overview
 --------
 
 <!--A small package with functions to convert column names of data.frames (or strings
 in general) to different cases like snake_case, smallCamel- and BigCamelCase among others. Also high level features for more advanced case conversions are provided via `to_any_case()`.-->
-The snakecase package contains five specific case converter functions and one more general high level function with additional functionality.
+The snakecase package introduces a fresh and straightforward approach on caseconversion of strings, based upon a concise design philosophy.
 
 Install
 -------
@@ -19,207 +19,144 @@ Install
 # install.packages("devtools")
 # devtools::install_github("Tazinho/snakecase")
 
-# cran version
+#  cran version
 install.packages("snakecase")
 ```
 
-Usage
-=====
+Easy cases
+----------
 
-Specific case converters
-------------------------
+There are 5 different cases available. Note that they are all build up on the first ("parsed") case, which (basically) surrounds every word a string consists of by underscores.
 
 ``` r
 library(snakecase)
-strings <- c("this Is a Strange_string", "AND THIS ANOTHER_One")
+string <- "RStudio"
 
-to_parsed_case(strings)
-## [1] "this_Is_a_Strange_string" "AND_THIS_ANOTHER_One"
+to_any_case(string, case = "parsed")
+## [1] "R_Studio"
 
-to_snake_case(strings)
-## [1] "this_is_a_strange_string" "and_this_another_one"
+to_any_case(string, case = "snake")
+## [1] "r_studio"
 
-to_small_camel_case(strings)
-## [1] "thisIsAStrangeString" "andThisAnotherOne"
+to_any_case(string, case = "screaming_snake")
+## [1] "R_STUDIO"
 
-to_big_camel_case(strings)
-## [1] "ThisIsAStrangeString" "AndThisAnotherOne"
+to_any_case(string, case = "small_camel")
+## [1] "rStudio"
 
-to_screaming_snake_case(strings)
-## [1] "THIS_IS_A_STRANGE_STRING" "AND_THIS_ANOTHER_ONE"
+to_any_case(string, case = "big_camel")
+## [1] "RStudio"
 ```
 
-Highlevel case converter
-------------------------
+For these simple cases also the shortcuts `to_parsed_case()`, `to_snake_case()`, `to_screamin_snake_case()`, `to_small_camel_case()` and `to_big_camel_case()` are provided, which achieve exactly the same as `to_any_case(string, case)`.
 
-The function `to_any_case()` can do everything that the others can and also adds some extra high level functionality.
+Parsing options (Todo, currently in dev only)
+---------------------------------------------
 
-### Default usage
+More complex cases
+------------------
+
+Till now, we only looked at an easy example. By default the parsing of this package recognizes patterns of switching from lower- to uppercase (and vice versa), underscores and spaces/tabs as word boundaries. If we introduce other characters like dots or colons in our strings, the following will happen:
 
 ``` r
-to_any_case(strings, case = "parsed")
-## [1] "this_Is_a_Strange_string" "AND_THIS_ANOTHER_One"
+string <- "R.Stüdio: v.1.0.143"
 
-to_any_case(strings, case = "snake")
-## [1] "this_is_a_strange_string" "and_this_another_one"
-
-to_any_case(strings, case = "small_camel")
-## [1] "thisIsAStrangeString" "andThisAnotherOne"
-
-to_any_case(strings, case = "big_camel")
-## [1] "ThisIsAStrangeString" "AndThisAnotherOne"
-
-to_any_case(strings, case = "screaming_snake")
-## [1] "THIS_IS_A_STRANGE_STRING" "AND_THIS_ANOTHER_ONE"
+to_any_case(string, case = "snake")
+## [1] "r_._stüdio_:_v_._1_._0_._143"
 ```
 
-### Pre -and postprocessing
+Every single character, which is not a letter or a digit, will be treated like a word and surrounded by underscores. This is intended, since it is not clear, if, for example a dot, is ment to be
 
-By default only whitespaces, underscores and some patterns of mixed lower/upper case letter combinations are recognized as word boundaries. You can specify anything as a word boundary which is a valid stringr regular expression:
+-   a separator and should be replaced by an underscore or
+-   a decimal mark and should just be kept as it is (without underscores around it).
+
+### Preprocess & protect
+
+If you would like to treat dots and colons as separators, you can supply them (as a regular expression) to the `preprocess` argument (now they will be internally replaced by underscores, before the parsing occurs)
 
 ``` r
-strings2 <- c("this - Is_-: a Strange_string", "ÄND THIS ANOTHER_One")
-
-to_snake_case(strings2)
-## [1] "this_-_is_-_:_a_strange_string" "änd_this_another_one"
-
-to_any_case(strings2, case = "snake", preprocess = "-|\\:")
-## [1] "this_is_a_strange_string" "änd_this_another_one"
+to_any_case(string, case = "snake", preprocess = ":|\\.")
+## [1] "r_stüdio_v_1_0_143"
 ```
 
-You can also specify a different separator than `"_"` or `""` via `postprocess`:
+If you just want to keep them, since they have a special meaning and are not ment to be separators, you can supply them (also as a regular expression) to the `protect` argument (now the underscores around the protected arguments will be deleted)
 
 ``` r
-to_any_case(strings2, case = "snake", preprocess = "-|\\:", postprocess = " ")
-## [1] "this is a strange string" "änd this another one"
-
-to_any_case(strings2, case = "big_camel", preprocess = "-|\\:", postprocess = "//")
-## [1] "This//Is//A//Strange//String" "Änd//This//Another//One"
+to_any_case(string, case = "snake", protect = ":|\\.")
+## [1] "r.stüdio:v.1.0.143"
 ```
 
-### Pre -and postfix
+Of course you can also combine `preprocess` & `protect` and since these arguments take regular expressions as input, `to_any_case()` becomes very flexible.
 
-You can set pre -and suffixes:
+You could for example treat only those dots as separators, which are not behind a number and keep the others as decimal marks
 
 ``` r
-to_any_case(strings2, case = "big_camel", preprocess = "-|\\:", postprocess = "//",
-            prefix = "USER://", postfix = ".exe")
-## [1] "USER://This//Is//A//Strange//String.exe"
-## [2] "USER://Änd//This//Another//One.exe"
+to_any_case(string, case = "snake",
+            preprocess = ":|(?<!\\d)\\.",
+            protect = "\\.")
+## [1] "r_stüdio_v_1.0.143"
 ```
 
 ### Special characters
 
-If you have problems with special characters on your platform, you can replace them via `replace_special_characters = TRUE`:
+If you have problems with special characters (like u umlaut) on your platform, you can replace them via `replace_special_characters = TRUE`:
 
 ``` r
-strings3 <- c("ßüss üß ä stränge sträng", "unrealistisch aber nützich")
-
-to_any_case(strings3, case = "screaming_snake", replace_special_characters = TRUE)
-## [1] "SSUESS_UESS_AE_STRAENGE_STRAENG" "UNREALISTISCH_ABER_NUETZICH"
-```
-
-### Protect anything
-
-If you see unwanted underscores around specific pattern, which you don't want to delete via `preprocess`, just use `protect`:
-
-``` r
-strings4 <- c("var12", "var1.2", "va.r.1.2")
-
-to_any_case(strings4, case = "snake")
-## [1] "var_12"         "var_1_._2"      "va_._r_._1_._2"
-to_any_case(strings4, case = "snake", protect = "\\d")
-## [1] "var12"       "var1.2"      "va_._r_.1.2"
-to_any_case(strings4, case = "snake", protect = "\\d|\\.")
-## [1] "var12"    "var1.2"   "va.r.1.2"
-```
-
-### Vectorisation
-
-`to_any_case()` is vectorised over `string`, `preprocess`, `postprocess`, `prefix`, `postfix` and `protect`.
-
-### More complex stuff
-
-Since `preprocess` and `protect` allow to use regular expressions, `to_any_case()` becomes very flexible and can achieve complex operations. Lets assume, that you want to translate a string, which contains dots and decimal numbers, into snakecase. You want that the dots are treated as `"_"` in the output, but not if they are the separator of a decimal.
-
-You can achieve this, while passing a regex (in this case a lookaround) to the `preprocess` argument, which only translates those dots into `"_"`, that don't have a digit in front. The resulting underscores between the digits can be cleaned via `protect = "\\d"`:
-
-``` r
-to_any_case(c("va.riable.1.2"), case = "snake", preprocess = "(?<!\\d)\\.", protect = "\\d")
-## [1] "va_riable1.2"
-
-# you could also use a postprocess in between
-to_any_case(c("va.riable.1.2"), case = "snake", preprocess = "(?<!\\d)\\.", postprocess = "//", protect = "\\d")
-## [1] "va//riable1.2"
-```
-
-<!--
-
-```r
-library(snakecase)
-
-strings <- c("smallCamelCase", "BigCamelCase", "SCREAMING_SNAKE_CASE",
-             "RRRProjectRRProject", "große Männer_1.2_3-4/5", NA)
-
-# conversion
-to_snake_case(strings)
-## [1] "small_camel_case"             "big_camel_case"              
-## [3] "screaming_snake_case"         "rrr_project_rr_project"      
-## [5] "große_männer_1_._2_3_-_4_/_5" NA
-
-to_small_camel_case(strings)
-## [1] "smallCamelCase"       "bigCamelCase"         "screamingSnakeCase"  
-## [4] "rrrProjectRrProject"  "großeMänner1.2_3-4/5" NA
-
-to_big_camel_case(strings)
-## [1] "SmallCamelCase"       "BigCamelCase"         "ScreamingSnakeCase"  
-## [4] "RrrProjectRrProject"  "GroßeMänner1.2_3-4/5" NA
-
-to_screaming_snake_case(strings)
-## [1] "SMALL_CAMEL_CASE"              "BIG_CAMEL_CASE"               
-## [3] "SCREAMING_SNAKE_CASE"          "RRR_PROJECT_RR_PROJECT"       
-## [5] "GROSSE_MÄNNER_1_._2_3_-_4_/_5" NA
-
-to_any_case(strings,
-            case = "big_camel", 
-            preprocess = "\\.|-|/", 
+to_any_case(string, case = "snake", 
+            preprocess = ":|(?<!\\d)\\.",
+            protect = "\\.",
             replace_special_characters = TRUE)
-## [1] "SmallCamelCase"         "BigCamelCase"          
-## [3] "ScreamingSnakeCase"     "RrrProjectRrProject"   
-## [5] "GrosseMaenner1_2_3_4_5" NA
-
-to_any_case(strings,
-            case = "screaming_snake",
-            preprocess = "\\.|-|/",
-            postprocess = "/",
-            prefix = "USER/",
-            postfix = ".exe",
-            replace_special_characters = TRUE)
-## [1] "USER/SMALL/CAMEL/CASE.exe"         "USER/BIG/CAMEL/CASE.exe"          
-## [3] "USER/SCREAMING/SNAKE/CASE.exe"     "USER/RRR/PROJECT/RR/PROJECT.exe"  
-## [5] "USER/GROSSE/MAENNER/1/2/3/4/5.exe" NA
-
-# test if your names are a valid case (consistent with this package)
-# for example smallCamelCase
-strings == to_small_camel_case(strings)
-## [1]  TRUE FALSE FALSE FALSE FALSE    NA
-
-# compare input and output
-library(dplyr)
-
-tibble(inp = strings, outp = to_small_camel_case(strings)) %>% 
-  mutate(compare = inp == outp)
-## # A tibble: 6 × 3
-##                      inp                 outp compare
-##                    <chr>                <chr>   <lgl>
-## 1         smallCamelCase       smallCamelCase    TRUE
-## 2           BigCamelCase         bigCamelCase   FALSE
-## 3   SCREAMING_SNAKE_CASE   screamingSnakeCase   FALSE
-## 4    RRRProjectRRProject  rrrProjectRrProject   FALSE
-## 5 große Männer_1.2_3-4/5 großeMänner1.2_3-4/5   FALSE
-## 6                   <NA>                 <NA>      NA
+## [1] "r_stuedio_v_1.0.143"
 ```
--->
+
+Currently this supports only german letters and is likely to change in the future in favour of a more streamlined approach.
+
+Postprocessing
+--------------
+
+By default the separators of the output are (depanding on the case) `"_"` or `""`. You can customize this, while supplying another separator to the `postprocess` argument
+
+``` r
+string = "RStudio"
+
+to_any_case(string, case = "snake", 
+            postprocess = ".")
+## [1] "r.studio"
+
+to_any_case(string, case = "big_camel", 
+            postprocess = "-")
+## [1] "R-Studio"
+
+to_any_case(string, case = "parsed", 
+            postprocess = " ")
+## [1] "R Studio"
+```
+
+Note that the latter example has a nice application for the annotation of graphics. "RStudio" is not a good example for this, since it is a name of a company and already written correctly. But for typical column names this could be a nice way to (almost) automate the conversion of internal (naming conversion in R) and external (naming conversion for business reports) representation.
+
+Pre -and postfix
+----------------
+
+You can set pre -and suffixes:
+
+``` r
+to_any_case(string, case = "big_camel", postprocess = "//",
+            prefix = "USER://", postfix = ".exe")
+## [1] "USER://R//Studio.exe"
+```
+
+Vectorisation, speed and special input handling
+-----------------------------------------------
+
+The snakecase package is internally build up on the [stringr](https://github.com/tidyverse/stringr) package , which means that many powerful features are provided "by default":
+
+-   `to_any_case()` is vectorised over most of its arguments like `string`, `preprocess`, `protect`, `postprocess`, `prefix`, `postfix`.
+-   internal character operations are superfast c++
+-   special input like `character(0)`, `NA` etc. is handled in exactely the same consistent and convenient manner as in the stringr package and all its tidy relatives.
+
+Empty\_fill and unique\_sep
+---------------------------
+
 Design Philosophy
 =================
 

@@ -25,8 +25,8 @@ Hash: 530f0b839551f96ec991ce4f93156ee1
 
 Package: Rcpp
 Source: CRAN
-Version: 0.12.10
-Hash: 6cf65d0dd6a92f2d43c8d4805d33efe9
+Version: 0.12.11
+Hash: 2ee22f3b5e75dec80b1d8eca61cd96d8
 
 Package: assertthat
 Source: CRAN
@@ -35,8 +35,8 @@ Hash: e8805df54c65ac96d50235c44a82615c
 
 Package: backports
 Source: CRAN
-Version: 1.0.5
-Hash: 8b835bdc5447f2c76fda198e17d6bda4
+Version: 1.1.0
+Hash: 3f754426ca2b7dbbf63951fe5075373b
 
 Package: base64enc
 Source: CRAN
@@ -58,6 +58,15 @@ Source: CRAN
 Version: 1.17.1
 Hash: 97cb6f6293cd18d17df77a6383cc6763
 
+Package: callr
+Source: github
+Version: 1.0.0.9000
+Hash: 4359493f6216a855edf50fef3c62a378
+GithubRepo: callr
+GithubUsername: r-pkgs
+GithubRef: HEAD
+GithubSha1: eadfa3fd556a045b96c7495efb886522dacb517c
+
 Package: commonmark
 Source: CRAN
 Version: 1.2
@@ -78,6 +87,11 @@ Source: CRAN
 Version: 2.6
 Hash: 8162b82ca4809c0d63c30aedbd7348e0
 
+Package: debugme
+Source: CRAN
+Version: 1.0.2
+Hash: 28d8f97402746afa3bf2ce392173c957
+
 Package: desc
 Source: CRAN
 Version: 1.1.0
@@ -96,7 +110,7 @@ Hash: e53fb8c58673df868183697e39a6a4d6
 Package: dplyr
 Source: CRAN
 Version: 0.5.0
-Hash: 673660fd0b947477dab1044abc8b2c95
+Hash: 09fc57f582c74ffa20a57e0a48b27150
 
 Package: evaluate
 Source: CRAN
@@ -108,10 +122,24 @@ Source: CRAN
 Version: 1.5
 Hash: 258cf79a8dbeedf1c981cdb53837d2af
 
+Package: gh
+Source: github
+Version: 1.0.0
+Hash: 9446f43b2e3191b643905a4824a5bac9
+GithubRepo: gh
+GithubUsername: r-pkgs
+GithubRef: master
+GithubSha1: 110bef22c44928fc3e3a2bc22bbda4d01fdab553
+
 Package: git2r
 Source: CRAN
 Version: 0.18.0
 Hash: 9dfaafbcca68be29b89ef7783dc1dac0
+
+Package: highlight
+Source: CRAN
+Version: 0.4.7.1
+Hash: 888789a635beb64b9cddbf7ce3f0acb1
 
 Package: highr
 Source: CRAN
@@ -121,7 +149,7 @@ Hash: aa3d5b7912b5fed4b546ed5cd2a1760b
 Package: htmltools
 Source: CRAN
 Version: 0.3.6
-Hash: fb62c5ebb577da9b27b9a0b660ba7fc4
+Hash: eeba9fb36d4cb6cc66f060187102be41
 
 Package: httr
 Source: CRAN
@@ -130,8 +158,13 @@ Hash: 7de1f8f760441881804af7c1ff324340
 
 Package: hunspell
 Source: CRAN
-Version: 2.4
-Hash: 3313fc81685884aa42b95248a284ef6e
+Version: 2.5
+Hash: 20750f28d9b4d8ef54fca335ad529c8d
+
+Package: ini
+Source: CRAN
+Version: 0.2
+Hash: 12df248cc384eb68545a617da2730c8e
 
 Package: installr
 Source: CRAN
@@ -145,13 +178,18 @@ Hash: 24cc0ffeb1771d710173d9803a131870
 
 Package: knitr
 Source: CRAN
-Version: 1.15.1
-Hash: eed7437e2b614c9e3923b7932b16ac97
+Version: 1.16
+Hash: 3b8dc00d51027c6d041d56bc92136452
 
 Package: lazyeval
 Source: CRAN
 Version: 0.2.0
 Hash: 3d6e7608e65bbf5cb170dab1e3c9ed8b
+
+Package: magick
+Source: CRAN
+Version: 0.4
+Hash: 4feded775afca5e1123a80dcf373b21d
 
 Package: magrittr
 Source: CRAN
@@ -187,10 +225,46 @@ GithubUsername: rstudio
 GithubRef: master
 GithubSha1: b55feb68f662e9e1c58807316bde5ca0d40a3f64
 
+Package: pkgbuild
+Source: github
+Version: 0.0.0.9000
+Hash: 0240738ba54f63281313d51faee40fc2
+GithubRepo: pkgbuild
+GithubUsername: r-pkgs
+GithubRef: master
+GithubSha1: 8aab60b03bb09212881e3544e332d60defc52fd6
+
+Package: pkgdown
+Source: github
+Version: 0.1.0.9000
+Hash: 2b1ee29bd1363ca480940f3d0c165283
+GithubRepo: pkgdown
+GithubUsername: hadley
+GithubRef: master
+GithubSha1: 0d8a1e52ea239c9e8717b0713490c24b050f3c20
+
+Package: pkgload
+Source: github
+Version: 0.0.0.9000
+Hash: 8dbbe64b0174aa71740459bed47680f4
+GithubRepo: pkgload
+GithubUsername: r-pkgs
+GithubRef: master
+GithubSha1: 119cf9a667abc97c6f4a19148ce7b324e8de676d
+
 Package: praise
 Source: CRAN
 Version: 1.0.0
 Hash: 77da8f1df873a4b91e5c4a68fe2fb1b6
+
+Package: processx
+Source: github
+Version: 1.0.0.9000
+Hash: 6bd394520936777c1b85e6e1bb8e721f
+GithubRepo: processx
+GithubUsername: r-pkgs
+GithubRef: master
+GithubSha1: 4ef89dd1a883860d19dcae3bc8ec0b3b9e2600c7
 
 Package: purrr
 Source: CRAN
@@ -200,12 +274,21 @@ Hash: faada139260184912fea03f3fea13842
 Package: purrrlyr
 Source: CRAN
 Version: 0.0.2
-Hash: 59130743d7914c2c1e6d1cc025288a66
+Hash: fbf30c137d5f5e9a7a85057927306b00
 
 Package: rex
 Source: CRAN
 Version: 1.1.1
 Hash: 69e208c6283398d235e507a658ba8079
+
+Package: rlang
+Source: github
+Version: 0.1.1.9000
+Hash: ee0a26e3efd94a9b037a91d1b382c5fe
+GithubRepo: rlang
+GithubUsername: hadley
+GithubRef: master
+GithubSha1: 7c2f7e85b3092fadb49cd0e4abd5d62e1569aefb
 
 Package: rmarkdown
 Source: CRAN
@@ -215,7 +298,7 @@ Hash: b37fc27c2604de97b4981eeae7a00879
 Package: roxygen2
 Source: CRAN
 Version: 6.0.1
-Hash: 7a75b821e00443c60a239fa4070b4117
+Hash: 5ec390c33d6b969ceea50bf7456456f8
 
 Package: rprojroot
 Source: CRAN
@@ -249,8 +332,17 @@ Hash: 88d5291104227f9dc2e7c7c1d0eb6c74
 
 Package: tibble
 Source: CRAN
-Version: 1.3.0
-Hash: 8de64ed3345488e66b676875ed1ebdce
+Version: 1.3.1
+Hash: 07704884dc23a81adf01659b2ceeb8db
+
+Package: usethis
+Source: github
+Version: 0.0.0.9000
+Hash: 38295e64d932ce6d8cd769ee9e13fa42
+GithubRepo: usethis
+GithubUsername: r-pkgs
+GithubRef: master
+GithubSha1: 6dca914f22b3fef6da108dbf5ba48d34b2ef7e8d
 
 Package: whisker
 Source: CRAN
@@ -265,7 +357,7 @@ Hash: 774eb7be9087cdc24b53b74e5359cfac
 Package: xml2
 Source: CRAN
 Version: 1.1.1
-Hash: 19ad10ef8e73cb435eb49f9d5d259980
+Hash: 35dbee121bb8d76347677290ba1c6a06
 
 Package: yaml
 Source: CRAN
