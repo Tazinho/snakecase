@@ -9,7 +9,7 @@ Overview
 
 <!--A small package with functions to convert column names of data.frames (or strings
 in general) to different cases like snake_case, smallCamel- and BigCamelCase among others. Also high level features for more advanced case conversions are provided via `to_any_case()`.-->
-The snakecase package introduces a fresh and straightforward approach on caseconversion of strings, based upon a concise design philosophy.
+The snakecase package introduces a fresh and straightforward approach on case conversion of strings, based upon a concise design philosophy.
 
 Install
 -------
@@ -65,7 +65,7 @@ to_any_case(string, case = "snake")
 ## [1] "r_._stüdio_:_v_._1_._0_._143"
 ```
 
-Every single character, which is not a letter or a digit, will be treated like a word and surrounded by underscores. This is intended, since it is not clear, if, for example a dot, is ment to be
+Every single character, which is not a letter or a digit, will be treated like a word and surrounded by underscores. This is intended, since it is not clear, if, for example a dot, is meant to be
 
 -   a separator and should be replaced by an underscore or
 -   a decimal mark and should just be kept as it is (without underscores around it).
@@ -79,7 +79,7 @@ to_any_case(string, case = "snake", preprocess = ":|\\.")
 ## [1] "r_stüdio_v_1_0_143"
 ```
 
-If you just want to keep them, since they have a special meaning and are not ment to be separators, you can supply them (also as a regular expression) to the `protect` argument (now the underscores around the protected arguments will be deleted)
+If you just want to keep them, since they have a special meaning and are not meant to be separators, you can supply them (also as a regular expression) to the `protect` argument (now the underscores around the protected arguments will be deleted)
 
 ``` r
 to_any_case(string, case = "snake", protect = ":|\\.")
@@ -109,12 +109,12 @@ to_any_case(string, case = "snake",
 ## [1] "r_stuedio_v_1.0.143"
 ```
 
-Currently this supports only german letters and is likely to change in the future in favour of a more streamlined approach.
+Currently this supports only German letters and is likely to change in the future in favor of a more streamlined approach.
 
 Postprocessing
 --------------
 
-By default the separators of the output are (depanding on the case) `"_"` or `""`. You can customize this, while supplying another separator to the `postprocess` argument
+By default the separators of the output are (depending on the case) `"_"` or `""`. You can customize this, while supplying another separator to the `postprocess` argument
 
 ``` r
 string = "RStudio"
@@ -151,8 +151,8 @@ Vectorisation, speed and special input handling
 The snakecase package is internally build up on the [stringr](https://github.com/tidyverse/stringr) package , which means that many powerful features are provided "by default":
 
 -   `to_any_case()` is vectorised over most of its arguments like `string`, `preprocess`, `protect`, `postprocess`, `prefix`, `postfix`.
--   internal character operations are superfast c++
--   special input like `character(0)`, `NA` etc. is handled in exactely the same consistent and convenient manner as in the stringr package and all its tidy relatives.
+-   internal character operations are super fast c++
+-   special input like `character(0)`, `NA` etc. is handled in exactly the same consistent and convenient manner as in the stringr package and all its tidy relatives.
 
 Empty\_fill and unique\_sep
 ---------------------------
