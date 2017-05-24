@@ -28,6 +28,8 @@ Easy cases
 
 There are 5 different cases available. Note that they are all build up on the first ("parsed") case, which (basically) surrounds every word a string consists of by underscores.
 
+(Please also note that the string "RStudio", which I will use here, is already in its "correct spelling", since it's a [registered trademark](https://www.rstudio.com/about/trademark/) and the following are just artificial examples to familiarize you with the `to_any_case()` function.)
+
 ``` r
 library(snakecase)
 string <- "RStudio"
@@ -48,7 +50,7 @@ to_any_case(string, case = "big_camel")
 ## [1] "RStudio"
 ```
 
-For these simple cases also the shortcuts `to_parsed_case()`, `to_snake_case()`, `to_screamin_snake_case()`, `to_small_camel_case()` and `to_big_camel_case()` are provided, which achieve exactly the same as `to_any_case(string, case)`.
+For these simple cases also the shortcuts `to_parsed_case()`, `to_snake_case()`, `to_screaming_snake_case()`, `to_small_camel_case()` and `to_big_camel_case()` are provided, which achieve exactly the same as `to_any_case(string, case)`.
 
 Parsing options (Todo, currently in dev only)
 ---------------------------------------------
@@ -65,7 +67,7 @@ to_any_case(string, case = "snake")
 ## [1] "r_._stüdio_:_v_._1_._0_._143"
 ```
 
-Every single character, which is not a letter or a digit, will be treated like a word and surrounded by underscores. This is intended, since it is not clear, if, for example a dot, is meant to be
+Every single character, which is not a letter, digit, underscore or blank character (tab/whitespace), will be treated like a word and surrounded by underscores. This is intended, since it is not clear, if, for example a dot, is meant to be
 
 -   a separator and should be replaced by an underscore or
 -   a decimal mark and should just be kept as it is (without underscores around it).
@@ -114,7 +116,7 @@ Currently this supports only German letters and is likely to change in the futur
 Postprocessing
 --------------
 
-By default the separators of the output are (depending on the case) `"_"` or `""`. You can customize this, while supplying another separator to the `postprocess` argument
+By default the separators of the output are `"_"` or `""` (depending on the case). You can customize this, while supplying another separator to the `postprocess` argument
 
 ``` r
 string = "RStudio"
@@ -132,7 +134,7 @@ to_any_case(string, case = "parsed",
 ## [1] "R Studio"
 ```
 
-Note that the latter example has a nice application for the annotation of graphics. "RStudio" is not a good example for this, since it is a name of a company and already written correctly. But for typical column names this could be a nice way to (almost) automate the conversion of internal (naming conversion in R) and external (naming conversion for business reports) representation.
+Note that the latter example has a nice application for the annotation of graphics. "RStudio" is not a good example for this, since it is a name of a company and already written correctly. But for typical column names this could be a nice way to (almost) automate the conversion of internal (naming conventions in personal development workflow) and external (naming conversion for business reports etc.) representation.
 
 Pre -and postfix
 ----------------
@@ -145,6 +147,9 @@ to_any_case(string, case = "big_camel", postprocess = "//",
 ## [1] "USER://R//Studio.exe"
 ```
 
+Empty\_fill and unique\_sep (Todo: documentation)
+-------------------------------------------------
+
 Vectorisation, speed and special input handling
 -----------------------------------------------
 
@@ -153,9 +158,6 @@ The snakecase package is internally build up on the [stringr](https://github.com
 -   `to_any_case()` is vectorised over most of its arguments like `string`, `preprocess`, `protect`, `postprocess`, `prefix`, `postfix`.
 -   internal character operations are super fast c++
 -   special input like `character(0)`, `NA` etc. is handled in exactly the same consistent and convenient manner as in the stringr package and all its tidy relatives.
-
-Empty\_fill and unique\_sep
----------------------------
 
 Design Philosophy
 =================
@@ -241,3 +243,4 @@ Related Resources
 -   [Are there any official naming conventions in R?, stackoverflowquestion 2012](http://stackoverflow.com/questions/10013545/are-there-any-official-naming-conventions-for-r)
 -   [`clean_names()` function](https://github.com/sfirke/janitor/blob/master/R/clean_names.R) from the [janitor package](https://github.com/sfirke/janitor)
 -   [`to_camel()` function](https://github.com/Rapporter/rapportools/blob/master/R/utils.R) from the [rapporttools package](https://github.com/Rapporter/rapportools)
+-   [lettercase-pkg](https://cran.r-project.org/web/packages/lettercase/index.html)
