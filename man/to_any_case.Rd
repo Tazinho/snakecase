@@ -5,7 +5,7 @@
 \title{General case conversion}
 \usage{
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
-  "screaming_snake", "parsed"), preprocess = NULL, protect = NULL,
+  "screaming_snake", "parsed"), preprocess = NULL,
   replace_special_characters = FALSE, postprocess = NULL, prefix = "",
   postfix = "", unique_sep = NULL, empty_fill = NULL, parsingoption = 1)
 }
@@ -19,11 +19,6 @@ returns the parsed input string, separated by underscores, without any further m
 \item{preprocess}{String that will be wrapped internally into \code{stringr::regex()}. 
 All matches will be treated as additional splitting parameters besides the default ones 
 (\code{"_"} and \code{" "}), when parsing the input string.}
-
-\item{protect}{A string which is a valid \code{stringr::regex()}. Matches within the output
-won't have any "_" (or artifacts of \code{preprocess}) beside. Note that \code{preprocess} has a higher precedence than protect, 
-which means that it doesn't make sense to protect sth. which is already replaced
-via \code{preprocess}.}
 
 \item{replace_special_characters}{Logical, if \code{TRUE}, special characters 
 will be translated to characters which are more likely to be understood by 
@@ -80,12 +75,6 @@ to_any_case(strings2, case = "big_camel", preprocess = "-|\\\\:", postprocess = 
 
 ### Special characters like german umlauts for example can be replaced via 
 # replace_special_characters = TRUE
-
-### Protect anything that shouldn't have an underscore beside in the output
-strings3 <- c("var12", "var1.2", "va.r.1.2")
-to_any_case(strings3, case = "snake")
-to_any_case(strings3, case = "snake", protect = "\\\\d")
-to_any_case(strings3, case = "snake", protect = "\\\\d|\\\\.")
 
 }
 \seealso{
