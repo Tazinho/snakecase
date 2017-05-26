@@ -130,6 +130,11 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
       string <- string %>% purrr::map_chr(stringr::str_c, collapse = "")
     } else {
       string <- string %>% purrr::map_chr(stringr::str_c, collapse = "_")
+      
+      if(!is.null(protect)){
+        string <- protect_internal(string, protect)
+      }
+      
       string <- purrr::map2_chr(string, postprocess, ~ stringr::str_replace_all(.x, "_", .y))  
     }
   }

@@ -1,5 +1,10 @@
 # snakecase 0.4.0.9002
 
+* fixed bug in camelcases, for letters after protected symbols (usually one wouln't
+protect in these cases anyway...)
+
+# snakecase 0.4.0.9002
+
 * implemented `check_design_rule()` (not exported)
 * resolved bugs in other design options (also deleted one which is not valid for
 screaming snake case)
