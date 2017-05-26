@@ -52,6 +52,14 @@ test_that("complex strings", {
                            protect = "\\.",
                            postprocess = "."),
                "merkwuerdiger.variablen.name.mit.vielen.mustern.version.3.7.4")
+  
+  expect_equal(to_any_case("R.Studio", case = "big_camel", protect = "\\."),
+               c("R.Studio"))
+  
+  expect_equal(to_any_case("R.Studio: v 1.0.143",
+                           case = "big_camel", preprocess = "\\.",
+                           protect = "[[^:alnum:]]"),
+               "RStudio:V1_0_143")
 })
 
 test_that("stackoverflow answers", {

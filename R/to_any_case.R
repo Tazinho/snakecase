@@ -79,18 +79,16 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
   ### preprocess and parsing
   string <- to_parsed_case_internal(string, preprocess = preprocess, parsingoption = parsingoption)
   
-  ### protect
-  if(!is.null(protect)){
-    postprocess_protector <- "_"
-    
-    protect <- stringr::str_c("([", protect, "])")
-    infront <- stringr::str_c(postprocess_protector , "+", protect)
-    behind <- stringr::str_c(protect, postprocess_protector, "+")
-    string <- stringr::str_replace_all(string, infront, "\\1") %>% 
-      stringr::str_replace_all(behind, "\\1")
+  ### protect (must come after caseconversion, but before postprocess, because the 
+  # separator has to be "_" or a default string, 
+  # but must not be a reg exp, which would have to be used otherwise)
+  if(!case %in% c("small_camel", "big_camel")){
+    if(!is.null(protect)){
+      string <- protect_internal(string, protect)
+    }
   }
   
-  ### replace Special Characters
+  ### replace Special Characters (must come after split from the cases, but before the caseconversion)
   if(replace_special_characters){
     string <- string %>%
       purrr::map_chr(
