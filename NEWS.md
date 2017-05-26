@@ -1,6 +1,6 @@
-# snakecase 0.4.0.9002
+# snakecase 0.4.0.9003
 
-* fixed bug in camelcases, for letters after protected symbols (usually one wouln't
+* fixed bug in camelcases, for letters after protected symbols (usually one wouldn't
 protect in these cases anyway...)
 
 # snakecase 0.4.0.9002
