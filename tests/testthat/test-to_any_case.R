@@ -14,8 +14,12 @@ test_that("examples", {
   
   expect_equal(to_any_case(examples, case = "screaming_snake"),
                cases[["screaming_snake_case"]])
+  
   expect_equal(to_any_case(examples, case = "parsed"),
              cases[["parsed_case"]])
+  
+  expect_equal(to_any_case("R.Studio", case = "big_camel", protect = "\\.", postprocess = "-"),
+               "R.Studio")
 }
 )
 
