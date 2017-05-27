@@ -11,7 +11,7 @@ Overview
 in general) to different cases like snake_case, smallCamel- and BigCamelCase among others. Also high level features for more advanced case conversions are provided via `to_any_case()`.-->
 The snakecase package introduces a fresh and straightforward approach on case conversion of strings, based upon a concise design philosophy.
 
-If you don't want to read too much, you can watch this [talk](https://www.youtube.com/watch?v=T6p0l8XzP64) instead.
+If you don't want to read too much, you could watch this [talk](https://www.youtube.com/watch?v=T6p0l8XzP64) instead.
 
 Install
 -------
@@ -30,7 +30,7 @@ Easy cases
 
 There are 5 different cases available. Note that they are all build up on the first ("parsed") case, which (basically) surrounds every word a string consists of by underscores.
 
-(Please also note that the string "RStudio", which I will use here, is already in its "correct spelling", since it's a [registered trademark](https://www.rstudio.com/about/trademark/) and the following are just artificial examples to familiarize you with the `to_any_case()` function.)
+(Please also note that the string "RStudio", which I will use here, is already in its "correct spelling" and the following are just artificial examples to familiarize you with the `to_any_case()` function.)
 
 ``` r
 library(snakecase)
@@ -89,6 +89,8 @@ If you just want to keep them, since they have a special meaning and are not mea
 to_any_case(string, case = "snake", protect = ":|\\.")
 ## [1] "r.stüdio:v.1.0.143"
 ```
+
+If you want to suppress underscores around non alphanumeric characters in general, just supply `preprocess = "[[^::alnum::]]"`.
 
 Of course you can also combine `preprocess` & `protect` and since these arguments take regular expressions as input, `to_any_case()` becomes very flexible.
 
