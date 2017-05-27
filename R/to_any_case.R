@@ -79,6 +79,12 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
   ### preprocess and parsing
   string <- to_parsed_case_internal(string, preprocess = preprocess, parsingoption = parsingoption)
   
+  ## fill empty strings
+  if(!is.null(empty_fill)){
+    string[string == ""] <- empty_fill
+    string <- to_parsed_case_internal(string, preprocess = preprocess, parsingoption = parsingoption)
+  }
+  
   ### protect (must come after caseconversion, but before postprocess, because the 
   # separator has to be "_" or a default string, 
   # but must not be a reg exp, which would have to be used otherwise)
@@ -144,14 +150,12 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
     string <- string %>% stringr::str_to_upper()
   }
   
-  ## pre and postfix
-  string <- stringr::str_c(prefix, string, postfix)
-  ## fill empty strings
-  if(!is.null(empty_fill))
-  string[string == ""] <- empty_fill
   ## make unique
   if(!is.null(unique_sep))
-  string <- make.unique(string, sep = unique_sep)
+    string <- make.unique(string, sep = unique_sep)
+  ## pre and postfix
+  string <- stringr::str_c(prefix, string, postfix)
+  
   ## return
   string
 }

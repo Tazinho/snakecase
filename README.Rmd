@@ -121,6 +121,21 @@ to_any_case(string, case = "parsed",
 
 Note that the latter example has a nice application for the annotation of graphics. "RStudio" is not a good example for this, since it is a name of a company and already written correctly. But for typical column names this could be a nice way to (almost) automate the conversion of internal (naming conventions in personal development workflow) and external (naming conversion for business reports etc.) representation.
 
+## Empty or non unique output
+
+You can fill empty results with arbitrary strings via the `empty_fill` argument 
+
+```{r, collapse=TRUE}
+to_any_case(c("","_","."), empty_fill = c("empty", "also empty"))
+```
+
+Duplicated output can be automatically suffixed via an index (starting with the first
+duplication) and an arbitrary separator supplied to the `unique_sep` argument
+
+```{r, collapse = TRUE}
+to_any_case(c("same","same","other"), unique_sep = c(">"))
+```
+
 ## Pre -and postfix
 
 You can set pre -and suffixes:
@@ -130,13 +145,11 @@ to_any_case(string, case = "big_camel", postprocess = "//",
             prefix = "USER://", postfix = ".exe")
 ```
 
-## Empty_fill and unique_sep (Todo: documentation)
-
 ## Vectorisation, speed and special input handling
 
 The snakecase package is internally build up on the [stringr](https://github.com/tidyverse/stringr) package , which means that many powerful features are provided "by default":
 
-* `to_any_case()` is vectorised over most of its arguments like `string`, `preprocess`, `protect`, `postprocess`, `prefix`,
+* `to_any_case()` is vectorised over most of its arguments like `string`, `preprocess`, `protect`, `postprocess`, `empty_fill`, `prefix`,
 `postfix`.
 * internal character operations are super fast c++
 * special input like `character(0)`, `NA` etc. is handled in exactly the same consistent and convenient manner as in the stringr package and all its tidy relatives.
