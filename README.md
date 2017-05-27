@@ -17,12 +17,12 @@ Install
 -------
 
 ``` r
-#  install snakecase from cran
-install.packages("snakecase")
+# install snakecase from cran
+# install.packages("snakecase")
 
 # or the (stable) development version hosted on github
-# install.packages("devtools")
-# devtools::install_github("Tazinho/snakecase")
+install.packages("devtools")
+devtools::install_github("Tazinho/snakecase")
 ```
 
 Easy cases
@@ -54,8 +54,23 @@ to_any_case(string, case = "big_camel")
 
 For these simple cases also the shortcuts `to_parsed_case()`, `to_snake_case()`, `to_screaming_snake_case()`, `to_small_camel_case()` and `to_big_camel_case()` are provided, which achieve exactly the same as `to_any_case(string, case)`.
 
-Parsing options (Todo, currently in dev only)
----------------------------------------------
+Parsing options
+---------------
+
+Above "RStudio" was parsed to "R\_Studio". This is a deliberate choice, but also other parsing options are implemented, which make more sense, when different words are separated completely by switching between upper and lower case.
+
+``` r
+to_any_case("HAMBURGcity", case = "parsed", parsingoption = 1)
+## [1] "HAMBUR_Gcity"
+
+to_any_case("HAMBURGcity", case = "parsed", parsingoption = 2)
+## [1] "HAMBURG_city"
+
+to_any_case("HAMBURGcity", case = "parsed", parsingoption = 3)
+## [1] "HAMBURGcity"
+```
+
+which fulfill the design
 
 More complex cases
 ------------------
@@ -147,7 +162,7 @@ You can fill empty results with arbitrary strings via the `empty_fill` argument
 
 ``` r
 to_any_case(c("","_","."), empty_fill = c("empty", "also empty"))
-## [1] "empty"      "also empty" "."
+## [1] "empty"      "also_empty" "."
 ```
 
 Duplicated output can be automatically suffixed via an index (starting with the first duplication) and an arbitrary separator supplied to the `unique_sep` argument

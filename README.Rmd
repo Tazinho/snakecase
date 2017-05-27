@@ -17,13 +17,13 @@ If you don't want to read too much, you could watch this [talk](https://www.yout
 
 ## Install
 
-```{r, results='hide', message=FALSE, warning=FALSE, eval = FALSE}
-#  install snakecase from cran
-install.packages("snakecase")
+```{r, results='hide', message=FALSE, warning=FALSE, eval = TRUE}
+# install snakecase from cran
+# install.packages("snakecase")
 
 # or the (stable) development version hosted on github
-# install.packages("devtools")
-# devtools::install_github("Tazinho/snakecase")
+install.packages("devtools")
+devtools::install_github("Tazinho/snakecase")
 ```
 
 ## Easy cases
@@ -49,7 +49,19 @@ to_any_case(string, case = "big_camel")
 
 For these simple cases also the shortcuts `to_parsed_case()`, `to_snake_case()`, `to_screaming_snake_case()`, `to_small_camel_case()` and `to_big_camel_case()` are provided, which achieve exactly the same as `to_any_case(string, case)`.
 
-## Parsing options (Todo, currently in dev only)
+## Parsing options
+
+Above "RStudio" was parsed to "R_Studio". This is a deliberate choice, but also other parsing options are implemented, which make more sense, when different words are separated completely by switching between upper and lower case. 
+
+```{r, collapse = TRUE}
+to_any_case("HAMBURGcity", case = "parsed", parsingoption = 1)
+
+to_any_case("HAMBURGcity", case = "parsed", parsingoption = 2)
+
+to_any_case("HAMBURGcity", case = "parsed", parsingoption = 3)
+```
+
+which fulfill the design
 
 ## More complex cases
 
