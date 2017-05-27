@@ -1,3 +1,8 @@
+# snakecase 0.4.0.9004
+
+* empty_fill runs now at the beginning of to any case function (after the first parsing)
+and a second parsing is introduced in case anything is filled.
+
 # snakecase 0.4.0.9003
 
 * fixed bug in camelcases, for letters after protected symbols (usually one wouldn't

@@ -80,7 +80,7 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
   string <- to_parsed_case_internal(string, preprocess = preprocess, parsingoption = parsingoption)
   
   ## fill empty strings
-  if(!is.null(empty_fill)){
+  if(!is.null(empty_fill) & any(string == "")){
     string[string == ""] <- empty_fill
     string <- to_parsed_case_internal(string, preprocess = preprocess, parsingoption = parsingoption)
   }
