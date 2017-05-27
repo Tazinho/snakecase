@@ -1,6 +1,9 @@
 #' Internal helper to replace special characters.
 #'
 #' @param string A string (for example names of a data frame).
+#' @param replace_special_characters Logical, if \code{TRUE}, special characters 
+#' will be translated to characters which are more likely to be understood by 
+#' different programs. For example german umlauts will be translated to ae, oe, ue etc.
 #' 
 #' @return A character vector.
 #'
