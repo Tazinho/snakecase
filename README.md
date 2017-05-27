@@ -11,6 +11,8 @@ Overview
 in general) to different cases like snake_case, smallCamel- and BigCamelCase among others. Also high level features for more advanced case conversions are provided via `to_any_case()`.-->
 The snakecase package introduces a fresh and straightforward approach on case conversion of strings, based upon a concise design philosophy.
 
+If you don't want to read too much, you can watch this [talk](https://www.youtube.com/watch?v=T6p0l8XzP64) instead.
+
 Install
 -------
 
