@@ -96,7 +96,7 @@ to_any_case(string, case = "snake", protect = ":|\\.")
 ```
 
 If you want to suppress underscores around non alphanumeric characters in general,
-just supply `preprocess = "[[^::alnum::]]"`.
+just supply `protect = "[[^::alnum::]]"`.
 
 Of course you can also combine `preprocess` & `protect` and since these arguments take regular expressions as input, `to_any_case()` becomes very flexible.
 
