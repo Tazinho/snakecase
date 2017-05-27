@@ -60,17 +60,20 @@ Parsing options
 Above "RStudio" was parsed to "R\_Studio". This is a deliberate choice, but also other parsing options are implemented, which make more sense, when different words are separated completely by switching between upper and lower case.
 
 ``` r
+# the default case makes no sense in this setting
 to_any_case("HAMBURGcity", case = "parsed", parsingoption = 1)
 ## [1] "HAMBUR_Gcity"
 
+# so the second parsing option is the way to address this example
 to_any_case("HAMBURGcity", case = "parsed", parsingoption = 2)
 ## [1] "HAMBURG_city"
 
+# there might be reasons to suppress the parsing, while choosing neither one or two
 to_any_case("HAMBURGcity", case = "parsed", parsingoption = 3)
 ## [1] "HAMBURGcity"
 ```
 
-which fulfill the design
+In general only parsing options are implemented, which fulfill the design rules of this package, as mentioned below.
 
 More complex cases
 ------------------
