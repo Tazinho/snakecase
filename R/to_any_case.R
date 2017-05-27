@@ -88,28 +88,13 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
     }
   }
   
-  ### replace Special Characters (must come after split from the cases, but before the caseconversion)
-  if(replace_special_characters){
-    string <- string %>%
-      purrr::map_chr(
-        ~ stringr::str_replace_all(.x, c("\u00C4" = "Ae",
-                                         "\u00D6" = "Oe",
-                                         "\u00DC" = "Ue",
-                                         "\u00E4" = "ae",
-                                         "\u00F6" = "oe",
-                                         "\u00FC" = "ue",
-                                         "\u00DF" = "ss",
-                                         "\u0025" = "_percent_",
-                                         "\\`" = "",
-                                         "\\'" = "",
-                                         "\\@" = "_at_")
-                                   )
-        )
-  }
+  ### replace Special Characters (must come after split from the cases,
+  # but before the caseconversion)
+  string <- replace_special_characters_internal(string, replace_special_characters)
   
   ### cases and postprocessing
   
-  # parsedcase with postprocessing 
+  # parsedcase with postprocessing
   if(case == "parsed" & !is.null(postprocess)){
     string <- purrr::map2_chr(string,
                               postprocess,
