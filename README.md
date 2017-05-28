@@ -135,8 +135,10 @@ to_any_case(string, case = "snake",
 
 Currently this supports only German letters and is likely to change in the future in favor of a more streamlined approach.
 
-Postprocessing
---------------
+Customize output
+----------------
+
+### Postprocessing
 
 By default the separators of the output are `"_"` or `""` (depending on the case). You can customize this, while supplying another separator to the `postprocess` argument
 
@@ -158,8 +160,7 @@ to_any_case(string, case = "parsed",
 
 Note that the latter example has a nice application for the annotation of graphics. "RStudio" is not a good example for this, since it is a name of a company and already written correctly. But for typical column names this could be a nice way to (almost) automate the conversion of internal (naming conventions in personal development workflow) and external (naming conversion for business reports etc.) representation.
 
-Empty or non unique output
---------------------------
+### Empty or non unique output
 
 You can fill empty results with arbitrary strings via the `empty_fill` argument
 
@@ -175,8 +176,7 @@ to_any_case(c("same","same","other"), unique_sep = c(">"))
 ## [1] "same"   "same>1" "other"
 ```
 
-Pre -and postfix
-----------------
+### Pre -and postfix
 
 You can set pre -and suffixes:
 
