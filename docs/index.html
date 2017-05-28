@@ -64,198 +64,149 @@
 <a href="#overview" class="anchor"></a>Overview</h2>
 <!--A small package with functions to convert column names of data.frames (or strings
 in general) to different cases like snake_case, smallCamel- and BigCamelCase among others. Also high level features for more advanced case conversions are provided via `to_any_case()`.-->
-<p>The snakecase package contains five specific case converter functions and one more general high level function with additional functionality.</p>
+<p>The snakecase package introduces a fresh and straightforward approach on case conversion of strings, based upon a concise design philosophy.</p>
+<p>If you don’t want to read too much, you could watch this <a href="https://www.youtube.com/watch?v=T6p0l8XzP64">talk</a> instead.</p>
 </div>
 <div id="install" class="section level2">
 <h2 class="hasAnchor">
 <a href="#install" class="anchor"></a>Install</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># (stable) development version</span>
-<span class="co"># install.packages("devtools")</span>
-<span class="co"># devtools::install_github("Tazinho/snakecase")</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install snakecase from cran</span>
+<span class="co"># install.packages("snakecase")</span>
 
-<span class="co"># cran version</span>
-<span class="kw">install.packages</span>(<span class="st">"snakecase"</span>)</code></pre></div>
+<span class="co"># or the (stable) development version hosted on github</span>
+<span class="kw">install.packages</span>(<span class="st">"devtools"</span>)
+devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"Tazinho/snakecase"</span>)</code></pre></div>
 </div>
-</div>
-<div id="usage" class="section level1">
-<h1 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h1>
-<div id="specific-case-converters" class="section level2">
+<div id="easy-cases" class="section level2">
 <h2 class="hasAnchor">
-<a href="#specific-case-converters" class="anchor"></a>Specific case converters</h2>
+<a href="#easy-cases" class="anchor"></a>Easy cases</h2>
+<p>There are 5 different cases available. Note that they are all build up on the first (“parsed”) case, which (basically) surrounds every word a string consists of by underscores.</p>
+<p>(Please also note that the string “RStudio”, which I will use here, is already in its “correct spelling” and the following are just artificial examples to familiarize you with the <code><a href="reference/to_any_case.html">to_any_case()</a></code> function.)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(snakecase)
-strings &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"this Is a Strange_string"</span>, <span class="st">"AND THIS ANOTHER_One"</span>)
+string &lt;-<span class="st"> "RStudio"</span>
 
-<span class="kw"><a href="reference/caseconverter.html">to_parsed_case</a></span>(strings)
-## [1] "this_Is_a_Strange_string" "AND_THIS_ANOTHER_One"
+<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(string, <span class="dt">case =</span> <span class="st">"parsed"</span>)
+## [1] "R_Studio"
 
-<span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(strings)
-## [1] "this_is_a_strange_string" "and_this_another_one"
+<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(string, <span class="dt">case =</span> <span class="st">"snake"</span>)
+## [1] "r_studio"
 
-<span class="kw"><a href="reference/caseconverter.html">to_small_camel_case</a></span>(strings)
-## [1] "thisIsAStrangeString" "andThisAnotherOne"
+<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(string, <span class="dt">case =</span> <span class="st">"screaming_snake"</span>)
+## [1] "R_STUDIO"
 
-<span class="kw"><a href="reference/caseconverter.html">to_big_camel_case</a></span>(strings)
-## [1] "ThisIsAStrangeString" "AndThisAnotherOne"
+<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(string, <span class="dt">case =</span> <span class="st">"small_camel"</span>)
+## [1] "rStudio"
 
-<span class="kw"><a href="reference/caseconverter.html">to_screaming_snake_case</a></span>(strings)
-## [1] "THIS_IS_A_STRANGE_STRING" "AND_THIS_ANOTHER_ONE"</code></pre></div>
+<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(string, <span class="dt">case =</span> <span class="st">"big_camel"</span>)
+## [1] "RStudio"</code></pre></div>
+<p>For these simple cases also the shortcuts <code><a href="reference/caseconverter.html">to_parsed_case()</a></code>, <code><a href="reference/caseconverter.html">to_snake_case()</a></code>, <code><a href="reference/caseconverter.html">to_screaming_snake_case()</a></code>, <code><a href="reference/caseconverter.html">to_small_camel_case()</a></code> and <code><a href="reference/caseconverter.html">to_big_camel_case()</a></code> are provided, which achieve exactly the same as <code><a href="reference/to_any_case.html">to_any_case(string, case)</a></code>.</p>
 </div>
-<div id="highlevel-case-converter" class="section level2">
+<div id="parsing-options" class="section level2">
 <h2 class="hasAnchor">
-<a href="#highlevel-case-converter" class="anchor"></a>Highlevel case converter</h2>
-<p>The function <code><a href="reference/to_any_case.html">to_any_case()</a></code> can do everything that the others can and also adds some extra high level functionality.</p>
-<div id="default-usage" class="section level3">
-<h3 class="hasAnchor">
-<a href="#default-usage" class="anchor"></a>Default usage</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(strings, <span class="dt">case =</span> <span class="st">"parsed"</span>)
-## [1] "this_Is_a_Strange_string" "AND_THIS_ANOTHER_One"
+<a href="#parsing-options" class="anchor"></a>Parsing options</h2>
+<p>Above “RStudio” was parsed to “R_Studio”. This is a deliberate choice, but also other parsing options are implemented, which make more sense, when different words are separated completely by switching between upper and lower case.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># the default case makes no sense in this setting</span>
+<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"HAMBURGcity"</span>, <span class="dt">case =</span> <span class="st">"parsed"</span>, <span class="dt">parsingoption =</span> <span class="dv">1</span>)
+## [1] "HAMBUR_Gcity"
 
-<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(strings, <span class="dt">case =</span> <span class="st">"snake"</span>)
-## [1] "this_is_a_strange_string" "and_this_another_one"
+<span class="co"># so the second parsing option is the way to address this example</span>
+<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"HAMBURGcity"</span>, <span class="dt">case =</span> <span class="st">"parsed"</span>, <span class="dt">parsingoption =</span> <span class="dv">2</span>)
+## [1] "HAMBURG_city"
 
-<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(strings, <span class="dt">case =</span> <span class="st">"small_camel"</span>)
-## [1] "thisIsAStrangeString" "andThisAnotherOne"
-
-<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(strings, <span class="dt">case =</span> <span class="st">"big_camel"</span>)
-## [1] "ThisIsAStrangeString" "AndThisAnotherOne"
-
-<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(strings, <span class="dt">case =</span> <span class="st">"screaming_snake"</span>)
-## [1] "THIS_IS_A_STRANGE_STRING" "AND_THIS_ANOTHER_ONE"</code></pre></div>
+<span class="co"># there might be reasons to suppress the parsing, while choosing neither one or two</span>
+<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"HAMBURGcity"</span>, <span class="dt">case =</span> <span class="st">"parsed"</span>, <span class="dt">parsingoption =</span> <span class="dv">3</span>)
+## [1] "HAMBURGcity"</code></pre></div>
+<p>In general only parsing options are implemented, which fulfill the design rules of this package, as mentioned below.</p>
 </div>
-<div id="pre--and-postprocessing" class="section level3">
+<div id="more-complex-cases" class="section level2">
+<h2 class="hasAnchor">
+<a href="#more-complex-cases" class="anchor"></a>More complex cases</h2>
+<p>Till now, we only looked at an easy example. By default the parsing of this package recognizes patterns of switching from lower- to uppercase (and vice versa), underscores and spaces/tabs as word boundaries. If we introduce other characters like dots or colons in our strings, the following will happen:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">string &lt;-<span class="st"> "R.Stüdio: v.1.0.143"</span>
+
+<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(string, <span class="dt">case =</span> <span class="st">"snake"</span>)
+## [1] "r_._stüdio_:_v_._1_._0_._143"</code></pre></div>
+<p>Every single character, which is not a letter, digit, underscore or blank character (tab/whitespace), will be treated like a word and surrounded by underscores. This is intended, since it is not clear, if, for example a dot, is meant to be</p>
+<ul>
+<li>a separator and should be replaced by an underscore or</li>
+<li>a decimal mark and should just be kept as it is (without underscores around it).</li>
+</ul>
+<div id="preprocess-protect" class="section level3">
 <h3 class="hasAnchor">
-<a href="#pre--and-postprocessing" class="anchor"></a>Pre -and postprocessing</h3>
-<p>By default only whitespaces, underscores and some patterns of mixed lower/upper case letter combinations are recognized as word boundaries. You can specify anything as a word boundary which is a valid stringr regular expression:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">strings2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"this - Is_-: a Strange_string"</span>, <span class="st">"ÄND THIS ANOTHER_One"</span>)
-
-<span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(strings2)
-## [1] "this_-_is_-_:_a_strange_string" "änd_this_another_one"
-
-<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(strings2, <span class="dt">case =</span> <span class="st">"snake"</span>, <span class="dt">preprocess =</span> <span class="st">"-|</span><span class="ch">\\</span><span class="st">:"</span>)
-## [1] "this_is_a_strange_string" "änd_this_another_one"</code></pre></div>
-<p>You can also specify a different separator than <code>"_"</code> or <code>""</code> via <code>postprocess</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(strings2, <span class="dt">case =</span> <span class="st">"snake"</span>, <span class="dt">preprocess =</span> <span class="st">"-|</span><span class="ch">\\</span><span class="st">:"</span>, <span class="dt">postprocess =</span> <span class="st">" "</span>)
-## [1] "this is a strange string" "änd this another one"
-
-<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(strings2, <span class="dt">case =</span> <span class="st">"big_camel"</span>, <span class="dt">preprocess =</span> <span class="st">"-|</span><span class="ch">\\</span><span class="st">:"</span>, <span class="dt">postprocess =</span> <span class="st">"//"</span>)
-## [1] "This//Is//A//Strange//String" "Änd//This//Another//One"</code></pre></div>
-</div>
-<div id="pre--and-postfix" class="section level3">
-<h3 class="hasAnchor">
-<a href="#pre--and-postfix" class="anchor"></a>Pre -and postfix</h3>
-<p>You can set pre -and suffixes:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(strings2, <span class="dt">case =</span> <span class="st">"big_camel"</span>, <span class="dt">preprocess =</span> <span class="st">"-|</span><span class="ch">\\</span><span class="st">:"</span>, <span class="dt">postprocess =</span> <span class="st">"//"</span>,
-            <span class="dt">prefix =</span> <span class="st">"USER://"</span>, <span class="dt">postfix =</span> <span class="st">".exe"</span>)
-## [1] "USER://This//Is//A//Strange//String.exe"
-## [2] "USER://Änd//This//Another//One.exe"</code></pre></div>
+<a href="#preprocess-protect" class="anchor"></a>Preprocess &amp; protect</h3>
+<p>If you would like to treat dots and colons as separators, you can supply them (as a regular expression) to the <code>preprocess</code> argument (now they will be internally replaced by underscores, before the parsing occurs)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(string, <span class="dt">case =</span> <span class="st">"snake"</span>, <span class="dt">preprocess =</span> <span class="st">":|</span><span class="ch">\\</span><span class="st">."</span>)
+## [1] "r_stüdio_v_1_0_143"</code></pre></div>
+<p>If you just want to keep them, since they have a special meaning and are not meant to be separators, you can supply them (also as a regular expression) to the <code>protect</code> argument (now the underscores around the protected arguments will be deleted)</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(string, <span class="dt">case =</span> <span class="st">"snake"</span>, <span class="dt">protect =</span> <span class="st">":|</span><span class="ch">\\</span><span class="st">."</span>)
+## [1] "r.stüdio:v.1.0.143"</code></pre></div>
+<p>If you want to suppress underscores around non alphanumeric characters in general, just supply <code>protect = "[[^::alnum::]]"</code>.</p>
+<p>Of course you can also combine <code>preprocess</code> &amp; <code>protect</code> and since these arguments take regular expressions as input, <code><a href="reference/to_any_case.html">to_any_case()</a></code> becomes very flexible.</p>
+<p>You could for example treat only those dots as separators, which are not behind a number and keep the others as decimal marks</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(string, <span class="dt">case =</span> <span class="st">"snake"</span>,
+            <span class="dt">preprocess =</span> <span class="st">":|(?&lt;!</span><span class="ch">\\</span><span class="st">d)</span><span class="ch">\\</span><span class="st">."</span>,
+            <span class="dt">protect =</span> <span class="st">"</span><span class="ch">\\</span><span class="st">."</span>)
+## [1] "r_stüdio_v_1.0.143"</code></pre></div>
 </div>
 <div id="special-characters" class="section level3">
 <h3 class="hasAnchor">
 <a href="#special-characters" class="anchor"></a>Special characters</h3>
-<p>If you have problems with special characters on your platform, you can replace them via <code>replace_special_characters = TRUE</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">strings3 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"ßüss üß ä stränge sträng"</span>, <span class="st">"unrealistisch aber nützich")</span>
-
-<span class="st">to_any_case(strings3, case = "</span>screaming_snake<span class="st">", replace_special_characters = TRUE)</span>
-<span class="st">## [1] "</span>SSUESS_UESS_AE_STRAENGE_STRAENG<span class="st">" "</span>UNREALISTISCH_ABER_NUETZICH<span class="st">"</span></code></pre></div>
+<p>If you have problems with special characters (like u umlaut) on your platform, you can replace them via <code>replace_special_characters = TRUE</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(string, <span class="dt">case =</span> <span class="st">"snake"</span>, 
+            <span class="dt">preprocess =</span> <span class="st">":|(?&lt;!</span><span class="ch">\\</span><span class="st">d)</span><span class="ch">\\</span><span class="st">."</span>,
+            <span class="dt">protect =</span> <span class="st">"</span><span class="ch">\\</span><span class="st">."</span>,
+            <span class="dt">replace_special_characters =</span> <span class="ot">TRUE</span>)
+## [1] "r_stuedio_v_1.0.143"</code></pre></div>
+<p>Currently this supports only German letters and is likely to change in the future in favor of a more streamlined approach.</p>
 </div>
-<div id="protect-anything" class="section level3">
-<h3 class="hasAnchor">
-<a href="#protect-anything" class="anchor"></a>Protect anything</h3>
-<p>If you see unwanted underscores around specific pattern, which you don’t want to delete via <code>preprocess</code>, just use <code>protect</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">strings4 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"var12"</span>, <span class="st">"var1.2"</span>, <span class="st">"va.r.1.2"</span>)
-
-<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(strings4, <span class="dt">case =</span> <span class="st">"snake"</span>)
-## [1] "var_12"         "var_1_._2"      "va_._r_._1_._2"
-<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(strings4, <span class="dt">case =</span> <span class="st">"snake"</span>, <span class="dt">protect =</span> <span class="st">"</span><span class="ch">\\</span><span class="st">d"</span>)
-## [1] "var12"       "var1.2"      "va_._r_.1.2"
-<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(strings4, <span class="dt">case =</span> <span class="st">"snake"</span>, <span class="dt">protect =</span> <span class="st">"</span><span class="ch">\\</span><span class="st">d|</span><span class="ch">\\</span><span class="st">."</span>)
-## [1] "var12"    "var1.2"   "va.r.1.2"</code></pre></div>
 </div>
-<div id="vectorisation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#vectorisation" class="anchor"></a>Vectorisation</h3>
-<p><code><a href="reference/to_any_case.html">to_any_case()</a></code> is vectorised over <code>string</code>, <code>preprocess</code>, <code>postprocess</code>, <code>prefix</code>, <code>postfix</code> and <code>protect</code>.</p>
+<div id="postprocessing" class="section level2">
+<h2 class="hasAnchor">
+<a href="#postprocessing" class="anchor"></a>Postprocessing</h2>
+<p>By default the separators of the output are <code>"_"</code> or <code>""</code> (depending on the case). You can customize this, while supplying another separator to the <code>postprocess</code> argument</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">string =<span class="st"> "RStudio"</span>
+
+<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(string, <span class="dt">case =</span> <span class="st">"snake"</span>, 
+            <span class="dt">postprocess =</span> <span class="st">"."</span>)
+## [1] "r.studio"
+
+<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(string, <span class="dt">case =</span> <span class="st">"big_camel"</span>, 
+            <span class="dt">postprocess =</span> <span class="st">"-"</span>)
+## [1] "R-Studio"
+
+<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(string, <span class="dt">case =</span> <span class="st">"parsed"</span>, 
+            <span class="dt">postprocess =</span> <span class="st">" "</span>)
+## [1] "R Studio"</code></pre></div>
+<p>Note that the latter example has a nice application for the annotation of graphics. “RStudio” is not a good example for this, since it is a name of a company and already written correctly. But for typical column names this could be a nice way to (almost) automate the conversion of internal (naming conventions in personal development workflow) and external (naming conversion for business reports etc.) representation.</p>
 </div>
-<div id="more-complex-stuff" class="section level3">
-<h3 class="hasAnchor">
-<a href="#more-complex-stuff" class="anchor"></a>More complex stuff</h3>
-<p>Since <code>preprocess</code> and <code>protect</code> allow to use regular expressions, <code><a href="reference/to_any_case.html">to_any_case()</a></code> becomes very flexible and can achieve complex operations. Lets assume, that you want to translate a string, which contains dots and decimal numbers, into snakecase. You want that the dots are treated as <code>"_"</code> in the output, but not if they are the separator of a decimal.</p>
-<p>You can achieve this, while passing a regex (in this case a lookaround) to the <code>preprocess</code> argument, which only translates those dots into <code>"_"</code>, that don’t have a digit in front. The resulting underscores between the digits can be cleaned via <code>protect = "\\d"</code>:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="kw">c</span>(<span class="st">"va.riable.1.2"</span>), <span class="dt">case =</span> <span class="st">"snake"</span>, <span class="dt">preprocess =</span> <span class="st">"(?&lt;!</span><span class="ch">\\</span><span class="st">d)</span><span class="ch">\\</span><span class="st">."</span>, <span class="dt">protect =</span> <span class="st">"</span><span class="ch">\\</span><span class="st">d"</span>)
-## [1] "va_riable1.2"
-
-<span class="co"># you could also use a postprocess in between</span>
-<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="kw">c</span>(<span class="st">"va.riable.1.2"</span>), <span class="dt">case =</span> <span class="st">"snake"</span>, <span class="dt">preprocess =</span> <span class="st">"(?&lt;!</span><span class="ch">\\</span><span class="st">d)</span><span class="ch">\\</span><span class="st">."</span>, <span class="dt">postprocess =</span> <span class="st">"//"</span>, <span class="dt">protect =</span> <span class="st">"</span><span class="ch">\\</span><span class="st">d"</span>)
-## [1] "va//riable1.2"</code></pre></div>
-<!--
-
-```r
-library(snakecase)
-
-strings <- c("smallCamelCase", "BigCamelCase", "SCREAMING_SNAKE_CASE",
-             "RRRProjectRRProject", "große Männer_1.2_3-4/5", NA)
-
-# conversion
-to_snake_case(strings)
-## [1] "small_camel_case"             "big_camel_case"              
-## [3] "screaming_snake_case"         "rrr_project_rr_project"      
-## [5] "große_männer_1_._2_3_-_4_/_5" NA
-
-to_small_camel_case(strings)
-## [1] "smallCamelCase"       "bigCamelCase"         "screamingSnakeCase"  
-## [4] "rrrProjectRrProject"  "großeMänner1.2_3-4/5" NA
-
-to_big_camel_case(strings)
-## [1] "SmallCamelCase"       "BigCamelCase"         "ScreamingSnakeCase"  
-## [4] "RrrProjectRrProject"  "GroßeMänner1.2_3-4/5" NA
-
-to_screaming_snake_case(strings)
-## [1] "SMALL_CAMEL_CASE"              "BIG_CAMEL_CASE"               
-## [3] "SCREAMING_SNAKE_CASE"          "RRR_PROJECT_RR_PROJECT"       
-## [5] "GROSSE_MÄNNER_1_._2_3_-_4_/_5" NA
-
-to_any_case(strings,
-            case = "big_camel", 
-            preprocess = "\\.|-|/", 
-            replace_special_characters = TRUE)
-## [1] "SmallCamelCase"         "BigCamelCase"          
-## [3] "ScreamingSnakeCase"     "RrrProjectRrProject"   
-## [5] "GrosseMaenner1_2_3_4_5" NA
-
-to_any_case(strings,
-            case = "screaming_snake",
-            preprocess = "\\.|-|/",
-            postprocess = "/",
-            prefix = "USER/",
-            postfix = ".exe",
-            replace_special_characters = TRUE)
-## [1] "USER/SMALL/CAMEL/CASE.exe"         "USER/BIG/CAMEL/CASE.exe"          
-## [3] "USER/SCREAMING/SNAKE/CASE.exe"     "USER/RRR/PROJECT/RR/PROJECT.exe"  
-## [5] "USER/GROSSE/MAENNER/1/2/3/4/5.exe" NA
-
-# test if your names are a valid case (consistent with this package)
-# for example smallCamelCase
-strings == to_small_camel_case(strings)
-## [1]  TRUE FALSE FALSE FALSE FALSE    NA
-
-# compare input and output
-library(dplyr)
-
-tibble(inp = strings, outp = to_small_camel_case(strings)) %>% 
-  mutate(compare = inp == outp)
-## # A tibble: 6 × 3
-##                      inp                 outp compare
-##                    <chr>                <chr>   <lgl>
-## 1         smallCamelCase       smallCamelCase    TRUE
-## 2           BigCamelCase         bigCamelCase   FALSE
-## 3   SCREAMING_SNAKE_CASE   screamingSnakeCase   FALSE
-## 4    RRRProjectRRProject  rrrProjectRrProject   FALSE
-## 5 große Männer_1.2_3-4/5 großeMänner1.2_3-4/5   FALSE
-## 6                   <NA>                 <NA>      NA
-```
--->
+<div id="empty-or-non-unique-output" class="section level2">
+<h2 class="hasAnchor">
+<a href="#empty-or-non-unique-output" class="anchor"></a>Empty or non unique output</h2>
+<p>You can fill empty results with arbitrary strings via the <code>empty_fill</code> argument</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="kw">c</span>(<span class="st">""</span>,<span class="st">"_"</span>,<span class="st">"."</span>), <span class="dt">empty_fill =</span> <span class="kw">c</span>(<span class="st">"empty"</span>, <span class="st">"also empty"</span>))
+## [1] "empty"      "also empty" "."</code></pre></div>
+<p>Duplicated output can be automatically suffixed via an index (starting with the first duplication) and an arbitrary separator supplied to the <code>unique_sep</code> argument</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="kw">c</span>(<span class="st">"same"</span>,<span class="st">"same"</span>,<span class="st">"other"</span>), <span class="dt">unique_sep =</span> <span class="kw">c</span>(<span class="st">"&gt;"</span>))
+## [1] "same"   "same&gt;1" "other"</code></pre></div>
 </div>
+<div id="pre--and-postfix" class="section level2">
+<h2 class="hasAnchor">
+<a href="#pre--and-postfix" class="anchor"></a>Pre -and postfix</h2>
+<p>You can set pre -and suffixes:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(string, <span class="dt">case =</span> <span class="st">"big_camel"</span>, <span class="dt">postprocess =</span> <span class="st">"//"</span>,
+            <span class="dt">prefix =</span> <span class="st">"USER://"</span>, <span class="dt">postfix =</span> <span class="st">".exe"</span>)
+## [1] "USER://R//Studio.exe"</code></pre></div>
+</div>
+<div id="vectorisation-speed-and-special-input-handling" class="section level2">
+<h2 class="hasAnchor">
+<a href="#vectorisation-speed-and-special-input-handling" class="anchor"></a>Vectorisation, speed and special input handling</h2>
+<p>The snakecase package is internally build up on the <a href="https://github.com/tidyverse/stringr">stringr</a> package , which means that many powerful features are provided “by default”:</p>
+<ul>
+<li>
+<code><a href="reference/to_any_case.html">to_any_case()</a></code> is vectorised over most of its arguments like <code>string</code>, <code>preprocess</code>, <code>protect</code>, <code>postprocess</code>, <code>empty_fill</code>, <code>prefix</code>, <code>postfix</code>.</li>
+<li>internal character operations are super fast c++</li>
+<li>special input like <code>character(0)</code>, <code>NA</code> etc. is handled in exactly the same consistent and convenient manner as in the stringr package and all its tidy relatives.</li>
+</ul>
 </div>
 </div>
 <div id="design-philosophy" class="section level1">
@@ -338,6 +289,7 @@ following testcases, also these two equations are tested.--></p>
 <li>
 <a href="https://github.com/Rapporter/rapportools/blob/master/R/utils.R"><code>to_camel()</code> function</a> from the <a href="https://github.com/Rapporter/rapportools">rapporttools package</a>
 </li>
+<li><a href="https://cran.r-project.org/web/packages/lettercase/index.html">lettercase-pkg</a></li>
 </ul>
 </div>
 </div>
@@ -360,7 +312,6 @@ following testcases, also these two equations are tested.--></p>
 <li><a href="https://ci.appveyor.com/project/Tazinho/snakecase"><img src="https://ci.appveyor.com/api/projects/status/github/Tazinho/snakecase?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
 <li><a href="https://travis-ci.org/Tazinho/snakecase"><img src="https://travis-ci.org/Tazinho/snakecase.svg?branch=master" alt="Travis-CI Build Status"></a></li>
 <li><a href="https://cran.r-project.org/package=snakecase"><img src="http://www.r-pkg.org/badges/version/snakecase" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://codecov.io/github/Tazinho/snakecase?branch=master"><img src="https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg" alt="Coverage Status"></a></li>
 <li><a href="http://cranlogs.r-pkg.org/"><img src="http://cranlogs.r-pkg.org/badges/snakecase" alt="downloads"></a></li>
 <li><a href="http://cranlogs.r-pkg.org/"><img src="http://cranlogs.r-pkg.org/badges/grand-total/snakecase" alt="total"></a></li>
 </ul>

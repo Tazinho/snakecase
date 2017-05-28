@@ -1,4 +1,4 @@
-#' Internal helper to protect non alphanumerics (delete the separators around them).
+#' Internal protect helper (deletes the separators around protected regex matches).
 #'
 #' @param string A string (for example names of a data frame).
 #' @param protect A string which is a valid \code{stringr::regex()}. Matches within the output

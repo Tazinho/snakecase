@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • snakecase</title>
+<title>Internal helper to protect non alphanumerics (delete the separators around them). � protect_internal • snakecase</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -36,7 +36,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -72,76 +72,51 @@
       </header>
 
       <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;0.4.0.9004</small>
-      </h1>
+    <h1>Internal helper to protect non alphanumerics (delete the separators around them).</h1>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    
+    <p>Internal helper to protect non alphanumerics (delete the separators around them).</p>
+    
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <pre class="usage"><span class='fu'>protect_internal</span>(<span class='no'>string</span>, <span class='kw'>protect</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>string</th>
+      <td><p>A string (for example names of a data frame).</p></td>
+    </tr>
+    <tr>
+      <th>protect</th>
+      <td><p>A string which is a valid <code>stringr::regex()</code>. Matches within the output
+won't have any "_" (or artifacts of <code>preprocess</code>) beside. Note that <code>preprocess</code> has a higher precedence than protect, 
+which means that it doesn't make sense to protect sth. which is already replaced
+via <code>preprocess</code>.</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="caseconverter.html">to_snake_case</a></code> <code><a href="caseconverter.html">to_small_camel_case</a></code> <code><a href="caseconverter.html">to_big_camel_case</a></code> <code><a href="caseconverter.html">to_screaming_snake_case</a></code> <code><a href="caseconverter.html">to_parsed_case</a></code> </p>
-          </td>
-          <td><p>Specific case converter shortcuts</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="check_design_rule.html">check_design_rule</a></code> </p>
-          </td>
-          <td><p>Internal helper to test the design rules for any string and setting of <code>to_any_case()</code></p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="protect_internal.html">protect_internal</a></code> </p>
-          </td>
-          <td><p>Internal helper to protect non alphanumerics (delete the separators around them).</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="replace_special_characters_internal.html">replace_special_characters_internal</a></code> </p>
-          </td>
-          <td><p>Internal helper to replace special characters.</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="to_any_case.html">to_any_case</a></code> </p>
-          </td>
-          <td><p>General case conversion</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="to_parsed_case_internal.html">to_parsed_case_internal</a></code> </p>
-          </td>
-          <td><p>Internal parser, which is relevant for preprocessing, parsing and parsingoptions</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+    <p>A character vector.</p>
+    
+
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
-    </ul>
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
+
+    <h2>Author</h2>
+    
+Malte Grosser, <a href='mailto:malte.grosser@gmail.com'>malte.grosser@gmail.com</a>
+
   </div>
 </div>
 
