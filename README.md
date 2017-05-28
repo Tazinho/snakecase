@@ -165,7 +165,7 @@ You can fill empty results with arbitrary strings via the `empty_fill` argument
 
 ``` r
 to_any_case(c("","_","."), empty_fill = c("empty", "also empty"))
-## [1] "empty"      "also_empty" "."
+## [1] "empty"      "also empty" "."
 ```
 
 Duplicated output can be automatically suffixed via an index (starting with the first duplication) and an arbitrary separator supplied to the `unique_sep` argument
