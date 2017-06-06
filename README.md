@@ -158,7 +158,7 @@ to_any_case(string, case = "parsed",
 ## [1] "R Studio"
 ```
 
-Note that the latter example has a nice application for the annotation of graphics. "RStudio" is not a good example for this, since it is a name of a company and already written correctly. But for typical column names this could be a nice way to (almost) automate the conversion of internal (naming conventions in personal development workflow) and external (naming conversion for business reports etc.) representation.
+Note that the latter example has a nice application for the annotation of graphics. "RStudio" is not a good example for this, since it is a name of a company and already written correctly. But for typical column names this could be a nice way to (almost) automate the conversion of internal (naming conventions in personal development workflow) and external (naming conventions for business reports etc.) representation.
 
 ### Empty or non unique output
 

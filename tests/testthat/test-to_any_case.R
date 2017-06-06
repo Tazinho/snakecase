@@ -64,7 +64,17 @@ test_that("complex strings", {
                            case = "big_camel", preprocess = "\\.",
                            protect = "[[^:alnum:]]"),
                "RStudio:V1_0_143")
+  
+  expect_equal(to_any_case("R.aStudio", case = "snake", protect = "\\.|A", postprocess = "-"), "r.a-studio")
+  expect_equal(to_any_case("R.aStudio", case = "snake", protect = "\\.|a", postprocess = "-"), "r.astudio")
+  expect_equal(to_any_case("R.aStudio", case = "big_camel", protect = "\\.|A", postprocess = "-"), "R.A-Studio")
+  expect_equal(to_any_case("R.aStudio", case = "big_camel", protect = "\\.|a", postprocess = "-"), "R.AStudio")
+  expect_equal(to_any_case("R.aStudio", case = "small_camel", protect = "\\.|A", postprocess = "-"), "r.A-Studio")
+  expect_equal(to_any_case("R.aStudio", case = "small_camel", protect = "\\.|a", postprocess = "-"), "r.AStudio")
+  expect_equal(to_any_case("r.aStudio", protect = "a", postprocess = "-", case = "big_camel"), "R-.AStudio")
+  
 })
+
 
 test_that("stackoverflow answers", {
   expect_equal(to_any_case(c("ThisText", "NextText"), case = "snake", postprocess = "\\."),
