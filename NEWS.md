@@ -1,3 +1,9 @@
+# snakecase 0.4.0.9005
+
+* empty_fill runs again in the end, before the pre and postprocess
+* fixed bug: `to_any_case("r.aStudio", protect = "a", postprocess = "-", case = "big_camel")` will now
+correctly return "R-.AStudio" (so the protection will be triggered by the input and not by the output). In contrast `protect = A` will yield in unprotected output (`-A-`)
+
 # snakecase 0.4.0.9004
 
 * empty_fill runs now at the beginning of to any case function (after the first parsing)

@@ -109,15 +109,28 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
   # caseconversion to small-/big camel case
   if(case == "small_camel" | case == "big_camel"){
     string <- string %>% 
-      stringr::str_split(pattern = "(?<!\\d)_|_(?!\\d)") %>% 
-      purrr::map(stringr::str_to_title)
+      stringr::str_split(pattern = "(?<!\\d)_|_(?!\\d)")
+    
+    if(!is.null(protect) & !is.null(postprocess)){
+      string <- string %>% 
+        # mark end of matches of protect before the caseconversion
+        purrr::map(~stringr::str_replace(.x, stringr::str_c("^(", protect, ")$"), "\\1__"))
+    }
+      string <- string %>% purrr::map(stringr::str_to_title)
+      
+    if(!is.null(protect) & !is.null(postprocess)){
+      string <- string %>% 
+        # mark beginning of matches of protect after the caseconversion
+        purrr::map(~stringr::str_replace(.x, "(.+__)$", "__\\1"))
+    }
+      
     if(is.null(postprocess)){
       string <- string %>% purrr::map_chr(stringr::str_c, collapse = "")
     } else {
       string <- string %>% purrr::map_chr(stringr::str_c, collapse = "_")
       
-      if(!is.null(protect)){
-        string <- protect_internal(string, protect)
+      if(!is.null(protect) & !is.null(postprocess)){
+        string <- string %>% purrr::map_chr(~stringr::str_replace_all(.x, "_{2,}", ""))#protect_internal(string, protect)
       }
       
       string <- purrr::map2_chr(string, postprocess, ~ stringr::str_replace_all(.x, "_", .y))  
