@@ -20,4 +20,4 @@ protect_internal <- function(string, protect = NULL){
     stringr::str_replace_all(behind, "\\1")
   
   string
-} 
+}
