@@ -4,8 +4,10 @@
 #'
 #' @param string A string (for example names of a data frame).
 #' @param case The desired target case, provided as one of \code{"snake"}, \code{"small_camel"}, \code{"big_camel"}, 
-#' \code{"screaming_snake"} or \code{"parsed"}. The latter one is not really a case, but is helpful since it
-#' returns the parsed input string, separated by underscores, without any further modification.
+#' \code{"screaming_snake"}, \code{"parsed"} or , \code{"none"}. The latter two are not really cases, but are helpful since they allow to
+#' return the parsed input string, separated by underscores, without any further modification or just the input string. 
+#' Note that \code{case = "none"} only works with \code{replace_special_characters}, \code{prefix},
+#' \code{postfix}, \code{empty_fill} and \code{unique_sep}.
 #' @param preprocess String that will be wrapped internally into \code{stringr::regex()}. 
 #' All matches will be treated as additional splitting parameters besides the default ones 
 #' (\code{"_"} and \code{" "}), when parsing the input string.
@@ -73,11 +75,13 @@
 #'
 #' @export
 #'
-to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake", "parsed"), preprocess = NULL, protect = NULL, replace_special_characters = FALSE, postprocess = NULL, prefix = "", postfix = "", unique_sep = NULL, empty_fill = NULL, parsingoption = 1){
+to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake", "parsed", "none"), preprocess = NULL, protect = NULL, replace_special_characters = FALSE, postprocess = NULL, prefix = "", postfix = "", unique_sep = NULL, empty_fill = NULL, parsingoption = 1){
   case <- match.arg(case)
   
   ### preprocess and parsing
-  string <- to_parsed_case_internal(string, preprocess = preprocess, parsingoption = parsingoption)
+  if (case != "none"){
+    string <- to_parsed_case_internal(string, preprocess = preprocess, parsingoption = parsingoption)
+  }
   
   ### protect (must come after caseconversion, but before postprocess, because the 
   # separator has to be "_" or a default string, 

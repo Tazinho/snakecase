@@ -1,3 +1,7 @@
+# snakecase 0.4.0.9006
+
+* new implemented cases: "none",
+
 # snakecase 0.4.0.9005
 
 * empty_fill runs again in the end, before the pre and postprocess

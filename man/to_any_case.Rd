@@ -5,7 +5,7 @@
 \title{General case conversion}
 \usage{
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
-  "screaming_snake", "parsed"), preprocess = NULL, protect = NULL,
+  "screaming_snake", "parsed", "none"), preprocess = NULL, protect = NULL,
   replace_special_characters = FALSE, postprocess = NULL, prefix = "",
   postfix = "", unique_sep = NULL, empty_fill = NULL, parsingoption = 1)
 }
@@ -13,8 +13,10 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
 \item{string}{A string (for example names of a data frame).}
 
 \item{case}{The desired target case, provided as one of \code{"snake"}, \code{"small_camel"}, \code{"big_camel"}, 
-\code{"screaming_snake"} or \code{"parsed"}. The latter one is not really a case, but is helpful since it
-returns the parsed input string, separated by underscores, without any further modification.}
+\code{"screaming_snake"}, \code{"parsed"} or , \code{"none"}. The latter two are not really cases, but are helpful since they allow to
+return the parsed input string, separated by underscores, without any further modification or just the input string. 
+Note that \code{case = "none"} only works with \code{replace_special_characters}, \code{prefix},
+\code{postfix}, \code{empty_fill} and \code{unique_sep}.}
 
 \item{preprocess}{String that will be wrapped internally into \code{stringr::regex()}. 
 All matches will be treated as additional splitting parameters besides the default ones 
