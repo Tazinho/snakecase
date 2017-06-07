@@ -73,6 +73,9 @@ test_that("complex strings", {
   expect_equal(to_any_case("R.aStudio", case = "small_camel", protect = "\\.|a", postprocess = "-"), "r.AStudio")
   expect_equal(to_any_case("r.aStudio", protect = "a", postprocess = "-", case = "big_camel"), "R-.AStudio")
   
+  expect_equal(to_any_case("rStudio", case = "none", prefix = "rrr."),
+               "rrr.rStudio")
+  
 })
 
 
