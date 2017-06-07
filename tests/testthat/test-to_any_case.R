@@ -73,6 +73,17 @@ test_that("complex strings", {
   expect_equal(to_any_case("R.aStudio", case = "small_camel", protect = "\\.|a", postprocess = "-"), "r.AStudio")
   expect_equal(to_any_case("r.aStudio", protect = "a", postprocess = "-", case = "big_camel"), "R-.AStudio")
   
+  expect_equal(to_any_case("rStudio", case = "none", prefix = "rrr."),
+               "rrr.rStudio")
+  
+  expect_equal(to_any_case("Rstudio_STudio_sssTTT", case = "mixed"),
+               "Rstudio_S_Tudio_sss_Ttt")
+  expect_equal(to_any_case("Rstudio_STudio_sssTTT", case = "mixed", parsingoption = 2),
+               "Rstudio_St_udio_sss_Ttt")
+  
+  expect_equal(to_any_case(names(iris), case = "lower_upper", preprocess = "\\.", postprocess = "-"),
+               c("sepal-LENGTH", "sepal-WIDTH", "petal-LENGTH", "petal-WIDTH", "species"))
+  
 })
 
 

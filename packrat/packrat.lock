@@ -99,8 +99,8 @@ Hash: 346d3477f87b89692dd1379eaed1a1be
 
 Package: devtools
 Source: CRAN
-Version: 1.13.1
-Hash: 8dadb6c6a916c8312dddc7b4d394c9f3
+Version: 1.13.2
+Hash: 1bcfefa7d2fad3f1a2f5367c9ceccd46
 
 Package: digest
 Source: CRAN
