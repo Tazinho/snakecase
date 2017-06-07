@@ -75,7 +75,7 @@
 #'
 #' @export
 #'
-to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake", "parsed", "none"), preprocess = NULL, protect = NULL, replace_special_characters = FALSE, postprocess = NULL, prefix = "", postfix = "", unique_sep = NULL, empty_fill = NULL, parsingoption = 1){
+to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake", "parsed", "mixed", "none"), preprocess = NULL, protect = NULL, replace_special_characters = FALSE, postprocess = NULL, prefix = "", postfix = "", unique_sep = NULL, empty_fill = NULL, parsingoption = 1){
   case <- match.arg(case)
   
   ### preprocess and parsing
@@ -97,9 +97,17 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
   string <- replace_special_characters_internal(string, replace_special_characters)
   
   ### cases and postprocessing
+  if (case == "mixed"){
+    string <- string %>% 
+      stringr::str_split("_") %>% 
+      purrr::map(~stringr::str_c(stringr::str_sub(.x, 1, 1),
+                                 stringr::str_sub(.x, 2) %>%
+                                   stringr::str_to_lower())) %>%
+      purrr::map_chr(~stringr::str_c(.x, collapse = "_"))
+    }
   
   # parsedcase with postprocessing
-  if(case == "parsed" & !is.null(postprocess)){
+  if(case %in% c("parsed", "mixed") & !is.null(postprocess)){
     string <- purrr::map2_chr(string,
                               postprocess,
                               ~ stringr::str_replace_all(.x, "_", .y))}

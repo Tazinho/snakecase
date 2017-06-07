@@ -1,6 +1,6 @@
 # snakecase 0.4.0.9006
 
-* new implemented cases: "none"
+* new implemented cases: "none", "mixed"
 
 # snakecase 0.4.0.9005
 

@@ -5,9 +5,10 @@
 \title{General case conversion}
 \usage{
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
-  "screaming_snake", "parsed", "none"), preprocess = NULL, protect = NULL,
-  replace_special_characters = FALSE, postprocess = NULL, prefix = "",
-  postfix = "", unique_sep = NULL, empty_fill = NULL, parsingoption = 1)
+  "screaming_snake", "parsed", "mixed", "none"), preprocess = NULL,
+  protect = NULL, replace_special_characters = FALSE, postprocess = NULL,
+  prefix = "", postfix = "", unique_sep = NULL, empty_fill = NULL,
+  parsingoption = 1)
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
