@@ -1,6 +1,6 @@
 # snakecase 0.4.0.9006
 
-* new implemented cases: "none", "mixed"
+* new implemented cases: "none", "mixed", "upper_lower", "lower_upper".
 
 # snakecase 0.4.0.9005
 

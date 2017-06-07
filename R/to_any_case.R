@@ -4,8 +4,9 @@
 #'
 #' @param string A string (for example names of a data frame).
 #' @param case The desired target case, provided as one of \code{"snake"}, \code{"small_camel"}, \code{"big_camel"}, 
-#' \code{"screaming_snake"}, \code{"parsed"} or , \code{"none"}. The latter two are not really cases, but are helpful since they allow to
-#' return the parsed input string, separated by underscores, without any further modification or just the input string. 
+#' \code{"screaming_snake"}, \code{lower_upper}, \code{upper_lower}, \code{"parsed"}, \code{mixed} or , \code{"none"}. The latter three are not really cases, but are helpful since they allow to
+#' return the parsed input string, separated by underscores, without any further modification ("parsed"), 
+#' only the first letters (behind an underscore) appear as parsed and the rest is lowercase ("mixed") or just the input string ("none"). 
 #' Note that \code{case = "none"} only works with \code{replace_special_characters}, \code{prefix},
 #' \code{postfix}, \code{empty_fill} and \code{unique_sep}.
 #' @param preprocess String that will be wrapped internally into \code{stringr::regex()}. 
@@ -75,7 +76,7 @@
 #'
 #' @export
 #'
-to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake", "parsed", "mixed", "none"), preprocess = NULL, protect = NULL, replace_special_characters = FALSE, postprocess = NULL, prefix = "", postfix = "", unique_sep = NULL, empty_fill = NULL, parsingoption = 1){
+to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake", "parsed", "mixed", "lower_upper", "upper_lower", "none"), preprocess = NULL, protect = NULL, replace_special_characters = FALSE, postprocess = NULL, prefix = "", postfix = "", unique_sep = NULL, empty_fill = NULL, parsingoption = 1){
   case <- match.arg(case)
   
   ### preprocess and parsing
@@ -106,11 +107,39 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
       purrr::map_chr(~stringr::str_c(.x, collapse = "_"))
     }
   
-  # parsedcase with postprocessing
-  if(case %in% c("parsed", "mixed") & !is.null(postprocess)){
+  if (case %in% c("lower_upper", "upper_lower")){
+    if (case == "lower_upper"){
+      string <- string %>% stringr::str_split("_") %>% 
+        purrr::map2(purrr::map(., ~ seq_along(.x) %% 2 == 0),
+                    # odds to lower
+                    ~{.x[!.y] <- stringr::str_to_lower(.x[!.y]);
+                    # equals to upper
+                    .x[.y] <- stringr::str_to_upper(.x[.y]);
+                    .x}) %>% 
+        purrr::map_chr(~stringr::str_c(.x, collapse = "_"))
+    }
+    if (case == "upper_lower") {
+      string <- string %>% stringr::str_split("_") %>% 
+        purrr::map2(purrr::map(., ~ seq_along(.x) %% 2 == 0),
+                    # odds to upper
+                    ~{.x[!.y] <- stringr::str_to_upper(.x[!.y]);
+                    # equals to lower
+                    .x[.y] <- stringr::str_to_lower(.x[.y]);
+                    .x}) %>% 
+        purrr::map_chr(~stringr::str_c(.x, collapse = "_"))
+    }
+  }
+  
+  # ohter cases with postprocessing
+  if(case %in% c("parsed", "mixed", "none", "upper_lower", "lower_upper") & !is.null(postprocess)){
     string <- purrr::map2_chr(string,
                               postprocess,
                               ~ stringr::str_replace_all(.x, "_", .y))}
+  
+  if(case %in% c("upper_lower", "lower_upper") & is.null(postprocess)){
+    string <- string %>% stringr::str_split(pattern = "(?<!\\d)_|_(?!\\d)") %>% 
+      purrr::map_chr(~stringr::str_c(.x, collapse = ""))
+  }
   
   ## other cases without postprocessing
   if(case %in% c("snake", "small_camel", "big_camel", "screaming_snake")){

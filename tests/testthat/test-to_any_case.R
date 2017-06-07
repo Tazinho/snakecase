@@ -81,6 +81,9 @@ test_that("complex strings", {
   expect_equal(to_any_case("Rstudio_STudio_sssTTT", case = "mixed", parsingoption = 2),
                "Rstudio_St_udio_sss_Ttt")
   
+  expect_equal(to_any_case(names(iris), case = "lower_upper", preprocess = "\\.", postprocess = "-"),
+               c("sepal-LENGTH", "sepal-WIDTH", "petal-LENGTH", "petal-WIDTH", "species"))
+  
 })
 
 
