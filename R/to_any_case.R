@@ -108,23 +108,32 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
     }
   
   if (case %in% c("lower_upper", "upper_lower")){
+    
+    # this helper returns a logical vector with TRUE for the first and every
+    # second string of those which contain an alphabetic character
+    relevant <- function(string){
+      relevant <- string %>% stringr::str_detect("[:alpha:]")
+      relevant[relevant] <- rep_len(c(TRUE, FALSE), sum(relevant))
+      relevant
+    }
+    
     if (case == "lower_upper"){
       string <- string %>% stringr::str_split("_") %>% 
-        purrr::map2(purrr::map(., ~ seq_along(.x) %% 2 == 0),
+        purrr::map2(purrr::map(., ~ relevant(.x)),
                     # odds to lower
-                    ~{.x[!.y] <- stringr::str_to_lower(.x[!.y]);
-                    # equals to upper
-                    .x[.y] <- stringr::str_to_upper(.x[.y]);
+                    ~{.x[.y] <- stringr::str_to_lower(.x[.y]);
+                    # others to upper
+                    .x[!.y] <- stringr::str_to_upper(.x[!.y]);
                     .x}) %>% 
         purrr::map_chr(~stringr::str_c(.x, collapse = "_"))
     }
     if (case == "upper_lower") {
       string <- string %>% stringr::str_split("_") %>% 
-        purrr::map2(purrr::map(., ~ seq_along(.x) %% 2 == 0),
+        purrr::map2(purrr::map(., ~ relevant(.x)),
                     # odds to upper
-                    ~{.x[!.y] <- stringr::str_to_upper(.x[!.y]);
-                    # equals to lower
-                    .x[.y] <- stringr::str_to_lower(.x[.y]);
+                    ~{.x[.y] <- stringr::str_to_upper(.x[.y]);
+                    # others to lower
+                    .x[!.y] <- stringr::str_to_lower(.x[!.y]);
                     .x}) %>% 
         purrr::map_chr(~stringr::str_c(.x, collapse = "_"))
     }
