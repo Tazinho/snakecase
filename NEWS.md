@@ -1,3 +1,8 @@
+# snakecase 0.4.0.9007
+
+* small bug fix for behaviour of upper_lower/lower_upper. Now substrings with 
+without alphabetical characters are ignored.
+
 # snakecase 0.4.0.9006
 
 * new implemented cases: "none", "mixed", "upper_lower", "lower_upper".

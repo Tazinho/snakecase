@@ -28,7 +28,7 @@ devtools::install_github("Tazinho/snakecase")
 Easy cases
 ----------
 
-There are 7 different cases available. Note that they are all build up on the first ("parsed") case, which (basically) surrounds every word a string consists of by underscores.
+There are 8 different cases available. Note that they are all build up on the first ("parsed") case, which (basically) surrounds every word a string consists of by underscores.
 
 (Please also note that the string "RStudio", which I will use here, is already in its "correct spelling" and the following are just artificial examples to familiarize you with the `to_any_case()` function.)
 
@@ -60,7 +60,7 @@ to_any_case(string, case = "upper_lower")
 to_any_case(string, case = "mixed")
 ## [1] "R_Studio"
 
-# the "none" case is provided for the usage of the other function arguments
+# the "none" case is provided for the (exclusive) usage of the other function arguments
 to_any_case(string, case = "none")
 ## [1] "RStudio"
 ```

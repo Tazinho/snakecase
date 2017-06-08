@@ -84,6 +84,11 @@ test_that("complex strings", {
   expect_equal(to_any_case(names(iris), case = "lower_upper", preprocess = "\\.", postprocess = "-"),
                c("sepal-LENGTH", "sepal-WIDTH", "petal-LENGTH", "petal-WIDTH", "species"))
   
+  expect_equal(to_any_case("R.aStudio", case = "lower_upper"),
+               "r.Astudio")
+  expect_equal(to_any_case("R.aStudio", case = "upper_lower"),
+               "R.aSTUDIO")
+  
 })
 
 
