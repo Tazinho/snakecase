@@ -67,6 +67,31 @@ to_any_case(string, case = "none")
 
 For these simple cases also the shortcuts `to_parsed_case()`, `to_snake_case()`, `to_screaming_snake_case()` etc. are provided, which achieve exactly the same as `to_any_case(string, case)`.
 
+Customize output
+----------------
+
+### Postprocessing
+
+By default the separators of the output are `"_"` or `""` (depending on the case). You can customize this, while supplying another separator to the `postprocess` argument
+
+``` r
+string = "RStudio"
+
+to_any_case(string, case = "snake", 
+            postprocess = ".")
+## [1] "r.studio"
+
+to_any_case(string, case = "big_camel", 
+            postprocess = "-")
+## [1] "R-Studio"
+
+to_any_case(string, case = "parsed", 
+            postprocess = " ")
+## [1] "R Studio"
+```
+
+Note that the latter example has a nice application for the annotation of graphics. "RStudio" is not a good example for this, since it is a name of a company and already written correctly. But for typical column names this could be a nice way to (almost) automate the conversion of internal (naming conventions in personal development workflow) and external (naming conventions for business reports etc.) representation.
+
 Parsing options
 ---------------
 
@@ -148,31 +173,6 @@ to_any_case(string, case = "snake",
 
 Currently this supports only German letters and is likely to change in the future in favor of a more streamlined approach.
 
-Customize output
-----------------
-
-### Postprocessing
-
-By default the separators of the output are `"_"` or `""` (depending on the case). You can customize this, while supplying another separator to the `postprocess` argument
-
-``` r
-string = "RStudio"
-
-to_any_case(string, case = "snake", 
-            postprocess = ".")
-## [1] "r.studio"
-
-to_any_case(string, case = "big_camel", 
-            postprocess = "-")
-## [1] "R-Studio"
-
-to_any_case(string, case = "parsed", 
-            postprocess = " ")
-## [1] "R Studio"
-```
-
-Note that the latter example has a nice application for the annotation of graphics. "RStudio" is not a good example for this, since it is a name of a company and already written correctly. But for typical column names this could be a nice way to (almost) automate the conversion of internal (naming conventions in personal development workflow) and external (naming conventions for business reports etc.) representation.
-
 ### Empty or non unique output
 
 You can fill empty results with arbitrary strings via the `empty_fill` argument
@@ -196,7 +196,7 @@ You can set pre -and suffixes:
 ``` r
 to_any_case(string, case = "big_camel", postprocess = "//",
             prefix = "USER://", postfix = ".exe")
-## [1] "USER://R//Studio.exe"
+## [1] "USER://R//.//Stüdio//://V//.//1//.//0//.//143.exe"
 ```
 
 Vectorisation, speed and special input handling
