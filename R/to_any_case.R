@@ -87,8 +87,8 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
   ### protect (must come after caseconversion, but before postprocess, because the 
   # separator has to be "_" or a default string, 
   # but must not be a reg exp, which would have to be used otherwise)
-  if(!case %in% c("small_camel", "big_camel")){
-    if(!is.null(protect)){
+  if(!is.null(protect)){
+    if(!case %in% c("small_camel", "big_camel", "lower_upper", "upper_lower")){
       string <- protect_internal(string, protect)
     }
   }
@@ -100,7 +100,7 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
   ### cases and postprocessing
   if (case == "mixed"){
     string <- string %>% 
-      stringr::str_split("_") %>% 
+      stringr::str_split(pattern = "_") %>% 
       purrr::map(~stringr::str_c(stringr::str_sub(.x, 1, 1),
                                  stringr::str_sub(.x, 2) %>%
                                    stringr::str_to_lower())) %>%
@@ -108,7 +108,6 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
     }
   
   if (case %in% c("lower_upper", "upper_lower")){
-    
     # this helper returns a logical vector with TRUE for the first and every
     # second string of those which contain an alphabetic character
     relevant <- function(string){
@@ -118,26 +117,104 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
     }
     
     if (case == "lower_upper"){
-      string <- string %>% stringr::str_split("_") %>% 
-        purrr::map2(purrr::map(., ~ relevant(.x)),
+      string <- string %>% stringr::str_split("_") 
+      
+      if(!is.null(protect) & !is.null(postprocess)){
+        string <- string %>% 
+          # mark end of matches of protect before the caseconversion
+          purrr::map(~stringr::str_replace(.x, stringr::str_c("^(", protect, ")$"), "\\1__"))
+      }
+      
+      string <- purrr::map2(string, purrr::map(string, ~ relevant(.x)),
                     # odds to lower
                     ~{.x[.y] <- stringr::str_to_lower(.x[.y]);
                     # others to upper
                     .x[!.y] <- stringr::str_to_upper(.x[!.y]);
-                    .x}) %>% 
-        purrr::map_chr(~stringr::str_c(.x, collapse = "_"))
+                    .x}) 
+      
+      if(!is.null(protect) & !is.null(postprocess)){
+        string <- string %>% 
+          # mark beginning of matches of protect after the caseconversion
+          purrr::map(~stringr::str_replace(.x, "(.+__)$", "__\\1"))
+      }
+      
+      if(is.null(postprocess)){
+        string <- string %>% purrr::map_chr(stringr::str_c, collapse = "")
+      } else {
+        string <- string %>% purrr::map_chr(stringr::str_c, collapse = "_")
+        
+        if(!is.null(protect) & !is.null(postprocess)){
+          string <- string %>% purrr::map_chr(~stringr::str_replace_all(.x, "_{2,}", ""))#protect_internal(string, protect)
+        }
+        
+        string <- purrr::map2_chr(string, postprocess, ~ stringr::str_replace_all(.x, "_", .y))  
+      }
     }
     if (case == "upper_lower") {
-      string <- string %>% stringr::str_split("_") %>% 
-        purrr::map2(purrr::map(., ~ relevant(.x)),
+      string <- string %>% stringr::str_split("_")
+      
+      if(!is.null(protect) & !is.null(postprocess)){
+        string <- string %>% 
+          # mark end of matches of protect before the caseconversion
+          purrr::map(~stringr::str_replace(.x, stringr::str_c("^(", protect, ")$"), "\\1__"))
+      }
+      
+      string <- purrr::map2(string, purrr::map(string, ~ relevant(.x)),
                     # odds to upper
                     ~{.x[.y] <- stringr::str_to_upper(.x[.y]);
                     # others to lower
                     .x[!.y] <- stringr::str_to_lower(.x[!.y]);
-                    .x}) %>% 
-        purrr::map_chr(~stringr::str_c(.x, collapse = "_"))
+                    .x}) 
+      
+      if(!is.null(protect) & !is.null(postprocess)){
+        string <- string %>% 
+          # mark beginning of matches of protect after the caseconversion
+          purrr::map(~stringr::str_replace(.x, "(.+__)$", "__\\1"))
+      }
+      
+      if(is.null(postprocess)){
+        string <- string %>% purrr::map_chr(stringr::str_c, collapse = "")
+      } else {
+        string <- string %>% purrr::map_chr(stringr::str_c, collapse = "_")
+        
+        if(!is.null(protect) & !is.null(postprocess)){
+          string <- string %>% purrr::map_chr(~stringr::str_replace_all(.x, "_{2,}", ""))#protect_internal(string, protect)
+        }
+        
+        string <- purrr::map2_chr(string, postprocess, ~ stringr::str_replace_all(.x, "_", .y))  
+      }
     }
   }
+  
+  # if(case == "small_camel" | case == "big_camel"){
+  #   string <- string %>% 
+  #     stringr::str_split(pattern = "(?<!\\d)_|_(?!\\d)")
+  #   
+  #   if(!is.null(protect) & !is.null(postprocess)){
+  #     string <- string %>% 
+  #       # mark end of matches of protect before the caseconversion
+  #       purrr::map(~stringr::str_replace(.x, stringr::str_c("^(", protect, ")$"), "\\1__"))
+  #   }
+  #   string <- string %>% purrr::map(stringr::str_to_title)
+  #   
+  #   if(!is.null(protect) & !is.null(postprocess)){
+  #     string <- string %>% 
+  #       # mark beginning of matches of protect after the caseconversion
+  #       purrr::map(~stringr::str_replace(.x, "(.+__)$", "__\\1"))
+  #   }
+  #   
+  #   if(is.null(postprocess)){
+  #     string <- string %>% purrr::map_chr(stringr::str_c, collapse = "")
+  #   } else {
+  #     string <- string %>% purrr::map_chr(stringr::str_c, collapse = "_")
+  #     
+  #     if(!is.null(protect) & !is.null(postprocess)){
+  #       string <- string %>% purrr::map_chr(~stringr::str_replace_all(.x, "_{2,}", ""))#protect_internal(string, protect)
+  #     }
+  #     
+  #     string <- purrr::map2_chr(string, postprocess, ~ stringr::str_replace_all(.x, "_", .y))  
+  #   }
+  # }
   
   # ohter cases with postprocessing
   if(case %in% c("parsed", "mixed", "none", "upper_lower", "lower_upper") & !is.null(postprocess)){

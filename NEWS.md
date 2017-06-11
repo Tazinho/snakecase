@@ -1,3 +1,7 @@
+# snakecase 0.4.0.9008
+
+* small bug fix for upper_lower/lower_upper regarding the behaviour for the combination of preprocess and protect (similar to an earlier bug in the camel cases).
+
 # snakecase 0.4.0.9007
 
 * small bug fix for behaviour of upper_lower/lower_upper. Now substrings with 
