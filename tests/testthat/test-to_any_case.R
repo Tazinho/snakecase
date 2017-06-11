@@ -89,6 +89,13 @@ test_that("complex strings", {
   expect_equal(to_any_case("R.aStudio", case = "upper_lower"),
                "R.aSTUDIO")
   
+  expect_equal(to_any_case("R.aStudio", case = "lower_upper", protect = "\\."),
+               "r.Astudio")
+  expect_equal(to_any_case("R.aStudio", case = "lower_upper", protect = "\\.|a", postprocess = "-"),
+               "r.Astudio")
+  expect_equal(to_any_case("R.aStudio", case = "lower_upper", protect = "\\.|A", postprocess = "-"),
+               "r.A-studio")
+  
 })
 
 
