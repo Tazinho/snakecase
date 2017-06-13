@@ -98,7 +98,7 @@ In general only parsing options are implemented, which fulfill the design rules 
 
 ## More complex cases
 
-Till now, we only looked at an easy example. By default the parsing of this package recognizes patterns of switching from lower- to uppercase (and vice versa), underscores and spaces/tabs as word boundaries. If we introduce other characters like dots or colons in our strings, the following will happen:
+Till now, we only looked at an easy example. By default the parsing of this package recognizes patterns of switching from lower- to uppercase (and vice versa), underscores and spaces or tabs as word boundaries. If we introduce other characters like dots or colons in our strings, the following will happen:
 
 ```{r, collapse=TRUE}
 string <- "R.Stüdio: v.1.0.143"
