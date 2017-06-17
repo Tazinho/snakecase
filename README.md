@@ -95,7 +95,7 @@ Note that the latter example has a nice application for the annotation of graphi
 Parsing options
 ---------------
 
-Above "RStudio" was parsed to "R\_Studio". This is a deliberate choice, but also other parsing options are implemented, which make more sense, when different words are separated completely by switching between upper and lower case.
+Above "RStudio" was parsed to "R\_Studio". This is a deliberate choice, but also other parsing options are implemented, which make more sense, when for example different words are separated completely by switching between upper and lower case.
 
 ``` r
 # the default case makes no sense in this setting
@@ -223,7 +223,7 @@ to_snake_case("CID")
 ## [1] "cid"
 ```
 
-We could have also converted to "c\_i\_d" and if we don't know the meaning of "CID", we can't decide which one is the better solution. However it is easy to exclude specific approaches by counterexamples. So in practice it might be nicer to convert "SCREAMING\_SNAKE\_CASE" to "screaming\_snake\_case" instead of "s\_c\_r\_e\_a\_m\_i\_n\_g\_s\_n\_a\_k\_e\_c\_a\_s\_e" (or "screamin\_g\_snak\_e\_cas\_e" or "s\_creaming\_s\_nake\_c\_ase"), which means that also "cid" is preferable to "c\_i\_d" (or "c\_id" or "ci\_d") without further knowledge.
+We could have also converted to "c\_i\_d" and if we don't know the meaning of "CID", we can't decide which one is the better solution. However, it is easy to exclude specific approaches by counterexamples. So in practice it might be nicer to convert "SCREAMING\_SNAKE\_CASE" to "screaming\_snake\_case" instead of "s\_c\_r\_e\_a\_m\_i\_n\_g\_s\_n\_a\_k\_e\_c\_a\_s\_e" (or "screamin\_g\_snak\_e\_cas\_e" or "s\_creaming\_s\_nake\_c\_ase"), which means that also "cid" is preferable to "c\_i\_d" (or "c\_id" or "ci\_d") without further knowledge.
 
 Since the computer can't know, that we want "c\_id" by himself. It is easiest, if we provide him with the right information (here in form of a valid PascalCase syntax):
 

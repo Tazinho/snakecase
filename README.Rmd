@@ -81,7 +81,7 @@ Note that the latter example has a nice application for the annotation of graphi
 
 ## Parsing options
 
-Above "RStudio" was parsed to "R_Studio". This is a deliberate choice, but also other parsing options are implemented, which make more sense, when different words are separated completely by switching between upper and lower case. 
+Above "RStudio" was parsed to "R_Studio". This is a deliberate choice, but also other parsing options are implemented, which make more sense, when for example different words are separated completely by switching between upper and lower case.
 
 ```{r, collapse = TRUE}
 # the default case makes no sense in this setting
@@ -198,7 +198,7 @@ Take for example a situation where you have IDs for some customers. Instead of c
 to_snake_case("CID")
 ```
 
-We could have also converted to "c_i_d" and if we don't know the meaning of "CID", we can't decide which one is the better solution. However it is easy to exclude specific approaches by counterexamples. So in practice it might be nicer to convert "SCREAMING_SNAKE_CASE" to "screaming_snake_case" instead of "s_c_r_e_a_m_i_n_g_s_n_a_k_e_c_a_s_e" (or "screamin_g_snak_e_cas_e" or "s_creaming_s_nake_c_ase"), which means that also "cid" is preferable to "c_i_d" (or "c_id" or "ci_d") without further knowledge.
+We could have also converted to "c_i_d" and if we don't know the meaning of "CID", we can't decide which one is the better solution. However, it is easy to exclude specific approaches by counterexamples. So in practice it might be nicer to convert "SCREAMING_SNAKE_CASE" to "screaming_snake_case" instead of "s_c_r_e_a_m_i_n_g_s_n_a_k_e_c_a_s_e" (or "screamin_g_snak_e_cas_e" or "s_creaming_s_nake_c_ase"), which means that also "cid" is preferable to "c_i_d" (or "c_id" or "ci_d") without further knowledge.
 
 Since the computer can't know, that we want "c_id" by himself. It is easiest, if we provide him with the right information (here in form of a valid PascalCase syntax):
 
