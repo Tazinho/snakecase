@@ -1,3 +1,7 @@
+# snakecase 0.4.0.9009
+
+* provided aliases `"all_caps"`, `"lower_camel"` and `"upper_camel"` for `"screaming_snake"`, `"small_camel"` and `"big_camel"`.
+
 # snakecase 0.4.0.9008
 
 * small bug fix for upper_lower/lower_upper regarding the behaviour for the combination of preprocess and protect (similar to an earlier bug in the camel cases).

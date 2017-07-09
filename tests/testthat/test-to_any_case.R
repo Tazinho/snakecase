@@ -96,6 +96,14 @@ test_that("complex strings", {
   expect_equal(to_any_case("R.aStudio", case = "lower_upper", protect = "\\.|A", postprocess = "-"),
                "r.A-studio")
   
+  expect_equal(to_any_case("rstudio", case = "all_caps"),
+               "RSTUDIO")
+  expect_equal(to_any_case("rstudio", case = "upper_camel"),
+               "Rstudio")
+  expect_equal(to_any_case("rstudio", case = "lower_camel"),
+               "rstudio")
+  expect_equal(to_any_case("bla rstudio", case = "lower_camel"),
+               "blaRstudio")
 })
 
 

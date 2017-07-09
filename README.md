@@ -42,13 +42,13 @@ to_any_case(string, case = "parsed")
 to_any_case(string, case = "snake")
 ## [1] "r_studio"
 
-to_any_case(string, case = "screaming_snake")
+to_any_case(string, case = "screaming_snake") # also "all_caps" will work
 ## [1] "R_STUDIO"
 
-to_any_case(string, case = "small_camel")
+to_any_case(string, case = "small_camel") # also "lower_camel" will work
 ## [1] "rStudio"
 
-to_any_case(string, case = "big_camel")
+to_any_case(string, case = "big_camel") # also "upper_camel" will work
 ## [1] "RStudio"
 
 to_any_case(string, case = "lower_upper")

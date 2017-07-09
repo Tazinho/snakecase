@@ -8,7 +8,8 @@
 #' return the parsed input string, separated by underscores, without any further modification ("parsed"), 
 #' only the first letters (behind an underscore) appear as parsed and the rest is lowercase ("mixed") or just the input string ("none"). 
 #' Note that \code{case = "none"} only works with \code{replace_special_characters}, \code{prefix},
-#' \code{postfix}, \code{empty_fill} and \code{unique_sep}.
+#' \code{postfix}, \code{empty_fill} and \code{unique_sep}. One can use \code{"all_caps"}, \code{"lower_camel"} and \code{upper_camel} as aliases for
+#' \code{"screaming_snake"}, \code{"small_camel"} and \code{"upper_camel"}.
 #' @param preprocess String that will be wrapped internally into \code{stringr::regex()}. 
 #' All matches will be treated as additional splitting parameters besides the default ones 
 #' (\code{"_"} and \code{" "}), when parsing the input string.
@@ -76,8 +77,11 @@
 #'
 #' @export
 #'
-to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake", "parsed", "mixed", "lower_upper", "upper_lower", "none"), preprocess = NULL, protect = NULL, replace_special_characters = FALSE, postprocess = NULL, prefix = "", postfix = "", unique_sep = NULL, empty_fill = NULL, parsingoption = 1){
+to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake", "parsed", "mixed", "lower_upper", "upper_lower", "all_caps", "lower_camel", "upper_camel", "none"), preprocess = NULL, protect = NULL, replace_special_characters = FALSE, postprocess = NULL, prefix = "", postfix = "", unique_sep = NULL, empty_fill = NULL, parsingoption = 1){
   case <- match.arg(case)
+  case[case == "all_caps"] <- "screaming_snake"
+  case[case == "lower_camel"] <- "small_camel"
+  case[case == "upper_camel"] <- "big_camel"
   
   ### preprocess and parsing
   if (case != "none"){
