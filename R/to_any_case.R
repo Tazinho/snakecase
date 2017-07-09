@@ -79,16 +79,20 @@
 #'
 to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake", "parsed", "mixed", "lower_upper", "upper_lower", "all_caps", "lower_camel", "upper_camel", "none"), preprocess = NULL, protect = NULL, replace_special_characters = FALSE, postprocess = NULL, prefix = "", postfix = "", unique_sep = NULL, empty_fill = NULL, parsingoption = 1){
   case <- match.arg(case)
+### ____________________________________________________________________________
+### Aliases
   case[case == "all_caps"] <- "screaming_snake"
   case[case == "lower_camel"] <- "small_camel"
   case[case == "upper_camel"] <- "big_camel"
-  
-  ### preprocess and parsing
+### ____________________________________________________________________________
+### preprocess (regex into "_") and parsing (surrounding by "_")
   if (case != "none"){
-    string <- to_parsed_case_internal(string, preprocess = preprocess, parsingoption = parsingoption)
+    string <- to_parsed_case_internal(string,
+                                      preprocess = preprocess, 
+                                      parsingoption = parsingoption)
   }
-  
-  ### protect (must come after caseconversion, but before postprocess, because the 
+### ____________________________________________________________________________
+### protect (must come after caseconversion, but before postprocess, because the 
   # separator has to be "_" or a default string, 
   # but must not be a reg exp, which would have to be used otherwise)
   if(!is.null(protect)){
@@ -190,36 +194,6 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
     }
   }
   
-  # if(case == "small_camel" | case == "big_camel"){
-  #   string <- string %>% 
-  #     stringr::str_split(pattern = "(?<!\\d)_|_(?!\\d)")
-  #   
-  #   if(!is.null(protect) & !is.null(postprocess)){
-  #     string <- string %>% 
-  #       # mark end of matches of protect before the caseconversion
-  #       purrr::map(~stringr::str_replace(.x, stringr::str_c("^(", protect, ")$"), "\\1__"))
-  #   }
-  #   string <- string %>% purrr::map(stringr::str_to_title)
-  #   
-  #   if(!is.null(protect) & !is.null(postprocess)){
-  #     string <- string %>% 
-  #       # mark beginning of matches of protect after the caseconversion
-  #       purrr::map(~stringr::str_replace(.x, "(.+__)$", "__\\1"))
-  #   }
-  #   
-  #   if(is.null(postprocess)){
-  #     string <- string %>% purrr::map_chr(stringr::str_c, collapse = "")
-  #   } else {
-  #     string <- string %>% purrr::map_chr(stringr::str_c, collapse = "_")
-  #     
-  #     if(!is.null(protect) & !is.null(postprocess)){
-  #       string <- string %>% purrr::map_chr(~stringr::str_replace_all(.x, "_{2,}", ""))#protect_internal(string, protect)
-  #     }
-  #     
-  #     string <- purrr::map2_chr(string, postprocess, ~ stringr::str_replace_all(.x, "_", .y))  
-  #   }
-  # }
-  
   # ohter cases with postprocessing
   if(case %in% c("parsed", "mixed", "none", "upper_lower", "lower_upper") & !is.null(postprocess)){
     string <- purrr::map2_chr(string,
@@ -272,6 +246,7 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
                                stringr::str_to_lower(),
                              stringr::str_sub(string, 2))
   }
+  
   # snake- and screaming_snake
   if(case == "snake" | case == "screaming_snake"){
     if(is.null(postprocess)){
@@ -288,17 +263,22 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
     string <- string %>% stringr::str_to_upper()
   }
   
-  ## fill empty strings
+### ____________________________________________________________________________
+### fill empty strings
   if(!is.null(empty_fill) & any(string == "")){
     string[string == ""] <- empty_fill
   }
   
-  ## make unique
+### ____________________________________________________________________________
+### make unique
   if(!is.null(unique_sep))
     string <- make.unique(string, sep = unique_sep)
-  ## pre and postfix
+
+### ____________________________________________________________________________
+### pre and postfix
   string <- stringr::str_c(prefix, string, postfix)
-  
-  ## return
+
+### ____________________________________________________________________________
+### return
   string
 }
