@@ -2,7 +2,7 @@
 % Please edit documentation in R/protect_internal.R
 \name{protect_internal}
 \alias{protect_internal}
-\title{Internal helper to protect non alphanumerics (delete the separators around them).}
+\title{Internal protect helper (deletes the separators around protected regex matches).}
 \usage{
 protect_internal(string, protect = NULL)
 }
@@ -18,7 +18,7 @@ via \code{preprocess}.}
 A character vector.
 }
 \description{
-Internal helper to protect non alphanumerics (delete the separators around them).
+Internal protect helper (deletes the separators around protected regex matches).
 }
 \author{
 Malte Grosser, \email{malte.grosser@gmail.com}
