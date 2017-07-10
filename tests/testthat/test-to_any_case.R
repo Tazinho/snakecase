@@ -104,6 +104,23 @@ test_that("complex strings", {
                "rstudio")
   expect_equal(to_any_case("bla rstudio", case = "lower_camel"),
                "blaRstudio")
+  
+  expect_equal(to_any_case("R.aStudio", case = "parsed", protect = "\\.|A", postprocess = "-"),
+               "R.a-Studio")
+  expect_equal(to_any_case("R.aStudio", case = "small_camel", protect = "\\.|A", postprocess = "-"),
+               "r.A-Studio")
+  expect_equal(to_any_case("R.aStudio", case = "big_camel", protect = "\\.|A", postprocess = "-"),
+               "R.A-Studio")
+  expect_equal(to_any_case("R.aStudio", case = "screaming_snake", protect = "\\.|A", postprocess = "-"),
+               "R.A-STUDIO")
+  expect_equal(to_any_case("R.aStudio", case = "lower_upper", protect = "\\.|A", postprocess = "-"),
+               "r.A-studio")
+  expect_equal(to_any_case("R.aStudio", case = "upper_lower", protect = "\\.|A", postprocess = "-"),
+               "R.a-STUDIO")
+  expect_equal(to_any_case("R.aStudio", case = "none", protect = "\\.|A", postprocess = "-"),
+               "R.aStudio")
+  expect_equal(to_any_case("R.aStudio", case = "mixed", protect = "\\.|A", postprocess = "-"),
+               "R.a-Studio")
 })
 
 

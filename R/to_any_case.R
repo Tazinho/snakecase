@@ -92,6 +92,10 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
                                       parsingoption = parsingoption)
   }
 ### ____________________________________________________________________________
+### Here must come splitting, (eventually protect helper ["__"]),
+### caseconversion, replacement of sp. characters,
+### protect, collapsing (including postprocessing)
+  
 ### protect (must come after caseconversion, but before postprocess, because the 
   # separator has to be "_" or a default string, 
   # but must not be a reg exp, which would have to be used otherwise)
@@ -268,16 +272,13 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
   if(!is.null(empty_fill) & any(string == "")){
     string[string == ""] <- empty_fill
   }
-  
 ### ____________________________________________________________________________
 ### make unique
   if(!is.null(unique_sep))
     string <- make.unique(string, sep = unique_sep)
-
 ### ____________________________________________________________________________
 ### pre and postfix
   string <- stringr::str_c(prefix, string, postfix)
-
 ### ____________________________________________________________________________
 ### return
   string
