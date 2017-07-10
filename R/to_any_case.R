@@ -77,9 +77,29 @@
 #'
 #' @export
 #'
-to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "screaming_snake", "parsed", "mixed", "lower_upper", "upper_lower", "all_caps", "lower_camel", "upper_camel", "none"), preprocess = NULL, protect = NULL, replace_special_characters = FALSE, postprocess = NULL, prefix = "", postfix = "", unique_sep = NULL, empty_fill = NULL, parsingoption = 1){
+to_any_case <- function(string,
+                        case = c("snake", "small_camel", "big_camel", "screaming_snake", 
+                                 "parsed", "mixed", "lower_upper", "upper_lower",
+                                 "all_caps", "lower_camel", "upper_camel", "none"),
+                        preprocess = NULL, 
+                        protect = NULL, 
+                        replace_special_characters = FALSE,
+                        postprocess = NULL,
+                        prefix = "",
+                        postfix = "", 
+                        unique_sep = NULL,
+                        empty_fill = NULL,
+                        parsingoption = 1){
   case <- match.arg(case)
 ### ____________________________________________________________________________
+### helper for "lower_upper", "upper_lower"
+  # this helper returns a logical vector with TRUE for the first and every
+  # second string of those which contain an alphabetic character
+  relevant <- function(string){
+    relevant <- string %>% stringr::str_detect("[:alpha:]")
+    relevant[relevant] <- rep_len(c(TRUE, FALSE), sum(relevant))
+    relevant
+  }
 ### Aliases
   case[case == "all_caps"] <- "screaming_snake"
   case[case == "lower_camel"] <- "small_camel"
@@ -92,181 +112,108 @@ to_any_case <- function(string, case = c("snake", "small_camel", "big_camel", "s
                                       parsingoption = parsingoption)
   }
 ### ____________________________________________________________________________
-### Here must come splitting, (eventually protect helper ["__"]),
-### caseconversion, replacement of sp. characters,
-### protect, collapsing (including postprocessing)
-  
-### protect (must come after caseconversion, but before postprocess, because the 
-  # separator has to be "_" or a default string, 
-  # but must not be a reg exp, which would have to be used otherwise)
-  if(!is.null(protect)){
-    if(!case %in% c("small_camel", "big_camel", "lower_upper", "upper_lower")){
-      string <- protect_internal(string, protect)
-    }
-  }
-  
-  ### replace Special Characters (must come after split from the cases,
-  # but before the caseconversion)
-  string <- replace_special_characters_internal(string, replace_special_characters)
-  
-  ### cases and postprocessing
-  if (case == "mixed"){
-    string <- string %>% 
-      stringr::str_split(pattern = "_") %>% 
-      purrr::map(~stringr::str_c(stringr::str_sub(.x, 1, 1),
-                                 stringr::str_sub(.x, 2) %>%
-                                   stringr::str_to_lower())) %>%
-      purrr::map_chr(~stringr::str_c(.x, collapse = "_"))
-    }
-  
-  if (case %in% c("lower_upper", "upper_lower")){
-    # this helper returns a logical vector with TRUE for the first and every
-    # second string of those which contain an alphabetic character
-    relevant <- function(string){
-      relevant <- string %>% stringr::str_detect("[:alpha:]")
-      relevant[relevant] <- rep_len(c(TRUE, FALSE), sum(relevant))
-      relevant
-    }
-    
-    if (case == "lower_upper"){
-      string <- string %>% stringr::str_split("_") 
-      
-      if(!is.null(protect) & !is.null(postprocess)){
-        string <- string %>% 
-          # mark end of matches of protect before the caseconversion
-          purrr::map(~stringr::str_replace(.x, stringr::str_c("^(", protect, ")$"), "\\1__"))
-      }
-      
-      string <- purrr::map2(string, purrr::map(string, ~ relevant(.x)),
-                    # odds to lower
-                    ~{.x[.y] <- stringr::str_to_lower(.x[.y]);
-                    # others to upper
-                    .x[!.y] <- stringr::str_to_upper(.x[!.y]);
-                    .x}) 
-      
-      if(!is.null(protect) & !is.null(postprocess)){
-        string <- string %>% 
-          # mark beginning of matches of protect after the caseconversion
-          purrr::map(~stringr::str_replace(.x, "(.+__)$", "__\\1"))
-      }
-      
-      if(is.null(postprocess)){
-        string <- string %>% purrr::map_chr(stringr::str_c, collapse = "")
-      } else {
-        string <- string %>% purrr::map_chr(stringr::str_c, collapse = "_")
-        
-        if(!is.null(protect) & !is.null(postprocess)){
-          string <- string %>% purrr::map_chr(~stringr::str_replace_all(.x, "_{2,}", ""))#protect_internal(string, protect)
-        }
-        
-        string <- purrr::map2_chr(string, postprocess, ~ stringr::str_replace_all(.x, "_", .y))  
-      }
-    }
-    if (case == "upper_lower") {
+### "mixed", "snake", "small_camel", "big_camel", "screaming_case", "parsed"
+  if(case %in% c("mixed", "snake", "small_camel",
+                 "big_camel", "screaming_snake", "parsed",
+                 "lower_upper", "upper_lower")){
+### split-----------------------------------------------------------------------
+    if(case %in% c("mixed", "snake", "screaming_snake", "parsed", "lower_upper", "upper_lower")){
       string <- string %>% stringr::str_split("_")
-      
-      if(!is.null(protect) & !is.null(postprocess)){
-        string <- string %>% 
-          # mark end of matches of protect before the caseconversion
-          purrr::map(~stringr::str_replace(.x, stringr::str_c("^(", protect, ")$"), "\\1__"))
-      }
-      
-      string <- purrr::map2(string, purrr::map(string, ~ relevant(.x)),
-                    # odds to upper
-                    ~{.x[.y] <- stringr::str_to_upper(.x[.y]);
-                    # others to lower
-                    .x[!.y] <- stringr::str_to_lower(.x[!.y]);
-                    .x}) 
-      
-      if(!is.null(protect) & !is.null(postprocess)){
-        string <- string %>% 
-          # mark beginning of matches of protect after the caseconversion
-          purrr::map(~stringr::str_replace(.x, "(.+__)$", "__\\1"))
-      }
-      
-      if(is.null(postprocess)){
-        string <- string %>% purrr::map_chr(stringr::str_c, collapse = "")
-      } else {
-        string <- string %>% purrr::map_chr(stringr::str_c, collapse = "_")
-        
-        if(!is.null(protect) & !is.null(postprocess)){
-          string <- string %>% purrr::map_chr(~stringr::str_replace_all(.x, "_{2,}", ""))#protect_internal(string, protect)
-        }
-        
-        string <- purrr::map2_chr(string, postprocess, ~ stringr::str_replace_all(.x, "_", .y))  
-      }
     }
-  }
-  
-  # ohter cases with postprocessing
-  if(case %in% c("parsed", "mixed", "none", "upper_lower", "lower_upper") & !is.null(postprocess)){
-    string <- purrr::map2_chr(string,
-                              postprocess,
-                              ~ stringr::str_replace_all(.x, "_", .y))}
-  
-  if(case %in% c("upper_lower", "lower_upper") & is.null(postprocess)){
-    string <- string %>% stringr::str_split(pattern = "(?<!\\d)_|_(?!\\d)") %>% 
-      purrr::map_chr(~stringr::str_c(.x, collapse = ""))
-  }
-  
-  ## other cases without postprocessing
-  if(case %in% c("snake", "small_camel", "big_camel", "screaming_snake")){
-    string <- string %>% purrr::map_chr(stringr::str_to_lower)
-  }
-  
-  ## postprocessing and further conversion for other cases
-  # caseconversion to small-/big camel case
-  if(case == "small_camel" | case == "big_camel"){
-    string <- string %>% 
-      stringr::str_split(pattern = "(?<!\\d)_|_(?!\\d)")
-    
-    if(!is.null(protect) & !is.null(postprocess)){
+    #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    if(case %in% c("small_camel", "big_camel")){
       string <- string %>% 
-        # mark end of matches of protect before the caseconversion
+        stringr::str_split(pattern = "(?<!\\d)_|_(?!\\d)")
+    }
+### protecthelper (1)-----------------------------------------------------------
+# mark end of matches of protect before the caseconversion
+    if(!is.null(protect)){
+      string <- string %>% 
         purrr::map(~stringr::str_replace(.x, stringr::str_c("^(", protect, ")$"), "\\1__"))
     }
+### caseconversion--------------------------------------------------------------
+    if(case == "mixed"){
+      string <- string %>% 
+        purrr::map(~stringr::str_c(stringr::str_sub(.x, 1, 1),
+                                   stringr::str_sub(.x, 2) %>%
+                                   stringr::str_to_lower()))}
+    #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    if(case == "snake"){
+      string <- string %>%
+        purrr::map(~ stringr::str_to_lower(.x))
+    }
+    #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    if(case == "big_camel"){
+      string <- string %>% purrr::map(stringr::str_to_lower)
       string <- string %>% purrr::map(stringr::str_to_title)
-      
-    if(!is.null(protect) & !is.null(postprocess)){
+    }
+    #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    if(case == "small_camel"){
+      string <- string %>% purrr::map(stringr::str_to_lower)
+      string <- string %>% purrr::map(stringr::str_to_title)
+      string <- string %>%
+        purrr::map_chr(stringr::str_c, collapse = " ") %>% 
+        purrr::map_chr(~ stringr::str_c(stringr::str_sub(.x, 1, 1) %>%
+                                          stringr::str_to_lower(),
+                                        stringr::str_sub(.x, 2))) %>% 
+        stringr::str_split(" ")
+    }
+    #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    if(case == "screaming_snake")
+      string <- string %>% purrr::map(stringr::str_to_upper)
+    #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    if (case == "lower_upper"){
+      string <- purrr::map2(string, purrr::map(string, ~ relevant(.x)),
+                            # odds to lower
+                            ~{.x[.y] <- stringr::str_to_lower(.x[.y]);
+                            # others to upper
+                            .x[!.y] <- stringr::str_to_upper(.x[!.y]);
+                            .x}) 
+    }
+    #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    if (case == "upper_lower") {
+      string <- purrr::map2(string, purrr::map(string, ~ relevant(.x)),
+                            # odds to upper
+                            ~{.x[.y] <- stringr::str_to_upper(.x[.y]);
+                            # others to lower
+                            .x[!.y] <- stringr::str_to_lower(.x[!.y]);
+                            .x}) 
+    }
+### replacement of sp. characters-----------------------------------------------
+    string <- string %>%
+      purrr::map(~replace_special_characters_internal(.x, replace_special_characters))
+### protecthelper (2)-----------------------------------------------------------
+    if(!is.null(protect)){
       string <- string %>% 
         # mark beginning of matches of protect after the caseconversion
         purrr::map(~stringr::str_replace(.x, "(.+__)$", "__\\1"))
     }
-      
-    if(is.null(postprocess)){
-      string <- string %>% purrr::map_chr(stringr::str_c, collapse = "")
-    } else {
-      string <- string %>% purrr::map_chr(stringr::str_c, collapse = "_")
-      
-      if(!is.null(protect) & !is.null(postprocess)){
-        string <- string %>% purrr::map_chr(~stringr::str_replace_all(.x, "_{2,}", ""))#protect_internal(string, protect)
+### collapsing------------------------------------------------------------------
+    if(case %in% c("mixed", "snake", "screaming_snake", "parsed"))
+    string <- string %>% purrr::map_chr(~stringr::str_c(.x, collapse = "_"))
+    #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+    if(case %in% c("small_camel", "big_camel", "lower_upper", "upper_lower")){
+      if(is.null(postprocess)){
+        string <- string %>% purrr::map_chr(stringr::str_c, collapse = "")
+      } else {
+        string <- string %>% purrr::map_chr(stringr::str_c, collapse = "_")
       }
-      
-      string <- purrr::map2_chr(string, postprocess, ~ stringr::str_replace_all(.x, "_", .y))  
     }
-  }
-  if(case == "small_camel"){
-    string <- stringr::str_c(stringr::str_sub(string, 1, 1) %>%
-                               stringr::str_to_lower(),
-                             stringr::str_sub(string, 2))
-  }
-  
-  # snake- and screaming_snake
-  if(case == "snake" | case == "screaming_snake"){
-    if(is.null(postprocess)){
-      string <- purrr::map_chr(string,
-                               ~ stringr::str_replace_all(.x, "_", "_"))
-    } else {
-      string <- purrr::map2_chr(string, 
-                                postprocess, ~ stringr::str_replace_all(.x, "_", .y))
+### protect---------------------------------------------------------------------
+    if(!is.null(protect)){
+      string <- string %>% purrr::map_chr(~stringr::str_replace_all(.x, "_{2,}", ""))
     }
+### postprocessing--------------------------------------------------------------
+    if(!is.null(postprocess)){
+      string <- purrr::map2_chr(string,
+                                postprocess,
+                                ~ stringr::str_replace_all(.x, "_", .y))}
+    }
+### ____________________________________________________________________________
+### "none"
+  if(case == "none"){
+    string <- replace_special_characters_internal(string, replace_special_characters)
   }
-  
-  ## screaming_snake
-  if(case == "screaming_snake"){
-    string <- string %>% stringr::str_to_upper()
-  }
-  
 ### ____________________________________________________________________________
 ### fill empty strings
   if(!is.null(empty_fill) & any(string == "")){

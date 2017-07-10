@@ -13,7 +13,7 @@
 replace_special_characters_internal <- function(string, replace_special_characters){
   if (replace_special_characters){
     string <- string %>%
-      purrr::map_chr(
+      purrr::map(
         ~ stringr::str_replace_all(.x, c("\u00C4" = "Ae",
                                          "\u00D6" = "Oe",
                                          "\u00DC" = "Ue",
