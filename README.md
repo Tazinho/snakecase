@@ -161,17 +161,17 @@ to_any_case(string, case = "snake",
 
 ### Special characters
 
-If you have problems with special characters (like u umlaut) on your platform, you can replace them via `replace_special_characters = TRUE`:
+If you have problems with special characters (like u umlaut) on your platform, you can replace them via `replace_special_characters = c("german", "Latin-ASCII")`:
 
 ``` r
 to_any_case(string, case = "snake", 
             preprocess = ":|(?<!\\d)\\.",
             protect = "\\.",
-            replace_special_characters = TRUE)
+            replace_special_characters = c("german", "Latin-ASCII"))
 ## [1] "r_stuedio_v_1.0.143"
 ```
 
-Currently this supports only German letters and is likely to change in the future in favor of a more streamlined approach.
+You can supply any id from `stringi::stri_trans_list()` or countryname from the internal transliteration dictionary of this package (currently only "german"; also in combination).
 
 ### Empty or non unique output
 

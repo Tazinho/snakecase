@@ -7,6 +7,7 @@ output: rmarkdown::github_document
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/Tazinho/snakecase?branch=master&svg=true)](https://ci.appveyor.com/project/Tazinho/snakecase) [![Travis-CI Build Status](https://travis-ci.org/Tazinho/snakecase.svg?branch=master)](https://travis-ci.org/Tazinho/snakecase) [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/snakecase)](https://cran.r-project.org/package=snakecase) <!--[![Coverage Status](https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg)](https://codecov.io/github/Tazinho/snakecase?branch=master)-->
 [![downloads](http://cranlogs.r-pkg.org/badges/snakecase)](http://cranlogs.r-pkg.org/) [![total](http://cranlogs.r-pkg.org/badges/grand-total/snakecase)](http://cranlogs.r-pkg.org/)
 
+
 ## Overview
 
 <!--A small package with functions to convert column names of data.frames (or strings
@@ -140,17 +141,18 @@ to_any_case(string, case = "snake",
 
 ### Special characters
 
-If you have problems with special characters (like u umlaut) on your platform, you can replace them via `replace_special_characters = TRUE`:
+If you have problems with special characters (like u umlaut) on your platform, you can replace them via `replace_special_characters = c("german", "Latin-ASCII")`:
 
 ```{r, collapse = TRUE, eval = FALSE}
 to_any_case(string, case = "snake", 
             preprocess = ":|(?<!\\d)\\.",
             protect = "\\.",
-            replace_special_characters = TRUE)
+            replace_special_characters = c("german", "Latin-ASCII"))
 ## [1] "r_stuedio_v_1.0.143"
 ```
 
-Currently this supports only German letters and is likely to change in the future in favor of a more streamlined approach.
+You can supply any id from `stringi::stri_trans_list()` or countryname from the internal
+transliteration dictionary of this package (currently only "german"; also in combination).
 
 ### Empty or non unique output
 
