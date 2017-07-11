@@ -4,7 +4,7 @@
 \alias{replace_special_characters_internal}
 \title{Internal helper to replace special characters.}
 \usage{
-replace_special_characters_internal(string, replace_special_characters)
+replace_special_characters_internal(string, replace_special_characters, case)
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
@@ -12,6 +12,8 @@ replace_special_characters_internal(string, replace_special_characters)
 \item{replace_special_characters}{Logical, if \code{TRUE}, special characters 
 will be translated to characters which are more likely to be understood by 
 different programs. For example german umlauts will be translated to ae, oe, ue etc.}
+
+\item{case}{Length one character, from the imput options of \code{to_any_case}.}
 }
 \value{
 A character vector.

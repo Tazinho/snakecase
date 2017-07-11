@@ -1,3 +1,8 @@
+# snakecase 0.4.0.9010
+
+Input of `replace special character` is now a character vector. It's entries have to be elements of `stringi::stri_trans_list()` or names of the transliteration dictionary list, 
+which comes with this package. This update enables users to transliterate strings from different encodings, in a flexible way. For example UTF8 to Ascii, ... .
+
 # snakecase 0.4.0.9009
 
 * provided aliases `"all_caps"`, `"lower_camel"` and `"upper_camel"` for `"screaming_snake"`, `"small_camel"` and `"big_camel"`.

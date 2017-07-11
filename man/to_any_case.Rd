@@ -7,7 +7,7 @@
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
   "screaming_snake", "parsed", "mixed", "lower_upper", "upper_lower",
   "all_caps", "lower_camel", "upper_camel", "none"), preprocess = NULL,
-  protect = NULL, replace_special_characters = FALSE, postprocess = NULL,
+  protect = NULL, replace_special_characters = NULL, postprocess = NULL,
   prefix = "", postfix = "", unique_sep = NULL, empty_fill = NULL,
   parsingoption = 1)
 }
@@ -31,9 +31,14 @@ won't have any "_" (or artifacts of \code{preprocess}) beside. Note that \code{p
 which means that it doesn't make sense to protect sth. which is already replaced
 via \code{preprocess}.}
 
-\item{replace_special_characters}{Logical, if \code{TRUE}, special characters 
-will be translated to characters which are more likely to be understood by 
-different programs. For example german umlauts will be translated to ae, oe, ue etc.}
+\item{replace_special_characters}{A character vector. If not \code{NULL},
+strings will be transliterated via \code{stringi::stri_trans_general}. It is also possible to supply
+a character vector (for example "germany"), which transliterates according to some implemented dictionary (umlauts are transliterated to oe, ae, ...).
+It is possible to combine ids from \code{stringi::stri_trans_list()} and dictionaries from this packages.
+Currently implemented dictionaries: "german".
+You should use this feature with care in case of \code{case = "parsed"} and \code{case = "none"}, 
+since for upper case letters, which have transliterations of lenth 2, the second letter will
+be transliterated to lowercase, for example Oe, Ae, Ss, ...}
 
 \item{postprocess}{String that will be used as separator. The defaults are \code{"_"} 
 and \code{""}, regarding the specified \code{case}.}

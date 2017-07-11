@@ -17,9 +17,14 @@
 #' won't have any "_" (or artifacts of \code{preprocess}) beside. Note that \code{preprocess} has a higher precedence than protect, 
 #' which means that it doesn't make sense to protect sth. which is already replaced
 #' via \code{preprocess}.
-#' @param replace_special_characters Logical, if \code{TRUE}, special characters 
-#' will be translated to characters which are more likely to be understood by 
-#' different programs. For example german umlauts will be translated to ae, oe, ue etc.
+#' @param replace_special_characters A character vector. If not \code{NULL},
+#' strings will be transliterated via \code{stringi::stri_trans_general}. It is also possible to supply
+#' a character vector (for example "germany"), which transliterates according to some implemented dictionary (umlauts are transliterated to oe, ae, ...).
+#' It is possible to combine ids from \code{stringi::stri_trans_list()} and dictionaries from this packages.
+#' Currently implemented dictionaries: "german".
+#' You should use this feature with care in case of \code{case = "parsed"} and \code{case = "none"}, 
+#' since for upper case letters, which have transliterations of lenth 2, the second letter will
+#' be transliterated to lowercase, for example Oe, Ae, Ss, ...
 #' @param postprocess String that will be used as separator. The defaults are \code{"_"} 
 #' and \code{""}, regarding the specified \code{case}.
 #' @param prefix prefix (string).
@@ -83,7 +88,7 @@ to_any_case <- function(string,
                                  "all_caps", "lower_camel", "upper_camel", "none"),
                         preprocess = NULL, 
                         protect = NULL, 
-                        replace_special_characters = FALSE,
+                        replace_special_characters = NULL,
                         postprocess = NULL,
                         prefix = "",
                         postfix = "", 
@@ -130,6 +135,11 @@ to_any_case <- function(string,
     if(!is.null(protect)){
       string <- string %>% 
         purrr::map(~stringr::str_replace(.x, stringr::str_c("^(", protect, ")$"), "\\1__"))
+    }
+### replacement of sp. characters-----------------------------------------------
+    if(!is.null(replace_special_characters)){
+      string <- string %>%
+        purrr::map(~replace_special_characters_internal(.x, replace_special_characters, case))
     }
 ### caseconversion--------------------------------------------------------------
     if(case == "mixed"){
@@ -179,9 +189,6 @@ to_any_case <- function(string,
                             .x[!.y] <- stringr::str_to_lower(.x[!.y]);
                             .x}) 
     }
-### replacement of sp. characters-----------------------------------------------
-    string <- string %>%
-      purrr::map(~replace_special_characters_internal(.x, replace_special_characters))
 ### protecthelper (2)-----------------------------------------------------------
     if(!is.null(protect)){
       string <- string %>% 
@@ -212,7 +219,7 @@ to_any_case <- function(string,
     }
 ### ____________________________________________________________________________
 ### "none"
-  if(case == "none"){
+  if(case == "none" & !is.null(replace_special_characters)){
     string <- replace_special_characters_internal(string, replace_special_characters)
   }
 ### ____________________________________________________________________________
