@@ -121,6 +121,8 @@ test_that("complex strings", {
                "R.aStudio")
   expect_equal(to_any_case("R.aStudio", case = "mixed", protect = "\\.|A", postprocess = "-"),
                "R.a-Studio")
+  
+  expect_equal(to_any_case(character(0), postprocess = "c"), "")
 })
 
 

@@ -1,3 +1,7 @@
+# snakecase 0.4.0.9011
+
+Fix bug for `character(0)` in combination with `postprocess`
+
 # snakecase 0.4.0.9010
 
 Input of `replace special character` is now a character vector. It's entries have to be elements of `stringi::stri_trans_list()` or names of the transliteration dictionary list, 

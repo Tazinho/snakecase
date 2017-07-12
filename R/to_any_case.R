@@ -211,7 +211,7 @@ to_any_case <- function(string,
       string <- string %>% purrr::map_chr(~stringr::str_replace_all(.x, "_{2,}", ""))
     }
 ### postprocessing--------------------------------------------------------------
-    if(!is.null(postprocess)){
+    if(!is.null(postprocess) & !identical(string, character(0))){
       string <- purrr::map2_chr(string,
                                 postprocess,
                                 ~ stringr::str_replace_all(.x, "_", .y))}
