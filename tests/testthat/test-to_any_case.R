@@ -123,6 +123,12 @@ test_that("complex strings", {
                "R.a-Studio")
   
   expect_equal(to_any_case(character(0), postprocess = "c"), "")
+  
+  # expect_equal(to_any_case(c(NA, NA, NA), "lower_upper"),
+  #              rep(NA_character_, 3))
+  # 
+  # expect_equal(to_any_case(c(NA, NA, NA), "upper_lower"),
+  #              rep(NA_character_, 3))
 })
 
 
