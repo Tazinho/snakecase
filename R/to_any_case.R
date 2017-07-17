@@ -136,8 +136,8 @@ to_any_case <- function(string,
       # string <- string %>% 
       #   purrr::map(~stringr::str_replace(.x, stringr::str_c("^(", protect, ")$"), "\\1__"))
       # 
-      string <- purrr::map(string, ~stringr::str_replace(.x, stringr::str_c("(", protect, ")$"), "\\1__"))
-      string <- purrr::map(string, ~stringr::str_replace(.x, stringr::str_c("^(", protect, ")"), "\\1__"))
+      string <- purrr::map(string, ~stringr::str_replace(.x, stringr::str_c("^(", protect, ")"), "\\1___"))
+      string <- purrr::map(string, ~stringr::str_replace(.x, stringr::str_c("(", protect, ")$"), "__\\1___"))
     }
 ### replacement of sp. characters-----------------------------------------------
     if(!is.null(replace_special_characters)){
@@ -196,7 +196,7 @@ to_any_case <- function(string,
     if(!is.null(protect)){
       string <- string %>% 
         # mark beginning of matches of protect after the caseconversion
-        purrr::map(~stringr::str_replace(.x, "(.+__)$", "__\\1"))
+        purrr::map(~stringr::str_replace_all(.x, "([[^_].*]___)", "__\\1"))
     }
 ### collapsing------------------------------------------------------------------
     if(case %in% c("mixed", "snake", "screaming_snake", "parsed"))
