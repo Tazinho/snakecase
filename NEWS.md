@@ -1,3 +1,7 @@
+# snakecase 0.4.0.9012
+
+bug fix in devversion: protect works now for beginning and end of substrings and not anymore only for complete substrings.
+
 # snakecase 0.4.0.9011
 
 Fix bug for `character(0)` in combination with `postprocess`

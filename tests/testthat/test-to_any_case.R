@@ -60,10 +60,8 @@ test_that("complex strings", {
   expect_equal(to_any_case("R.Studio", case = "big_camel", protect = "\\."),
                c("R.Studio"))
   
-  expect_equal(to_any_case("R.Studio: v 1.0.143",
-                           case = "big_camel", preprocess = "\\.",
-                           protect = "[[^:alnum:]]"),
-               "RStudio:V1_0_143")
+  expect_equal(to_any_case("R.Studio: v 1.0.143", case = "big_camel", preprocess = "\\.", postprocess = "_", protect = ":"),
+               "R_Studio:V_1_0_143")
   
   expect_equal(to_any_case("R.aStudio", case = "snake", protect = "\\.|A", postprocess = "-"), "r.a-studio")
   expect_equal(to_any_case("R.aStudio", case = "snake", protect = "\\.|a", postprocess = "-"), "r.astudio")
