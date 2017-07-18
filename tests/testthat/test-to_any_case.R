@@ -125,6 +125,12 @@ test_that("complex strings", {
   expect_equal(to_any_case("fdf 1 2", protect = "\\d", case = "big_camel"),
                "Fdf12")
   
+  expect_equal(to_any_case("kleines Ha.schen", "screaming_snake", protect = "a"),
+               "KLEINES_HA._SCHEN")
+  
+  expect_equal(to_any_case("kleines Ha.schen", "screaming_snake", protect = "Ha"),
+               "KLEINESHA._SCHEN")
+  
   # expect_equal(to_any_case(c(NA, NA, NA), "lower_upper"),
   #              rep(NA_character_, 3))
   # 

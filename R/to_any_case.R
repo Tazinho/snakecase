@@ -196,7 +196,7 @@ to_any_case <- function(string,
     if(!is.null(protect)){
       string <- string %>% 
         # mark beginning of matches of protect after the caseconversion
-        purrr::map(~stringr::str_replace_all(.x, "([[^_].*]___)", "__\\1"))
+        purrr::map(~stringr::str_replace_all(.x, "([^_]*___)", "__\\1"))
     }
 ### collapsing------------------------------------------------------------------
     if(case %in% c("mixed", "snake", "screaming_snake", "parsed"))
