@@ -133,11 +133,9 @@ to_any_case <- function(string,
 ### protecthelper (1)-----------------------------------------------------------
 # mark end of matches of protect before the caseconversion
     if(!is.null(protect)){
-      # string <- string %>% 
-      #   purrr::map(~stringr::str_replace(.x, stringr::str_c("^(", protect, ")$"), "\\1__"))
-      # 
+      # in the 2nd line the replacement only can occur, if it didn't appear in the first line
       string <- purrr::map(string, ~stringr::str_replace(.x, stringr::str_c("^(", protect, ")"), "\\1___"))
-      string <- purrr::map(string, ~stringr::str_replace(.x, stringr::str_c("(", protect, ")$"), "__\\1___"))
+      string <- purrr::map(string, ~stringr::str_replace(.x, stringr::str_c("(", protect, ")[^_]*$"), "__\\1___"))
     }
 ### replacement of sp. characters-----------------------------------------------
     if(!is.null(replace_special_characters)){
