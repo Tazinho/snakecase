@@ -6,6 +6,8 @@
 #' @param parsingoption An integer (1 (default), 2 or 3) that will determine the parsingoption.
 #' 1: RRRStudio -> RRR_Studio
 #' 2: RRRStudio -> RRRS_tudio
+#' 3: parses the first UPPER letter group like parsingoption 2 and the rest like option 1
+#' 4: parses the first UPPERlowercase letter group like parsingoption 1 and the rest like option 2
 #' if another integer is supplied, no parsing regarding the pattern of upper- and lowercase will appear.
 #' 
 #' @return A character vector separated by underscores, containing the parsed string.
@@ -48,23 +50,47 @@ to_parsed_case_internal <- function(string, preprocess = NULL, parsingoption = 1
     parse4_separate_non_characters = function(string){
       sep_signs_around <- "([\u00C4\u00D6\u00DC[:upper:]\u00E4\u00F6\u00FC\u00DF[:lower:]\\d]*)"
       string <- stringr::str_replace_all(string, sep_signs_around, "_\\1")
+      string},
+    # Inserts underscores around groups of only the first group of one upper case letter
+    # followed by lower case letters.
+    parse5_pat_cap_smalls_first = function(string){
+      pat_cap_smalls_first <- "([\u00C4\u00D6\u00DC[:upper:]][\u00E4\u00F6\u00FC\u00DF[:lower:]]+|\\d+)"
+      string <- stringr::str_replace(string, pat_cap_smalls_first, "_\\1_")
+      string},
+    # Inserts underscores around the first capital letter group with length >= 2
+    parse6_pat_caps2_first = function(string){
+      pat_caps2_first <- "([[:upper:]\u00C4\u00D6\u00DC]{2,})"
+      string <- stringr::str_replace(string, pat_caps2_first, "_\\1_")
       string}
   )
   
-  ### applying parsing functions
-  # case: 1 RRRStudio -> RRR_Studio
+  ### applying parsing functions  
+  # case: 1 RRRStudioSStudioStudio -> RRR_Studio_S_Studio_Studio
   if(parsingoption == 1){
     string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
     string <- parsing_functions[["parse2_pat_caps2"]](string)
     string <- parsing_functions[["parse3_pat_cap_lonely"]](string)
     string <- parsing_functions[["parse4_separate_non_characters"]](string)}
-  # case: 2 RRRStudio -> RRRS_tudio
+  # case: 2 RRRStudioSStudioStudio -> RRRS_tudio_SS_tudio_Studio
   if(parsingoption == 2){
     string <- parsing_functions[["parse2_pat_caps2"]](string)
     string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
     string <- parsing_functions[["parse3_pat_cap_lonely"]](string)
     string <- parsing_functions[["parse4_separate_non_characters"]](string)}
-  
+  # case:3 RRRStudioSStudioStudio -> RRR_Studio_SS_tudio_Studio
+  if(parsingoption == 3){
+    string <- parsing_functions[["parse5_pat_cap_smalls_first"]](string)
+    string <- parsing_functions[["parse2_pat_caps2"]](string)
+    string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
+    string <- parsing_functions[["parse3_pat_cap_lonely"]](string)
+    string <- parsing_functions[["parse4_separate_non_characters"]](string)}
+  # case:4 RRRStudioSStudioStudio -> RRRS_tudio_S_Studio_Studio
+  if(parsingoption == 4){
+    string <- parsing_functions[["parse6_pat_caps2_first"]](string)
+    string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
+    string <- parsing_functions[["parse2_pat_caps2"]](string)
+    string <- parsing_functions[["parse3_pat_cap_lonely"]](string)
+    string <- parsing_functions[["parse4_separate_non_characters"]](string)}
   ### customize the output
   # remove more than one "_" and starting/ending "_"
   string <- string %>%

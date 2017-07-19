@@ -1,3 +1,10 @@
+# snakecase 0.4.0.9013
+
+Implemented two further parsingoptopions:
+
+* 3: parses the first UPPER letter group like parsingoption 2 and the rest like option 1  
+* 4: parses the first UPPERlowercase letter group like parsingoption 1 and the rest like option 2
+
 # snakecase 0.4.0.9012
 
 bug fix in devversion: protect works now for beginning and end of substrings and not anymore only for complete substrings.

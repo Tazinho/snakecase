@@ -36,7 +36,9 @@
 #' @param parsingoption An integer (1 (default), 2 or 3) that will determine the parsingoption.
 #' 1: RRRStudio -> RRR_Studio
 #' 2: RRRStudio -> RRRS_tudio
-#' If another integer is supplied, no parsing regarding the pattern of upper- and lowercase will appear.
+#' 3: parses the first UPPER letter group like parsingoption 2 and the rest like option 1
+#' 4: parses the first UPPERlowercase letter group like parsingoption 1 and the rest like option 2
+#' if another integer is supplied, no parsing regarding the pattern of upper- and lowercase will appear.
 #' 
 #' @return A character vector according the specified parameters above.
 #'

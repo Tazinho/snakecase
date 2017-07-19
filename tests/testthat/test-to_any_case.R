@@ -20,6 +20,15 @@ test_that("examples", {
   
   expect_equal(to_any_case("R.Studio", case = "big_camel", protect = "\\.", postprocess = "-"),
                "R.Studio")
+  
+  expect_equal(to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 3),
+               "HAMBUR_Gcity_GERU_sa")
+  
+  expect_equal(to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 4),
+               "HAMBURG_city_GER_Usa")
+  
+  expect_equal(to_any_case("HAMBURGcity", case = "parsed", parsingoption = 5),
+               "HAMBURGcity")
 }
 )
 

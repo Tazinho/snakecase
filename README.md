@@ -106,8 +106,16 @@ to_any_case("HAMBURGcity", case = "parsed", parsingoption = 1)
 to_any_case("HAMBURGcity", case = "parsed", parsingoption = 2)
 ## [1] "HAMBURG_city"
 
+# one can also parse the beginning like parsingoption 1 and the rest like option 2
+to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 3)
+## [1] "HAMBURGcityGERUsa"
+
+# or starting like parsingoption 2 and for the rest switch to option 1
+to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 4)
+## [1] "HAMBURGcityGERUsa"
+
 # there might be reasons to suppress the parsing, while choosing neither one or two
-to_any_case("HAMBURGcity", case = "parsed", parsingoption = 3)
+to_any_case("HAMBURGcity", case = "parsed", parsingoption = 5)
 ## [1] "HAMBURGcity"
 ```
 
