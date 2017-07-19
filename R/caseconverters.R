@@ -93,7 +93,9 @@ to_lower_upper_case <- function(string){
     relevant
   }
   
-  string <- purrr::map2(string, purrr::map(string, ~ relevant(.x)),
+  string[!is.na(string)] <- purrr::map2(string[!is.na(string)],
+                                        purrr::map(string[!is.na(string)],
+                                                   ~ relevant(.x)),
                         # odds to lower
                         ~{.x[.y] <- stringr::str_to_lower(.x[.y]);
                         # others to upper
@@ -116,7 +118,9 @@ to_upper_lower_case <- function(string){
     relevant
   }
   
-  string <- purrr::map2(string, purrr::map(string, ~ relevant(.x)),
+  string[!is.na(string)] <- purrr::map2(string[!is.na(string)],
+                                        purrr::map(string[!is.na(string)],
+                                                   ~ relevant(.x)),
                         # odds to upper
                         ~{.x[.y] <- stringr::str_to_upper(.x[.y]);
                         # others to lower

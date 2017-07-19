@@ -140,6 +140,9 @@ test_that("complex strings", {
   expect_equal(to_any_case("kleines Ha.schen", "screaming_snake", protect = "Ha"),
                "KLEINESHA._SCHEN")
   
+  expect_equal(to_any_case(c("R.aStudio", NA, NA, NA, NA), case = "upper_lower"),
+               c("R.aSTUDIO", NA, NA, NA, NA))
+  
   # expect_equal(to_any_case(c(NA, NA, NA), "lower_upper"),
   #              rep(NA_character_, 3))
   # 

@@ -176,7 +176,9 @@ to_any_case <- function(string,
       string <- string %>% purrr::map(stringr::str_to_upper)
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if (case == "lower_upper"){
-      string <- purrr::map2(string, purrr::map(string, ~ relevant(.x)),
+      string[!is.na(string)] <- purrr::map2(string[!is.na(string)],
+                                            purrr::map(string[!is.na(string)],
+                                                       ~ relevant(.x)),
                             # odds to lower
                             ~{.x[.y] <- stringr::str_to_lower(.x[.y]);
                             # others to upper
@@ -185,7 +187,9 @@ to_any_case <- function(string,
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if (case == "upper_lower") {
-      string <- purrr::map2(string, purrr::map(string, ~ relevant(.x)),
+      string[!is.na(string)] <- purrr::map2(string[!is.na(string)], 
+                                            purrr::map(string[!is.na(string)],
+                                                       ~ relevant(.x)),
                             # odds to upper
                             ~{.x[.y] <- stringr::str_to_upper(.x[.y]);
                             # others to lower
