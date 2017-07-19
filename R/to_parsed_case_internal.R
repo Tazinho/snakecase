@@ -21,9 +21,7 @@ to_parsed_case_internal <- function(string, preprocess = NULL, parsingoption = 1
   ### preprocessing:
   # catch everything that should be handled like underscores
   # (only spaces by default)
-  if(!is.null(preprocess)){
-    string <- stringr::str_replace_all(string, preprocess, "_")
-  }
+  
   string <- stringr::str_replace_all(string, "[:blank:]", "_")
   
   ### define parsing functions

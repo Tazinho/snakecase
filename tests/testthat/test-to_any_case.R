@@ -152,6 +152,9 @@ test_that("complex strings", {
   expect_equal(to_any_case("\u00E6", replace_special_characters = "Latin-ASCII"),
                 "ae")
   
+  expect_equal(to_any_case("bla.bla", case = "none", preprocess = "\\."),
+               "bla_bla")
+  
   # expect_equal(to_any_case(c(NA, NA, NA), "lower_upper"),
   #              rep(NA_character_, 3))
   # 

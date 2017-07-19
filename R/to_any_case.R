@@ -24,7 +24,8 @@
 #'  or behind an underscore is turned into lowercase.}
 #'  \item{\code{"none"}: Neither parsing nor caseconversion occur. This case might be helpful, when
 #'  one wants to call the function for the quick usage of the other parameters.
-#'  Works with \code{replace_special_characters}, \code{prefix}, \code{postfix},
+#'  Works with \code{preprocess}, \code{replace_special_characters}, \code{prefix},
+#'   \code{postfix},
 #'   \code{empty_fill} and \code{unique_sep}.}
 #'  }
 #'  
@@ -134,6 +135,8 @@ to_any_case <- function(string,
   case[case == "upper_camel"] <- "big_camel"
 ### ____________________________________________________________________________
 ### preprocess (regex into "_") and parsing (surrounding by "_")
+  string <- preprocess_internal(string, preprocess)
+  
   if (case != "none"){
     string <- to_parsed_case_internal(string,
                                       preprocess = preprocess, 

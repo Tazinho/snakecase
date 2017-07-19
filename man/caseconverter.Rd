@@ -40,7 +40,7 @@ These functions allow you to parse and convert a string to a specific case.
 \examples{
 strings <- c("this Is a Strange_string", "AND THIS ANOTHER_One", NA)
 
-to_snake_case(strings)
+to_snake_case(string)
 to_small_camel_case(strings)
 to_big_camel_case(strings)
 to_screaming_snake_case(strings)
