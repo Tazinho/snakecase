@@ -65,7 +65,7 @@ to_any_case(string, case = "none")
 ## [1] "RStudio"
 ```
 
-For these simple cases also the shortcuts `to_parsed_case()`, `to_snake_case()`, `to_screaming_snake_case()` etc. are provided, which achieve exactly the same as `to_any_case(string, case)`.
+For these simple cases (except for `case = "none"`) also the shortcuts `to_parsed_case()`, `to_snake_case()`, `to_screaming_snake_case()` etc. are provided, which achieve exactly the same as `to_any_case(string, case)`.
 
 Customize output
 ----------------
@@ -108,11 +108,11 @@ to_any_case("HAMBURGcity", case = "parsed", parsingoption = 2)
 
 # one can also parse the beginning like parsingoption 1 and the rest like option 2
 to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 3)
-## [1] "HAMBURGcityGERUsa"
+## [1] "HAMBUR_Gcity_GERU_sa"
 
 # or starting like parsingoption 2 and for the rest switch to option 1
 to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 4)
-## [1] "HAMBURGcityGERUsa"
+## [1] "HAMBURG_city_GER_Usa"
 
 # there might be reasons to suppress the parsing, while choosing neither one or two
 to_any_case("HAMBURGcity", case = "parsed", parsingoption = 5)

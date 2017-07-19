@@ -57,7 +57,7 @@ to_any_case(string, case = "mixed")
 to_any_case(string, case = "none")
 ```
 
-For these simple cases also the shortcuts `to_parsed_case()`, `to_snake_case()`, `to_screaming_snake_case()` etc. are provided, which achieve exactly the same as `to_any_case(string, case)`.
+For these simple cases (except for `case = "none"`) also the shortcuts `to_parsed_case()`, `to_snake_case()`, `to_screaming_snake_case()` etc. are provided, which achieve exactly the same as `to_any_case(string, case)`.
 
 ## Customize output
 

@@ -65,3 +65,63 @@ to_screaming_snake_case <- function(string){
 to_parsed_case <- function(string){
   to_parsed_case_internal(string)
 }
+
+#' @rdname caseconverter
+#' @export
+
+to_mixed_case <- function(string){
+  string <- to_parsed_case_internal(string)
+  string <- string %>% stringr::str_split("_")
+  string <- string %>% 
+    purrr::map(~stringr::str_c(stringr::str_sub(.x, 1, 1),
+                               stringr::str_sub(.x, 2) %>%
+                                 stringr::str_to_lower()))
+  string <- string %>% purrr::map_chr(~stringr::str_c(.x, collapse = "_"))
+  string
+}
+
+#' @rdname caseconverter
+#' @export
+
+to_lower_upper_case <- function(string){
+  string <- to_parsed_case_internal(string)
+  string <- string %>% stringr::str_split("_")
+  
+  relevant <- function(string){
+    relevant <- string %>% stringr::str_detect("[:alpha:]")
+    relevant[relevant] <- rep_len(c(TRUE, FALSE), sum(relevant))
+    relevant
+  }
+  
+  string <- purrr::map2(string, purrr::map(string, ~ relevant(.x)),
+                        # odds to lower
+                        ~{.x[.y] <- stringr::str_to_lower(.x[.y]);
+                        # others to upper
+                        .x[!.y] <- stringr::str_to_upper(.x[!.y]);
+                        .x}) 
+  string <- string %>% purrr::map_chr(stringr::str_c, collapse = "")
+  string
+}
+
+#' @rdname caseconverter
+#' @export
+
+to_upper_lower_case <- function(string){
+  string <- to_parsed_case_internal(string)
+  string <- string %>% stringr::str_split("_")
+  
+  relevant <- function(string){
+    relevant <- string %>% stringr::str_detect("[:alpha:]")
+    relevant[relevant] <- rep_len(c(TRUE, FALSE), sum(relevant))
+    relevant
+  }
+  
+  string <- purrr::map2(string, purrr::map(string, ~ relevant(.x)),
+                        # odds to upper
+                        ~{.x[.y] <- stringr::str_to_upper(.x[.y]);
+                        # others to lower
+                        .x[!.y] <- stringr::str_to_lower(.x[!.y]);
+                        .x}) 
+  string <- string %>% purrr::map_chr(stringr::str_c, collapse = "")
+  string
+}

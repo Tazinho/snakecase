@@ -1,3 +1,7 @@
+# snakecase 0.4.0.9014
+
+* added shortcutfunctions `to_mixed_case()`, `to_lower_upper_case()` and `to_upper_lower_case()`
+
 # snakecase 0.4.0.9013
 
 Implemented two further parsingoptopions:
