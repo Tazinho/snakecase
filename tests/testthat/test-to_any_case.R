@@ -143,6 +143,15 @@ test_that("complex strings", {
   expect_equal(to_any_case(c("R.aStudio", NA, NA, NA, NA), case = "upper_lower"),
                c("R.aSTUDIO", NA, NA, NA, NA))
   
+  expect_equal(to_any_case("ac\u00C4o", replace_special_characters = "Latin-ASCII"),
+               "ac_ao")
+  
+  expect_equal(to_any_case("ac\u00C4o", replace_special_characters = c("german", "Latin-ASCII")),
+               "ac_aeo")
+  
+  expect_equal(to_any_case("\u00E6", replace_special_characters = "Latin-ASCII"),
+                "ae")
+  
   # expect_equal(to_any_case(c(NA, NA, NA), "lower_upper"),
   #              rep(NA_character_, 3))
   # 

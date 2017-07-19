@@ -14,20 +14,37 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
 \arguments{
 \item{string}{A string (for example names of a data frame).}
 
-\item{case}{The desired target case, provided as one of \code{"snake"}, \code{"small_camel"}, \code{"big_camel"}, 
-\code{"screaming_snake"}, \code{lower_upper}, \code{upper_lower}, \code{"parsed"}, \code{mixed} or , \code{"none"}. The latter three are not really cases, but are helpful since they allow to
-return the parsed input string, separated by underscores, without any further modification ("parsed"), 
-only the first letters (behind an underscore) appear as parsed and the rest is lowercase ("mixed") or just the input string ("none"). 
-Note that \code{case = "none"} only works with \code{replace_special_characters}, \code{prefix},
-\code{postfix}, \code{empty_fill} and \code{unique_sep}. One can use \code{"all_caps"}, \code{"lower_camel"} and \code{upper_camel} as aliases for
-\code{"screaming_snake"}, \code{"small_camel"} and \code{"upper_camel"}.}
+\item{case}{The desired target case, provided as one of the following:
+\itemize{
+ \item{snake_case: \code{"snake"}}
+ \item{lowerCamel: \code{"lower_camel"} or \code{"small_camel"}}
+ \item{UpperCamel: \code{"upper_camel"} or \code{"big_camel"}}
+ \item{ALL_CAPS: \code{"screaming_snake"} or \code{"all_caps"}}
+ \item{lowerUPPER: \code{"lower_upper"}}
+ \item{UPPERlower: \code{"upper_lower"}}
+ }
 
-\item{preprocess}{String that will be wrapped internally into \code{stringr::regex()}. 
-All matches will be treated as additional splitting parameters besides the default ones 
-(\code{"_"} and \code{" "}), when parsing the input string.}
+ There are three "special" cases available:
+\itemize{
+ \item{\code{"parsed"}: This case is underlying all other cases. 
+ Every substring a string consists
+ of becomes surrounded by an underscore (depending on the \code{parsingoption}).
+  Underscores at the start and end are trimmed. No lower or 
+ upper case pattern from the input string are changed.}
+ \item{\code{"mixed"}: Almost the same as \code{case = "parsed"}. Every letter which is not at the start
+ or behind an underscore is turned into lowercase.}
+ \item{\code{"none"}: Neither parsing nor caseconversion occur. This case might be helpful, when
+ one wants to call the function for the quick usage of the other parameters.
+ Works with \code{replace_special_characters}, \code{prefix}, \code{postfix},
+  \code{empty_fill} and \code{unique_sep}.}
+ }}
 
-\item{protect}{A string which is a valid \code{stringr::regex()}. Matches within the output
-won't have any "_" (or artifacts of \code{preprocess}) beside. Note that \code{preprocess} has a higher precedence than protect, 
+\item{preprocess}{A string (if not \code{NULL}) that will be wrapped internally
+into \code{stringr::regex()}. All matches will be replaced by underscores.}
+
+\item{protect}{A string (if not \code{NULL}) which is a valid \code{stringr::regex()}. Matches within the input
+won't have any "_" beside within the output.
+Note that \code{preprocess} has a higher precedence than protect, 
 which means that it doesn't make sense to protect sth. which is already replaced
 via \code{preprocess}.}
 
