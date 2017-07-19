@@ -49,14 +49,16 @@ Note that \code{preprocess} has a higher precedence than protect,
 which means that it doesn't make sense to protect sth. which is already replaced
 via \code{preprocess}.}
 
-\item{replace_special_characters}{A character vector. If not \code{NULL},
-strings will be transliterated via \code{stringi::stri_trans_general}. It is also possible to supply
-a character vector (for example "germany"), which transliterates according to some implemented dictionary (umlauts are transliterated to oe, ae, ...).
-It is possible to combine ids from \code{stringi::stri_trans_list()} and dictionaries from this packages.
-Currently implemented dictionaries: "german".
-You should use this feature with care in case of \code{case = "parsed"} and \code{case = "none"}, 
-since for upper case letters, which have transliterations of lenth 2, the second letter will
-be transliterated to lowercase, for example Oe, Ae, Ss, ...}
+\item{replace_special_characters}{A character vector (if not \code{NULL}). The entries of this argument
+need to be elements of \code{stringi::stri_trans_list()} or names of lookup tables (currently
+only "german" is supported). In the order of the entries the letters of the input
+ string will be transliterated via \code{stringi::stri_trans_general} or replaced via the 
+ matches of the lookup table.
+
+You should use this feature with care in case of \code{case = "parsed"} and 
+\code{case = "none"}, since for upper case letters, which have transliterations/replacements
+ of lenth 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
+ might not always be what is intended.}
 
 \item{postprocess}{String that will be used as separator. The defaults are \code{"_"} 
 and \code{""}, regarding the specified \code{case}.}
@@ -65,18 +67,22 @@ and \code{""}, regarding the specified \code{case}.}
 
 \item{postfix}{postfix (string).}
 
-\item{unique_sep}{A string. If it is supplied, then duplicated names will get a suffix integer
-in the order of their appearance. The suffix is separated by the supplied string to this argument.}
+\item{unique_sep}{A string. If not \code{NULL}, then duplicated names will get 
+a suffix integer
+in the order of their appearance. The suffix is separated by the supplied string
+ to this argument.}
 
 \item{empty_fill}{A string. If it is supplied, then each entry that matches "" will be replaced
 by the supplied string to this argument.}
 
-\item{parsingoption}{An integer (1 (default), 2 or 3) that will determine the parsingoption.
-1: RRRStudio -> RRR_Studio
-2: RRRStudio -> RRRS_tudio
-3: parses the first UPPER letter group like parsingoption 2 and the rest like option 1
-4: parses the first UPPERlowercase letter group like parsingoption 1 and the rest like option 2
-if another integer is supplied, no parsing regarding the pattern of upper- and lowercase will appear.}
+\item{parsingoption}{An integer that will determine the parsingoption.
+#' \itemize{
+ \item{1: \code{RRRStudio -> RRR_Studio}}
+ \item{2: \code{RRRStudio -> RRRS_tudio}}
+ \item{3: parses at the beginning like option 1 and the rest like option 2.}
+ \item{4: parses at the beginning like option 2 and the rest like option 1.}
+ \item{any other integer: no parsing"}
+ }}
 }
 \value{
 A character vector according the specified parameters above.
@@ -89,34 +95,49 @@ Function to convert strings to any case
 \code{postprocess} might follow in the future.
 }
 \examples{
-### Default usage
+### Cases
 strings <- c("this Is a Strange_string", "AND THIS ANOTHER_One")
 to_any_case(strings, case = "snake")
-to_any_case(strings, case = "small_camel")
-to_any_case(strings, case = "big_camel")
-to_any_case(strings, case = "screaming_snake")
+to_any_case(strings, case = "lower_camel")
+to_any_case(strings, case = "upper_camel")
+to_any_case(strings, case = "all_caps")
+to_any_case(strings, case = "lower_upper")
+to_any_case(strings, case = "upper_lower")
 to_any_case(strings, case = "parsed")
+to_any_case(strings, case = "mixed")
+to_any_case(strings, case = "none")
 
-### Pre -and postprocessing
+### Parsing options
+# the default option makes no sense in this setting
+to_any_case("HAMBURGcity", case = "parsed", parsingoption = 1)
+# so the second parsing option is the way to address this example
+to_any_case("HAMBURGcity", case = "parsed", parsingoption = 2)
+# one can also parse the beginning like parsingoption 1 and the rest like option 2
+to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 3)
+# or starting like parsingoption 2 and for the rest switch to option 1
+to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 4)
+# there might be reasons to suppress the parsing, while choosing neither one or two
+to_any_case("HAMBURGcity", case = "parsed", parsingoption = 5)
+
+### Preprocess & protect
+string <- "R.St\\u00FCdio: v.1.0.143"
+to_any_case(string, case = "snake", preprocess = ":|\\\\.")
+to_any_case(string, case = "snake", protect = ":|\\\\.")
+to_any_case(string, case = "snake",
+            preprocess = ":|(?<!\\\\d)\\\\.",
+            protect = "\\\\.")
+
+### Replace special characters
+to_any_case("\\u00E4ngstlicher Has\\u00EA", replace_special_characters = c("german", "Latin-ASCII"))
+
+### Postprocess
 strings2 <- c("this - Is_-: a Strange_string", "AND THIS ANOTHER_One")
-to_snake_case(strings2)
-to_any_case(strings2, case = "snake", preprocess = "-|\\\\:")
-
 to_any_case(strings2, case = "snake", preprocess = "-|\\\\:", postprocess = " ")
 to_any_case(strings2, case = "big_camel", preprocess = "-|\\\\:", postprocess = "//")
 
 ### Pre -and postfix
 to_any_case(strings2, case = "big_camel", preprocess = "-|\\\\:", postprocess = "//",
             prefix = "USER://", postfix = ".exe")
-
-### Special characters like german umlauts for example can be replaced via 
-# replace_special_characters = TRUE
-
-### Protect anything that shouldn't have an underscore beside in the output
-strings3 <- c("var12", "var1.2", "va.r.1.2")
-to_any_case(strings3, case = "snake")
-to_any_case(strings3, case = "snake", protect = "\\\\d")
-to_any_case(strings3, case = "snake", protect = "\\\\d|\\\\.")
 
 }
 \seealso{

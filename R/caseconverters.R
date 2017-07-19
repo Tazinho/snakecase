@@ -12,7 +12,7 @@
 #' @examples
 #' strings <- c("this Is a Strange_string", "AND THIS ANOTHER_One", NA)
 #' 
-#' to_snake_case(string)
+#' to_snake_case(strings)
 #' to_small_camel_case(strings)
 #' to_big_camel_case(strings)
 #' to_screaming_snake_case(strings)

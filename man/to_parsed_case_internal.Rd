@@ -4,20 +4,19 @@
 \alias{to_parsed_case_internal}
 \title{Internal parser, which is relevant for preprocessing, parsing and parsingoptions}
 \usage{
-to_parsed_case_internal(string, preprocess = NULL, parsingoption = 1L)
+to_parsed_case_internal(string, parsingoption = 1L)
 }
 \arguments{
 \item{string}{A string.}
 
-\item{preprocess}{Character string that will be wrapped internally into stringr::regex. 
-All matches will be padded with underscores.}
-
-\item{parsingoption}{An integer (1 (default), 2 or 3) that will determine the parsingoption.
-1: RRRStudio -> RRR_Studio
-2: RRRStudio -> RRRS_tudio
-3: parses the first UPPER letter group like parsingoption 2 and the rest like option 1
-4: parses the first UPPERlowercase letter group like parsingoption 1 and the rest like option 2
-if another integer is supplied, no parsing regarding the pattern of upper- and lowercase will appear.}
+\item{parsingoption}{An integer that will determine the parsingoption.
+\itemize{
+ \item{1: \code{RRRStudio -> RRR_Studio}}
+ \item{2: \code{RRRStudio -> RRRS_tudio}}
+ \item{3: parses at the beginning like option 1 and the rest like option 2.}
+ \item{4: parses at the beginning like option 2 and the rest like option 1.}
+ \item{any other integer: no parsing"}
+ }}
 }
 \value{
 A character vector separated by underscores, containing the parsed string.

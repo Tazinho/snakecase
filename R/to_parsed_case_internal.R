@@ -1,15 +1,15 @@
 #' Internal parser, which is relevant for preprocessing, parsing and parsingoptions
 #'
 #' @param string A string.
-#' @param preprocess Character string that will be wrapped internally into stringr::regex. 
-#' All matches will be padded with underscores.
-#' @param parsingoption An integer (1 (default), 2 or 3) that will determine the parsingoption.
-#' 1: RRRStudio -> RRR_Studio
-#' 2: RRRStudio -> RRRS_tudio
-#' 3: parses the first UPPER letter group like parsingoption 2 and the rest like option 1
-#' 4: parses the first UPPERlowercase letter group like parsingoption 1 and the rest like option 2
-#' if another integer is supplied, no parsing regarding the pattern of upper- and lowercase will appear.
-#' 
+#' @param parsingoption An integer that will determine the parsingoption.
+#' \itemize{
+#'  \item{1: \code{RRRStudio -> RRR_Studio}}
+#'  \item{2: \code{RRRStudio -> RRRS_tudio}}
+#'  \item{3: parses at the beginning like option 1 and the rest like option 2.}
+#'  \item{4: parses at the beginning like option 2 and the rest like option 1.}
+#'  \item{any other integer: no parsing"}
+#'  }
+#'  
 #' @return A character vector separated by underscores, containing the parsed string.
 #'
 #' @author Malte Grosser, \email{malte.grosser@@gmail.com}
@@ -17,7 +17,7 @@
 #'
 #' @importFrom magrittr "%>%"
 #'
-to_parsed_case_internal <- function(string, preprocess = NULL, parsingoption = 1L){
+to_parsed_case_internal <- function(string, parsingoption = 1L){
   ### preprocessing:
   # catch everything that should be handled like underscores
   # (only spaces by default)
@@ -52,12 +52,12 @@ to_parsed_case_internal <- function(string, preprocess = NULL, parsingoption = 1
     # Inserts underscores around groups of only the first group of one upper case letter
     # followed by lower case letters.
     parse5_pat_cap_smalls_first = function(string){
-      pat_cap_smalls_first <- "([\u00C4\u00D6\u00DC[:upper:]][\u00E4\u00F6\u00FC\u00DF[:lower:]]+|\\d+)"
+      pat_cap_smalls_first <- "^([\u00C4\u00D6\u00DC[:upper:]][\u00E4\u00F6\u00FC\u00DF[:lower:]]+|\\d+)"
       string <- stringr::str_replace(string, pat_cap_smalls_first, "_\\1_")
       string},
     # Inserts underscores around the first capital letter group with length >= 2
     parse6_pat_caps2_first = function(string){
-      pat_caps2_first <- "([[:upper:]\u00C4\u00D6\u00DC]{2,})"
+      pat_caps2_first <- "^([[:upper:]\u00C4\u00D6\u00DC]{2,})"
       string <- stringr::str_replace(string, pat_caps2_first, "_\\1_")
       string}
   )
