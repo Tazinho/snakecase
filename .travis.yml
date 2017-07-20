@@ -1,45 +1,7 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
-language: r
+language: R
+sudo: false
 cache: packages
-sudo: required
-dist: trusty
-
-matrix:
-  include:
-    - os: linux
-      r: oldrel
-    - os: linux
-      r: release
-    - os: linux
-      r: devel
-      env: R_CODECOV=true
-    - os: osx
-      osx_image: xcode8
-      latex: false
-    - os: osx
-      osx_image: xcode6.4
-      latex: false
-      
-addons:
-  apt:
-    packages:
-    - r-cran-stringr
-    - r-cran-purrr
-    - r-cran-magrittr
-    - r-cran-stringi
-    - r-cran-testthat
-    - r-cran-covr
-    - r-cran-tibble
-    - r-cran-purrrlyr
-    - r-cran-knitr
-    - r-cran-rmarkdown
-
 after_success:
-- if [[ "${R_CODECOV}" ]]; then R -e 'covr::codecov()'; fi
-
-
-notifications:
-  email:
-    on_success: change
-on_failure: change
+  - Rscript -e 'covr::codecov()'
