@@ -108,7 +108,7 @@ to_any_case("HAMBURGcity", case = "parsed", parsingoption = 2)
 
 # one can also parse the beginning like parsingoption 1 and the rest like option 2
 to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 3)
-## [1] "HAMBUR_Gcity_GERU_sa"
+## [1] "HAMBURG_city_GERU_sa"
 
 # or starting like parsingoption 2 and for the rest switch to option 1
 to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 4)
