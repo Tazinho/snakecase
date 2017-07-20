@@ -21,14 +21,5 @@ matrix:
       osx_image: xcode6.4
       latex: false
 
-addons:
-  apt:
-    packages:
-    - r-cran-lazyeval
-    - r-cran-magrittr
-    - r-cran-testthat
-    - r-cran-jsonlite
-    - r-cran-knitr
-
 after_success:
 - if [[ "${R_CODECOV}" ]]; then R -e 'covr::codecov()'; fi
