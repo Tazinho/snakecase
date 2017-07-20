@@ -2,7 +2,7 @@
 #' 
 #' These functions allow you to parse and convert a string to a specific case.
 #'
-#' @param string A string.
+#' @param string A string (for example names of a data frame).
 #' @name caseconverter
 #' @return A character vector according the specified target case.
 #' 
@@ -16,7 +16,11 @@
 #' to_small_camel_case(strings)
 #' to_big_camel_case(strings)
 #' to_screaming_snake_case(strings)
+#' to_lower_upper_case(strings)
+#' to_upper_lower_case(strings)
 #' to_parsed_case(strings)
+#' to_mixed_case(strings)
+#' 
 #' 
 #' @importFrom magrittr "%>%"
 NULL
