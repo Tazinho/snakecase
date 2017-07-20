@@ -102,6 +102,7 @@
 #' 
 #' ### Preprocess & protect
 #' string <- "R.St\u00FCdio: v.1.0.143"
+#' to_any_case(string)
 #' to_any_case(string, case = "snake", preprocess = ":|\\.")
 #' to_any_case(string, case = "snake", protect = ":|\\.")
 #' to_any_case(string, case = "snake",
