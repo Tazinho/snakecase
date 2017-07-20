@@ -28,6 +28,16 @@ Source: CRAN
 Version: 0.2.0
 Hash: e8805df54c65ac96d50235c44a82615c
 
+Package: backports
+Source: CRAN
+Version: 1.1.0
+Hash: 3f754426ca2b7dbbf63951fe5075373b
+
+Package: base64enc
+Source: CRAN
+Version: 0.1-3
+Hash: c590d29e555926af053055e23ee79efb
+
 Package: bindr
 Source: CRAN
 Version: 0.1
@@ -37,6 +47,26 @@ Package: bindrcpp
 Source: CRAN
 Version: 0.2
 Hash: 8ab2dbf7ea120cf2d31183e0bf388485
+
+Package: bitops
+Source: CRAN
+Version: 1.0-6
+Hash: 67d0775189fd0041d95abca618c5c07e
+
+Package: brew
+Source: CRAN
+Version: 1.0-6
+Hash: 931f9972deae0f205e1c78a51f33149b
+
+Package: caTools
+Source: CRAN
+Version: 1.17.1
+Hash: 97cb6f6293cd18d17df77a6383cc6763
+
+Package: commonmark
+Source: CRAN
+Version: 1.2
+Hash: 1290583b9d16fb60322126a8698fb729
 
 Package: covr
 Source: CRAN
@@ -48,6 +78,21 @@ Source: CRAN
 Version: 1.3.2
 Hash: 576a9d297a567d6a5ebd164ca5221590
 
+Package: curl
+Source: CRAN
+Version: 2.7
+Hash: 1d97b529645be4e502fad3db22415e66
+
+Package: desc
+Source: CRAN
+Version: 1.1.0
+Hash: 346d3477f87b89692dd1379eaed1a1be
+
+Package: devtools
+Source: CRAN
+Version: 1.13.2
+Hash: 1bcfefa7d2fad3f1a2f5367c9ceccd46
+
 Package: digest
 Source: CRAN
 Version: 0.6.12
@@ -58,10 +103,45 @@ Source: CRAN
 Version: 0.7.1
 Hash: 669f4d38aaac878ede74800b408b09fa
 
+Package: evaluate
+Source: CRAN
+Version: 0.10.1
+Hash: 54d95f4ec6d0300100413ed0127d89ae
+
+Package: formatR
+Source: CRAN
+Version: 1.5
+Hash: 258cf79a8dbeedf1c981cdb53837d2af
+
+Package: git2r
+Source: CRAN
+Version: 0.18.0
+Hash: 9dfaafbcca68be29b89ef7783dc1dac0
+
 Package: glue
 Source: CRAN
 Version: 1.1.1
 Hash: dfd5a27768175ae51d08dc6beba1ef11
+
+Package: highr
+Source: CRAN
+Version: 0.6
+Hash: aa3d5b7912b5fed4b546ed5cd2a1760b
+
+Package: htmltools
+Source: CRAN
+Version: 0.3.6
+Hash: 5b070a04ef8df1953544873db1c5896e
+
+Package: httr
+Source: CRAN
+Version: 1.2.1
+Hash: 7de1f8f760441881804af7c1ff324340
+
+Package: jsonlite
+Source: CRAN
+Version: 1.5
+Hash: 9c51936d8dd00b2f1d4fe9d10499694c
 
 Package: knitr
 Source: CRAN
@@ -77,6 +157,26 @@ Package: magrittr
 Source: CRAN
 Version: 1.5
 Hash: bdc4d48c3135e8f3b399536ddf160df4
+
+Package: markdown
+Source: CRAN
+Version: 0.8
+Hash: 045d7c594d503b41f1c28946d076c8aa
+
+Package: memoise
+Source: CRAN
+Version: 1.1.0
+Hash: 410fcd334bc626db100237cc1370f2e9
+
+Package: mime
+Source: CRAN
+Version: 0.5
+Hash: 463550cf44fb6f0a2359368f42eebe62
+
+Package: openssl
+Source: CRAN
+Version: 0.9.6
+Hash: 5f4711e142a44655dfea4d64fcf2f641
 
 Package: packrat
 Source: github
@@ -119,8 +219,23 @@ Hash: 86c53487ce7f82f0a7cc11c816060910
 
 Package: rmarkdown
 Source: CRAN
-Version: 1.5
-Hash: b37fc27c2604de97b4981eeae7a00879
+Version: 1.6
+Hash: 40f4034a7b8e28edc2b384bdb0c4d537
+
+Package: roxygen2
+Source: CRAN
+Version: 6.0.1
+Hash: 82a85278378502d37455fcfc84951433
+
+Package: rprojroot
+Source: CRAN
+Version: 1.2
+Hash: fdcac51a7f47decd60556ceefc3c26b1
+
+Package: rstudioapi
+Source: CRAN
+Version: 0.6
+Hash: fd256f8bfb9a64cc35f98b0decb1a79f
 
 Package: stringi
 Source: CRAN
@@ -141,3 +256,23 @@ Package: tibble
 Source: CRAN
 Version: 1.3.3
 Hash: 6a18f6da2887d2c4c4a6554027161483
+
+Package: whisker
+Source: CRAN
+Version: 0.3-2
+Hash: 803d662762e532705c2c066a82d066e7
+
+Package: withr
+Source: CRAN
+Version: 1.0.2
+Hash: 774eb7be9087cdc24b53b74e5359cfac
+
+Package: xml2
+Source: CRAN
+Version: 1.1.1
+Hash: b326a762ddb04eef605cc88987fa71fb
+
+Package: yaml
+Source: CRAN
+Version: 2.1.14
+Hash: c81230c3a7d9ba20607ad6b4331173d1
