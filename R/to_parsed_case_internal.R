@@ -52,7 +52,7 @@ to_parsed_case_internal <- function(string, parsingoption = 1L){
     # Inserts underscores around groups of only the first group of one upper case letter
     # followed by lower case letters.
     parse5_pat_cap_smalls_first = function(string){
-      pat_cap_smalls_first <- "^([\u00C4\u00D6\u00DC[:upper:]][\u00E4\u00F6\u00FC\u00DF[:lower:]]+|\\d+)"
+      pat_cap_smalls_first <- "([\u00C4\u00D6\u00DC[:upper:]][\u00E4\u00F6\u00FC\u00DF[:lower:]]+|\\d+)"
       string <- stringr::str_replace(string, pat_cap_smalls_first, "_\\1_")
       string},
     # Inserts underscores around the first capital letter group with length >= 2
