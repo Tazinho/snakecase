@@ -22,7 +22,7 @@ test_that("examples", {
                "R.Studio")
   
   expect_equal(to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 3),
-               "HAMBUR_Gcity_GERU_sa")
+               "HAMBURG_city_GERU_sa")
   
   expect_equal(to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 4),
                "HAMBURG_city_GER_Usa")

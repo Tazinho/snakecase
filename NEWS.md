@@ -1,7 +1,3 @@
-# snakecase 0.4.0.9017
-
-* fixed bug, due to start in parsing of parsingoption 3
-
 # snakecase 0.4.0.9016
 
 * `case == "none"` works now with `preprocess`.
