@@ -63,6 +63,15 @@ Source: CRAN
 Version: 1.17.1
 Hash: 97cb6f6293cd18d17df77a6383cc6763
 
+Package: callr
+Source: github
+Version: 1.0.0.9000
+Hash: 928fb88439061be17a5d1408b2cf9f40
+GithubRepo: callr
+GithubUsername: r-pkgs
+GithubRef: HEAD
+GithubSha1: ce3f15cbdccb6981e94fedb7a3c5424fff152094
+
 Package: commonmark
 Source: CRAN
 Version: 1.2
@@ -70,8 +79,8 @@ Hash: 1290583b9d16fb60322126a8698fb729
 
 Package: covr
 Source: CRAN
-Version: 2.2.2
-Hash: 4b7aa8c6847719b64201de2562353c3f
+Version: 3.0.0
+Hash: 48fd7b88ecf2dda957c03ea1740b5a43
 
 Package: crayon
 Source: CRAN
@@ -80,8 +89,13 @@ Hash: 576a9d297a567d6a5ebd164ca5221590
 
 Package: curl
 Source: CRAN
-Version: 2.7
-Hash: 1d97b529645be4e502fad3db22415e66
+Version: 2.8.1
+Hash: 5a3f385f21add1e944b93b3cd9ce8b48
+
+Package: debugme
+Source: CRAN
+Version: 1.0.2
+Hash: 28d8f97402746afa3bf2ce392173c957
 
 Package: desc
 Source: CRAN
@@ -90,8 +104,8 @@ Hash: 346d3477f87b89692dd1379eaed1a1be
 
 Package: devtools
 Source: CRAN
-Version: 1.13.2
-Hash: 1bcfefa7d2fad3f1a2f5367c9ceccd46
+Version: 1.13.3
+Hash: 2e91d10786ace8f6258480f576bb91f3
 
 Package: digest
 Source: CRAN
@@ -100,8 +114,8 @@ Hash: e53fb8c58673df868183697e39a6a4d6
 
 Package: dplyr
 Source: CRAN
-Version: 0.7.1
-Hash: 669f4d38aaac878ede74800b408b09fa
+Version: 0.7.2
+Hash: a4e8be0458f97a40806bcced654de815
 
 Package: evaluate
 Source: CRAN
@@ -113,15 +127,29 @@ Source: CRAN
 Version: 1.5
 Hash: 258cf79a8dbeedf1c981cdb53837d2af
 
+Package: gh
+Source: github
+Version: 1.0.1
+Hash: 2d347fdc4d82a9adc834a75389be2166
+GithubRepo: gh
+GithubUsername: r-pkgs
+GithubRef: master
+GithubSha1: d3c0e1c2a591fa4f13a9a2b2af3ebe50ec4245ff
+
 Package: git2r
 Source: CRAN
-Version: 0.18.0
-Hash: 9dfaafbcca68be29b89ef7783dc1dac0
+Version: 0.19.0
+Hash: f4f7966fc357f60dc62dbffcea917eef
 
 Package: glue
 Source: CRAN
 Version: 1.1.1
 Hash: dfd5a27768175ae51d08dc6beba1ef11
+
+Package: highlight
+Source: CRAN
+Version: 0.4.7.1
+Hash: 888789a635beb64b9cddbf7ce3f0acb1
 
 Package: highr
 Source: CRAN
@@ -137,6 +165,21 @@ Package: httr
 Source: CRAN
 Version: 1.2.1
 Hash: 7de1f8f760441881804af7c1ff324340
+
+Package: hunspell
+Source: CRAN
+Version: 2.6
+Hash: a4df84575f12d779a024de4ac198c690
+
+Package: ini
+Source: CRAN
+Version: 0.2
+Hash: 12df248cc384eb68545a617da2730c8e
+
+Package: installr
+Source: CRAN
+Version: 0.19.0
+Hash: 5b02af2e8d5904eca4cbf85e68d33499
 
 Package: jsonlite
 Source: CRAN
@@ -187,6 +230,15 @@ GithubUsername: rstudio
 GithubRef: master
 GithubSha1: b55feb68f662e9e1c58807316bde5ca0d40a3f64
 
+Package: pkgbuild
+Source: github
+Version: 0.0.0.9000
+Hash: 0240738ba54f63281313d51faee40fc2
+GithubRepo: pkgbuild
+GithubUsername: r-pkgs
+GithubRef: master
+GithubSha1: 8aab60b03bb09212881e3544e332d60defc52fd6
+
 Package: pkgconfig
 Source: CRAN
 Version: 2.0.1
@@ -202,15 +254,33 @@ Source: CRAN
 Version: 1.0.0
 Hash: 77da8f1df873a4b91e5c4a68fe2fb1b6
 
+Package: processx
+Source: github
+Version: 2.0.1
+Hash: 3eaf6a5f50cec5ea18fb5ca1cec5493d
+GithubRepo: processx
+GithubUsername: r-lib
+GithubRef: master
+GithubSha1: 28b06e36853ed2d06d499b81e6ada71adc108121
+
 Package: purrr
 Source: CRAN
-Version: 0.2.2.2
-Hash: faada139260184912fea03f3fea13842
+Version: 0.2.3
 
 Package: purrrlyr
 Source: CRAN
 Version: 0.0.2
 Hash: 40063dc550779f9c9ed42b2155da136a
+
+Package: rematch
+Source: CRAN
+Version: 1.0.1
+Hash: ad4faf59e7611117ff165817074c50c7
+
+Package: rex
+Source: CRAN
+Version: 1.1.1
+Hash: 69e208c6283398d235e507a658ba8079
 
 Package: rlang
 Source: CRAN
@@ -237,6 +307,11 @@ Source: CRAN
 Version: 0.6
 Hash: fd256f8bfb9a64cc35f98b0decb1a79f
 
+Package: rversions
+Source: CRAN
+Version: 1.0.3
+Hash: 44837671df6bf1d0b863dc6f83f42a16
+
 Package: stringi
 Source: CRAN
 Version: 1.1.5
@@ -257,6 +332,15 @@ Source: CRAN
 Version: 1.3.3
 Hash: 6a18f6da2887d2c4c4a6554027161483
 
+Package: usethis
+Source: github
+Version: 0.0.0.9000
+Hash: 38295e64d932ce6d8cd769ee9e13fa42
+GithubRepo: usethis
+GithubUsername: r-lib
+GithubRef: master
+GithubSha1: 6dca914f22b3fef6da108dbf5ba48d34b2ef7e8d
+
 Package: whisker
 Source: CRAN
 Version: 0.3-2
@@ -264,8 +348,8 @@ Hash: 803d662762e532705c2c066a82d066e7
 
 Package: withr
 Source: CRAN
-Version: 1.0.2
-Hash: 774eb7be9087cdc24b53b74e5359cfac
+Version: 2.0.0
+Hash: cc7e555b8e249aa5cf391592fcae71a2
 
 Package: xml2
 Source: CRAN
