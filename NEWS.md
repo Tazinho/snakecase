@@ -1,3 +1,16 @@
+# snakecase 0.5.0
+
+* CRAN update
+
+* Changes since last CRAN submission include:
+    * string transliteration via updated `replace_special_character` argument
+    * some new cases: "none", "mixed", "upper_lower", "lower_upper"
+    * aliases: "all_caps", "lower_camel", "upper_camel"
+    * different parsing options
+    * several bugfixes
+    * improved internal testing
+    * internal modularisation
+
 # snakecase 0.4.0.9016
 
 * `case == "none"` works now with `preprocess`.
