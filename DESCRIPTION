@@ -23,6 +23,7 @@ Suggests:
     rmarkdown
 URL: https://github.com/Tazinho/snakecase
 BugReports: https://github.com/Tazinho/snakecase/issues
+Encoding: UTF-8
 License: GPL-3
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
