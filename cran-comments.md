@@ -1,13 +1,10 @@
 ## Test environments
-* local Windows X install, R 3.4.0
-* default travis-ci environment
-* default AppVeyor environment (R 3.3.3)
+* local Windows X install, R 3.4.1
+* default travis-ci environment (R 3.4.1)
+* default AppVeyor environment (R 3.4.1)
 
 ## R CMD check results
 There were no ERRORs, WARNINGs or NOTEs 
 
-## Notes
-* This is the first submission
-
 ## Downstream dependencies
-There are currently no downstream dependencies for this package
+No ERRORs or WARNINGs found :)
