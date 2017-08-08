@@ -4,7 +4,7 @@
 #' @param replace_special_characters Logical, if \code{TRUE}, special characters 
 #' will be translated to characters which are more likely to be understood by 
 #' different programs. For example german umlauts will be translated to ae, oe, ue etc.
-#' @param case Length one character, from the imput options of \code{to_any_case}.
+#' @param case Length one character, from the input options of \code{to_any_case}.
 #' 
 #' @return A character vector.
 #'

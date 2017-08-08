@@ -13,7 +13,7 @@ replace_special_characters_internal(string, replace_special_characters, case)
 will be translated to characters which are more likely to be understood by 
 different programs. For example german umlauts will be translated to ae, oe, ue etc.}
 
-\item{case}{Length one character, from the imput options of \code{to_any_case}.}
+\item{case}{Length one character, from the input options of \code{to_any_case}.}
 }
 \value{
 A character vector.
