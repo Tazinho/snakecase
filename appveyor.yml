@@ -40,3 +40,7 @@ artifacts:
 
   - path: '\*_*.zip'
     name: Bits
+
+environment:
+  global:
+    WARNINGS_ARE_ERORRS: 1
