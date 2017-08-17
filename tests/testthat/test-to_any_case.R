@@ -32,6 +32,35 @@ test_that("examples", {
 }
 )
 
+test_that("janitor-pkg-tests",{
+  clean_names3 <- function(old_names, case = "snake"){
+    new_names <- old_names %>%
+      gsub("'", "", .) %>% # remove quotation marks
+      gsub("\"", "", .) %>% # remove quotation marks
+      gsub("%", ".percent_", .) %>%
+      gsub("^[ ]+", "", .) %>%
+      make.names(.) %>%
+      to_any_case(case = case, preprocess = "\\.", 
+                  replace_special_characters = c("Latin-ASCII"))
+    # Handle duplicated names - they mess up dplyr pipelines
+    # This appends the column number to repeated instances of duplicate variable names
+    dupe_count <- vapply(1:length(new_names), function(i) { 
+      sum(new_names[i] == new_names[1:i]) }, integer(1))
+    
+    new_names[dupe_count > 1] <- paste(new_names[dupe_count > 1],
+                                       dupe_count[dupe_count > 1],
+                                       sep = "_")
+    new_names
+  }
+  
+  expect_equal(clean_names3(c("sp ace", "repeated", "a**#@", "%", "#",
+                 "!", "d(!)9", "REPEATED", "can\"'t", "hi_`there`",
+                 "  leading spaces", "\u20AC", "a\u00E7\u00E3o", "far\u0153", "r.st\u00FCdio:v.1.0.143")),
+               c("sp_ace", "repeated", "a", "percent", "x", "x_2", "d_9", "repeated_2", 
+                 "cant", "hi_there", "leading_spaces", "x_3", "acao", "faroe", 
+                 "r_studio_v_1_0_143"))
+})
+
 # test_that("rules",{
 #   examples <- cases[["examples"]]
 #   
