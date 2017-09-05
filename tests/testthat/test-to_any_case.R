@@ -59,6 +59,77 @@ test_that("janitor-pkg-tests",{
                c("sp_ace", "repeated", "a", "percent", "x", "x_2", "d_9", "repeated_2", 
                  "cant", "hi_there", "leading_spaces", "x_3", "acao", "faroe", 
                  "r_studio_v_1_0_143"))
+  
+  expect_equal(clean_names3(c("sp ace", "repeated", "a**#@", "%", "#",
+                              "!", "d(!)9", "REPEATED", "can\"'t", "hi_`there`",
+                              "  leading spaces", "\u20AC", "a\u00E7\u00E3o", "far\u0153", "r.st\u00FCdio:v.1.0.143"),
+                            case = "parsed"),
+               c("sp_ace", "repeated", "a", "percent", "X", "X_2", "d_9", "REPEATED", 
+                 "cant", "hi_there", "leading_spaces", "X_3", "acao", "faroe", 
+                 "r_studio_v_1_0_143"))
+  
+  expect_equal(clean_names3(c("sp ace", "repeated", "a**#@", "%", "#",
+                              "!", "d(!)9", "REPEATED", "can\"'t", "hi_`there`",
+                              "  leading spaces", "\u20AC", "a\u00E7\u00E3o", "far\u0153", "r.st\u00FCdio:v.1.0.143"),
+                            case = "screaming_snake"),
+               c("SP_ACE", "REPEATED", "A", "PERCENT", "X", "X_2", "D_9", "REPEATED_2", 
+                 "CANT", "HI_THERE", "LEADING_SPACES", "X_3", "ACAO", "FAROE", 
+                 "R_STUDIO_V_1_0_143")
+  )
+  
+  expect_equal(clean_names3(c("sp ace", "repeated", "a**#@", "%", "#",
+                              "!", "d(!)9", "REPEATED", "can\"'t", "hi_`there`",
+                              "  leading spaces", "\u20AC", "a\u00E7\u00E3o", "far\u0153", "r.st\u00FCdio:v.1.0.143"),
+                            case = "small_camel"),
+               c("spAce", "repeated", "a", "percent", "x", "x_2", "d9", "repeated_2", 
+                 "cant", "hiThere", "leadingSpaces", "x_3", "acao", "faroe", "rStudioV1_0_143"
+               )
+  )
+  
+  expect_equal(clean_names3(c("sp ace", "repeated", "a**#@", "%", "#",
+                              "!", "d(!)9", "REPEATED", "can\"'t", "hi_`there`",
+                              "  leading spaces", "\u20AC", "a\u00E7\u00E3o", "far\u0153", "r.st\u00FCdio:v.1.0.143"),
+                            case = "big_camel"),
+               c("SpAce", "Repeated", "A", "Percent", "X", "X_2", "D9", "Repeated_2", 
+                 "Cant", "HiThere", "LeadingSpaces", "X_3", "Acao", "Faroe", "RStudioV1_0_143"
+               )
+  )
+  
+  expect_equal(clean_names3(c("sp ace", "repeated", "a**#@", "%", "#",
+                              "!", "d(!)9", "REPEATED", "can\"'t", "hi_`there`",
+                              "  leading spaces", "\u20AC", "a\u00E7\u00E3o", "far\u0153", "r.st\u00FCdio:v.1.0.143"),
+                            case = "lower_upper"),
+               c("spACE", "repeated", "a", "percent", "x", "x_2", "d9", "repeated_2", 
+                 "cant", "hiTHERE", "leadingSPACES", "x_3", "acao", "faroe", "rSTUDIOv10143"
+               )
+  )
+  
+  expect_equal(clean_names3(c("sp ace", "repeated", "a**#@", "%", "#",
+                              "!", "d(!)9", "REPEATED", "can\"'t", "hi_`there`",
+                              "  leading spaces", "\u20AC", "a\u00E7\u00E3o", "far\u0153", "r.st\u00FCdio:v.1.0.143"),
+                            case = "upper_lower"),
+               c("SPace", "REPEATED", "A", "PERCENT", "X", "X_2", "D9", "REPEATED_2", 
+                 "CANT", "HIthere", "LEADINGspaces", "X_3", "ACAO", "FAROE", "RstudioV10143"
+               )
+  )
+  
+  expect_equal(clean_names3(c("sp ace", "repeated", "a**#@", "%", "#",
+                              "!", "d(!)9", "REPEATED", "can\"'t", "hi_`there`",
+                              "  leading spaces", "\u20AC", "a\u00E7\u00E3o", "far\u0153", "r.st\u00FCdio:v.1.0.143"),
+                            case = "mixed"),
+               c("sp_ace", "repeated", "a", "percent", "X", "X_2", "d_9", "Repeated", 
+                 "cant", "hi_there", "leading_spaces", "X_3", "acao", "faroe", 
+                 "r_studio_v_1_0_143")
+  )
+  
+  expect_equal(clean_names3(c("sp ace", "repeated", "a**#@", "%", "#",
+                              "!", "d(!)9", "REPEATED", "can\"'t", "hi_`there`",
+                              "  leading spaces", "\u20AC", "a\u00E7\u00E3o", "far\u0153", "r.st\u00FCdio:v.1.0.143"),
+                            case = "none"),
+               c("sp_ace", "repeated", "a____", "_percent_", "X_", "X__2", "d___9", 
+                 "REPEATED", "cant", "hi__there_", "leading_spaces", "X__3", "acao", 
+                 "faroe", "r_studio_v_1_0_143")
+  )
 })
 
 # test_that("rules",{
