@@ -144,8 +144,7 @@ to_any_case <- function(string,
   case <- match.arg(case)
 ### ____________________________________________________________________________
 ### save names-attribute
-  st.names <- names(string)
-  
+  string_names <- names(string)
 ### ____________________________________________________________________________
 ### helper for "lower_upper", "upper_lower"
   # this helper returns a logical vector with TRUE for the first and every
@@ -292,8 +291,8 @@ to_any_case <- function(string,
   string <- stringr::str_c(prefix, string, postfix)
 ### ____________________________________________________________________________
 ### set back names-attribute
-  names(string) <- st.names
-  ### ____________________________________________________________________________
+  names(string) <- string_names
+### ____________________________________________________________________________
 ### return
   string
 }
