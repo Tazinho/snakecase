@@ -143,6 +143,10 @@ to_any_case <- function(string,
                         parsingoption = 1){
   case <- match.arg(case)
 ### ____________________________________________________________________________
+### save names-attribute
+  st.names <- names(string)
+  
+### ____________________________________________________________________________
 ### helper for "lower_upper", "upper_lower"
   # this helper returns a logical vector with TRUE for the first and every
   # second string of those which contain an alphabetic character
@@ -287,6 +291,9 @@ to_any_case <- function(string,
 ### pre and postfix
   string <- stringr::str_c(prefix, string, postfix)
 ### ____________________________________________________________________________
+### set back names-attribute
+  names(string) <- st.names
+  ### ____________________________________________________________________________
 ### return
   string
 }
