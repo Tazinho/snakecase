@@ -32,6 +32,56 @@ test_that("examples", {
 }
 )
 
+test_that("preserve-names-attribute", {
+  
+  labs <- c(a = "abcDEF", b = "bbccEE", c = "TeESt it")
+  
+  expect_equal(
+    to_any_case(labs, case = "snake"),
+    structure(c("abc_def", "bbcc_ee", "te_e_st_it"), .Names = c("a", "b", "c"))
+    )
+  
+  expect_equal(
+    to_any_case(labs, case = "upper_camel"),
+    structure(c("AbcDef", "BbccEe", "TeEStIt"), .Names = c("a", "b", "c"))
+    )
+  
+  expect_equal(
+    to_any_case(labs, case = "lower_camel"),
+    structure(c("abcDef", "bbccEe", "teEStIt"), .Names = c("a", "b", "c"))
+    )
+  
+  expect_equal(
+    to_any_case(labs, case = "parsed"),
+    structure(c("abc_DEF", "bbcc_EE", "Te_E_St_it"), .Names = c("a", "b", "c"))
+  )
+  
+  expect_equal(
+    to_any_case(labs, case = "mixed"),
+    structure(c("abc_Def", "bbcc_Ee", "Te_E_St_it"), .Names = c("a", "b", "c"))
+  )
+  
+  expect_equal(
+    to_any_case(labs, case = "none"),
+    structure(c("abcDEF", "bbccEE", "TeESt it"), .Names = c("a", "b", "c"))
+    )
+  
+  expect_equal(
+    to_any_case(labs, case = "all_caps"),
+    structure(c("ABC_DEF", "BBCC_EE", "TE_E_ST_IT"), .Names = c("a", "b", "c"))
+    )
+  
+  expect_equal(
+    to_any_case(labs, case = "upper_lower"),
+    structure(c("ABCdef", "BBCCee", "TEeSTit"), .Names = c("a", "b", "c"))
+    )
+  
+  expect_equal(
+    to_any_case(labs, case = "lower_upper"),
+    structure(c("abcDEF", "bbccEE", "teEstIT"), .Names = c("a", "b", "c"))
+    )
+})
+
 test_that("janitor-pkg-tests",{
   clean_names3 <- function(old_names, case = "snake"){
     new_names <- old_names %>%

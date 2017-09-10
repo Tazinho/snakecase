@@ -24,3 +24,13 @@ test_that("rules",{
                to_screaming_snake_case(examples)
   ) 
 })
+
+test_that("preserve-name-attribute",{
+  labs <- c(a = "abcDEF", b = "bbccEE", c = "TeESt it")
+  
+  expect_equal(
+    to_screaming_snake_case(labs),
+    structure(c("ABC_DEF", "BBCC_EE", "TE_E_ST_IT"), .Names = c("a", 
+                                                                "b", "c"))
+  )
+})

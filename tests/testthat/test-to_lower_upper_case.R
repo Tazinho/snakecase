@@ -5,3 +5,13 @@ test_that("random stuff", {
                "rSTUDIOrrrSTUDIO")
   }
 )
+
+test_that("preserve-name-attribute",{
+  labs <- c(a = "abcDEF", b = "bbccEE", c = "TeESt it")
+  
+  expect_equal(
+    to_lower_upper_case(labs),
+    structure(c("abcDEF", "bbccEE", "teEstIT"), .Names = c("a", "b", 
+                                                           "c"))
+  )
+})

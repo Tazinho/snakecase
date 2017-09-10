@@ -24,3 +24,13 @@ test_that("rules",{
                to_small_camel_case(examples)
                )
 })
+
+test_that("preserve-name-attribute",{
+  labs <- c(a = "abcDEF", b = "bbccEE", c = "TeESt it")
+  
+  expect_equal(
+    to_small_camel_case(labs),
+    structure(c("abcDef", "bbccEe", "teEStIt"), .Names = c("a", "b", 
+                                                           "c"))
+  )
+})
