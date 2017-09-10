@@ -30,17 +30,24 @@ NULL
 #' @export
 
 to_snake_case <- function(string){
-  to_parsed_case_internal(string) %>% 
+  # save names-attribute
+  string_names <- names(string)
+  string <- to_parsed_case_internal(string) %>% 
     purrr::map_chr(stringr::str_to_lower)
+  names(string) <- string_names
+  string
 }
 
 #' @rdname caseconverter
 #' @export
 
 to_small_camel_case <- function(string){
+  # save names-attribute
+  out_names <- names(string)
   out <- to_big_camel_case(string)
   out <- stringr::str_c(stringr::str_sub(out, 1, 1) %>% stringr::str_to_lower(),
                         stringr::str_sub(out, 2))
+  names(out) <- out_names
   out
 }
 
@@ -48,32 +55,46 @@ to_small_camel_case <- function(string){
 #' @export
 
 to_big_camel_case <- function(string){
-  to_parsed_case_internal(string) %>% 
+  # save names-attribute
+  string_names <- names(string)
+  string <- to_parsed_case_internal(string) %>% 
     purrr::map_chr(stringr::str_to_lower) %>% 
     stringr::str_split("(?<!\\d)_|_(?!\\d)") %>% 
     purrr::map(stringr::str_to_title) %>% 
     purrr::map_chr(stringr::str_c, collapse = "")
+  names(string) <- string_names
+  string
 }
 
 #' @rdname caseconverter
 #' @export 
 
 to_screaming_snake_case <- function(string){
-  to_parsed_case_internal(string) %>%
+  # save names-attribute
+  string_names <- names(string)
+  string <- to_parsed_case_internal(string) %>%
     stringr::str_to_upper()
+  names(string) <- string_names
+  string
 }
 
 #' @rdname caseconverter
 #' @export
 
 to_parsed_case <- function(string){
-  to_parsed_case_internal(string)
+  # save names-attribute
+  string_names <- names(string)
+  string <- to_parsed_case_internal(string)
+  names(string) <- string_names
+  string
 }
 
 #' @rdname caseconverter
 #' @export
 
 to_mixed_case <- function(string){
+  # save names-attribute
+  string_names <- names(string)
   string <- to_parsed_case_internal(string)
   string <- string %>% stringr::str_split("_")
   string <- string %>% 
@@ -81,6 +102,7 @@ to_mixed_case <- function(string){
                                stringr::str_sub(.x, 2) %>%
                                  stringr::str_to_lower()))
   string <- string %>% purrr::map_chr(~stringr::str_c(.x, collapse = "_"))
+  names(string) <- string_names
   string
 }
 
@@ -88,6 +110,8 @@ to_mixed_case <- function(string){
 #' @export
 
 to_lower_upper_case <- function(string){
+  # save names-attribute
+  string_names <- names(string)
   string <- to_parsed_case_internal(string)
   string <- string %>% stringr::str_split("_")
   
@@ -106,6 +130,7 @@ to_lower_upper_case <- function(string){
                         .x[!.y] <- stringr::str_to_upper(.x[!.y]);
                         .x}) 
   string <- string %>% purrr::map_chr(stringr::str_c, collapse = "")
+  names(string) <- string_names
   string
 }
 
@@ -113,6 +138,9 @@ to_lower_upper_case <- function(string){
 #' @export
 
 to_upper_lower_case <- function(string){
+  # save names-attribute
+  string_names <- names(string)
+  
   string <- to_parsed_case_internal(string)
   string <- string %>% stringr::str_split("_")
   
@@ -131,5 +159,6 @@ to_upper_lower_case <- function(string){
                         .x[!.y] <- stringr::str_to_lower(.x[!.y]);
                         .x}) 
   string <- string %>% purrr::map_chr(stringr::str_c, collapse = "")
+  names(string) <- string_names
   string
 }
