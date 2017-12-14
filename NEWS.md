@@ -1,3 +1,7 @@
+# snakecase 0.5.3.9000
+
+* added abbreviations argument for better mixed case handling
+
 # snakecase 0.5.2.9000
 
 * improve consistency with stringr pkg regarding special input handlig

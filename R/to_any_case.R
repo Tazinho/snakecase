@@ -67,6 +67,10 @@
 #'  \item{4: parses at the beginning like option 2 and the rest like option 1.}
 #'  \item{any other integer: no parsing"}
 #'  }
+#'  
+#' @param abbreviations character with (uppercase) abbreviations. This marks
+#'  abbreviations with an underscore behind (in front of the parsing).
+#'  useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2.
 #' 
 #' @return A character vector according the specified parameters above.
 #'
@@ -99,6 +103,9 @@
 #' to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 4)
 #' # there might be reasons to suppress the parsing, while choosing neither one or two
 #' to_any_case("HAMBURGcity", case = "parsed", parsingoption = 5)
+#' 
+#' ### Abbreviations
+#' to_any_case(c("RSSfeedRSSfeed", "USPassport", "USpassport"), abbreviations = c("RSS", "US"))
 #' 
 #' ### Preprocess & protect
 #' string <- "R.St\u00FCdio: v.1.0.143"
@@ -140,7 +147,8 @@ to_any_case <- function(string,
                         postfix = "",
                         unique_sep = NULL,
                         empty_fill = NULL,
-                        parsingoption = 1){
+                        parsingoption = 1,
+                        abbreviations = NULL){
   case <- match.arg(case)
 ### check input length (necessary for NULL and atomic(0))
   if(identical(stringr::str_length(string), integer())){return(character())}
@@ -160,6 +168,10 @@ to_any_case <- function(string,
   case[case == "all_caps"] <- "screaming_snake"
   case[case == "lower_camel"] <- "small_camel"
   case[case == "upper_camel"] <- "big_camel"
+### abbreviation handling
+  # mark abbreviation with an underscore behind (in front of the parsing)
+  # useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2
+  string <- abbreviation_internal(string, abbreviations)
 ### ____________________________________________________________________________
 ### preprocess (regex into "_") and parsing (surrounding by "_")
   string <- preprocess_internal(string, preprocess)

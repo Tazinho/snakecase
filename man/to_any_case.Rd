@@ -9,7 +9,7 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
   "all_caps", "lower_camel", "upper_camel", "none"), preprocess = NULL,
   protect = NULL, replace_special_characters = NULL, postprocess = NULL,
   prefix = "", postfix = "", unique_sep = NULL, empty_fill = NULL,
-  parsingoption = 1)
+  parsingoption = 1, abbreviations = NULL)
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
@@ -83,6 +83,10 @@ by the supplied string to this argument.}
  \item{4: parses at the beginning like option 2 and the rest like option 1.}
  \item{any other integer: no parsing"}
  }}
+
+\item{abbreviations}{character with (uppercase) abbreviations. This marks
+abbreviations with an underscore behind (in front of the parsing).
+useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2.}
 }
 \value{
 A character vector according the specified parameters above.
