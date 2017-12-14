@@ -121,6 +121,19 @@ to_any_case("HAMBURGcity", case = "parsed", parsingoption = 5)
 
 In general only parsing options are implemented, which fulfill the design rules of this package, as mentioned below.
 
+Abbreviations
+-------------
+
+Parsing options might be a bit of an overkill. Most of the time parsing option 1 (default) should be enough and only in special cases, mostly abbreviations, like "ID", "EN", "US", "NBA" etc. some kind of mixed cases are used with intention. So to overcome this ambiguous cases it might be a good idea to let `to_any_case` know in advance (hardcoded), which abbrevations you make usage of. This can be done via the `abbreviations` argument.
+
+``` r
+to_any_case(c("RSSfeedRSSfeed", "RSSFeedRSSFeed",
+              "USPassport", "USpassport"), 
+            abbreviations = c("RSS", "US"))
+## [1] "rss_feed_rss_feed" "rss_feed_rss_feed" "us_passport"      
+## [4] "us_passport"
+```
+
 More complex cases
 ------------------
 
