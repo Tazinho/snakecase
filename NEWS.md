@@ -1,3 +1,9 @@
+# snakecase 0.5.2.9000
+
+* improve consistency with stringr pkg regarding special input handlig
+  
+  `if(identical(stringr::str_length(string), integer())){return(character())}`
+
 # snakecase 0.5.1
 
 * Changes since last update:

@@ -142,6 +142,8 @@ to_any_case <- function(string,
                         empty_fill = NULL,
                         parsingoption = 1){
   case <- match.arg(case)
+### check input length (necessary for NULL and atomic(0))
+  if(identical(stringr::str_length(string), integer())){return(character())}
 ### ____________________________________________________________________________
 ### save names-attribute
   string_names <- names(string)

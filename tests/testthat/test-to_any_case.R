@@ -279,7 +279,7 @@ test_that("complex strings", {
   expect_equal(to_any_case("R.aStudio", case = "mixed", protect = "\\.|A", postprocess = "-"),
                "R.a-Studio")
   
-  expect_equal(to_any_case(character(0), postprocess = "c"), "")
+  expect_equal(to_any_case(character(0), postprocess = "c"), character())
   
   expect_equal(to_any_case("fdf 1 2", protect = "\\d", case = "big_camel"),
                "Fdf12")
