@@ -106,6 +106,8 @@ to_any_case(
 
     ## [1] "r stuedio ide v 1.0.143 rss feed"
 
+Before getting overwhelmed: In most cases the `preprocess`, `replace_special_characters`, `case` and `postprocess` argument should suffice all your needs.
+
 **Further cosmetics**
 
 -   `make_unique` (logical): can be set to `"TRUE"` if you convert several strings at once and want the output to be unique (for example if the output is supposed to be used as column names for a data frame).
