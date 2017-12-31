@@ -25,6 +25,111 @@ install.packages("devtools")
 devtools::install_github("Tazinho/snakecase")
 ```
 
+Quick examples
+--------------
+
+``` r
+library(snakecase)
+
+# default is snake case
+to_any_case("veryComplicatedString")
+## [1] "very_complicated_string"
+
+# dots and other special signs are parsed as words
+to_any_case(names(iris))
+## [1] "sepal_._length" "sepal_._width"  "petal_._length" "petal_._width" 
+## [5] "species"
+
+# since it is not clear if they are separators
+to_any_case(names(iris), preprocess = "\\.")
+## [1] "sepal_length" "sepal_width"  "petal_length" "petal_width" 
+## [5] "species"
+
+# or decimal marks
+to_any_case("var_1.5", protect = "\\.")
+## [1] "var_1.5"
+
+# of course other cases are supported and separators can be adjusted
+to_any_case(names(iris), preprocess = "\\.", case = "upper_camel", postprocess = " ")
+## [1] "Sepal Length" "Sepal Width"  "Petal Length" "Petal Width" 
+## [5] "Species"
+
+# all of the cases like: snake, lower_camel, upper_camel, all_caps, lower_upper
+# and upper_lower are based on parsed case
+to_any_case("THISIsHOW IAmPARSED!", case = "parsed")
+## [1] "THIS_Is_HOW_I_Am_PARSED_!"
+
+# be aware that automatic case conversion depends on the input string and it is
+# recommended to verify the results. You might want to pipe results into dput()
+# and hardcode name changes instead of blindly trusting to_any_case's output.
+dput(to_any_case("SomeBAdInput"))
+## "some_b_ad_input"
+```
+
+Internal steps
+--------------
+
+The `to_any_case()` function is the workhorse of the package and basically enables you to convert any string into any case via a well thought process of **parsing** (3 steps), **conversion** (2), **postprocessing** (2) and final **cosmetics** (3). (+some internal details...)
+
+Lets illustrate this on a more complicated example, where we visit each argument of `to_any_case()` once, in the order of the internal steps taken:
+
+``` r
+to_any_case(
+  string = "R.StüdioIDE: v.1.0.143RSSfeed",
+  
+  ### --------------------------------------------------------------------------
+  ### 1. Parsing 
+  abbreviations = "RSS",  # regexp: surrounds matches with "_"
+  ##> "R.StüdioIDE: v.1.0.143_RSS_feed"
+  preprocess = ":|(?<!\\d)\\.", # regexp: replaces matches with "_"
+  ##> "R_StüdioIDE_ v.1.0.143_RSS_feed"
+  parsingoption = 1, # integer: replaces blank characters and surrounds
+                     # matches of specific pattern with "_"
+  ##> "R_Stüdio_IDE_v_._1_._0_._143_RSS_feed"
+  
+  ### --------------------------------------------------------------------------
+  ### 2. Conversion
+  replace_special_characters = "german", # character: converts special 
+                                         # characters into ASCII representation
+  ##> "R_Stuedio_IDE_v_._1_._0_._143_RSS_feed"
+            case = "snake", # character: converts the word/character pattern
+                            # into a specific case and the regarding separator
+                            # depending on the case
+  ##> "r_stuedio_ide_v_._1_._0_._143_rss_feed"
+  
+  ### --------------------------------------------------------------------------
+  ### 3. Postprocessing
+            protect = "\\.", # regexp: removes "_" around matches.  
+  ##> "r_stuedio_ide_v.1.0.143_rss_feed"
+            postprocess = " " # character: replaces "_" with it's argument as a
+                              # new separator
+  ##> "r stuedio ide v.1.0.143 rss feed"
+  
+  )
+```
+
+    ## [1] "r stuedio ide v 1.0.143 rss feed"
+
+**Further cosmetics**
+
+-   `make_unique` (logical): can be set to `"TRUE"` if you convert several strings at once and want the output to be unique (for example if the output is supposed to be used as column names for a data frame).
+-   `prefix` (character): simple prefix
+-   `postfix` (character): simple post/suffix
+
+Vectorisation, speed and special input handling
+-----------------------------------------------
+
+The snakecase package is internally build up on the [stringr](https://github.com/tidyverse/stringr) package, which means that many powerful features are provided "by default":
+
+-   `to_any_case()` is vectorised over most of its arguments like `string`, `preprocess`, `protect`, `postprocess`, `empty_fill`, `prefix`, `postfix`.
+-   internal character operations are super fast c++ (however, a lot of speed is lost due to a more systematic and maintainable implementation)
+-   special input like `character(0)`, `NA` etc. is handled in exactly the same consistent and convenient manner as in the stringr package and all its tidy relatives.
+
+Further reading
+---------------
+
+For the rest of this Readme, we first provide more detailed description on the usage of each parameter and then dive a bit deeper into the general design philosophy for the parsing patterns implemented into the package.
+
 Easy cases
 ----------
 
@@ -33,7 +138,6 @@ There are 8 different cases available. Note that they are all build up on the fi
 (Please also note that the string "RStudio", which I will use here, is already in its "correct spelling" and the following are just artificial examples to familiarize you with the `to_any_case()` function.)
 
 ``` r
-library(snakecase)
 string <- "RStudio"
 
 to_any_case(string, case = "parsed")
@@ -219,15 +323,6 @@ to_any_case(string, case = "big_camel", postprocess = "//",
             prefix = "USER://", postfix = ".exe")
 ## [1] "USER://R//.//Stüdio//://V//.//1//.//0//.//143.exe"
 ```
-
-Vectorisation, speed and special input handling
------------------------------------------------
-
-The snakecase package is internally build up on the [stringr](https://github.com/tidyverse/stringr) package , which means that many powerful features are provided "by default":
-
--   `to_any_case()` is vectorised over most of its arguments like `string`, `preprocess`, `protect`, `postprocess`, `empty_fill`, `prefix`, `postfix`.
--   internal character operations are super fast c++
--   special input like `character(0)`, `NA` etc. is handled in exactly the same consistent and convenient manner as in the stringr package and all its tidy relatives.
 
 Design Philosophy
 =================
