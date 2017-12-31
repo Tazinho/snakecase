@@ -13,8 +13,7 @@ The snakecase package introduces a fresh and straightforward approach on case co
 
 If you don't want to read too much, you could watch this [talk](https://www.youtube.com/watch?v=T6p0l8XzP64) instead.
 
-Install
--------
+### Install
 
 ``` r
 # install snakecase from cran
@@ -25,8 +24,7 @@ install.packages("devtools")
 devtools::install_github("Tazinho/snakecase")
 ```
 
-Quick examples
---------------
+### Basic examples
 
 ``` r
 library(snakecase)
@@ -66,8 +64,7 @@ dput(to_any_case("SomeBAdInput"))
 ## "some_b_ad_input"
 ```
 
-Internal steps
---------------
+### Big picture (a parameterized workflow)
 
 The `to_any_case()` function is the workhorse of the package and basically enables you to convert any string into any case via a well thought process of **parsing** (3 steps), **conversion** (2), **postprocessing** (2) and final **cosmetics** (3). (+some internal details...)
 
@@ -75,8 +72,8 @@ Lets illustrate this on a more complicated example, where we visit each argument
 
 ``` r
 to_any_case(
-  string = "R.StüdioIDE: v.1.0.143RSSfeed",
-  
+  ### --------------------------------------------------------------------------
+  string = "R.StüdioIDE: v.1.0.143RSSfeed", ################### INPUT STRING ###
   ### --------------------------------------------------------------------------
   ### 1. Parsing 
   abbreviations = "RSS",  # regexp: surrounds matches with "_"
@@ -85,25 +82,24 @@ to_any_case(
   ##> "R_StüdioIDE_ v.1.0.143_RSS_feed"
   parsingoption = 1, # integer: replaces blank characters and surrounds
                      # matches of specific pattern with "_"
-  ##> "R_Stüdio_IDE_v_._1_._0_._143_RSS_feed"
-  
+  ##> "R_Stüdio_IDE_v_._1_._0_._143_RSS_feed" ################ PARSED STRING ###
   ### --------------------------------------------------------------------------
   ### 2. Conversion
   replace_special_characters = "german", # character: converts special 
                                          # characters into ASCII representation
   ##> "R_Stuedio_IDE_v_._1_._0_._143_RSS_feed"
-            case = "snake", # character: converts the word/character pattern
-                            # into a specific case and the regarding separator
-                            # depending on the case
-  ##> "r_stuedio_ide_v_._1_._0_._143_rss_feed"
-  
+  case = "snake", # character: converts the word/character pattern into a 
+                  # specific case and the regarding separator (depending on the 
+                  # case)
+  ##> "r_stuedio_ide_v_._1_._0_._143_rss_feed" ############ CONVERTED STRING ###
   ### --------------------------------------------------------------------------
   ### 3. Postprocessing
-            protect = "\\.", # regexp: removes "_" around matches.  
+  protect = "\\.", # regexp: removes "_" around matches.  
   ##> "r_stuedio_ide_v.1.0.143_rss_feed"
-            postprocess = " " # character: replaces "_" with it's argument as a
-                              # new separator
-  ##> "r stuedio ide v.1.0.143 rss feed"
+  
+  postprocess = " " # character: sets it's argument as a separator
+  ##> "r stuedio ide v.1.0.143 rss feed" ############## POSTPROCESSED STRING ###
+  ### --------------------------------------------------------------------------
   
   )
 ```
@@ -116,8 +112,7 @@ to_any_case(
 -   `prefix` (character): simple prefix
 -   `postfix` (character): simple post/suffix
 
-Vectorisation, speed and special input handling
------------------------------------------------
+### Vectorisation, speed and special input handling
 
 The snakecase package is internally build up on the [stringr](https://github.com/tidyverse/stringr) package, which means that many powerful features are provided "by default":
 
@@ -130,8 +125,7 @@ Further reading
 
 For the rest of this Readme, we first provide more detailed description on the usage of each parameter and then dive a bit deeper into the general design philosophy for the parsing patterns implemented into the package.
 
-Easy cases
-----------
+### Easy cases
 
 There are 8 different cases available. Note that they are all build up on the first ("parsed") case, which (basically) surrounds every word a string consists of by underscores.
 
@@ -171,10 +165,9 @@ to_any_case(string, case = "none")
 
 For these simple cases (except for `case = "none"`) also the shortcuts `to_parsed_case()`, `to_snake_case()`, `to_screaming_snake_case()` etc. are provided, which achieve exactly the same as `to_any_case(string, case)`.
 
-Customize output
-----------------
+### Customize output
 
-### Postprocessing
+#### Postprocessing
 
 By default the separators of the output are `"_"` or `""` (depending on the case). You can customize this, while supplying another separator to the `postprocess` argument
 
@@ -196,8 +189,7 @@ to_any_case(string, case = "parsed",
 
 Note that the latter example has a nice application for the annotation of graphics. "RStudio" is not a good example for this, since it is a name of a company and already written correctly. But for typical column names this could be a nice way to (almost) automate the conversion from internal (naming conventions in personal development workflow) to external (naming conventions for business reports etc.) representation.
 
-Parsing options
----------------
+### Parsing options
 
 Above "RStudio" was parsed to "R\_Studio". This is a deliberate choice, but also other parsing options are implemented, which make more sense, when for example different words are separated completely by switching between upper and lower case.
 
@@ -225,8 +217,7 @@ to_any_case("HAMBURGcity", case = "parsed", parsingoption = 5)
 
 In general only parsing options are implemented, which fulfill the design rules of this package, as mentioned below.
 
-Abbreviations
--------------
+### Abbreviations
 
 Parsing options might be a bit of an overkill. Most of the time parsing option 1 (default) should be enough and only in special cases, mostly abbreviations, like "ID", "EN", "US", "NBA" etc. some kind of mixed cases are used with intention. So to overcome this ambiguous cases it might be a good idea to let `to_any_case` know in advance (hardcoded), which abbrevations you make usage of. This can be done via the `abbreviations` argument.
 
@@ -238,8 +229,7 @@ to_any_case(c("RSSfeedRSSfeed", "RSSFeedRSSFeed",
 ## [4] "us_passport"
 ```
 
-More complex cases
-------------------
+### More complex cases
 
 Till now, we only looked at an easy example. By default the parsing of this package recognizes patterns of switching from lower- to uppercase (and vice versa), underscores and spaces or tabs as word boundaries. If we introduce other characters like dots or colons in our strings, the following will happen:
 
@@ -255,7 +245,7 @@ Every single character, which is not a letter, digit, underscore or blank charac
 -   a separator and should be replaced by an underscore or
 -   a decimal mark and should just be kept as it is (without underscores around it).
 
-### Preprocess & protect
+#### Preprocess & protect
 
 If you would like to treat dots and colons as separators, you can supply them (as a regular expression) to the `preprocess` argument (now they will be internally replaced by underscores, before the parsing occurs)
 
@@ -284,7 +274,7 @@ to_any_case(string, case = "snake",
 ## [1] "r_stüdio_v_1.0.143"
 ```
 
-### Special characters
+#### Special characters
 
 If you have problems with special characters (like u umlaut) on your platform, you can replace them via `replace_special_characters = c("german", "Latin-ASCII")`:
 
@@ -298,7 +288,7 @@ to_any_case(string, case = "snake",
 
 You can supply any id from `stringi::stri_trans_list()` or countryname from the internal transliteration dictionary of this package (currently only "german"; also in combination).
 
-### Empty or non unique output
+#### Empty or non unique output
 
 You can fill empty results with arbitrary strings via the `empty_fill` argument
 
@@ -314,7 +304,7 @@ to_any_case(c("same","same","other"), unique_sep = c(">"))
 ## [1] "same"   "same>1" "other"
 ```
 
-### Pre -and postfix
+#### Pre -and postfix
 
 You can set pre -and suffixes:
 
@@ -325,10 +315,9 @@ to_any_case(string, case = "big_camel", postprocess = "//",
 ```
 
 Design Philosophy
-=================
+-----------------
 
-Practical influences
---------------------
+### Practical influences
 
 Conversion to a specific target case is not always obvious or unique. In general a clean conversion can only be guaranteed, when the input-string is meaningful.
 
@@ -350,8 +339,7 @@ to_snake_case("CId")
 
 In this way it is guaranteed to get the correct conversion and the only chance of an error lies in an accidentally wrong provided input string or a bug in the converter function `to_snake_case()`.
 
-Consistent behaviour
---------------------
+### Consistent behaviour
 
 In many scenarios the analyst doesn't have a big influence on naming conventions and sometimes there might occur situations where it is not possible to find out the exact meaning of a variable name, even if we ask the original author. In some cases data might also have been named by a machine and the results can be relatively technically. So in general it is a good idea to compare the input of the case converter functions with their output, to see if the intended meanings at least seem to be preserved.
 
@@ -371,8 +359,7 @@ Both of the first two alternatives can't be consistently converted back to a val
 
 In this way, we can get a good starting point on how to convert specific strings to valid snake\_case. Once we have a clean snake\_case conversion, we can easily convert further to smallCamelCase, BigCamelCase, SCREAMING\_SNAKE\_CASE or anything else.
 
-Three rules of consistency
---------------------------
+### Three rules of consistency
 
 In the last sections we have seen, that it is reasonable to bring a specific conversion from an input string to some standardized case into question. We have also seen, that it is helpful to introduce some tests on the behavior of a specific conversion pattern in related cases. The latter can help to detect inappropriate conversions and also establishes a consistent behavior when converting exotic cases or switching between standardized cases. Maybe we can generalize some of these tests and introduce some kind of consistency patterns. This would enable us that whenever inappropriate or non-unique possibilities for conversions appear, we have rules that help us to deal with this situation and help to exclude some inconsistent conversion alternatives.
 
@@ -393,14 +380,14 @@ During the development of this package I recognized three specific rules that se
 Note that it can easily be shown, that rule three follows from the first and the second rule. However, it seems reasonable to express each by its own, since they all have an interpretation and together they give a really good intuition about the properties of the converter functions.
 
 Testing
-=======
+-------
 
 To give a meaningful conversion for different cases, we systematically designed test-cases for conversion to snake, small- and big camel case among others. To be consistent regarding the conversion between different cases, we also test the rules above on all test-cases. <!--Note that equality in this equation is only one criterion and it still doesn't
 imply a unique solution on how to translate an initial string argument to snake or camel case. (Note that also `to_xxx(string) = to_xxx(string)` seems desirable). However, for the 
 following testcases, also these two equations are tested.-->
 
 Related Resources
-=================
+-----------------
 
 -   [The state of naming conventions in R, Bååth 2012, R Journal](https://lup.lub.lu.se/search/publication/e324f252-1d1c-4416-ad1f-284d4ba84bf9) [Download article](journal.r-project.org/archive/2012-2/RJournal_2012-2_Baaaath.pdf)
 -   [Consistent naming conventions in R, Lovelace 2014, RBloggers](https://www.r-bloggers.com/consistent-naming-conventions-in-r/)
