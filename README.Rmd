@@ -75,23 +75,23 @@ to_any_case(
   ##> "R_StüdioIDE_ v.1.0.143_RSS_feed"
   parsingoption = 1, # integer: replaces blank characters and surrounds
                      # matches of specific pattern with "_"
-  ##> "R_Stüdio_IDE_v_._1_._0_._143_RSS_feed" ################ PARSED STRING ###
+  ##> "R_Stüdio_IDE_v_1_._0_._143_RSS_feed" ################ PARSED STRING ###
   ### --------------------------------------------------------------------------
   ### 2. Conversion
   replace_special_characters = "german", # character: converts special 
                                          # characters into ASCII representation
-  ##> "R_Stuedio_IDE_v_._1_._0_._143_RSS_feed"
+  ##> "R_Stuedio_IDE_v_1_._0_._143_RSS_feed"
   case = "snake", # character: converts the word/character pattern into a 
                   # specific case and the regarding separator (depending on the 
                   # case)
-  ##> "r_stuedio_ide_v_._1_._0_._143_rss_feed" ############ CONVERTED STRING ###
+  ##> "r_stuedio_ide_v_1_._0_._143_rss_feed" ############ CONVERTED STRING ###
   ### --------------------------------------------------------------------------
   ### 3. Postprocessing
   protect = "\\.", # regexp: removes "_" around matches.  
-  ##> "r_stuedio_ide_v.1.0.143_rss_feed"
+  ##> "r_stuedio_ide_v_1.0.143_rss_feed"
   
-  postprocess = " " # character: sets it's argument as a separator
-  ##> "r stuedio ide v.1.0.143 rss feed" ############## POSTPROCESSED STRING ###
+  postprocess = " " # character: sets its argument as a separator
+  ##> "r stuedio ide v 1.0.143 rss feed" ############## POSTPROCESSED STRING ###
   ### --------------------------------------------------------------------------
   
   )
