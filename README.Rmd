@@ -61,7 +61,7 @@ dput(to_any_case("SomeBAdInput"))
 
 The `to_any_case()` function is the workhorse of the package and basically enables you to convert any string into any case via a well thought process of __parsing__ (3 steps), __conversion__ (2), __postprocessing__ (2) and final __cosmetics__ (3). (+some internal details...)
 
-Lets illustrate this on a more complicated example, where we visit each argument of `to_any_case()` once, in the order of the internal steps taken:
+Lets illustrate this on a more complicated example, where we visit each argument of `to_any_case()`, in the order of the internal steps taken:
 
 ```{r, collapse = FALSE}
 to_any_case(
@@ -72,26 +72,25 @@ to_any_case(
   abbreviations = "RSS",  # character: surrounds matches with "_"
   ##> "R.StüdioIDE: v.1.0.143_RSS_feed"
   preprocess = ":|(?<!\\d)\\.", # regexp: replaces matches with "_"
-  ##> "R_StüdioIDE_ v.1.0.143_RSS_feed"
+  ##> "R_StüdioIDE_ v_1.0.143_RSS_feed"
   parsingoption = 1, # integer: replaces blank characters and surrounds
                      # matches of specific pattern with "_"
-  ##> "R_Stüdio_IDE_v_1_._0_._143_RSS_feed" ################ PARSED STRING ###
+  ##> "R_Stüdio_IDE_v_1_._0_._143_RSS_feed" ######################### PARSED ###
   ### --------------------------------------------------------------------------
   ### 2. Conversion
   replace_special_characters = "german", # character: converts special 
                                          # characters into ASCII representation
-  ##> "R_Stuedio_IDE_v_1_._0_._143_RSS_feed"
+  ##> "R" "Stuedio" "IDE" "v" "1" "." "0" "." "143" "RSS" "feed"
   case = "snake", # character: converts the word/character pattern into a 
                   # specific case and the regarding separator (depending on the 
                   # case)
-  ##> "r_stuedio_ide_v_1_._0_._143_rss_feed" ############ CONVERTED STRING ###
+  ##> "r" "stuedio" "ide" "v" "1" "." "0" "." "143" "rss" "feed" # CONVERTED ###
   ### --------------------------------------------------------------------------
   ### 3. Postprocessing
-  protect = "\\.", # regexp: removes "_" around matches.  
-  ##> "r_stuedio_ide_v_1.0.143_rss_feed"
-  
-  postprocess = " " # character: sets its argument as a separator
-  ##> "r stuedio ide v 1.0.143 rss feed" ############## POSTPROCESSED STRING ###
+  postprocess = " ", # character: sets its argument as a separator
+  ##> "r stuedio ide v 1 . 0 . 143 rss feed"
+  protect = "\\." # regexp: removes "_" around matches.  
+  ##> "r stuedio ide v 1.0.143 rss feed" ##################### POSTPROCESSED ###
   ### --------------------------------------------------------------------------
   
   )
