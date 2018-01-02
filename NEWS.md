@@ -1,3 +1,7 @@
+# snakecase 0.5.4.9000
+
+* added special behaviour for abbreviations within "mixed_case"
+
 # snakecase 0.5.3.9000
 
 * added abbreviations argument for better mixed case handling

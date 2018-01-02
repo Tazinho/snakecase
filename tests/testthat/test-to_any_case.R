@@ -308,6 +308,12 @@ test_that("complex strings", {
   expect_equal(to_any_case("bla.bla", case = "none", preprocess = "\\."),
                "bla_bla")
   
+  expect_equal(to_any_case("blaUSABlaGERBlaZDFBla", abbreviations = c("USA", "GER", "ZDF", "BLA"), case = "mixed"),
+               "bla_USA_Bla_GER_Bla_ZDF_Bla")
+  
+  expect_equal(to_any_case("someUSPeople", abbreviations = "US", case = "mixed", postprocess = " "),
+               "some US People")
+  
   # expect_equal(to_any_case(c(NA, NA, NA), "lower_upper"),
   #              rep(NA_character_, 3))
   # 

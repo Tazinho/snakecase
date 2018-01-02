@@ -21,7 +21,7 @@
 #'   Underscores at the start and end are trimmed. No lower or 
 #'  upper case pattern from the input string are changed.}
 #'  \item{\code{"mixed"}: Almost the same as \code{case = "parsed"}. Every letter which is not at the start
-#'  or behind an underscore is turned into lowercase.}
+#'  or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will stay in upper case.}
 #'  \item{\code{"none"}: Neither parsing nor case conversion occur. This case might be helpful, when
 #'  one wants to call the function for the quick usage of the other parameters.
 #'  Works with \code{preprocess}, \code{replace_special_characters}, \code{prefix},
@@ -159,10 +159,12 @@ to_any_case <- function(string,
 ### helper for "lower_upper", "upper_lower"
   # this helper returns a logical vector with TRUE for the first and every
   # second string of those which contain an alphabetic character
-  relevant <- function(string){
-    relevant <- string %>% stringr::str_detect("[:alpha:]")
-    relevant[relevant] <- rep_len(c(TRUE, FALSE), sum(relevant))
-    relevant
+  if(case == "upper_lower" | case == "lower_upper") {
+    relevant <- function(string){
+      relevant <- string %>% stringr::str_detect("[:alpha:]")
+      relevant[relevant] <- rep_len(c(TRUE, FALSE), sum(relevant))
+      relevant
+    }
   }
 ### Aliases
   case[case == "all_caps"] <- "screaming_snake"
@@ -209,9 +211,13 @@ to_any_case <- function(string,
 ### caseconversion--------------------------------------------------------------
     if(case == "mixed"){
       string <- string %>% 
-        purrr::map(~stringr::str_c(stringr::str_sub(.x, 1, 1),
-                                   stringr::str_sub(.x, 2) %>%
-                                   stringr::str_to_lower()))}
+        purrr::map(~ifelse(!.x %in% abbreviations, 
+                           stringr::str_c(stringr::str_sub(.x, 1, 1),
+                                          stringr::str_sub(.x, 2) %>%
+                                            stringr::str_to_lower()),
+                           .x)
+                   )
+      }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if(case == "snake"){
       string <- string %>%

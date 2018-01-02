@@ -32,7 +32,7 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
   Underscores at the start and end are trimmed. No lower or 
  upper case pattern from the input string are changed.}
  \item{\code{"mixed"}: Almost the same as \code{case = "parsed"}. Every letter which is not at the start
- or behind an underscore is turned into lowercase.}
+ or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will stay in upper case.}
  \item{\code{"none"}: Neither parsing nor case conversion occur. This case might be helpful, when
  one wants to call the function for the quick usage of the other parameters.
  Works with \code{preprocess}, \code{replace_special_characters}, \code{prefix},
@@ -122,6 +122,9 @@ to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 3)
 to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 4)
 # there might be reasons to suppress the parsing, while choosing neither one or two
 to_any_case("HAMBURGcity", case = "parsed", parsingoption = 5)
+
+### Abbreviations
+to_any_case(c("RSSfeedRSSfeed", "USPassport", "USpassport"), abbreviations = c("RSS", "US"))
 
 ### Preprocess & protect
 string <- "R.St\\u00FCdio: v.1.0.143"
