@@ -197,7 +197,7 @@ to_any_case <- function(string,
         stringr::str_split(pattern = "(?<!\\d)_|_(?!\\d)")
     }
 ### protecthelper (1)-----------------------------------------------------------
-# mark end of matches of protect before the caseconversion
+# mark end of matches of protect before the case conversion
     if(!is.null(protect)){
       # in the 2nd line the replacement only can occur, if it didn't appear in the first line
       string <- purrr::map(string, ~stringr::str_replace(.x, stringr::str_c("^(", protect, ")"), "\\1___"))
@@ -240,8 +240,9 @@ to_any_case <- function(string,
         stringr::str_split(" ")
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-    if(case == "screaming_snake")
+    if(case == "screaming_snake"){
       string <- string %>% purrr::map(stringr::str_to_upper)
+    }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if (case == "lower_upper"){
       string[!is.na(string)] <- purrr::map2(string[!is.na(string)],
