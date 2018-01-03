@@ -87,7 +87,8 @@ On this example, you can see the pipeline including all implementation details.
 
 
 ```{r echo=FALSE, out.width='80%'}
-knitr::include_graphics('./man/figures/Workflow01.png')
+# knitr::include_graphics('./man/figures/Workflow01.png')
+knitr::include_graphics('https://github.com/Tazinho/snakecase/tree/devversion-02/man/figures')
 ```
 
 

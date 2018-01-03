@@ -92,7 +92,7 @@ The `to_any_case()` function is the workhorse of the package and basically enabl
 
 On this example, you can see the pipeline including all implementation details.
 
-<img src="./man/figures/Workflow01.png" width="80%" />
+<img src="https://github.com/Tazinho/snakecase/tree/devversion-02/man/figures" width="80%" />
 
 Some further cosmetics can be added to the output via the following arguments:
 
