@@ -14,7 +14,7 @@ output: rmarkdown::github_document
 in general) to different cases like snake_case, smallCamel- and BigCamelCase among others. Also high level features for more advanced case conversions are provided via `to_any_case()`.-->
 The snakecase package introduces a fresh and straightforward approach on case conversion of strings, based upon a concise design philosophy.
 
-If you don't want to read too much, you could watch this [talk](https://www.youtube.com/watch?v=T6p0l8XzP64) instead.
+If you don't want to read too much, you could watch this [older talk](https://www.youtube.com/watch?v=T6p0l8XzP64) instead.
 
 ### Install
 
@@ -24,36 +24,51 @@ If you don't want to read too much, you could watch this [talk](https://www.yout
 
 # or the (stable) development version hosted on github
 install.packages("devtools")
-devtools::install_github("Tazinho/snakecase")
+devtools::install_github("Tazinho/snakecase", ref = "devversion-02")
 ```
 
 ### Basic examples
 
+Default case is snake case
+
 ```{r, collapse = TRUE}
 library(snakecase)
-
-# default is snake case
 to_any_case("veryComplicatedString")
+```
 
-# dots and other special signs are parsed as words
-to_any_case(names(iris))
+Dots and other special characters may have a special intention
 
-# since it is not clear if they are separators
+```{r, collapse = TRUE}
+to_any_case("malte.grosser@gmail.com")
+```
+
+When it is clear that they are separators, you can supply them as a regex to the `preprocess` argument
+
+```{r, collapse = TRUE}
 to_any_case(names(iris), preprocess = "\\.")
+```
 
-# or decimal marks
-to_any_case("var_1.5", protect = "\\.")
+This is especially handy, when special characters have a meaning as a separator or for example as a decimal mark
 
-# of course other cases are supported and separators can be adjusted
+```{r, collapse = TRUE}
+to_any_case("Pi.Value:3.14", preprocess = ":|(?<!\\d)\\.")
+```
+
+Of course other cases are supported (`case`) and separators can be adjusted (`postprocess`)
+
+```{r, collapse = TRUE}
 to_any_case(names(iris), preprocess = "\\.", case = "upper_camel", postprocess = " ")
+```
 
-# all of the cases like: snake, lower_camel, upper_camel, all_caps, lower_upper,
-# upper_lower and mixed are based on parsed case
+All of the cases like: snake, lower_camel, upper_camel, all_caps, lower_upper, upper_lower and mixed are based on parsed case
+
+```{r, collapse = TRUE}
 to_any_case("THISIsHOW IAmPARSED!", case = "parsed")
+```
 
-# be aware that automatic case conversion depends on the input string and it is
-# recommended to verify the results. You might want to pipe results into dput()
-# and hardcode name changes instead of blindly trusting to_any_case's output.
+Be aware that automatic case conversion depends on the input string and it is recommended to verify the results. So you might want to pipe these into `dput()` (and hardcode name changes instead of blindly trusting `to_any_case()`'s output)
+
+```{r, collapse = TRUE}
 dput(to_any_case("SomeBAdInput"))
 ```
 
@@ -73,7 +88,7 @@ to_any_case(
   ##> "R.StüdioIDE: v.1.0.143_RSS_feed"
   preprocess = ":|(?<!\\d)\\.", # regexp: replaces matches with "_"
   ##> "R_StüdioIDE_ v_1.0.143_RSS_feed"
-  parsingoption = 1, # integer: replaces blank characters and surrounds
+  parsing_option = 1, # integer: replaces blank characters and surrounds
                      # matches of specific pattern with "_"
   ##> "R_Stüdio_IDE_v_1_._0_._143_RSS_feed" ######################### PARSED ###
   ### --------------------------------------------------------------------------
@@ -177,19 +192,19 @@ Above "RStudio" was parsed to "R_Studio". This is a deliberate choice, but also 
 
 ```{r, collapse = TRUE}
 # the default case makes no sense in this setting
-to_any_case("HAMBURGcity", case = "parsed", parsingoption = 1)
+to_any_case("HAMBURGcity", case = "parsed", parsing_option = 1)
 
 # so the second parsing option is the way to address this example
-to_any_case("HAMBURGcity", case = "parsed", parsingoption = 2)
+to_any_case("HAMBURGcity", case = "parsed", parsing_option = 2)
 
-# one can also parse the beginning like parsingoption 1 and the rest like option 2
-to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 3)
+# one can also parse the beginning like parsing_option 1 and the rest like option 2
+to_any_case("HAMBURGcityGERUsa", case = "parsed", parsing_option = 3)
 
-# or starting like parsingoption 2 and for the rest switch to option 1
-to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 4)
+# or starting like parsing_option 2 and for the rest switch to option 1
+to_any_case("HAMBURGcityGERUsa", case = "parsed", parsing_option = 4)
 
 # there might be reasons to suppress the parsing, while choosing neither one or two
-to_any_case("HAMBURGcity", case = "parsed", parsingoption = 5)
+to_any_case("HAMBURGcity", case = "parsed", parsing_option = 5)
 ```
 
 In general only parsing options are implemented, which fulfill the design rules of this package, as mentioned below.

@@ -11,7 +11,7 @@ Overview
 in general) to different cases like snake_case, smallCamel- and BigCamelCase among others. Also high level features for more advanced case conversions are provided via `to_any_case()`.-->
 The snakecase package introduces a fresh and straightforward approach on case conversion of strings, based upon a concise design philosophy.
 
-If you don't want to read too much, you could watch this [talk](https://www.youtube.com/watch?v=T6p0l8XzP64) instead.
+If you don't want to read too much, you could watch this [older talk](https://www.youtube.com/watch?v=T6p0l8XzP64) instead.
 
 ### Install
 
@@ -21,45 +21,59 @@ If you don't want to read too much, you could watch this [talk](https://www.yout
 
 # or the (stable) development version hosted on github
 install.packages("devtools")
-devtools::install_github("Tazinho/snakecase")
+devtools::install_github("Tazinho/snakecase", ref = "devversion-02")
 ```
 
 ### Basic examples
 
+Default case is snake case
+
 ``` r
 library(snakecase)
-
-# default is snake case
 to_any_case("veryComplicatedString")
 ## [1] "very_complicated_string"
+```
 
-# dots and other special signs are parsed as words
-to_any_case(names(iris))
-## [1] "sepal_._length" "sepal_._width"  "petal_._length" "petal_._width" 
-## [5] "species"
+Dots and other special characters may have a special intention
 
-# since it is not clear if they are separators
+``` r
+to_any_case("malte.grosser@gmail.com")
+## [1] "malte.grosser@gmail.com"
+```
+
+When it is clear that they are separators, you can supply them as a regex to the `preprocess` argument
+
+``` r
 to_any_case(names(iris), preprocess = "\\.")
 ## [1] "sepal_length" "sepal_width"  "petal_length" "petal_width" 
 ## [5] "species"
+```
 
-# or decimal marks
-to_any_case("var_1.5", protect = "\\.")
-## [1] "var_1.5"
+This is especially handy, when special characters have a meaning as a separator or for example as a decimal mark
 
-# of course other cases are supported and separators can be adjusted
+``` r
+to_any_case("Pi.Value:3.14", preprocess = ":|(?<!\\d)\\.")
+## [1] "pi_value_3.14"
+```
+
+Of course other cases are supported (`case`) and separators can be adjusted (`postprocess`)
+
+``` r
 to_any_case(names(iris), preprocess = "\\.", case = "upper_camel", postprocess = " ")
 ## [1] "Sepal Length" "Sepal Width"  "Petal Length" "Petal Width" 
 ## [5] "Species"
+```
 
-# all of the cases like: snake, lower_camel, upper_camel, all_caps, lower_upper
-# and upper_lower are based on parsed case
+All of the cases like: snake, lower\_camel, upper\_camel, all\_caps, lower\_upper, upper\_lower and mixed are based on parsed case
+
+``` r
 to_any_case("THISIsHOW IAmPARSED!", case = "parsed")
-## [1] "THIS_Is_HOW_I_Am_PARSED_!"
+## [1] "THIS_Is_HOW_I_Am_PARSED!"
+```
 
-# be aware that automatic case conversion depends on the input string and it is
-# recommended to verify the results. You might want to pipe results into dput()
-# and hardcode name changes instead of blindly trusting to_any_case's output.
+Be aware that automatic case conversion depends on the input string and it is recommended to verify the results. So you might want to pipe these into `dput()` (and hardcode name changes instead of blindly trusting to\_any\_case's output)
+
+``` r
 dput(to_any_case("SomeBAdInput"))
 ## "some_b_ad_input"
 ```
@@ -80,7 +94,7 @@ to_any_case(
   ##> "R.StüdioIDE: v.1.0.143_RSS_feed"
   preprocess = ":|(?<!\\d)\\.", # regexp: replaces matches with "_"
   ##> "R_StüdioIDE_ v_1.0.143_RSS_feed"
-  parsingoption = 1, # integer: replaces blank characters and surrounds
+  parsing_option = 1, # integer: replaces blank characters and surrounds
                      # matches of specific pattern with "_"
   ##> "R_Stüdio_IDE_v_1_._0_._143_RSS_feed" ######################### PARSED ###
   ### --------------------------------------------------------------------------
@@ -103,7 +117,10 @@ to_any_case(
   )
 ```
 
-    ## [1] "r stuedio ide v 1.0.143 rss feed"
+    ## Warning: argument protect is deprecated; If you really need this argument,
+    ## pls submit an issue on https://github.com/Tazinho/snakecase
+
+    ## [1] "r stuedio ide v 1  0  143 rss feed"
 
 Before getting overwhelmed: In most cases the `preprocess`, `replace_special_characters`, `case` and `postprocess` argument should suffice all your needs.
 
@@ -196,23 +213,23 @@ Above "RStudio" was parsed to "R\_Studio". This is a deliberate choice, but also
 
 ``` r
 # the default case makes no sense in this setting
-to_any_case("HAMBURGcity", case = "parsed", parsingoption = 1)
+to_any_case("HAMBURGcity", case = "parsed", parsing_option = 1)
 ## [1] "HAMBUR_Gcity"
 
 # so the second parsing option is the way to address this example
-to_any_case("HAMBURGcity", case = "parsed", parsingoption = 2)
+to_any_case("HAMBURGcity", case = "parsed", parsing_option = 2)
 ## [1] "HAMBURG_city"
 
-# one can also parse the beginning like parsingoption 1 and the rest like option 2
-to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 3)
+# one can also parse the beginning like parsing_option 1 and the rest like option 2
+to_any_case("HAMBURGcityGERUsa", case = "parsed", parsing_option = 3)
 ## [1] "HAMBURG_city_GERU_sa"
 
-# or starting like parsingoption 2 and for the rest switch to option 1
-to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 4)
+# or starting like parsing_option 2 and for the rest switch to option 1
+to_any_case("HAMBURGcityGERUsa", case = "parsed", parsing_option = 4)
 ## [1] "HAMBURG_city_GER_Usa"
 
 # there might be reasons to suppress the parsing, while choosing neither one or two
-to_any_case("HAMBURGcity", case = "parsed", parsingoption = 5)
+to_any_case("HAMBURGcity", case = "parsed", parsing_option = 5)
 ## [1] "HAMBURGcity"
 ```
 
@@ -238,7 +255,7 @@ Till now, we only looked at an easy example. By default the parsing of this pack
 string <- "R.Stüdio: v.1.0.143"
 
 to_any_case(string, case = "snake")
-## [1] "r_._stüdio_:_v_._1_._0_._143"
+## [1] "r.stüdio:v.1.0.143"
 ```
 
 Every single character, which is not a letter, digit, underscore or blank character (tab/whitespace), will be treated like a word and surrounded by underscores. This is intended, since it is not clear, if, for example a dot, is meant to be
@@ -259,7 +276,9 @@ If you just want to keep them, since they have a special meaning and are not mea
 
 ``` r
 to_any_case(string, case = "snake", protect = ":|\\.")
-## [1] "r.stüdio:v.1.0.143"
+## Warning: argument protect is deprecated; If you really need this argument,
+## pls submit an issue on https://github.com/Tazinho/snakecase
+## [1] "r__stüdio__v__1__0__143"
 ```
 
 If you want to suppress underscores around non alphanumeric characters in general, just supply `protect = "[^[:alnum:]]"`.
@@ -272,7 +291,9 @@ You could for example treat only those dots as separators, which are not behind 
 to_any_case(string, case = "snake",
             preprocess = ":|(?<!\\d)\\.",
             protect = "\\.")
-## [1] "r_stüdio_v_1.0.143"
+## Warning: argument protect is deprecated; If you really need this argument,
+## pls submit an issue on https://github.com/Tazinho/snakecase
+## [1] "r_stüdio_v_1__0__143"
 ```
 
 #### Special characters
@@ -312,7 +333,7 @@ You can set pre -and suffixes:
 ``` r
 to_any_case(string, case = "big_camel", postprocess = "//",
             prefix = "USER://", postfix = ".exe")
-## [1] "USER://R//.//Stüdio//://V//.//1//.//0//.//143.exe"
+## [1] "USER://R.Stüdio:V.1.0.143.exe"
 ```
 
 Design Philosophy
