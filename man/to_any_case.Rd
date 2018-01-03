@@ -7,6 +7,7 @@
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
   "screaming_snake", "parsed", "mixed", "lower_upper", "upper_lower",
   "all_caps", "lower_camel", "upper_camel", "none"), preprocess = NULL,
+  protect = "_(?![:alnum:])|(?<![:alnum:])_",
   replace_special_characters = NULL, postprocess = NULL, prefix = "",
   postfix = "", unique_sep = NULL, empty_fill = NULL,
   parsing_option = 1, abbreviations = NULL)
@@ -42,6 +43,12 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
 
 \item{preprocess}{A string (if not \code{NULL}) that will be wrapped internally
 into \code{stringr::regex()}. All matches will be replaced by underscores.}
+
+\item{protect}{A string (default: \code{"_(?![:alnum:])|(?<![:alnum:])_"}).
+Every internal match to the supplied regular expression won't have an output separator
+around (in older versions conversions like "sepal_._length" occured by default).
+This argument should usually never be used anymore. Hence, it will be removed in one of the following versions.
+If you need to make usage of this argument in your code, pls drop me an email, so that I can see if there might be a better solution.}
 
 \item{replace_special_characters}{A character vector (if not \code{NULL}). The entries of this argument
 need to be elements of \code{stringi::stri_trans_list()} or names of lookup tables (currently
