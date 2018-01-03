@@ -203,7 +203,7 @@ to_any_case <- function(string,
       string <- purrr::map(string, ~stringr::str_replace(.x, stringr::str_c("^(", protect, ")"), "\\1___"))
       string <- purrr::map(string, ~stringr::str_replace(.x, stringr::str_c("(", protect, ")[^_]*$"), "__\\1___"))
     }
-### replacement of sp. characters-----------------------------------------------
+### replacement of special characters_------------------------------------------
     if(!is.null(replace_special_characters)){
       string <- string %>%
         purrr::map(~replace_special_characters_internal(.x, replace_special_characters, case))
