@@ -88,51 +88,15 @@ dput(to_any_case("SomeBAdInput"))
 
 ### Big picture (a parameterized workflow)
 
-The `to_any_case()` function is the workhorse of the package and basically enables you to convert any string into any case via a well thought process of **parsing** (3 steps), **conversion** (2), **postprocessing** (1). The specific arguments allow you to customize this pipeline. On this specific example, you can see the workflow including all (hidden) implementation details.
+The `to_any_case()` function is the workhorse of the package and basically enables you to convert any string into any case via a well thought process of parsing (`abbreviations`, `preprocess`, `parsing_option`), **conversion** (`replace_special_characters`, `case`) and **postprocessing** (`postprocess`). The specific arguments allow you to customize the pipeline.
 
-``` r
-to_any_case(
-  ### --------------------------------------------------------------------------
-  string = "R.StüdioIDE: v.1.0.143RSSfeed", ################### INPUT STRING ###
-  ### --------------------------------------------------------------------------
-  ### 1. Parsing 
-  abbreviations = "RSS",  # character: surrounds matches with "_"
-  ##> "R.StüdioIDE: v.1.0.143_RSS_feed"
-  preprocess = ":|(?<!\\d)\\.", # regexp: replaces matches with "_"
-  ##> "R_StüdioIDE_ v_1.0.143_RSS_feed"
-  parsing_option = 1, # integer: replaces blank characters and surrounds
-                     # matches of specific pattern with "_"
-  ##> "R_Stüdio_IDE_v_1_._0_._143_RSS_feed" ######################### PARSED ###
-  ### --------------------------------------------------------------------------
-  ### 2. Conversion
-  replace_special_characters = "german", # character: converts special 
-                                         # characters into ASCII representation
-  ##> "R" "Stuedio" "IDE" "v" "1" "." "0" "." "143" "RSS" "feed"
-  case = "snake", # character: converts the word/character pattern into a 
-                  # specific case and the regarding separator (depending on the 
-                  # case)
-  ##> "r" "stuedio" "ide" "v" "1" "." "0" "." "143" "rss" "feed" # CONVERTED ###
-  ### --------------------------------------------------------------------------
-  ### 3. Postprocessing
-  postprocess = " ", # character: sets its argument as a separator
-  ##> "r stuedio ide v 1 . 0 . 143 rss feed"
-  protect = "\\." # regexp: removes "_" around matches.  
-  ##> "r stuedio ide v 1.0.143 rss feed" ##################### POSTPROCESSED ###
-  ### --------------------------------------------------------------------------
-  
-  )
-```
+On this example, you can see the pipeline including all implementation details.
 
-    ## Warning: argument protect is deprecated; If you really need this argument,
-    ## pls submit an issue on https://github.com/Tazinho/snakecase
+<img src="./man/figures/Workflow1.png" width="100%" />
 
-    ## [1] "r stuedio ide v 1  0  143 rss feed"
+Some further cosmetics can be added to the output via the following arguments:
 
-Before getting overwhelmed: In most cases the `preprocess`, `replace_special_characters`, `case` and `postprocess` argument should suffice all your needs.
-
-**Further cosmetics**
-
--   `make_unique` (logical): can be set to `"TRUE"` if you convert several strings at once and want the output to be unique (for example if the output is supposed to be used as column names for a data frame).
+-   `make_unique` (logical): When set to `"TRUE"` **R** automatically ensures that the output strings are unique
 -   `prefix` (character): simple prefix
 -   `postfix` (character): simple post/suffix
 
