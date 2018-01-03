@@ -96,17 +96,17 @@ On this example, you can see the pipeline including all implementation details.
 
 Some further cosmetics can be added to the output via the following arguments:
 
--   `make_unique` (logical): When set to `"TRUE"` **R** automatically ensures that the output strings are unique
+-   `make_unique` (logical): When set to `"TRUE"` the output strings are unique
 -   `prefix` (character): simple prefix
 -   `postfix` (character): simple post/suffix
 
 ### Vectorisation, speed and special input handling
 
-The snakecase package is internally build up on the [stringr](https://github.com/tidyverse/stringr) package, which means that many powerful features are provided "by default":
+The package is internally build up on the [stringr](https://github.com/tidyverse/stringr) package, which means that many powerful features are provided "by default":
 
--   `to_any_case()` is vectorised over most of its arguments like `string`, `preprocess`, `protect`, `postprocess`, `empty_fill`, `prefix`, `postfix`.
--   internal character operations are super fast c++ (however, a lot of speed is lost due to a more systematic and maintainable implementation)
--   special input like `character(0)`, `NA` etc. is handled in exactly the same consistent and convenient manner as in the stringr package and all its tidy relatives.
+-   `to_any_case()` is vectorised over most of its arguments like `string`, `preprocess`, `postprocess`, `empty_fill`, `prefix` and `postfix`.
+-   internal character operations are super fast c++ (however, a lot of speed is lost due to a more systematic and maintainable implementation. This might be optimized in the long run)
+-   special input like `character(0)`, `NA` etc. is handled in exactly the same consistent and convenient manner as in the stringr package
 
 Further reading
 ---------------
