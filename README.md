@@ -92,13 +92,13 @@ The `to_any_case()` function is the workhorse of the package and basically enabl
 
 On this example, you can see the pipeline including all implementation details.
 
-<img src="./man/figures/Workflow01.png" width="100%" />
+<img src="./man/figures/Workflow01.png" width="80%" />
 
 Some further cosmetics can be added to the output via the following arguments:
 
 -   `make_unique` (logical): When set to `"TRUE"` the output strings are unique
 -   `prefix` (character): simple prefix
--   `postfix` (character): simple post/suffix
+-   `postfix` (character): simple post-/suffix
 
 ### Vectorisation, speed and special input handling
 
