@@ -64,6 +64,14 @@ to_any_case(names(iris), preprocess = "\\.", case = "upper_camel", postprocess =
 ## [5] "Species"
 ```
 
+And you might want to remove special characters along the way
+
+``` r
+to_any_case("Doppelgänger is originally german", 
+            replace_special_characters = "german")
+## [1] "doppelgaenger_is_originally_german"
+```
+
 All of the cases like: snake, lower\_camel, upper\_camel, all\_caps, lower\_upper, upper\_lower and mixed are based on parsed case
 
 ``` r
@@ -71,7 +79,7 @@ to_any_case("THISIsHOW IAmPARSED!", case = "parsed")
 ## [1] "THIS_Is_HOW_I_Am_PARSED!"
 ```
 
-Be aware that automatic case conversion depends on the input string and it is recommended to verify the results. So you might want to pipe these into `dput()` (and hardcode name changes instead of blindly trusting to\_any\_case's output)
+Be aware that automatic case conversion depends on the input string and it is recommended to verify the results. So you might want to pipe these into `dput()` (and hardcode name changes instead of blindly trusting `to_any_case()`'s output)
 
 ``` r
 dput(to_any_case("SomeBAdInput"))
@@ -80,9 +88,7 @@ dput(to_any_case("SomeBAdInput"))
 
 ### Big picture (a parameterized workflow)
 
-The `to_any_case()` function is the workhorse of the package and basically enables you to convert any string into any case via a well thought process of **parsing** (3 steps), **conversion** (2), **postprocessing** (2) and final **cosmetics** (3). (+some internal details...)
-
-Lets illustrate this on a more complicated example, where we visit each argument of `to_any_case()`, in the order of the internal steps taken:
+The `to_any_case()` function is the workhorse of the package and basically enables you to convert any string into any case via a well thought process of **parsing** (3 steps), **conversion** (2), **postprocessing** (1). The specific arguments allow you to customize this pipeline. On this specific example, you can see the workflow including all (hidden) implementation details.
 
 ``` r
 to_any_case(
