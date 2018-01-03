@@ -148,6 +148,12 @@ to_any_case <- function(string,
                         empty_fill = NULL,
                         parsing_option = 1,
                         abbreviations = NULL){
+  ### Deprecations:
+  if (!identical(protect,"_(?![:alnum:])|(?<![:alnum:])_")) {
+    warning("argument protect is deprecated; If you really need this argument, pls submit an issue on https://github.com/Tazinho/snakecase", 
+              call. = FALSE)
+    }
+  ### Argument matching and checking
   case <- match.arg(case)
 ### check input length (necessary for NULL and atomic(0))
   if(identical(stringr::str_length(string), integer())){return(character())}
