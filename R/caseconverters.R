@@ -34,6 +34,9 @@ to_snake_case <- function(string){
   string_names <- names(string)
   string <- to_parsed_case_internal(string) %>% 
     purrr::map_chr(stringr::str_to_lower)
+  # Protect (only internal, not via an argument).
+  # Replace all "_" by "" which are around a not alphanumeric character
+  string <- stringr::str_replace_all(string, "_(?![:alnum:])|(?<![:alnum:])_", "")
   names(string) <- string_names
   string
 }
@@ -74,6 +77,9 @@ to_screaming_snake_case <- function(string){
   string_names <- names(string)
   string <- to_parsed_case_internal(string) %>%
     stringr::str_to_upper()
+  # Protect (only internal, not via an argument).
+  # Replace all "_" by "" which are around a not alphanumeric character
+  string <- stringr::str_replace_all(string, "_(?![:alnum:])|(?<![:alnum:])_", "")
   names(string) <- string_names
   string
 }
@@ -85,6 +91,9 @@ to_parsed_case <- function(string){
   # save names-attribute
   string_names <- names(string)
   string <- to_parsed_case_internal(string)
+  # Protect (only internal, not via an argument).
+  # Replace all "_" by "" which are around a not alphanumeric character
+  string <- stringr::str_replace_all(string, "_(?![:alnum:])|(?<![:alnum:])_", "")
   names(string) <- string_names
   string
 }
@@ -102,6 +111,9 @@ to_mixed_case <- function(string){
                                stringr::str_sub(.x, 2) %>%
                                  stringr::str_to_lower()))
   string <- string %>% purrr::map_chr(~stringr::str_c(.x, collapse = "_"))
+  # Protect (only internal, not via an argument).
+  # Replace all "_" by "" which are around a not alphanumeric character
+  string <- stringr::str_replace_all(string, "_(?![:alnum:])|(?<![:alnum:])_", "")
   names(string) <- string_names
   string
 }

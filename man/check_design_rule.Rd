@@ -4,9 +4,10 @@
 \alias{check_design_rule}
 \title{Internal helper to test the design rules for any string and setting of \code{to_any_case()}}
 \usage{
-check_design_rule(string, preprocess = NULL, protect = NULL,
+check_design_rule(string, preprocess = NULL,
   replace_special_characters = FALSE, postprocess = NULL, prefix = "",
-  postfix = "", unique_sep = NULL, empty_fill = NULL, parsingoption = 1)
+  postfix = "", unique_sep = NULL, empty_fill = NULL,
+  parsing_option = 1)
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
@@ -14,11 +15,6 @@ check_design_rule(string, preprocess = NULL, protect = NULL,
 \item{preprocess}{String that will be wrapped internally into \code{stringr::regex()}. 
 All matches will be treated as additional splitting parameters besides the default ones 
 (\code{"_"} and \code{" "}), when parsing the input string.}
-
-\item{protect}{A string which is a valid \code{stringr::regex()}. Matches within the output
-won't have any "_" (or artifacts of \code{preprocess}) beside. Note that \code{preprocess} has a higher precedence than protect, 
-which means that it doesn't make sense to protect sth. which is already replaced
-via \code{preprocess}.}
 
 \item{replace_special_characters}{Logical, if \code{TRUE}, special characters 
 will be translated to characters which are more likely to be understood by 
@@ -37,7 +33,7 @@ in the order of their appearance. The suffix is separated by the supplied string
 \item{empty_fill}{A string. If it is supplied, then each entry that matches "" will be replaced
 by the supplied string to this argument.}
 
-\item{parsingoption}{An integer (1 (default), 2 or 3) that will determine the parsingoption.
+\item{parsing_option}{An integer (1 (default), 2 or 3) that will determine the parsing option.
 1: RRRStudio -> RRR_Studio
 2: RRRStudio -> RRRS_tudio
 If another integer is supplied, no parsing regarding the pattern of upper- and lowercase will appear.}

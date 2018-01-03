@@ -1,7 +1,7 @@
-#' Internal parser, which is relevant for preprocessing, parsing and parsingoptions
+#' Internal parser, which is relevant for preprocessing, parsing and parsing options
 #'
 #' @param string A string.
-#' @param parsingoption An integer that will determine the parsingoption.
+#' @param parsing_option An integer that will determine the parsing option.
 #' \itemize{
 #'  \item{1: \code{RRRStudio -> RRR_Studio}}
 #'  \item{2: \code{RRRStudio -> RRRS_tudio}}
@@ -17,7 +17,7 @@
 #'
 #' @importFrom magrittr "%>%"
 #'
-to_parsed_case_internal <- function(string, parsingoption = 1L){
+to_parsed_case_internal <- function(string, parsing_option = 1L){
   ### preprocessing:
   # catch everything that should be handled like underscores
   # (only spaces by default)
@@ -64,26 +64,26 @@ to_parsed_case_internal <- function(string, parsingoption = 1L){
   
   ### applying parsing functions  
   # case: 1 RRRStudioSStudioStudio -> RRR_Studio_S_Studio_Studio
-  if(parsingoption == 1){
+  if(parsing_option == 1){
     string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
     string <- parsing_functions[["parse2_pat_caps2"]](string)
     string <- parsing_functions[["parse3_pat_cap_lonely"]](string)
     string <- parsing_functions[["parse4_separate_non_characters"]](string)}
   # case: 2 RRRStudioSStudioStudio -> RRRS_tudio_SS_tudio_Studio
-  if(parsingoption == 2){
+  if(parsing_option == 2){
     string <- parsing_functions[["parse2_pat_caps2"]](string)
     string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
     string <- parsing_functions[["parse3_pat_cap_lonely"]](string)
     string <- parsing_functions[["parse4_separate_non_characters"]](string)}
   # case:3 RRRStudioSStudioStudio -> RRR_Studio_SS_tudio_Studio
-  if(parsingoption == 3){
+  if(parsing_option == 3){
     string <- parsing_functions[["parse5_pat_cap_smalls_first"]](string)
     string <- parsing_functions[["parse2_pat_caps2"]](string)
     string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
     string <- parsing_functions[["parse3_pat_cap_lonely"]](string)
     string <- parsing_functions[["parse4_separate_non_characters"]](string)}
   # case:4 RRRStudioSStudioStudio -> RRRS_tudio_S_Studio_Studio
-  if(parsingoption == 4){
+  if(parsing_option == 4){
     string <- parsing_functions[["parse6_pat_caps2_first"]](string)
     string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
     string <- parsing_functions[["parse2_pat_caps2"]](string)
