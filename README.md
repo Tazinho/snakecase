@@ -112,7 +112,7 @@ The package is internally build up on the [stringr](https://github.com/tidyverse
 Recommended settings
 --------------------
 
-`to_any_case()` is an attempt to provide good low level control, while still being high level enough for daily usage. If you want a relatively stable wrapper with good defaults, you can choose the `clean_names()` function from the [janitor](https://github.com/sfirke/janitor) package, which works directly on data frames. You can also look into the [sjPlot](https://github.com/strengejacke/sjPlot) package, where automatic case conversion is used to provide nice default labels within graphics.
+`to_any_case()` is an attempt to provide good low level control, while still being high level enough for daily usage. If you want case conversion with good default settings, you can choose the `clean_names()` function from the [janitor](https://github.com/sfirke/janitor) package, which works directly on data frames. You can also look into the [sjPlot](https://github.com/strengejacke/sjPlot) package, where automatic case conversion is used to provide nice default labels within graphics.
 
 For daily usage I recommend to combine `to_any_case()` with `dput()`. In this way, you can quickly inspect, if the output is as intended and hardcode the results (which is basically safer and good practice in my opinion). In very complex cases you might just want to manually fix the output instead of tweeking with the arguments too much.
 
@@ -186,25 +186,17 @@ to_any_case("Maybé you_just...want to Format me a bit?", case = "none",
 ## [1] "Maybe you just   want to Format me a bit?"
 ```
 
--   `empty_fill`:
+-   cosmetics: `empty_fill`, `unique_sep`, `prefix`, `postfix`
 
 ``` r
 to_any_case(c("","_",""), empty_fill = c("empty", "also empty"))
 ## Warning in string[string == ""] <- empty_fill: Anzahl der zu ersetzenden
 ## Elemente ist kein Vielfaches der Ersetzungslänge
 ## [1] "empty"      "also empty" "empty"
-```
 
--   `unique_sep`:
-
-``` r
 to_any_case(c("same", "same", "same", "other"), unique_sep = c(">"))
 ## [1] "same"   "same>1" "same>2" "other"
-```
 
--   `prefix`, `postfix`:
-
-``` r
 to_any_case(c("customer", "product"), case = "big_camel", 
             prefix = c("table_1.", "table_2."),
             postfix = c("ID"))
