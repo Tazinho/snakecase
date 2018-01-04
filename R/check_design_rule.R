@@ -4,10 +4,6 @@
 #' @param preprocess String that will be wrapped internally into \code{stringr::regex()}. 
 #' All matches will be treated as additional splitting parameters besides the default ones 
 #' (\code{"_"} and \code{" "}), when parsing the input string.
-#' @param protect A string which is a valid \code{stringr::regex()}. Matches within the output
-#' won't have any "_" (or artifacts of \code{preprocess}) beside. Note that \code{preprocess} has a higher precedence than protect, 
-#' which means that it doesn't make sense to protect sth. which is already replaced
-#' via \code{preprocess}.
 #' @param replace_special_characters Logical, if \code{TRUE}, special characters 
 #' will be translated to characters which are more likely to be understood by 
 #' different programs. For example german umlauts will be translated to ae, oe, ue etc.
@@ -19,7 +15,7 @@
 #' by the supplied string to this argument.
 #' @param unique_sep A string. If it is supplied, then duplicated names will get a suffix integer
 #' in the order of their appearance. The suffix is separated by the supplied string to this argument.
-#' @param parsingoption An integer (1 (default), 2 or 3) that will determine the parsingoption.
+#' @param parsing_option An integer (1 (default), 2 or 3) that will determine the parsing option.
 #' 1: RRRStudio -> RRR_Studio
 #' 2: RRRStudio -> RRRS_tudio
 #' If another integer is supplied, no parsing regarding the pattern of upper- and lowercase will appear.
@@ -29,15 +25,15 @@
 #' @author Malte Grosser, \email{malte.grosser@@gmail.com}
 #' @keywords utilities
 #'
-check_design_rule <- function(string, preprocess = NULL, protect = NULL,
+check_design_rule <- function(string, preprocess = NULL,
                              replace_special_characters = FALSE, postprocess = NULL, prefix = "",
-                             postfix = "", unique_sep = NULL, empty_fill = NULL, parsingoption = 1){
+                             postfix = "", unique_sep = NULL, empty_fill = NULL, parsing_option = 1){
   test_c <- function(string, case){
     to_any_case(string = string, case = case, preprocess = preprocess, 
-                protect = protect, replace_special_characters = replace_special_characters,
+                replace_special_characters = replace_special_characters,
                 postprocess = postprocess, prefix = prefix, postfix = postfix,
                 unique_sep = unique_sep, empty_fill = empty_fill, 
-                parsingoption = parsingoption)
+                parsing_option = parsing_option)
   }
   all(
     # snake

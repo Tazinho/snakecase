@@ -11,7 +11,7 @@ Overview
 in general) to different cases like snake_case, smallCamel- and BigCamelCase among others. Also high level features for more advanced case conversions are provided via `to_any_case()`.-->
 The snakecase package introduces a fresh and straightforward approach on case conversion of strings, based upon a concise design philosophy.
 
-If you don't want to read too much, you could watch this [talk](https://www.youtube.com/watch?v=T6p0l8XzP64) instead.
+(If you are interested on (the history of) this package, you can watch this [(older) talk](https://www.youtube.com/watch?v=T6p0l8XzP64).)
 
 ### Install
 
@@ -21,299 +21,189 @@ If you don't want to read too much, you could watch this [talk](https://www.yout
 
 # or the (stable) development version hosted on github
 install.packages("devtools")
-devtools::install_github("Tazinho/snakecase")
+devtools::install_github("Tazinho/snakecase", ref = "devversion-02")
 ```
 
 ### Basic examples
 
+Default case is snake case
+
 ``` r
 library(snakecase)
-
-# default is snake case
 to_any_case("veryComplicatedString")
 ## [1] "very_complicated_string"
+```
 
-# dots and other special signs are parsed as words
-to_any_case(names(iris))
-## [1] "sepal_._length" "sepal_._width"  "petal_._length" "petal_._width" 
-## [5] "species"
+Dots and other special characters may have a special intention
 
-# since it is not clear if they are separators
+``` r
+to_any_case("malte.grosser@gmail.com")
+## [1] "malte.grosser@gmail.com"
+```
+
+When it is clear that they are separators, you can supply them as a regex to the `preprocess` argument
+
+``` r
 to_any_case(names(iris), preprocess = "\\.")
 ## [1] "sepal_length" "sepal_width"  "petal_length" "petal_width" 
 ## [5] "species"
+```
 
-# or decimal marks
-to_any_case("var_1.5", protect = "\\.")
-## [1] "var_1.5"
+This is especially handy, when special characters have a meaning as a separator or for example as a decimal mark
 
-# of course other cases are supported and separators can be adjusted
+``` r
+to_any_case("Pi.Value:3.14", preprocess = ":|(?<!\\d)\\.")
+## [1] "pi_value_3.14"
+```
+
+Of course other cases are supported (`case`) and separators can be adjusted (`postprocess`)
+
+``` r
 to_any_case(names(iris), preprocess = "\\.", case = "upper_camel", postprocess = " ")
 ## [1] "Sepal Length" "Sepal Width"  "Petal Length" "Petal Width" 
 ## [5] "Species"
+```
 
-# all of the cases like: snake, lower_camel, upper_camel, all_caps, lower_upper
-# and upper_lower are based on parsed case
+And you might want to remove special characters along the way
+
+``` r
+to_any_case("Doppelgänger is originally german", 
+            replace_special_characters = "german")
+## [1] "doppelgaenger_is_originally_german"
+```
+
+All of the cases like: snake, lower\_camel, upper\_camel, all\_caps, lower\_upper, upper\_lower and mixed are based on parsed case
+
+``` r
 to_any_case("THISIsHOW IAmPARSED!", case = "parsed")
-## [1] "THIS_Is_HOW_I_Am_PARSED_!"
+## [1] "THIS_Is_HOW_I_Am_PARSED!"
+```
 
-# be aware that automatic case conversion depends on the input string and it is
-# recommended to verify the results. You might want to pipe results into dput()
-# and hardcode name changes instead of blindly trusting to_any_case's output.
-dput(to_any_case("SomeBAdInput"))
-## "some_b_ad_input"
+Be aware that automatic case conversion depends on the input string and it is recommended to verify the results. So you might want to pipe these into `dput()` (and hardcode name changes instead of blindly trusting `to_any_case()`'s output)
+
+``` r
+dput(to_any_case(c("SomeBAdInput", "someGoodInput")))
+## c("some_b_ad_input", "some_good_input")
 ```
 
 ### Big picture (a parameterized workflow)
 
-The `to_any_case()` function is the workhorse of the package and basically enables you to convert any string into any case via a well thought process of **parsing** (3 steps), **conversion** (2), **postprocessing** (2) and final **cosmetics** (3). (+some internal details...)
+The `to_any_case()` function is the workhorse of the package and basically enables you to convert any string into any case via a well thought process of **parsing** (`abbreviations`, `preprocess`, `parsing_option`), **conversion** (`replace_special_characters`, `case`) and **postprocessing** (`postprocess`). The specific arguments allow you to customize the pipeline.
 
-Lets illustrate this on a more complicated example, where we visit each argument of `to_any_case()`, in the order of the internal steps taken:
+On this example, you can see the pipeline including all implementation details.
 
-``` r
-to_any_case(
-  ### --------------------------------------------------------------------------
-  string = "R.StüdioIDE: v.1.0.143RSSfeed", ################### INPUT STRING ###
-  ### --------------------------------------------------------------------------
-  ### 1. Parsing 
-  abbreviations = "RSS",  # character: surrounds matches with "_"
-  ##> "R.StüdioIDE: v.1.0.143_RSS_feed"
-  preprocess = ":|(?<!\\d)\\.", # regexp: replaces matches with "_"
-  ##> "R_StüdioIDE_ v_1.0.143_RSS_feed"
-  parsingoption = 1, # integer: replaces blank characters and surrounds
-                     # matches of specific pattern with "_"
-  ##> "R_Stüdio_IDE_v_1_._0_._143_RSS_feed" ######################### PARSED ###
-  ### --------------------------------------------------------------------------
-  ### 2. Conversion
-  replace_special_characters = "german", # character: converts special 
-                                         # characters into ASCII representation
-  ##> "R" "Stuedio" "IDE" "v" "1" "." "0" "." "143" "RSS" "feed"
-  case = "snake", # character: converts the word/character pattern into a 
-                  # specific case and the regarding separator (depending on the 
-                  # case)
-  ##> "r" "stuedio" "ide" "v" "1" "." "0" "." "143" "rss" "feed" # CONVERTED ###
-  ### --------------------------------------------------------------------------
-  ### 3. Postprocessing
-  postprocess = " ", # character: sets its argument as a separator
-  ##> "r stuedio ide v 1 . 0 . 143 rss feed"
-  protect = "\\." # regexp: removes "_" around matches.  
-  ##> "r stuedio ide v 1.0.143 rss feed" ##################### POSTPROCESSED ###
-  ### --------------------------------------------------------------------------
-  
-  )
-```
+<img src="./man/figures/Workflow01.PNG" width="100%" />
 
-    ## [1] "r stuedio ide v 1.0.143 rss feed"
+Some further cosmetics can be added to the output via the following arguments:
 
-Before getting overwhelmed: In most cases the `preprocess`, `replace_special_characters`, `case` and `postprocess` argument should suffice all your needs.
-
-**Further cosmetics**
-
--   `make_unique` (logical): can be set to `"TRUE"` if you convert several strings at once and want the output to be unique (for example if the output is supposed to be used as column names for a data frame).
+-   `unique_sep` (character): When not `NULL` non unique will get an integer suffix separated with the supplied string
+-   `empty_fill` (character): Empty output (`""`) will be replaced by this string
 -   `prefix` (character): simple prefix
--   `postfix` (character): simple post/suffix
+-   `postfix` (character): simple post-/suffix
 
 ### Vectorisation, speed and special input handling
 
-The snakecase package is internally build up on the [stringr](https://github.com/tidyverse/stringr) package, which means that many powerful features are provided "by default":
+The package is internally build up on the [stringr](https://github.com/tidyverse/stringr) package, which means that many powerful features are provided "by default":
 
--   `to_any_case()` is vectorised over most of its arguments like `string`, `preprocess`, `protect`, `postprocess`, `empty_fill`, `prefix`, `postfix`.
--   internal character operations are super fast c++ (however, a lot of speed is lost due to a more systematic and maintainable implementation)
--   special input like `character(0)`, `NA` etc. is handled in exactly the same consistent and convenient manner as in the stringr package and all its tidy relatives.
+-   `to_any_case()` is vectorised over most of its arguments like `string`, `preprocess`, `postprocess`, `empty_fill`, `prefix` and `postfix`.
+-   internal character operations are super fast c++. However, a lot of speed is lost due to a more systematic and maintainable implementation. (This might be optimized in the long run)
+-   special input like `character(0)`, `NA` etc. is handled in exactly the same consistent and convenient manner as in the stringr package
 
-Further reading
----------------
+Recommended settings
+--------------------
 
-For the rest of this Readme, we first provide more detailed description on the usage of each parameter and then dive a bit deeper into the general design philosophy for the parsing patterns implemented into the package.
+`to_any_case()` is an attempt to provide good low level control, while still being high level enough for daily usage. If you want case conversion with good default settings, you can choose the `clean_names()` function from the [janitor](https://github.com/sfirke/janitor) package, which works directly on data frames. You can also look into the [sjPlot](https://github.com/strengejacke/sjPlot) package, where automatic case conversion is used to provide nice default labels within graphics.
 
-### Easy cases
+For daily usage I recommend to combine `to_any_case()` with `dput()`. In this way, you can quickly inspect, if the output is as intended and hardcode the results (which is basically safer and good practice in my opinion). In very complex cases you might just want to manually fix the output instead of tweeking with the arguments too much.
 
-There are 8 different cases available. Note that they are all build up on the first ("parsed") case, which (basically) surrounds every word a string consists of by underscores.
+However, if you have a really hard time on a specific example or you want to have relatively stable settings for a specific usecase, the following settings might help you getting started...
 
-(Please also note that the string "RStudio", which I will use here, is already in its "correct spelling" and the following are just artificial examples to familiarize you with the `to_any_case()` function.)
+-   `abbreviations`: In the wild you might meet abbreviations like country codes, which are often written in upper case and can lead to odd looking "mixed cases". Before you consider a different `parsing_option`, you might just want to use the abbreviations argument
 
 ``` r
-string <- "RStudio"
-
-to_any_case(string, case = "parsed")
-## [1] "R_Studio"
-
-to_any_case(string, case = "snake")
-## [1] "r_studio"
-
-to_any_case(string, case = "screaming_snake") # also "all_caps" will work
-## [1] "R_STUDIO"
-
-to_any_case(string, case = "small_camel") # also "lower_camel" will work
-## [1] "rStudio"
-
-to_any_case(string, case = "big_camel") # also "upper_camel" will work
-## [1] "RStudio"
-
-to_any_case(string, case = "lower_upper")
-## [1] "rSTUDIO"
-
-to_any_case(string, case = "upper_lower")
-## [1] "Rstudio"
-
-to_any_case(string, case = "mixed")
-## [1] "R_Studio"
-
-# the "none" case is provided for the (exclusive) usage of the other function arguments
-to_any_case(string, case = "none")
-## [1] "RStudio"
+to_any_case(c("HHcity", "IDTable1", "KEYtable2", "newUSElections"),
+            abbreviations = c("HH", "ID", "KEY", "US"))
+## [1] "hh_city"          "id_table_1"       "key_table_2"     
+## [4] "new_us_elections"
 ```
 
-For these simple cases (except for `case = "none"`) also the shortcuts `to_parsed_case()`, `to_snake_case()`, `to_screaming_snake_case()` etc. are provided, which achieve exactly the same as `to_any_case(string, case)`.
-
-### Customize output
-
-#### Postprocessing
-
-By default the separators of the output are `"_"` or `""` (depending on the case). You can customize this, while supplying another separator to the `postprocess` argument
+-   `preprocess`: Very ofthen you might just want to have all special (non alpha numeric) characters as a separator. You can achive this while providing the regarding regex
 
 ``` r
-string = "RStudio"
-
-to_any_case(string, case = "snake", 
-            postprocess = ".")
-## [1] "r.studio"
-
-to_any_case(string, case = "big_camel", 
-            postprocess = "-")
-## [1] "R-Studio"
-
-to_any_case(string, case = "parsed", 
-            postprocess = " ")
-## [1] "R Studio"
+to_any_case("so.many_different@separators inThis|sentece",
+            preprocess = "[^[:alnum:]]")
+## [1] "so_many_different_separators_in_this_sentece"
 ```
 
-Note that the latter example has a nice application for the annotation of graphics. "RStudio" is not a good example for this, since it is a name of a company and already written correctly. But for typical column names this could be a nice way to (almost) automate the conversion from internal (naming conventions in personal development workflow) to external (naming conventions for business reports etc.) representation.
-
-### Parsing options
-
-Above "RStudio" was parsed to "R\_Studio". This is a deliberate choice, but also other parsing options are implemented, which make more sense, when for example different words are separated completely by switching between upper and lower case.
+-   You may want to do exactly the last thing, but for a specific reason you don't want to preprocess "." and "@"
 
 ``` r
-# the default case makes no sense in this setting
-to_any_case("HAMBURGcity", case = "parsed", parsingoption = 1)
-## [1] "HAMBUR_Gcity"
-
-# so the second parsing option is the way to address this example
-to_any_case("HAMBURGcity", case = "parsed", parsingoption = 2)
-## [1] "HAMBURG_city"
-
-# one can also parse the beginning like parsingoption 1 and the rest like option 2
-to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 3)
-## [1] "HAMBURG_city_GERU_sa"
-
-# or starting like parsingoption 2 and for the rest switch to option 1
-to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 4)
-## [1] "HAMBURG_city_GER_Usa"
-
-# there might be reasons to suppress the parsing, while choosing neither one or two
-to_any_case("HAMBURGcity", case = "parsed", parsingoption = 5)
-## [1] "HAMBURGcity"
+to_any_case("some-email@provider.com", 
+            preprocess = "[^[:alnum:]|\\.|@]") # notice: the order is important
+## [1] "some_email@provider.com"
 ```
 
-In general only parsing options are implemented, which fulfill the design rules of this package, as mentioned below.
-
-### Abbreviations
-
-Parsing options might be a bit of an overkill. Most of the time parsing option 1 (default) should be enough and only in special cases, mostly abbreviations, like "ID", "EN", "US", "NBA" etc. some kind of mixed cases are used with intention. So to overcome this ambiguous cases it might be a good idea to let `to_any_case` know in advance (hardcoded), which abbrevations you make usage of. This can be done via the `abbreviations` argument.
+-   `parsing_option`: We can modify the abbreviations example a bit. In this case, another parsing option might be handy
 
 ``` r
-to_any_case(c("RSSfeedRSSfeed", "RSSFeedRSSFeed",
-              "USPassport", "USpassport"), 
-            abbreviations = c("RSS", "US"))
-## [1] "rss_feed_rss_feed" "rss_feed_rss_feed" "us_passport"      
-## [4] "us_passport"
+to_any_case(c("HHcity", "IDtable1", "KEYtable2", "newUSelections"),
+            parsing_option = 2)
+## [1] "hh_city"          "id_table_1"       "key_table_2"     
+## [4] "new_us_elections"
 ```
 
-### More complex cases
+If you are interested in a specific parsing option, which is not implemented, pls open an issue.
 
-Till now, we only looked at an easy example. By default the parsing of this package recognizes patterns of switching from lower- to uppercase (and vice versa), underscores and spaces or tabs as word boundaries. If we introduce other characters like dots or colons in our strings, the following will happen:
-
-``` r
-string <- "R.Stüdio: v.1.0.143"
-
-to_any_case(string, case = "snake")
-## [1] "r_._stüdio_:_v_._1_._0_._143"
-```
-
-Every single character, which is not a letter, digit, underscore or blank character (tab/whitespace), will be treated like a word and surrounded by underscores. This is intended, since it is not clear, if, for example a dot, is meant to be
-
--   a separator and should be replaced by an underscore or
--   a decimal mark and should just be kept as it is (without underscores around it).
-
-#### Preprocess & protect
-
-If you would like to treat dots and colons as separators, you can supply them (as a regular expression) to the `preprocess` argument (now they will be internally replaced by underscores, before the parsing occurs)
+-   `replace_special_characters`: To transliterate exotic characters you can use any option from `stringi::stri_trans_list()` (especially "Latin-ASCII" is useful) or provided lookups introduced (country specific) by this package. Currently only "german" is supported. When more than one is supplied, the transliterations are performed iteratively
 
 ``` r
-to_any_case(string, case = "snake", preprocess = ":|\\.")
-## [1] "r_stüdio_v_1_0_143"
-```
-
-If you just want to keep them, since they have a special meaning and are not meant to be separators, you can supply them (also as a regular expression) to the `protect` argument (now the underscores around the protected arguments will be deleted)
-
-``` r
-to_any_case(string, case = "snake", protect = ":|\\.")
-## [1] "r.stüdio:v.1.0.143"
-```
-
-If you want to suppress underscores around non alphanumeric characters in general, just supply `protect = "[^[:alnum:]]"`.
-
-Of course you can also combine `preprocess` & `protect` and since these arguments take regular expressions as input, `to_any_case()` becomes very flexible.
-
-You could for example treat only those dots as separators, which are not behind a number and keep the others as decimal marks
-
-``` r
-to_any_case(string, case = "snake",
-            preprocess = ":|(?<!\\d)\\.",
-            protect = "\\.")
-## [1] "r_stüdio_v_1.0.143"
-```
-
-#### Special characters
-
-If you have problems with special characters (like u umlaut) on your platform, you can replace them via `replace_special_characters = c("german", "Latin-ASCII")`:
-
-``` r
-to_any_case(string, case = "snake", 
-            preprocess = ":|(?<!\\d)\\.",
-            protect = "\\.",
+to_any_case("Schönes Café", 
             replace_special_characters = c("german", "Latin-ASCII"))
-## [1] "r_stuedio_v_1.0.143"
+## [1] "schoenes_cafe"
 ```
 
-You can supply any id from `stringi::stri_trans_list()` or countryname from the internal transliteration dictionary of this package (currently only "german"; also in combination).
+If you can provide tranliterations for your (or any other) country, pls drop them within [this issue](https://github.com/Tazinho/snakecase/issues/107).
 
-#### Empty or non unique output
-
-You can fill empty results with arbitrary strings via the `empty_fill` argument
+-   `case` Sometimems you just need a reasonable case. Make sure to checkout
 
 ``` r
-to_any_case(c("","_","."), empty_fill = c("empty", "also empty"))
-## [1] "empty"      "also empty" "."
+to_any_case("parsed_case", case = "parsed")
+## [1] "parsed_case"
+
+to_any_case("My_first_LettersWONTChange", case = "mixed")
+## [1] "My_first_Letters_Wont_Change"
+
+to_any_case("IalsoWORKWith abbreviations", case = "mixed", abbreviations = "WORK")
+## [1] "Ialso_WORK_With_abbreviations"
+
+to_any_case("IWill LookLike aRollerCoasterYouCanPARSEMeWith option2",
+            case = "upper_lower") # or lower_upper
+## [1] "IwillLOOKlikeArollerCOASTERyouCANparseMEwithOPTION2"
+
+to_any_case("Maybé you_just...want to Format me a bit?", case = "none",
+            preprocess = "_|\\.", replace_special_characters = "Latin-ASCII",
+            postprocess = " ")
+## [1] "Maybe you just   want to Format me a bit?"
 ```
 
-Duplicated output can be automatically suffixed via an index (starting with the first duplication) and an arbitrary separator supplied to the `unique_sep` argument
+-   cosmetics: `empty_fill`, `unique_sep`, `prefix`, `postfix`
 
 ``` r
-to_any_case(c("same","same","other"), unique_sep = c(">"))
-## [1] "same"   "same>1" "other"
+to_any_case(c("","_",""), empty_fill = c("empty", "also empty"))
+## Warning in string[string == ""] <- empty_fill: Anzahl der zu ersetzenden
+## Elemente ist kein Vielfaches der Ersetzungslänge
+## [1] "empty"      "also empty" "empty"
+
+to_any_case(c("same", "same", "same", "other"), unique_sep = c(">"))
+## [1] "same"   "same>1" "same>2" "other"
+
+to_any_case(c("customer", "product"), case = "big_camel", 
+            prefix = c("table_1.", "table_2."),
+            postfix = c("ID"))
+## [1] "table_1.CustomerID" "table_2.ProductID"
 ```
 
-#### Pre -and postfix
-
-You can set pre -and suffixes:
-
-``` r
-to_any_case(string, case = "big_camel", postprocess = "//",
-            prefix = "USER://", postfix = ".exe")
-## [1] "USER://R//.//Stüdio//://V//.//1//.//0//.//143.exe"
-```
+-   Sometimes further pre or postprocessing might be needed. You can decide yourself: Open an issue here or build sth quickly yourself via packages like base, stringr, stringi etc.
 
 Design Philosophy
 -----------------
@@ -364,7 +254,7 @@ In this way, we can get a good starting point on how to convert specific strings
 
 In the last sections we have seen, that it is reasonable to bring a specific conversion from an input string to some standardized case into question. We have also seen, that it is helpful to introduce some tests on the behavior of a specific conversion pattern in related cases. The latter can help to detect inappropriate conversions and also establishes a consistent behavior when converting exotic cases or switching between standardized cases. Maybe we can generalize some of these tests and introduce some kind of consistency patterns. This would enable us that whenever inappropriate or non-unique possibilities for conversions appear, we have rules that help us to deal with this situation and help to exclude some inconsistent conversion alternatives.
 
-During the development of this package I recognized three specific rules that seem reasonable to be valid whenever cases are converted. To be more general we just use `to_x()` and `to_y()` to refer to any two differing converter functions from this package.
+During the development of this package I recognized three specific rules that seem reasonable to be valid whenever cases are converted. To be more general we just use `to_x()` and `to_y()` to refer to any two differing converter functions from the set of fucntions including `to_snake_case()`, `to_screaming_snake_case()`, `to_lower_camel_case` and `to_upper_camel_case()`. (Other cases like "lower\_upper" or "upper\_lower" could be included, if we consider `parsing_option = 2` within the equations.)
 
 1.  When we have converted to a standardized case, a new conversion to the case should not change the output:
 

@@ -17,7 +17,7 @@
 #' \itemize{
 #'  \item{\code{"parsed"}: This case is underlying all other cases. 
 #'  Every substring a string consists
-#'  of becomes surrounded by an underscore (depending on the \code{parsingoption}).
+#'  of becomes surrounded by an underscore (depending on the \code{parsing_option}).
 #'   Underscores at the start and end are trimmed. No lower or 
 #'  upper case pattern from the input string are changed.}
 #'  \item{\code{"mixed"}: Almost the same as \code{case = "parsed"}. Every letter which is not at the start
@@ -32,11 +32,11 @@
 #' @param preprocess A string (if not \code{NULL}) that will be wrapped internally
 #' into \code{stringr::regex()}. All matches will be replaced by underscores.
 #' 
-#' @param protect A string (if not \code{NULL}) which is a valid \code{stringr::regex()}. Matches within the input
-#' won't have any "_" beside within the output.
-#' Note that \code{preprocess} has a higher precedence than protect, 
-#' which means that it doesn't make sense to protect sth. which is already replaced
-#' via \code{preprocess}.
+#' @param protect A string (default: \code{"_(?![:alnum:])|(?<![:alnum:])_"}).
+#' Every internal match to the supplied regular expression won't have an output separator
+#' around (in older versions conversions like "sepal_._length" occured by default).
+#' This argument should usually never be used anymore. Hence, it will be removed in one of the following versions.
+#' If you need to make usage of this argument in your code, pls drop me an email, so that I can see if there might be a better solution.
 #' 
 #' @param replace_special_characters A character vector (if not \code{NULL}). The entries of this argument
 #' need to be elements of \code{stringi::stri_trans_list()} or names of lookup tables (currently
@@ -59,7 +59,7 @@
 #' a suffix integer
 #' in the order of their appearance. The suffix is separated by the supplied string
 #'  to this argument.
-#' @param parsingoption An integer that will determine the parsingoption.
+#' @param parsing_option An integer that will determine the parsing_option.
 #' #' \itemize{
 #'  \item{1: \code{RRRStudio -> RRR_Studio}}
 #'  \item{2: \code{RRRStudio -> RRRS_tudio}}
@@ -70,7 +70,7 @@
 #'  
 #' @param abbreviations character with (uppercase) abbreviations. This marks
 #'  abbreviations with an underscore behind (in front of the parsing).
-#'  useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2.
+#'  useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2.
 #' 
 #' @return A character vector according the specified parameters above.
 #'
@@ -94,27 +94,26 @@
 #' 
 #' ### Parsing options
 #' # the default option makes no sense in this setting
-#' to_any_case("HAMBURGcity", case = "parsed", parsingoption = 1)
+#' to_any_case("HAMBURGcity", case = "parsed", parsing_option = 1)
 #' # so the second parsing option is the way to address this example
-#' to_any_case("HAMBURGcity", case = "parsed", parsingoption = 2)
-#' # one can also parse the beginning like parsingoption 1 and the rest like option 2
-#' to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 3)
-#' # or starting like parsingoption 2 and for the rest switch to option 1
-#' to_any_case("HAMBURGcityGERUsa", case = "parsed", parsingoption = 4)
+#' to_any_case("HAMBURGcity", case = "parsed", parsing_option = 2)
+#' # one can also parse the beginning like parsing_option 1 and the rest like option 2
+#' to_any_case("HAMBURGcityGERUsa", case = "parsed", parsing_option = 3)
+#' # or starting like parsing_option 2 and for the rest switch to option 1
+#' to_any_case("HAMBURGcityGERUsa", case = "parsed", parsing_option = 4)
 #' # there might be reasons to suppress the parsing, while choosing neither one or two
-#' to_any_case("HAMBURGcity", case = "parsed", parsingoption = 5)
+#' to_any_case("HAMBURGcity", case = "parsed", parsing_option = 5)
 #' 
 #' ### Abbreviations
 #' to_any_case(c("RSSfeedRSSfeed", "USPassport", "USpassport"), abbreviations = c("RSS", "US"))
 #' 
-#' ### Preprocess & protect
+#' ### Preprocess
 #' string <- "R.St\u00FCdio: v.1.0.143"
 #' to_any_case(string)
 #' to_any_case(string, case = "snake", preprocess = ":|\\.")
-#' to_any_case(string, case = "snake", protect = ":|\\.")
+#' to_any_case(string, case = "snake")
 #' to_any_case(string, case = "snake",
-#'             preprocess = ":|(?<!\\d)\\.",
-#'             protect = "\\.")
+#'             preprocess = ":|(?<!\\d)\\.")
 #' 
 #' ### Replace special characters
 #' to_any_case("\u00E4ngstlicher Has\u00EA", replace_special_characters = c("german", "Latin-ASCII"))
@@ -140,15 +139,21 @@ to_any_case <- function(string,
                                  "parsed", "mixed", "lower_upper", "upper_lower",
                                  "all_caps", "lower_camel", "upper_camel", "none"),
                         preprocess = NULL,
-                        protect = NULL,
+                        protect = "_(?![:alnum:])|(?<![:alnum:])_",
                         replace_special_characters = NULL,
                         postprocess = NULL,
                         prefix = "",
                         postfix = "",
                         unique_sep = NULL,
                         empty_fill = NULL,
-                        parsingoption = 1,
+                        parsing_option = 1,
                         abbreviations = NULL){
+  ### Deprecations:
+  if (!identical(protect,"_(?![:alnum:])|(?<![:alnum:])_")) {
+    warning("argument protect is deprecated; If you really need this argument, pls submit an issue on https://github.com/Tazinho/snakecase", 
+              call. = FALSE)
+    }
+  ### Argument matching and checking
   case <- match.arg(case)
 ### check input length (necessary for NULL and atomic(0))
   if(identical(stringr::str_length(string), integer())){return(character())}
@@ -172,7 +177,7 @@ to_any_case <- function(string,
   case[case == "upper_camel"] <- "big_camel"
 ### abbreviation handling
   # mark abbreviation with an underscore behind (in front of the parsing)
-  # useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2
+  # useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2
   string <- abbreviation_internal(string, abbreviations)
 ### ____________________________________________________________________________
 ### preprocess (regex into "_") and parsing (surrounding by "_")
@@ -180,7 +185,7 @@ to_any_case <- function(string,
   
   if (case != "none"){
     string <- to_parsed_case_internal(string,
-                                      parsingoption = parsingoption)
+                                      parsing_option = parsing_option)
   }
 ### ____________________________________________________________________________
 ### "mixed", "snake", "small_camel", "big_camel", "screaming_case", "parsed"
@@ -188,20 +193,13 @@ to_any_case <- function(string,
                  "big_camel", "screaming_snake", "parsed",
                  "lower_upper", "upper_lower")){
 ### split-----------------------------------------------------------------------
-    if(case %in% c("mixed", "snake", "screaming_snake", "parsed", "lower_upper", "upper_lower")){
+    if(case %in% c("none", "mixed", "snake", "screaming_snake", "parsed", "lower_upper", "upper_lower")){
       string <- string %>% stringr::str_split("_")
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if(case %in% c("small_camel", "big_camel")){
       string <- string %>% 
         stringr::str_split(pattern = "(?<!\\d)_|_(?!\\d)")
-    }
-### protecthelper (1)-----------------------------------------------------------
-# mark end of matches of protect before the case conversion
-    if(!is.null(protect)){
-      # in the 2nd line the replacement only can occur, if it didn't appear in the first line
-      string <- purrr::map(string, ~stringr::str_replace(.x, stringr::str_c("^(", protect, ")"), "\\1___"))
-      string <- purrr::map(string, ~stringr::str_replace(.x, stringr::str_c("(", protect, ")[^_]*$"), "__\\1___"))
     }
 ### replacement of special characters_------------------------------------------
     if(!is.null(replace_special_characters)){
@@ -265,33 +263,28 @@ to_any_case <- function(string,
                             .x[!.y] <- stringr::str_to_lower(.x[!.y]);
                             .x}) 
     }
-### protecthelper (2)-----------------------------------------------------------
-    if(!is.null(protect)){
-      string <- string %>% 
-        # mark beginning of matches of protect after the caseconversion
-        purrr::map(~stringr::str_replace_all(.x, "([^_]*___)", "__\\1"))
-    }
 ### collapsing------------------------------------------------------------------
-    if(case %in% c("mixed", "snake", "screaming_snake", "parsed"))
-    string <- string %>% purrr::map_chr(~stringr::str_c(.x, collapse = "_"))
+    if(case %in% c("none", "mixed", "snake", "screaming_snake", "parsed",
+                   "small_camel", "big_camel", "lower_upper", "upper_lower")) {
+      string <- string %>% purrr::map_chr(~stringr::str_c(.x, collapse = "_"))
+    }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-    if(case %in% c("small_camel", "big_camel", "lower_upper", "upper_lower")){
-      if(is.null(postprocess)){
-        string <- string %>% purrr::map_chr(stringr::str_c, collapse = "")
-      } else {
-        string <- string %>% purrr::map_chr(stringr::str_c, collapse = "_")
-      }
+    # Protect (only internal, not via an argument).
+    # Replace all "_" by "" which are around a not alphanumeric character
+    if (!is.null(protect)){
+      string <- stringr::str_replace_all(string, protect, "")
     }
-### protect---------------------------------------------------------------------
-    if(!is.null(protect)){
-      string <- string %>% purrr::map_chr(~stringr::str_replace_all(.x, "_{2,}", ""))
-    }
+### ----------------------------------------------------------------------------
+}
 ### postprocessing--------------------------------------------------------------
     if(!is.null(postprocess) & !identical(string, character(0))){
       string <- purrr::map2_chr(string,
                                 postprocess,
                                 ~ stringr::str_replace_all(.x, "_", .y))}
-### ----------------------------------------------------------------------------
+    
+    if(is.null(postprocess) & case %in% c("small_camel", "big_camel", 
+                                            "lower_upper", "upper_lower")){
+      string <- stringr::str_replace_all(string, "(?<!\\d)_|_(?!\\d)", "")
     }
 ### ____________________________________________________________________________
 ### "none"
