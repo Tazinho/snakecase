@@ -140,7 +140,7 @@ to_any_case(c("HHcity", "IDtable1", "KEYtable2", "newUSelections"),
             parsing_option = 2)
 ```
 
-  If you are interested in a specific parsing option, which is not implemented, pls open an issue.
+If you are interested in a specific parsing option, which is not implemented, pls open an issue.
 
 * `replace_special_characters`: To transliterate exotic characters you can use any option from `stringi::stri_trans_list()` (especially "Latin-ASCII" is useful) or provided lookups introduced (country specific) by this package. Currently only "german" is supported. When more than one is supplied, the transliterations are performed iteratively
 
@@ -149,7 +149,7 @@ to_any_case("Schönes Café",
             replace_special_characters = c("german", "Latin-ASCII"))
 ```
 
-  If you can provide tranliterations for your (or any other) country, pls drop them within [this issue](https://github.com/Tazinho/snakecase/issues/107).
+If you can provide tranliterations for your (or any other) country, pls drop them within [this issue](https://github.com/Tazinho/snakecase/issues/107).
 
 * `case` Sometimems you just need a reasonable case. Make sure to checkout
 
@@ -168,20 +168,19 @@ to_any_case("Maybé you_just...want to Format me a bit?", case = "none",
             postprocess = " ")
 ```
 
-* cosmetics like:
-  * `empty_fill`
+* `empty_fill`:
 
 ```{r, collapse=TRUE}
 to_any_case(c("","_",""), empty_fill = c("empty", "also empty"))
 ```
 
-  * `unique_sep`
+* `unique_sep`:
 
 ```{r, collapse = TRUE}
-to_any_case(c("same","same","other"), unique_sep = c(">"))
+to_any_case(c("same", "same", "same", "other"), unique_sep = c(">"))
 ```
 
-  * `prefix`, `postfix`:
+* `prefix`, `postfix`:
 
 ```{r, collapse=TRUE}
 to_any_case(c("customer", "product"), case = "big_camel", 

@@ -186,8 +186,7 @@ to_any_case("Maybé you_just...want to Format me a bit?", case = "none",
 ## [1] "Maybe you just   want to Format me a bit?"
 ```
 
--   cosmetics like:
--   `empty_fill`
+-   `empty_fill`:
 
 ``` r
 to_any_case(c("","_",""), empty_fill = c("empty", "also empty"))
@@ -196,11 +195,11 @@ to_any_case(c("","_",""), empty_fill = c("empty", "also empty"))
 ## [1] "empty"      "also empty" "empty"
 ```
 
--   `unique_sep`
+-   `unique_sep`:
 
 ``` r
-to_any_case(c("same","same","other"), unique_sep = c(">"))
-## [1] "same"   "same>1" "other"
+to_any_case(c("same", "same", "same", "other"), unique_sep = c(">"))
+## [1] "same"   "same>1" "same>2" "other"
 ```
 
 -   `prefix`, `postfix`:
