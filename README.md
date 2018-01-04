@@ -21,7 +21,7 @@ The snakecase package introduces a fresh and straightforward approach on case co
 
 # or the (stable) development version hosted on github
 install.packages("devtools")
-devtools::install_github("Tazinho/snakecase", ref = "devversion-01")
+devtools::install_github("Tazinho/snakecase")
 ```
 
 ### Basic examples
