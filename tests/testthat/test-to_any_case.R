@@ -27,7 +27,7 @@ test_that("examples", {
   expect_equal(to_any_case("HAMBURGcityGERUsa", case = "parsed", parsing_option = 4),
                "HAMBURG_city_GER_Usa")
   
-  expect_equal(to_any_case("HAMBURGcity", case = "parsed", parsing_option = 5),
+  expect_equal(to_any_case("HAMBURGcity", case = "parsed", parsing_option = 0),
                "HAMBURGcity")
   
   expect_equal(to_any_case(c("RSSfeedRSSfeed", "USPassport", "USpassport"), abbreviations = c("RSS", "US")),

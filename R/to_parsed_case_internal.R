@@ -18,6 +18,10 @@
 #' @importFrom magrittr "%>%"
 #'
 to_parsed_case_internal <- function(string, parsing_option = 1L){
+  ### input checking
+  if(parsing_option >= 5L){
+    stop("parsing_option must be 1,2,3,4 or <= 0 for no parsing.")
+  }
   ### preprocessing:
   # catch everything that should be handled like underscores
   # (only spaces by default)
