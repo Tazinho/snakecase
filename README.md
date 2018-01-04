@@ -82,8 +82,8 @@ to_any_case("THISIsHOW IAmPARSED!", case = "parsed")
 Be aware that automatic case conversion depends on the input string and it is recommended to verify the results. So you might want to pipe these into `dput()` (and hardcode name changes instead of blindly trusting `to_any_case()`'s output)
 
 ``` r
-dput(to_any_case("SomeBAdInput"))
-## "some_b_ad_input"
+dput(to_any_case(c("SomeBAdInput", "someGoodInput")))
+## c("some_b_ad_input", "some_good_input")
 ```
 
 ### Big picture (a parameterized workflow)
@@ -118,7 +118,7 @@ For daily usage I recommend to combine `to_any_case()` with `dput()`. In this wa
 
 However, if you have a really hard time on a specific example or you want to have relatively stable settings for a specific usecase, the following settings might help you getting started...
 
--   `abbreviations`: In the wild you might meet abbreviations like country codes. Before you consider a different `parsing_option`, you might just want to use the abbreviations argument
+-   `abbreviations`: In the wild you might meet abbreviations like country codes, which are often written in upper case and can lead to odd looking "mixed cases". Before you consider a different `parsing_option`, you might just want to use the abbreviations argument
 
 ``` r
 to_any_case(c("HHcity", "IDTable1", "KEYtable2", "newUSElections"),
@@ -135,7 +135,7 @@ to_any_case("so.many_different@separators inThis|sentece",
 ## [1] "so_many_different_separators_in_this_sentece"
 ```
 
--   You may want to do exactly the last thing, but for a specific reason you dont want to preprocess "." and "@"
+-   You may want to do exactly the last thing, but for a specific reason you don't want to preprocess "." and "@"
 
 ``` r
 to_any_case("some-email@provider.com", 
