@@ -193,7 +193,7 @@ to_any_case <- function(string,
                  "big_camel", "screaming_snake", "parsed",
                  "lower_upper", "upper_lower")){
 ### split-----------------------------------------------------------------------
-    if(case %in% c("mixed", "snake", "screaming_snake", "parsed", "lower_upper", "upper_lower")){
+    if(case %in% c("none", "mixed", "snake", "screaming_snake", "parsed", "lower_upper", "upper_lower")){
       string <- string %>% stringr::str_split("_")
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
@@ -264,7 +264,7 @@ to_any_case <- function(string,
                             .x}) 
     }
 ### collapsing------------------------------------------------------------------
-    if(case %in% c("mixed", "snake", "screaming_snake", "parsed",
+    if(case %in% c("none", "mixed", "snake", "screaming_snake", "parsed",
                    "small_camel", "big_camel", "lower_upper", "upper_lower")) {
       string <- string %>% purrr::map_chr(~stringr::str_c(.x, collapse = "_"))
     }

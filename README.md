@@ -152,7 +152,7 @@ to_any_case(c("HHcity", "IDtable1", "KEYtable2", "newUSelections"),
 ## [4] "new_us_elections"
 ```
 
-    If you are interested in a specific parsing option, which is not implemented, pls open an issue.
+If you are interested in a specific parsing option, which is not implemented, pls open an issue.
 
 -   `replace_special_characters`: To transliterate exotic characters you can use any option from `stringi::stri_trans_list()` (especially "Latin-ASCII" is useful) or provided lookups introduced (country specific) by this package. Currently only "german" is supported. When more than one is supplied, the transliterations are performed iteratively
 
@@ -162,7 +162,7 @@ to_any_case("Schönes Café",
 ## [1] "schoenes_cafe"
 ```
 
-    If you can provide tranliterations for your (or any other) country, pls drop them within [this issue](https://github.com/Tazinho/snakecase/issues/107).
+If you can provide tranliterations for your (or any other) country, pls drop them within [this issue](https://github.com/Tazinho/snakecase/issues/107).
 
 -   `case` Sometimems you just need a reasonable case. Make sure to checkout
 
@@ -182,53 +182,37 @@ to_any_case("IWill LookLike aRollerCoasterYouCanPARSEMeWith option2",
 
 to_any_case("Maybé you_just...want to Format me a bit?", case = "none",
             preprocess = "_|\\.", replace_special_characters = "Latin-ASCII",
-            postprocess = "")
-## [1] "Maybe youjustwant to Format me a bit?"
+            postprocess = " ")
+## [1] "Maybe you just   want to Format me a bit?"
 ```
 
--   cosmetics like
-
--   sometimes further pre or postprocessing might be needed. You can decide yourself if this should become part of this package or it is easier to build sth quickly yourself via base, stringr, stringi etc.
-
-Further, if you have questions or a specific feature request, don't hesitate to open an issue.
-
-#### Special characters
-
-If you have problems with special characters (like u umlaut) on your platform, you can replace them via `replace_special_characters = c("german", "Latin-ASCII")`:
+-   cosmetics like:
+-   `empty_fill`
 
 ``` r
-to_any_case(string, case = "snake", 
-            preprocess = ":|(?<!\\d)\\.",
-            replace_special_characters = c("german", "Latin-ASCII"))
-## [1] "r_stuedio_v_1.0.143"
+to_any_case(c("","_",""), empty_fill = c("empty", "also empty"))
+## Warning in string[string == ""] <- empty_fill: Anzahl der zu ersetzenden
+## Elemente ist kein Vielfaches der Ersetzungslänge
+## [1] "empty"      "also empty" "empty"
 ```
 
-You can supply any id from `stringi::stri_trans_list()` or countryname from the internal transliteration dictionary of this package (currently only "german"; also in combination).
-
-#### Empty or non unique output
-
-You can fill empty results with arbitrary strings via the `empty_fill` argument
-
-``` r
-to_any_case(c("","_","."), empty_fill = c("empty", "also empty"))
-## [1] "empty"      "also empty" "."
-```
-
-Duplicated output can be automatically suffixed via an index (starting with the first duplication) and an arbitrary separator supplied to the `unique_sep` argument
+-   `unique_sep`
 
 ``` r
 to_any_case(c("same","same","other"), unique_sep = c(">"))
 ## [1] "same"   "same>1" "other"
 ```
 
-#### Pre -and postfix
-
-You can set pre -and suffixes:
+-   `prefix`, `postfix`:
 
 ``` r
-# to_any_case(string, case = "big_camel", postprocess = "//",
-#             prefix = "USER://", postfix = ".exe")
+to_any_case(c("customer", "product"), case = "big_camel", 
+            prefix = c("table_1.", "table_2."),
+            postfix = c("ID"))
+## [1] "table_1.CustomerID" "table_2.ProductID"
 ```
+
+-   Sometimes further pre or postprocessing might be needed. You can decide yourself: Open an issue here or build sth quickly yourself via packages like base, stringr, stringi etc.
 
 Design Philosophy
 -----------------
