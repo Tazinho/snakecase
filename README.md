@@ -88,7 +88,7 @@ dput(to_any_case("SomeBAdInput"))
 
 ### Big picture (a parameterized workflow)
 
-The `to_any_case()` function is the workhorse of the package and basically enables you to convert any string into any case via a well thought process of parsing (`abbreviations`, `preprocess`, `parsing_option`), **conversion** (`replace_special_characters`, `case`) and **postprocessing** (`postprocess`). The specific arguments allow you to customize the pipeline.
+The `to_any_case()` function is the workhorse of the package and basically enables you to convert any string into any case via a well thought process of **parsing** (`abbreviations`, `preprocess`, `parsing_option`), **conversion** (`replace_special_characters`, `case`) and **postprocessing** (`postprocess`). The specific arguments allow you to customize the pipeline.
 
 On this example, you can see the pipeline including all implementation details.
 
@@ -106,7 +106,7 @@ Some further cosmetics can be added to the output via the following arguments:
 The package is internally build up on the [stringr](https://github.com/tidyverse/stringr) package, which means that many powerful features are provided "by default":
 
 -   `to_any_case()` is vectorised over most of its arguments like `string`, `preprocess`, `postprocess`, `empty_fill`, `prefix` and `postfix`.
--   internal character operations are super fast c++ (however, a lot of speed is lost due to a more systematic and maintainable implementation. This might be optimized in the long run)
+-   internal character operations are super fast c++. However, a lot of speed is lost due to a more systematic and maintainable implementation. (This might be optimized in the long run)
 -   special input like `character(0)`, `NA` etc. is handled in exactly the same consistent and convenient manner as in the stringr package
 
 Recommended settings
@@ -126,6 +126,8 @@ However, if you have a really hard time on a specific example or you want to hav
 -   parsing\_options for example with lower upper. Reming on the design philosophy. Remind on usecases that might be implemented when needed
 -   cosmetics like
 
+Further, if you have questions or a specific feature request, don't hesitate to open an issue.
+
 #### Special characters
 
 If you have problems with special characters (like u umlaut) on your platform, you can replace them via `replace_special_characters = c("german", "Latin-ASCII")`:
@@ -133,7 +135,6 @@ If you have problems with special characters (like u umlaut) on your platform, y
 ``` r
 to_any_case(string, case = "snake", 
             preprocess = ":|(?<!\\d)\\.",
-            protect = "\\.",
             replace_special_characters = c("german", "Latin-ASCII"))
 ## [1] "r_stuedio_v_1.0.143"
 ```
