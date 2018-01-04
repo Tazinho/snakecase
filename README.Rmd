@@ -229,7 +229,7 @@ In this way, we can get a good starting point on how to convert specific strings
 
 In the last sections we have seen, that it is reasonable to bring a specific conversion from an input string to some standardized case into question. We have also seen, that it is helpful to introduce some tests on the behavior of a specific conversion pattern in related cases. The latter can help to detect inappropriate conversions and also establishes a consistent behavior when converting exotic cases or switching between standardized cases. Maybe we can generalize some of these tests and introduce some kind of consistency patterns. This would enable us that whenever inappropriate or non-unique possibilities for conversions appear, we have rules that help us to deal with this situation and help to exclude some inconsistent conversion alternatives.
 
-During the development of this package I recognized three specific rules that seem reasonable to be valid whenever cases are converted. To be more general we just use `to_x()` and `to_y()` to refer to any two differing converter functions from this package.
+During the development of this package I recognized three specific rules that seem reasonable to be valid whenever cases are converted. To be more general we just use `to_x()` and `to_y()` to refer to any two differing converter functions from the set of fucntions including `to_snake_case()`, `to_screaming_snake_case()`, `to_lower_camel_case` and `to_upper_camel_case()`. (Other cases like "lower_upper" or "upper_lower" could be included, if we consider `parsing_option = 2` within the equations.)
 
 1. When we have converted to a standardized case, a new conversion to the case should not change the output:
 
