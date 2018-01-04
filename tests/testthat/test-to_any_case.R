@@ -318,6 +318,9 @@ test_that("complex strings", {
   # 
   # expect_equal(to_any_case(c(NA, NA, NA), "upper_lower"),
   #              rep(NA_character_, 3))
+  expect_equal(to_any_case("blaBla.bla", case = "big_camel", parsing_option = 5),
+               "BlaBla.bla")
+  
 })
 
 

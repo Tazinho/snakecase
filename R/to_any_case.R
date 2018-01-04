@@ -65,6 +65,8 @@
 #'  \item{2: \code{RRRStudio -> RRRS_tudio}}
 #'  \item{3: parses at the beginning like option 1 and the rest like option 2.}
 #'  \item{4: parses at the beginning like option 2 and the rest like option 1.}
+#'  \item{5: parses like option 1 but suppresses "_" around non special characters.
+#'  In this way case conversion won't apply after these characters. See examples.}
 #'  \item{any other integer <= 0: no parsing"}
 #'  }
 #'  
@@ -101,8 +103,12 @@
 #' to_any_case("HAMBURGcityGERUsa", case = "parsed", parsing_option = 3)
 #' # or starting like parsing_option 2 and for the rest switch to option 1
 #' to_any_case("HAMBURGcityGERUsa", case = "parsed", parsing_option = 4)
+#' # By default (option 1) characters are converted after non alpha numeric characters.
+#' # This option (5) suppresses this behaviour
+#' to_any_case("blaBla.bla", case = "big_camel", parsing_option = 5)
 #' # there might be reasons to suppress the parsing, while choosing neither one or two
-#' to_any_case("HAMBURGcity", case = "parsed", parsing_option = 0s)
+#' 
+#' to_any_case("HAMBURGcity", case = "parsed", parsing_option = 0)
 #' 
 #' ### Abbreviations
 #' to_any_case(c("RSSfeedRSSfeed", "USPassport", "USpassport"), abbreviations = c("RSS", "US"))

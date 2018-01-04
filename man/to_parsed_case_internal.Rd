@@ -15,6 +15,8 @@ to_parsed_case_internal(string, parsing_option = 1L)
  \item{2: \code{RRRStudio -> RRRS_tudio}}
  \item{3: parses at the beginning like option 1 and the rest like option 2.}
  \item{4: parses at the beginning like option 2 and the rest like option 1.}
+ \item{5: parses like option 1 but suppresses "_" around non alpha-numeric characters.
+ In this way this option suppresses splits and resulting case conversion after these characters.}
  \item{any other integer <= 0: no parsing"}
  }}
 }
