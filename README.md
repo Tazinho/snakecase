@@ -68,8 +68,8 @@ And you might want to remove special characters along the way
 
 ``` r
 to_any_case("Doppelgänger is originally german", 
-            replace_special_characters = "german")
-## [1] "doppelgaenger_is_originally_german"
+            replace_special_characters = "german", case = "upper_camel")
+## [1] "DoppelgaengerIsOriginallyGerman"
 ```
 
 All of the cases like: snake, lower\_camel, upper\_camel, all\_caps, lower\_upper, upper\_lower and mixed are based on parsed case
