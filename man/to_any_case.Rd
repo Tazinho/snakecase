@@ -122,7 +122,7 @@ to_any_case("HAMBURGcityGERUsa", case = "parsed", parsing_option = 3)
 # or starting like parsing_option 2 and for the rest switch to option 1
 to_any_case("HAMBURGcityGERUsa", case = "parsed", parsing_option = 4)
 # there might be reasons to suppress the parsing, while choosing neither one or two
-to_any_case("HAMBURGcity", case = "parsed", parsing_option = 5)
+to_any_case("HAMBURGcity", case = "parsed", parsing_option = 0s)
 
 ### Abbreviations
 to_any_case(c("RSSfeedRSSfeed", "USPassport", "USpassport"), abbreviations = c("RSS", "US"))

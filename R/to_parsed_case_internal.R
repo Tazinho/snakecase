@@ -7,7 +7,7 @@
 #'  \item{2: \code{RRRStudio -> RRRS_tudio}}
 #'  \item{3: parses at the beginning like option 1 and the rest like option 2.}
 #'  \item{4: parses at the beginning like option 2 and the rest like option 1.}
-#'  \item{any other integer: no parsing"}
+#'  \item{any other integer <= 0: no parsing"}
 #'  }
 #'  
 #' @return A character vector separated by underscores, containing the parsed string.
