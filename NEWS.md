@@ -1,3 +1,10 @@
+#snakecase 0.6.0.9000
+
+* overhaul readme
+* renamed `parsingoption` argument to `parsing_option`
+* `process` argument: changed implementation in `to_any_case`, set a reasonable default, implemented the behaviour also in to_xxx shortcut functions, deprecated `process` argument
+* make modifications to case none, which allows now more parsing options
+
 # snakecase 0.5.4.9000
 
 * added special behaviour for abbreviations within "mixed_case"
