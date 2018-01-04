@@ -110,7 +110,7 @@ The package is internally build up on the [stringr](https://github.com/tidyverse
 
 For daily usage (especially when preparing fixed scripts) I recommend to combine `to_any_case()` with `dput()`. In this way, you can quickly inspect, if the output is as intended and hardcode the results (which is basically safer and good practice in my opinion). In very complex cases you might just want to manually fix the output instead of tweeking with the arguments too much.
 
-However, if you have a really hard time on a specific example or you want to have relatively stable settings for a specific usecase, the following settings might help you getting started...
+However, if you have a really hard time on a specific example or you want to have appropriate settings for a specific usecase, the following might help you getting started...
 
 * `abbreviations`: In the wild you might meet abbreviations like country codes, which are often written in upper case and can lead to odd looking "mixed cases". Before you consider a different `parsing_option`, you might just want to use the abbreviations argument
 
