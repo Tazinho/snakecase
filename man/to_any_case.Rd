@@ -20,7 +20,7 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
  \item{snake_case: \code{"snake"}}
  \item{lowerCamel: \code{"lower_camel"} or \code{"small_camel"}}
  \item{UpperCamel: \code{"upper_camel"} or \code{"big_camel"}}
- \item{ALL_CAPS: \code{"screaming_snake"} or \code{"all_caps"}}
+ \item{ALL_CAPS: \code{"all_caps"} or \code{"screaming_snake"}}
  \item{lowerUPPER: \code{"lower_upper"}}
  \item{UPPERlower: \code{"upper_lower"}}
  }
@@ -36,13 +36,13 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
  or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will stay in upper case.}
  \item{\code{"none"}: Neither parsing nor case conversion occur. This case might be helpful, when
  one wants to call the function for the quick usage of the other parameters.
- Works with \code{preprocess}, \code{replace_special_characters}, \code{prefix},
+ Works with \code{preprocess}, \code{replace_special_characters}, \code{postprocess}, \code{prefix},
   \code{postfix},
   \code{empty_fill} and \code{unique_sep}.}
  }}
 
 \item{preprocess}{A string (if not \code{NULL}) that will be wrapped internally
-into \code{stringr::regex()}. All matches will be replaced by underscores.}
+into \code{stringr::regex()}. All matches will be replaced by underscores. Underscores can later turned into another separator via \code{postprocess}.}
 
 \item{protect}{A string (default: \code{"_(?![:alnum:])|(?<![:alnum:])_"}).
 Every internal match to the supplied regular expression won't have an output separator
