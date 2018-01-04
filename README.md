@@ -118,13 +118,73 @@ For daily usage I recommend to combine `to_any_case()` with `dput()`. In this wa
 
 However, if you have a really hard time on a specific example or you want to have relatively stable settings for a specific usecase, the following settings might help you getting started...
 
--   show abbreviations
--   the "none" case is provided for the (exclusive) usage of the other function arguments to\_any\_case(string, case = "none"). Mention mixed and parsed case.
--   `replace_special_characters` argument. mention stringi and country specific strings. Mention that more will be implemented, when users submit transliterations and give link to github issue
--   preprocess with all non alpha-numeric \[^\[:alnum:\]\]
--   preprocessing with different intentions, show some regexes
--   parsing\_options for example with lower upper. Reming on the design philosophy. Remind on usecases that might be implemented when needed
+-   `abbreviations`: In the wild you might meet abbreviations like for example country country codes. Before you consider a different `parsing_option`, you might just want to use the abbreviations argument
+
+``` r
+to_any_case(c("HHcity", "IDTable1", "KEYtable2", "newUSElections"),
+            abbreviations = c("HH", "ID", "KEY", "US"))
+## [1] "hh_city"          "id_table_1"       "key_table_2"     
+## [4] "new_us_elections"
+```
+
+-   `preprocess`: Very ofthen you might just want to have all special (non alpha numeric) characters as a separator. You can achive this while providing the regarding regex
+
+``` r
+to_any_case("so.many_different@separators inThis|sentece",
+            preprocess = "[^[:alnum:]]")
+## [1] "so_many_different_separators_in_this_sentece"
+```
+
+-   You may want to do exactly the last thing, but for a specific reason you dont want to preprocess "." and "@"
+
+``` r
+to_any_case("some-email@provider.com", 
+            preprocess = "[^[:alnum:]|\\.|@]") # notice: the order is important
+## [1] "some_email@provider.com"
+```
+
+-   `parsing_option`: We can modify the abbreviations example a bit. In this case, another parsing option might be handy
+
+``` r
+to_any_case(c("HHcity", "IDtable1", "KEYtable2", "newUSelections"),
+            parsing_option = 2)
+## [1] "hh_city"          "id_table_1"       "key_table_2"     
+## [4] "new_us_elections"
+```
+
+If you are interested in a specific parsing option, which is not implemented, pls open an issue.
+
+-   `replace_special_characters`: To transliterate exotic characters you can use any option from `stringi::stri_trans_list()` (especially "Latin-ASCII" is useful) or provided lookups introduced (countryspecific) by this package. Currently only "german" is supported. When more than one is supplied, the transliterations are performed iteratively
+
+``` r
+to_any_case("Schönes Café", 
+            replace_special_characters = c("german", "Latin-ASCII"))
+## [1] "schoenes_cafe"
+```
+
+If you can provide tranliterations for your (or any other) country, pls drop them within [this issue](https://github.com/Tazinho/snakecase/issues/107).
+
+-   `case` Sometimems you just need a reasonable case. Make sure to checkout
+
+``` r
+to_any_case("parsed_case", case = "parsed")
+## [1] "parsed_case"
+to_any_case("My_first_LettersWONTChange", case = "mixed")
+## [1] "My_first_Letters_Wont_Change"
+to_any_case("IalsoWORKWith abbreviations", case = "mixed", abbreviations = "WORK")
+## [1] "Ialso_WORK_With_abbreviations"
+to_any_case("IWill LookLike aRollerCoasterYouCanPARSEMeWith option1",
+            case = "upper_lower") # or lower_upper
+## [1] "IwillLOOKlikeArollerCOASTERyouCANparseMEwithOPTION1"
+to_any_case("Maybé you_just...want to Format me a bit?", case = "none",
+            preprocess = "_|\\.", replace_special_characters = "Latin-ASCII",
+            postprocess = "")
+## [1] "Maybe you_just___want to Format me a bit?"
+```
+
 -   cosmetics like
+
+-   sometimes further pre or postprocessing might be needed. You can decide yourself if this should become part of this package or it is easier to build sth quickly yourself via base, stringr, stringi etc.
 
 Further, if you have questions or a specific feature request, don't hesitate to open an issue.
 
