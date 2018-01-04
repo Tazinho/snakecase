@@ -39,7 +39,7 @@
 #' If you need to make usage of this argument in your code, pls drop me an email, so that I can see if there might be a better solution.
 #' 
 #' @param replace_special_characters A character vector (if not \code{NULL}). The entries of this argument
-#' need to be elements of \code{stringi::stri_trans_list()} or names of lookup tables (currently
+#' need to be elements of \code{stringi::stri_trans_list()} (like "Latin-ASCII", which is often useful) or names of lookup tables (currently
 #' only "german" is supported). In the order of the entries the letters of the input
 #'  string will be transliterated via \code{stringi::stri_trans_general()} or replaced via the 
 #'  matches of the lookup table.
@@ -83,9 +83,9 @@
 #' ### Cases
 #' strings <- c("this Is a Strange_string", "AND THIS ANOTHER_One")
 #' to_any_case(strings, case = "snake")
-#' to_any_case(strings, case = "lower_camel")
-#' to_any_case(strings, case = "upper_camel")
-#' to_any_case(strings, case = "all_caps")
+#' to_any_case(strings, case = "lower_camel") # same as "small_camel"
+#' to_any_case(strings, case = "upper_camel") # same as "big_camel"
+#' to_any_case(strings, case = "all_caps") # same as "screaming_snake"
 #' to_any_case(strings, case = "lower_upper")
 #' to_any_case(strings, case = "upper_lower")
 #' to_any_case(strings, case = "parsed")
@@ -111,7 +111,6 @@
 #' string <- "R.St\u00FCdio: v.1.0.143"
 #' to_any_case(string)
 #' to_any_case(string, case = "snake", preprocess = ":|\\.")
-#' to_any_case(string, case = "snake")
 #' to_any_case(string, case = "snake",
 #'             preprocess = ":|(?<!\\d)\\.")
 #' 
