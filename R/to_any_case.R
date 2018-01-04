@@ -274,6 +274,8 @@ to_any_case <- function(string,
     if (!is.null(protect)){
       string <- stringr::str_replace_all(string, protect, "")
     }
+### ----------------------------------------------------------------------------
+}
 ### postprocessing--------------------------------------------------------------
     if(!is.null(postprocess) & !identical(string, character(0))){
       string <- purrr::map2_chr(string,
@@ -283,8 +285,6 @@ to_any_case <- function(string,
     if(is.null(postprocess) & case %in% c("small_camel", "big_camel", 
                                             "lower_upper", "upper_lower")){
       string <- stringr::str_replace_all(string, "(?<!\\d)_|_(?!\\d)", "")
-    }
-### ----------------------------------------------------------------------------
     }
 ### ____________________________________________________________________________
 ### "none"
