@@ -21,7 +21,7 @@ The snakecase package introduces a fresh and straightforward approach on case co
 
 # or the (stable) development version hosted on github
 install.packages("devtools")
-devtools::install_github("Tazinho/snakecase")
+devtools::install_github("Tazinho/snakecase", ref = "devversion-01")
 ```
 
 ### Basic examples
@@ -183,7 +183,7 @@ to_any_case("IWill LookLike aRollerCoasterYouCanPARSEMeWith option2",
 to_any_case("Maybé you_just...want to Format me a bit?", case = "none",
             preprocess = "_|\\.", replace_special_characters = "Latin-ASCII",
             postprocess = " ")
-## [1] "Maybe you just   want to Format me a bit?"
+## [1] "Maybe you just want to Format me a bit?"
 ```
 
 -   cosmetics: `empty_fill`, `unique_sep`, `prefix`, `postfix`
