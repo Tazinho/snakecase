@@ -191,14 +191,19 @@ to_any_case <- function(string,
   if (case != "none"){
     string <- to_parsed_case_internal(string,
                                       parsing_option = parsing_option)
+  } else {
+    string <- string %>%
+      purrr::map_chr(~ stringr::str_replace_all(.x, "_+", "_")) %>% 
+      purrr::map_chr(~ stringr::str_replace_all(.x, "^_|_$", ""))
   }
+  
 ### ____________________________________________________________________________
 ### "mixed", "snake", "small_camel", "big_camel", "screaming_case", "parsed"
   if(case %in% c("mixed", "snake", "small_camel",
                  "big_camel", "screaming_snake", "parsed",
                  "lower_upper", "upper_lower")){
 ### split-----------------------------------------------------------------------
-    if(case %in% c("none", "mixed", "snake", "screaming_snake", "parsed", "lower_upper", "upper_lower")){
+    if(case %in% c("mixed", "snake", "screaming_snake", "parsed", "lower_upper", "upper_lower")){
       string <- string %>% stringr::str_split("_")
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .

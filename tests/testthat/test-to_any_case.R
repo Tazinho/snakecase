@@ -175,13 +175,15 @@ test_that("janitor-pkg-tests",{
                  "r_studio_v_1_0_143")
   )
   
-  expect_equal(clean_names3(c("sp ace", "repeated", "a**#@", "%", "#",
-                              "!", "d(!)9", "REPEATED", "can\"'t", "hi_`there`",
-                              "  leading spaces", "\u20AC", "a\u00E7\u00E3o", "far\u0153", "r.st\u00FCdio:v.1.0.143"),
+  expect_equal(clean_names3(c("sp ace", "repeated", "a**#@", "%",
+                              "#", "!", "d(!)9", "REPEATED",
+                              "can\"'t", "hi_`there`", "  leading spaces", "\u20AC",
+                              "a\u00E7\u00E3o", "far\u0153", "r.st\u00FCdio:v.1.0.143"),
                             case = "none"),
-               c("sp_ace", "repeated", "a____", "_percent_", "X_", "X__2", "d___9", 
-                 "REPEATED", "cant", "hi__there_", "leading_spaces", "X__3", "acao", 
-                 "faroe", "r_studio_v_1_0_143")
+               c("sp_ace", "repeated", "a", "percent",
+                 "X", "X_2", "d_9", "REPEATED",
+                 "cant", "hi_there", "leading_spaces", "X_3", 
+                 "acao", "faroe", "r_studio_v_1_0_143")
   )
 })
 
