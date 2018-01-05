@@ -21,7 +21,7 @@ The snakecase package introduces a fresh and straightforward approach on case co
 
 # or the (stable) development version hosted on github
 install.packages("devtools")
-devtools::install_github("Tazinho/snakecase", ref = "devversion-01")
+devtools::install_github("Tazinho/snakecase")
 ```
 
 ### Basic examples
@@ -152,6 +152,14 @@ to_any_case(c("HHcity", "IDtable1", "KEYtable2", "newUSelections"),
 ## [4] "new_us_elections"
 ```
 
+-   To suppress conversion after a non alpha numeric character (except "\_"), you can choose parsing option 5
+
+``` r
+to_any_case("look_AfterThe-hyphen andThe.dot", 
+            case = "upper_camel", parsing_option = 5)
+## [1] "LookAfterThe-HyphenAndThe.dot"
+```
+
 If you are interested in a specific parsing option, which is not implemented, pls open an issue.
 
 -   `replace_special_characters`: To transliterate exotic characters you can use any option from `stringi::stri_trans_list()` (especially "Latin-ASCII" is useful) or provided lookups introduced (country specific) by this package. Currently only "german" is supported. When more than one is supplied, the transliterations are performed iteratively
@@ -203,7 +211,14 @@ to_any_case(c("customer", "product"), case = "big_camel",
 ## [1] "table_1.CustomerID" "table_2.ProductID"
 ```
 
--   Sometimes further pre or postprocessing might be needed. You can decide yourself: Open an issue here or build sth quickly yourself via packages like base, stringr, stringi etc.
+-   In general combinations of one letter words are hard to convert back from cases with `""` as default separator
+
+``` r
+to_any_case("a_b_c_d", case = "upper_camel")
+## [1] "ABCD"
+```
+
+-   Sometimes further pre or postprocessing might be needed. You can decide yourself: Open an issue (here)\[<https://github.com/Tazinho/snakecase/issues>\] or build sth. quickly yourself via packages like base, (stringr)\[<https://github.com/tidyverse/stringr>\], (stringi)\[<https://github.com/gagolews/stringi>\] etc.
 
 Design Philosophy
 -----------------

@@ -323,6 +323,15 @@ test_that("complex strings", {
   expect_equal(to_any_case("blaBla.bla", case = "big_camel", parsing_option = 5),
                "BlaBla.bla")
   
+  expect_equal(to_any_case("bla-bla", case = "upper_camel", parsing_option = 5),
+               "Bla-bla")
+  expect_equal(to_any_case("bla.bla", case = "upper_camel", parsing_option = 5),
+               "Bla.bla")
+  expect_equal(to_any_case("bla.bla", case = "upper_camel"),
+               "Bla.Bla")
+  expect_equal(to_any_case("a_b_c_d", case = "upper_camel"),
+               "ABCD")
+  
 })
 
 

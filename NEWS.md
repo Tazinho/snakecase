@@ -1,3 +1,8 @@
+#snakecase 0.6.1.9000
+
+* more consistency for case none
+* bugfix for parsing option 5
+
 #snakecase 0.6.0.9000
 
 * overhaul readme
