@@ -332,6 +332,15 @@ test_that("complex strings", {
   expect_equal(to_any_case("a_b_c_d", case = "upper_camel"),
                "ABCD")
   
+  expect_equal(to_any_case("some11 21 31numbers_11 21 32_With11 11_diffs11 22 d", case = "upper_camel"),
+               "Some11_21_31Numbers11_21_32With11_11Diffs11_22D")
+  expect_equal(to_any_case("some11 21 31numbers_11 21 32_With11 11_diffs11 22 d", case = "lower_camel"),
+               "some11_21_31Numbers11_21_32With11_11Diffs11_22D")
+  expect_equal(to_any_case("some11 21 31numbers_11 21 32_With11 11_diffs11 22 d", case = "upper_lower"),
+               "SOME11_21_31numbers11_21_32WITH11_11diffs11_22D")
+  expect_equal(to_any_case("some11 21 31numbers_11 21 32_With11 11_diffs11 22 d", case = "lower_upper"),
+               "some11_21_31NUMBERS11_21_32with11_11DIFFS11_22d")
+  
 })
 
 
