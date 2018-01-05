@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Internal helper to protect non alphanumerics (delete the separators around them). — protect_internal â€¢ snakecase</title>
+<title>Internal protect helper (deletes the separators around protected regex matches). — protect_internal â€¢ snakecase</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -51,10 +52,25 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/caseconverters.html">Case converters</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -62,7 +78,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/Tazinho/snakecase">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -74,11 +95,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Internal helper to protect non alphanumerics (delete the separators around them).</h1>
+    <h1>Internal protect helper (deletes the separators around protected regex matches).</h1>
     </div>
 
     
-    <p>Internal helper to protect non alphanumerics (delete the separators around them).</p>
+    <p>Internal protect helper (deletes the separators around protected regex matches).</p>
     
 
     <pre class="usage"><span class='fu'>protect_internal</span>(<span class='no'>string</span>, <span class='kw'>protect</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
@@ -92,7 +113,7 @@
     </tr>
     <tr>
       <th>protect</th>
-      <td><p>A string which is a valid <code>stringr::regex()</code>. Matches within the output
+      <td><p>A string which is a valid <code><a href='http://www.rdocumentation.org/packages/stringr/topics/modifiers'>stringr::regex()</a></code>. Matches within the output
 won't have any "_" (or artifacts of <code>preprocess</code>) beside. Note that <code>preprocess</code> has a higher precedence than protect, 
 which means that it doesn't make sense to protect sth. which is already replaced
 via <code>preprocess</code>.</p></td>

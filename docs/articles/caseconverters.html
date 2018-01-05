@@ -29,16 +29,38 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../articles/caseconverters.html">Case converters</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">News</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/Tazinho/snakecase">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -53,13 +75,13 @@
       <h1>Case converters</h1>
                         <h4 class="author">Malte Grosser</h4>
             
-            <h4 class="date">2017-05-28</h4>
+            <h4 class="date">2018-01-05</h4>
           </div>
 
     
     
 <div class="contents">
-<p>The snakecase package contains five specific case converter functions and one more general high level function with added functionality.</p>
+<p>The snakecase package contains eight specific case converter functions and one more general high level function with added functionality.</p>
 <div id="specific-case-converters" class="section level2">
 <h2 class="hasAnchor">
 <a href="#specific-case-converters" class="anchor"></a>Specific case converters</h2>
@@ -80,7 +102,16 @@ strings &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st"
 ## [1] "ThisIsAStrangeString" "AndThisAnotherOne"
 
 <span class="kw"><a href="../reference/caseconverter.html">to_screaming_snake_case</a></span>(strings)
-## [1] "THIS_IS_A_STRANGE_STRING" "AND_THIS_ANOTHER_ONE"</code></pre></div>
+## [1] "THIS_IS_A_STRANGE_STRING" "AND_THIS_ANOTHER_ONE"
+
+<span class="kw"><a href="../reference/caseconverter.html">to_lower_upper_case</a></span>(strings)
+## [1] "thisISaSTRANGEstring" "andTHISanotherONE"
+
+<span class="kw"><a href="../reference/caseconverter.html">to_lower_upper_case</a></span>(strings)
+## [1] "thisISaSTRANGEstring" "andTHISanotherONE"
+
+<span class="kw"><a href="../reference/caseconverter.html">to_mixed_case</a></span>(strings)
+## [1] "this_Is_a_Strange_string" "And_This_Another_One"</code></pre></div>
 </div>
 <div id="highlevel-case-converter" class="section level2">
 <h2 class="hasAnchor">
@@ -102,7 +133,19 @@ strings &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st"
 ## [1] "ThisIsAStrangeString" "AndThisAnotherOne"
 
 <span class="kw"><a href="../reference/to_any_case.html">to_any_case</a></span>(strings, <span class="dt">case =</span> <span class="st">"screaming_snake"</span>)
-## [1] "THIS_IS_A_STRANGE_STRING" "AND_THIS_ANOTHER_ONE"</code></pre></div>
+## [1] "THIS_IS_A_STRANGE_STRING" "AND_THIS_ANOTHER_ONE"
+
+<span class="kw"><a href="../reference/to_any_case.html">to_any_case</a></span>(strings, <span class="dt">case =</span> <span class="st">"lower_upper"</span>)
+## [1] "thisISaSTRANGEstring" "andTHISanotherONE"
+
+<span class="kw"><a href="../reference/to_any_case.html">to_any_case</a></span>(strings, <span class="dt">case =</span> <span class="st">"upper_lower"</span>)
+## [1] "THISisAstrangeSTRING" "ANDthisANOTHERone"
+
+<span class="kw"><a href="../reference/to_any_case.html">to_any_case</a></span>(strings, <span class="dt">case =</span> <span class="st">"mixed"</span>)
+## [1] "this_Is_a_Strange_string" "And_This_Another_One"
+
+<span class="kw"><a href="../reference/to_any_case.html">to_any_case</a></span>(strings, <span class="dt">case =</span> <span class="st">"none"</span>)
+## [1] "this Is a Strange_string" "AND THIS ANOTHER_One"</code></pre></div>
 </div>
 <div id="pre--and-postprocessing" class="section level3">
 <h3 class="hasAnchor">
@@ -111,7 +154,7 @@ strings &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st"
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">strings2 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"this - Is_-: a Strange_string"</span>, <span class="st">"ÄND THIS ANOTHER_One"</span>)
 
 <span class="kw"><a href="../reference/caseconverter.html">to_snake_case</a></span>(strings2)
-## [1] "this_-_is_-_:_a_strange_string" "änd_this_another_one"
+## [1] "this-is-:a_strange_string" "änd_this_another_one"
 
 <span class="kw"><a href="../reference/to_any_case.html">to_any_case</a></span>(strings2, <span class="dt">case =</span> <span class="st">"snake"</span>, <span class="dt">preprocess =</span> <span class="st">"-|</span><span class="ch">\\</span><span class="st">:"</span>)
 ## [1] "this_is_a_strange_string" "änd_this_another_one"</code></pre></div>
@@ -134,10 +177,11 @@ strings &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st"
 <div id="special-characters" class="section level3">
 <h3 class="hasAnchor">
 <a href="#special-characters" class="anchor"></a>Special characters</h3>
-<p>If you have problems with special characters on your platform, you can replace them via <code>replace_special_characters = TRUE</code>:</p>
+<p>If you have problems with special characters on your platform, you can replace them via <code>replace_special_characters = c("germany", "Latin-ASCII")</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">strings3 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"ßüss üß ä stränge sträng"</span>, <span class="st">"unrealistisch aber nützich")</span>
 
-<span class="st">to_any_case(strings3, case = "</span>screaming_snake<span class="st">", replace_special_characters = TRUE)</span>
+<span class="st">to_any_case(strings3, case = "</span>screaming_snake<span class="st">", </span>
+<span class="st">            replace_special_characters = c("</span>germany<span class="st">", "</span>Latin<span class="op">-</span>ASCII<span class="st">"))</span>
 <span class="st">## [1] "</span>SSUESS_UESS_AE_STRAENGE_STRAENG<span class="st">" "</span>UNREALISTISCH_ABER_NUETZICH<span class="st">"</span></code></pre></div>
 </div>
 <div id="protect-anything" class="section level3">
@@ -147,11 +191,15 @@ strings &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st"
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">strings4 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"var12"</span>, <span class="st">"var1.2"</span>, <span class="st">"va.r.1.2"</span>)
 
 <span class="kw"><a href="../reference/to_any_case.html">to_any_case</a></span>(strings4, <span class="dt">case =</span> <span class="st">"snake"</span>)
-## [1] "var_12"         "var_1_._2"      "va_._r_._1_._2"
+## [1] "var_12"   "var_1.2"  "va.r.1.2"
 <span class="kw"><a href="../reference/to_any_case.html">to_any_case</a></span>(strings4, <span class="dt">case =</span> <span class="st">"snake"</span>, <span class="dt">protect =</span> <span class="st">"</span><span class="ch">\\</span><span class="st">d"</span>)
-## [1] "var12"       "var1.2"      "va_._r_.1.2"
+## Warning: argument protect is deprecated; If you really need this argument,
+## pls submit an issue on https://github.com/Tazinho/snakecase
+## [1] "var_"         "var__._"      "va_._r_.__._"
 <span class="kw"><a href="../reference/to_any_case.html">to_any_case</a></span>(strings4, <span class="dt">case =</span> <span class="st">"snake"</span>, <span class="dt">protect =</span> <span class="st">"</span><span class="ch">\\</span><span class="st">d|</span><span class="ch">\\</span><span class="st">."</span>)
-## [1] "var12"    "var1.2"   "va.r.1.2"</code></pre></div>
+## Warning: argument protect is deprecated; If you really need this argument,
+## pls submit an issue on https://github.com/Tazinho/snakecase
+## [1] "var_"      "var___"    "va__r____"</code></pre></div>
 </div>
 <div id="vectorisation" class="section level3">
 <h3 class="hasAnchor">
@@ -169,7 +217,8 @@ strings &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st"
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
         <div id="tocnav">
-      <h2>Contents</h2>
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#specific-case-converters">Specific case converters</a></li>
       <li><a href="#highlevel-case-converter">Highlevel case converter</a></li>

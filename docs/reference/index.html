@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -51,10 +52,25 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/caseconverters.html">Case converters</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -62,7 +78,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/Tazinho/snakecase">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -76,7 +97,7 @@
     <div class="page-header">
       <h1>
         Reference
-        <small>version&nbsp;0.4.0.9004</small>
+        <small>version&nbsp;0.6.1.9000</small>
       </h1>
     </div>
 
@@ -98,7 +119,14 @@
         <tr>
           <!--  -->
           <td>
-            <p><code><a href="caseconverter.html">to_snake_case</a></code> <code><a href="caseconverter.html">to_small_camel_case</a></code> <code><a href="caseconverter.html">to_big_camel_case</a></code> <code><a href="caseconverter.html">to_screaming_snake_case</a></code> <code><a href="caseconverter.html">to_parsed_case</a></code> </p>
+            <p><code><a href="abbreviation_internal.html">abbreviation_internal</a></code> </p>
+          </td>
+          <td><p>Internal abbreviation marker, marks abbreviations with an underscore behind.
+Useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="caseconverter.html">to_snake_case</a></code> <code><a href="caseconverter.html">to_small_camel_case</a></code> <code><a href="caseconverter.html">to_big_camel_case</a></code> <code><a href="caseconverter.html">to_screaming_snake_case</a></code> <code><a href="caseconverter.html">to_parsed_case</a></code> <code><a href="caseconverter.html">to_mixed_case</a></code> <code><a href="caseconverter.html">to_lower_upper_case</a></code> <code><a href="caseconverter.html">to_upper_lower_case</a></code> </p>
           </td>
           <td><p>Specific case converter shortcuts</p></td>
         </tr><tr>
@@ -106,13 +134,19 @@
           <td>
             <p><code><a href="check_design_rule.html">check_design_rule</a></code> </p>
           </td>
-          <td><p>Internal helper to test the design rules for any string and setting of <code>to_any_case()</code></p></td>
+          <td><p>Internal helper to test the design rules for any string and setting of <code><a href='reference/to_any_case.html'>to_any_case()</a></code></p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="preprocess_internal.html">preprocess_internal</a></code> </p>
+          </td>
+          <td><p>Internal function that replaces regex matches with underscores</p></td>
         </tr><tr>
           <!--  -->
           <td>
             <p><code><a href="protect_internal.html">protect_internal</a></code> </p>
           </td>
-          <td><p>Internal helper to protect non alphanumerics (delete the separators around them).</p></td>
+          <td><p>Internal protect helper (deletes the separators around protected regex matches).</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -130,7 +164,7 @@
           <td>
             <p><code><a href="to_parsed_case_internal.html">to_parsed_case_internal</a></code> </p>
           </td>
-          <td><p>Internal parser, which is relevant for preprocessing, parsing and parsingoptions</p></td>
+          <td><p>Internal parser, which is relevant for preprocessing, parsing and parsing options</p></td>
         </tr>
       </tbody>
       </table>

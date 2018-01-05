@@ -23,7 +23,8 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-
+  
+  
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -51,10 +52,25 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="../index.html">
+    <span class="fa fa-home fa-lg"></span>
+     
+  </a>
 </li>
 <li>
-  <a href="../articles/index.html">Articles</a>
+  <a href="../reference/index.html">Reference</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/caseconverters.html">Case converters</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../news/index.html">News</a>
@@ -62,7 +78,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/Tazinho/snakecase">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -82,9 +103,12 @@
     
 
     <pre class="usage"><span class='fu'>to_any_case</span>(<span class='no'>string</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"snake"</span>, <span class='st'>"small_camel"</span>, <span class='st'>"big_camel"</span>,
-  <span class='st'>"screaming_snake"</span>, <span class='st'>"parsed"</span>), <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>protect</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>replace_special_characters</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>parsingoption</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+  <span class='st'>"screaming_snake"</span>, <span class='st'>"parsed"</span>, <span class='st'>"mixed"</span>, <span class='st'>"lower_upper"</span>, <span class='st'>"upper_lower"</span>,
+  <span class='st'>"all_caps"</span>, <span class='st'>"lower_camel"</span>, <span class='st'>"upper_camel"</span>, <span class='st'>"none"</span>), <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>protect</span> <span class='kw'>=</span> <span class='st'>"_(?![:alnum:])|(?&lt;![:alnum:])_"</span>,
+  <span class='kw'>replace_special_characters</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -95,28 +119,54 @@
     </tr>
     <tr>
       <th>case</th>
-      <td><p>The desired target case, provided as one of <code>"snake"</code>, <code>"small_camel"</code>, <code>"big_camel"</code>, 
-<code>"screaming_snake"</code> or <code>"parsed"</code>. The latter one is not really a case, but is helpful since it
-returns the parsed input string, separated by underscores, without any further modification.</p></td>
+      <td><p>The desired target case, provided as one of the following:</p><ul>
+<li><p>snake_case: <code>"snake"</code></p></li>
+<li><p>lowerCamel: <code>"lower_camel"</code> or <code>"small_camel"</code></p></li>
+<li><p>UpperCamel: <code>"upper_camel"</code> or <code>"big_camel"</code></p></li>
+<li><p>ALL_CAPS: <code>"all_caps"</code> or <code>"screaming_snake"</code></p></li>
+<li><p>lowerUPPER: <code>"lower_upper"</code></p></li>
+<li><p>UPPERlower: <code>"upper_lower"</code></p></li>
+</ul>
+
+<p>There are three "special" cases available:</p><ul>
+<li><p><code>"parsed"</code>: This case is underlying all other cases. 
+ Every substring a string consists
+ of becomes surrounded by an underscore (depending on the <code>parsing_option</code>).
+  Underscores at the start and end are trimmed. No lower or 
+ upper case pattern from the input string are changed.</p></li>
+<li><p><code>"mixed"</code>: Almost the same as <code>case = "parsed"</code>. Every letter which is not at the start
+ or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will stay in upper case.</p></li>
+<li><p><code>"none"</code>: Neither parsing nor case conversion occur. This case might be helpful, when
+ one wants to call the function for the quick usage of the other parameters.
+ Works with <code>preprocess</code>, <code>replace_special_characters</code>, <code>postprocess</code>, <code>prefix</code>,
+  <code>postfix</code>,
+  <code>empty_fill</code> and <code>unique_sep</code>.</p></li>
+</ul></td>
     </tr>
     <tr>
       <th>preprocess</th>
-      <td><p>String that will be wrapped internally into <code>stringr::regex()</code>. 
-All matches will be treated as additional splitting parameters besides the default ones 
-(<code>"_"</code> and <code>" "</code>), when parsing the input string.</p></td>
+      <td><p>A string (if not <code>NULL</code>) that will be wrapped internally
+into <code><a href='http://www.rdocumentation.org/packages/stringr/topics/modifiers'>stringr::regex()</a></code>. All matches will be replaced by underscores. Underscores can later turned into another separator via <code>postprocess</code>.</p></td>
     </tr>
     <tr>
       <th>protect</th>
-      <td><p>A string which is a valid <code>stringr::regex()</code>. Matches within the output
-won't have any "_" (or artifacts of <code>preprocess</code>) beside. Note that <code>preprocess</code> has a higher precedence than protect, 
-which means that it doesn't make sense to protect sth. which is already replaced
-via <code>preprocess</code>.</p></td>
+      <td><p>A string (default: <code>"_(?![:alnum:])|(?&lt;![:alnum:])_"</code>).
+Every internal match to the supplied regular expression won't have an output separator
+around (in older versions conversions like "sepal_._length" occured by default).
+This argument should usually never be used anymore. Hence, it will be removed in one of the following versions.
+If you need to make usage of this argument in your code, pls drop me an email, so that I can see if there might be a better solution.</p></td>
     </tr>
     <tr>
       <th>replace_special_characters</th>
-      <td><p>Logical, if <code>TRUE</code>, special characters 
-will be translated to characters which are more likely to be understood by 
-different programs. For example german umlauts will be translated to ae, oe, ue etc.</p></td>
+      <td><p>A character vector (if not <code>NULL</code>). The entries of this argument
+need to be elements of <code><a href='http://www.rdocumentation.org/packages/stringi/topics/stri_trans_list'>stringi::stri_trans_list()</a></code> (like "Latin-ASCII", which is often useful) or names of lookup tables (currently
+only "german" is supported). In the order of the entries the letters of the input
+ string will be transliterated via <code><a href='http://www.rdocumentation.org/packages/stringi/topics/stri_trans_general'>stringi::stri_trans_general()</a></code> or replaced via the 
+ matches of the lookup table.</p>
+<p>You should use this feature with care in case of <code>case = "parsed"</code> and 
+<code>case = "none"</code>, since for upper case letters, which have transliterations/replacements
+ of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
+ might not always be what is intended.</p></td>
     </tr>
     <tr>
       <th>postprocess</th>
@@ -133,8 +183,10 @@ and <code>""</code>, regarding the specified <code>case</code>.</p></td>
     </tr>
     <tr>
       <th>unique_sep</th>
-      <td><p>A string. If it is supplied, then duplicated names will get a suffix integer
-in the order of their appearance. The suffix is separated by the supplied string to this argument.</p></td>
+      <td><p>A string. If not <code>NULL</code>, then duplicated names will get 
+a suffix integer
+in the order of their appearance. The suffix is separated by the supplied string
+ to this argument.</p></td>
     </tr>
     <tr>
       <th>empty_fill</th>
@@ -142,11 +194,23 @@ in the order of their appearance. The suffix is separated by the supplied string
 by the supplied string to this argument.</p></td>
     </tr>
     <tr>
-      <th>parsingoption</th>
-      <td><p>An integer (1 (default), 2 or 3) that will determine the parsingoption.
-1: RRRStudio -&gt; RRR_Studio
-2: RRRStudio -&gt; RRRS_tudio
-If another integer is supplied, no parsing regarding the pattern of upper- and lowercase will appear.</p></td>
+      <th>parsing_option</th>
+      <td><p>An integer that will determine the parsing_option.
+#'</p><ul>
+<li><p>1: <code>RRRStudio -&gt; RRR_Studio</code></p></li>
+<li><p>2: <code>RRRStudio -&gt; RRRS_tudio</code></p></li>
+<li><p>3: parses at the beginning like option 1 and the rest like option 2.</p></li>
+<li><p>4: parses at the beginning like option 2 and the rest like option 1.</p></li>
+<li><p>5: parses like option 1 but suppresses "_" around non special characters.
+ In this way case conversion won't apply after these characters. See examples.</p></li>
+<li><p>any other integer &lt;= 0: no parsing"</p></li>
+</ul></td>
+    </tr>
+    <tr>
+      <th>abbreviations</th>
+      <td><p>character with (uppercase) abbreviations. This marks
+abbreviations with an underscore behind (in front of the parsing).
+useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2.</p></td>
     </tr>
     </table>
     
@@ -161,28 +225,39 @@ If another integer is supplied, no parsing regarding the pattern of upper- and l
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href = 'https://github.com/Tazinho/snakecase'>snakecase on github</a> or 
+    <p><a href='https://github.com/Tazinho/snakecase'>snakecase on github</a> or 
 <code><a href='caseconverter.html'>caseconverter</a></code> for some handy shortcuts.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>### Default usage</span>
+    <pre class="examples"><div class='input'><span class='co'>### Cases</span>
 <span class='no'>strings</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"this Is a Strange_string"</span>, <span class='st'>"AND THIS ANOTHER_One"</span>)
-<span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"snake"</span>)</div><div class='output co'>#&gt; [1] "this_is_a_strange_string" "and_this_another_one"    </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"small_camel"</span>)</div><div class='output co'>#&gt; [1] "thisIsAStrangeString" "andThisAnotherOne"   </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"big_camel"</span>)</div><div class='output co'>#&gt; [1] "ThisIsAStrangeString" "AndThisAnotherOne"   </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"screaming_snake"</span>)</div><div class='output co'>#&gt; [1] "THIS_IS_A_STRANGE_STRING" "AND_THIS_ANOTHER_ONE"    </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"parsed"</span>)</div><div class='output co'>#&gt; [1] "this_Is_a_Strange_string" "AND_THIS_ANOTHER_One"    </div><div class='input'>
-<span class='co'>### Pre -and postprocessing</span>
+<span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"snake"</span>)</div><div class='output co'>#&gt; [1] "this_is_a_strange_string" "and_this_another_one"    </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"lower_camel"</span>) <span class='co'># same as "small_camel"</span></div><div class='output co'>#&gt; [1] "thisIsAStrangeString" "andThisAnotherOne"   </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"upper_camel"</span>) <span class='co'># same as "big_camel"</span></div><div class='output co'>#&gt; [1] "ThisIsAStrangeString" "AndThisAnotherOne"   </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"all_caps"</span>) <span class='co'># same as "screaming_snake"</span></div><div class='output co'>#&gt; [1] "THIS_IS_A_STRANGE_STRING" "AND_THIS_ANOTHER_ONE"    </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"lower_upper"</span>)</div><div class='output co'>#&gt; [1] "thisISaSTRANGEstring" "andTHISanotherONE"   </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"upper_lower"</span>)</div><div class='output co'>#&gt; [1] "THISisAstrangeSTRING" "ANDthisANOTHERone"   </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"parsed"</span>)</div><div class='output co'>#&gt; [1] "this_Is_a_Strange_string" "AND_THIS_ANOTHER_One"    </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"mixed"</span>)</div><div class='output co'>#&gt; [1] "this_Is_a_Strange_string" "And_This_Another_One"    </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"none"</span>)</div><div class='output co'>#&gt; [1] "this Is a Strange_string" "AND THIS ANOTHER_One"    </div><div class='input'>
+<span class='co'>### Parsing options</span>
+<span class='co'># the default option makes no sense in this setting</span>
+<span class='fu'>to_any_case</span>(<span class='st'>"HAMBURGcity"</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"parsed"</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] "HAMBUR_Gcity"</div><div class='input'><span class='co'># so the second parsing option is the way to address this example</span>
+<span class='fu'>to_any_case</span>(<span class='st'>"HAMBURGcity"</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"parsed"</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] "HAMBURG_city"</div><div class='input'><span class='co'># one can also parse the beginning like parsing_option 1 and the rest like option 2</span>
+<span class='fu'>to_any_case</span>(<span class='st'>"HAMBURGcityGERUsa"</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"parsed"</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>3</span>)</div><div class='output co'>#&gt; [1] "HAMBURG_city_GERU_sa"</div><div class='input'><span class='co'># or starting like parsing_option 2 and for the rest switch to option 1</span>
+<span class='fu'>to_any_case</span>(<span class='st'>"HAMBURGcityGERUsa"</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"parsed"</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>4</span>)</div><div class='output co'>#&gt; [1] "HAMBURG_city_GER_Usa"</div><div class='input'><span class='co'># By default (option 1) characters are converted after non alpha numeric characters.</span>
+<span class='co'># This option (5) suppresses this behaviour</span>
+<span class='fu'>to_any_case</span>(<span class='st'>"blaBla.bla"</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"big_camel"</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>5</span>)</div><div class='output co'>#&gt; [1] "BlaBla.bla"</div><div class='input'><span class='co'># there might be reasons to suppress the parsing, while choosing neither one or two</span>
+
+<span class='fu'>to_any_case</span>(<span class='st'>"HAMBURGcity"</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"parsed"</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>0</span>)</div><div class='output co'>#&gt; [1] "HAMBURGcity"</div><div class='input'>
+<span class='co'>### Abbreviations</span>
+<span class='fu'>to_any_case</span>(<span class='fu'>c</span>(<span class='st'>"RSSfeedRSSfeed"</span>, <span class='st'>"USPassport"</span>, <span class='st'>"USpassport"</span>), <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"RSS"</span>, <span class='st'>"US"</span>))</div><div class='output co'>#&gt; [1] "rss_feed_rss_feed" "us_passport"       "us_passport"      </div><div class='input'>
+<span class='co'>### Preprocess</span>
+<span class='no'>string</span> <span class='kw'>&lt;-</span> <span class='st'>"R.St\u00FCdio: v.1.0.143"</span>
+<span class='fu'>to_any_case</span>(<span class='no'>string</span>)</div><div class='output co'>#&gt; [1] "r.stüdio:v.1.0.143"</div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>string</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"snake"</span>, <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='st'>":|\\."</span>)</div><div class='output co'>#&gt; [1] "r_stüdio_v_1_0_143"</div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>string</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"snake"</span>,
+            <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='st'>":|(?&lt;!\\d)\\."</span>)</div><div class='output co'>#&gt; [1] "r_stüdio_v_1.0.143"</div><div class='input'>
+<span class='co'>### Replace special characters</span>
+<span class='fu'>to_any_case</span>(<span class='st'>"\u00E4ngstlicher Has\u00EA"</span>, <span class='kw'>replace_special_characters</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"german"</span>, <span class='st'>"Latin-ASCII"</span>))</div><div class='output co'>#&gt; [1] "aengstlicher_hase"</div><div class='input'>
+<span class='co'>### Postprocess</span>
 <span class='no'>strings2</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"this - Is_-: a Strange_string"</span>, <span class='st'>"AND THIS ANOTHER_One"</span>)
-<span class='fu'><a href='caseconverter.html'>to_snake_case</a></span>(<span class='no'>strings2</span>)</div><div class='output co'>#&gt; [1] "this_-_is_-_:_a_strange_string" "and_this_another_one"          </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings2</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"snake"</span>, <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='st'>"-|\\:"</span>)</div><div class='output co'>#&gt; [1] "this_is_a_strange_string" "and_this_another_one"    </div><div class='input'>
 <span class='fu'>to_any_case</span>(<span class='no'>strings2</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"snake"</span>, <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='st'>"-|\\:"</span>, <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='st'>" "</span>)</div><div class='output co'>#&gt; [1] "this is a strange string" "and this another one"    </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings2</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"big_camel"</span>, <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='st'>"-|\\:"</span>, <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='st'>"//"</span>)</div><div class='output co'>#&gt; [1] "This//Is//A//Strange//String" "And//This//Another//One"     </div><div class='input'>
 <span class='co'>### Pre -and postfix</span>
 <span class='fu'>to_any_case</span>(<span class='no'>strings2</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"big_camel"</span>, <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='st'>"-|\\:"</span>, <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='st'>"//"</span>,
             <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>"USER://"</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>".exe"</span>)</div><div class='output co'>#&gt; [1] "USER://This//Is//A//Strange//String.exe"
 #&gt; [2] "USER://And//This//Another//One.exe"     </div><div class='input'>
-<span class='co'>### Special characters like german umlauts for example can be replaced via </span>
-<span class='co'># replace_special_characters = TRUE</span>
-
-<span class='co'>### Protect anything that shouldn't have an underscore beside in the output</span>
-<span class='no'>strings3</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"var12"</span>, <span class='st'>"var1.2"</span>, <span class='st'>"va.r.1.2"</span>)
-<span class='fu'>to_any_case</span>(<span class='no'>strings3</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"snake"</span>)</div><div class='output co'>#&gt; [1] "var_12"         "var_1_._2"      "va_._r_._1_._2"</div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings3</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"snake"</span>, <span class='kw'>protect</span> <span class='kw'>=</span> <span class='st'>"\\d"</span>)</div><div class='output co'>#&gt; [1] "var12"       "var1.2"      "va_._r_.1.2"</div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings3</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"snake"</span>, <span class='kw'>protect</span> <span class='kw'>=</span> <span class='st'>"\\d|\\."</span>)</div><div class='output co'>#&gt; [1] "var12"    "var1.2"   "va.r.1.2"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

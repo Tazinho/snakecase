@@ -157,7 +157,7 @@ to_any_case(c("HHcity", "IDtable1", "KEYtable2", "newUSelections"),
 ``` r
 to_any_case("look_AfterThe-hyphen andThe.dot", 
             case = "upper_camel", parsing_option = 5)
-## [1] "LookAfterThe-HyphenAndThe.dot"
+## [1] "LookAfterThe-hyphenAndThe.dot"
 ```
 
 If you are interested in a specific parsing option, which is not implemented, pls open an issue.
