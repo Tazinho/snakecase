@@ -73,7 +73,7 @@ All of the cases like: snake, lower_camel, upper_camel, all_caps, lower_upper, u
 to_any_case("THISIsHOW IAmPARSED!", case = "parsed")
 ```
 
-Shortcut wrappers like `to_snake_case`, `to_lower_camel_case` etc. are available.
+Shortcut wrappers like `to_snake_case()`, `to_lower_camel_case()` etc. are available.
 
 Be aware that automatic case conversion depends on the input string and it is recommended to verify the results. So you might want to pipe these into `dput()` (and hardcode name changes instead of blindly trusting `to_any_case()`'s output)
 
