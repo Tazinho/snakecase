@@ -1,15 +1,33 @@
-#snakecase 0.6.2.9000
+# snakecase 0.7.0
+
+* CRAN update
+
+* changes since last CRAN submission include:
+    * to_xxx_case shortcuts are now exact wrappers around to_any_case
+    * `process` is deprecated after changing implementation and setting a reosonable default.
+    * added `abbreviations` argument to `any_case()`
+    * case none is now a lot more general for formatting
+    * added `abbreviation` specific behaviour for mixed case
+    * new parsing_option 5, which suppresses conversion after ., @, etc
+    * renamig of:
+        * to_small / to_big_camel_case have been renamed to to_lower / to_upper_camel_case. The old names are and will still be supported in to_any_case
+        * `parsingoption` to `parsing_option`
+    * introduced rule that parsing_option <= 0 suppresses parsing from now on
+    * lots of additional tests and smaller bugfixes
+    * several documentation updates including help, examples, readme and vignette
+    
+# snakecase 0.6.2.9000
 
 * all to_xxx_case functions are now exact wrappers of to_any_case
 * to_small / to_big_camel_case have been renamed to to_lower / to_upper_camel_case
 * minimal vignette update
 
-#snakecase 0.6.1.9000
+# snakecase 0.6.1.9000
 
 * more consistency for case none
 * bugfix for parsing option 5
 
-#snakecase 0.6.0.9000 
+# snakecase 0.6.0.9000 
 
 * overhaul readme
 * renamed `parsingoption` argument to `parsing_option`
