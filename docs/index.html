@@ -117,7 +117,7 @@ in general) to different cases like snake_case, smallCamel- and BigCamelCase amo
 <p>All of the cases like: snake, lower_camel, upper_camel, all_caps, lower_upper, upper_lower and mixed are based on parsed case</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"THISIsHOW IAmPARSED!"</span>, <span class="dt">case =</span> <span class="st">"parsed"</span>)</a>
 <a class="sourceLine" id="cb8-2" data-line-number="2">## [1] "THIS_Is_HOW_I_Am_PARSED!"</a></code></pre></div>
-<p>Shortcut wrappers like <code>to_snake_case</code>, <code>to_lower_camel_case</code> etc. are available.</p>
+<p>Shortcut wrappers like <code><a href="reference/caseconverter.html">to_snake_case()</a></code>, <code><a href="reference/caseconverter.html">to_lower_camel_case()</a></code> etc. are available.</p>
 <p>Be aware that automatic case conversion depends on the input string and it is recommended to verify the results. So you might want to pipe these into <code>dput()</code> (and hardcode name changes instead of blindly trusting <code><a href="reference/to_any_case.html">to_any_case()</a></code>’s output)</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">dput</span>(<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="kw">c</span>(<span class="st">"SomeBAdInput"</span>, <span class="st">"someGoodInput"</span>)))</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2">## c("some_b_ad_input", "some_good_input")</a></code></pre></div>
