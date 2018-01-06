@@ -314,8 +314,8 @@ knitr::kable(tibble::tibble(nr = seq_along(cases),
                             examples = cases,
                             snake_case = snakecase::to_snake_case(cases),
                             #snake_case_dev = snakecase::to_snake_case_dev(cases),
-                            smallCamelCase = snakecase::to_small_camel_case(cases),
-                            BigCamelCase = snakecase::to_big_camel_case(cases)
+                            smallCamelCase = snakecase::to_lower_camel_case(cases),
+                            BigCamelCase = snakecase::to_upper_camel_case(cases)
                             )
              )
 ```

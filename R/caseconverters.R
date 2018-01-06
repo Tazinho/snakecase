@@ -60,8 +60,8 @@
 #' strings <- c("this Is a Strange_string", "AND THIS ANOTHER_One", NA)
 #' 
 #' to_snake_case(strings)
-#' to_small_camel_case(strings)
-#' to_big_camel_case(strings)
+#' to_lower_camel_case(strings)
+#' to_upper_camel_case(strings)
 #' to_screaming_snake_case(strings)
 #' to_lower_upper_case(strings)
 #' to_upper_lower_case(strings)
