@@ -9,117 +9,58 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-The snakecase package contains eight specific case converter functions and one more general high level function with added functionality.
+## Basic examples
 
-## Specific case converters
-
-```{r, collapse=TRUE}
-# devtools::install_github("Tazinho/snakecase")
-library(snakecase)
-strings <- c("this Is a Strange_string", "AND THIS ANOTHER_One")
-
-to_parsed_case(strings)
-
-to_snake_case(strings)
-
-to_small_camel_case(strings)
-
-to_big_camel_case(strings)
-
-to_screaming_snake_case(strings)
-
-to_lower_upper_case(strings)
-
-to_lower_upper_case(strings)
-
-to_mixed_case(strings)
-```
-
-## Highlevel case converter
-
-The function `to_any_case()` can do everything that the others can and also adds some extra high level functionality.
-
-### Default usage
-
-```{r, collapse=TRUE}
-to_any_case(strings, case = "parsed")
-
-to_any_case(strings, case = "snake")
-
-to_any_case(strings, case = "small_camel")
-
-to_any_case(strings, case = "big_camel")
-
-to_any_case(strings, case = "screaming_snake")
-
-to_any_case(strings, case = "lower_upper")
-
-to_any_case(strings, case = "upper_lower")
-
-to_any_case(strings, case = "mixed")
-
-to_any_case(strings, case = "none")
-```
-
-### Pre -and postprocessing
-
-By default only whitespaces, underscores and some patterns of mixed lower/upper case letter combinations are recognized as word boundaries. You can specify anything as a word boundary which is a valid stringr regular expression:
-
-```{r, collapse=TRUE}
-strings2 <- c("this - Is_-: a Strange_string", "ÄND THIS ANOTHER_One")
-
-to_snake_case(strings2)
-
-to_any_case(strings2, case = "snake", preprocess = "-|\\:")
-```
-
-You can also specify a different separator than `"_"` or `""` via `postprocess`:
+Default case is snake case
 
 ```{r, collapse = TRUE}
-to_any_case(strings2, case = "snake", preprocess = "-|\\:", postprocess = " ")
-
-to_any_case(strings2, case = "big_camel", preprocess = "-|\\:", postprocess = "//")
+library(snakecase)
+to_any_case("veryComplicatedString")
 ```
 
-### Pre -and postfix
+Dots and other special characters may have a special intention
 
-You can set pre -and suffixes:
-
-```{r, collapse=TRUE}
-to_any_case(strings2, case = "big_camel", preprocess = "-|\\:", postprocess = "//",
-            prefix = "USER://", postfix = ".exe")
+```{r, collapse = TRUE}
+to_any_case("malte.grosser@gmail.com")
 ```
 
-### Special characters
+When it is clear that they are separators, you can supply them as a regex to the `preprocess` argument
 
-If you have problems with special characters on your platform, you can replace them via `replace_special_characters = c("germany", "Latin-ASCII")`:
-
-```{r, collapse = TRUE, eval = FALSE}
-strings3 <- c("ßüss üß ä stränge sträng", "unrealistisch aber nützich")
-
-to_any_case(strings3, case = "screaming_snake", 
-            replace_special_characters = c("germany", "Latin-ASCII"))
-## [1] "SSUESS_UESS_AE_STRAENGE_STRAENG" "UNREALISTISCH_ABER_NUETZICH"
+```{r, collapse = TRUE}
+to_any_case(names(iris), preprocess = "\\.")
 ```
 
-### Protect anything
+This is especially handy, when special characters have a meaning as a separator or for example as a decimal mark
 
-If you see unwanted underscores around specific pattern, which you don't want to delete
-via `preprocess`, just use `protect`:
-
-```{r, collapse=TRUE}
-strings4 <- c("var12", "var1.2", "va.r.1.2")
-
-to_any_case(strings4, case = "snake")
-to_any_case(strings4, case = "snake", protect = "\\d")
-to_any_case(strings4, case = "snake", protect = "\\d|\\.")
+```{r, collapse = TRUE}
+to_any_case("Pi.Value:3.14", preprocess = ":|(?<!\\d)\\.")
 ```
 
-### Vectorisation
+Of course other cases are supported (`case`) and separators can be adjusted (`postprocess`)
 
-`to_any_case()` is vectorised over `string`, `preprocess`, `postprocess`, `prefix`,
-`postfix` and `protect`.
+```{r, collapse = TRUE}
+to_any_case(names(iris), preprocess = "\\.", case = "upper_camel", postprocess = " ")
+```
 
-## Further reading
+And you might want to remove special characters along the way
+
+```{r, collapse = TRUE}
+to_any_case("Doppelgänger is originally german", 
+            replace_special_characters = "german", case = "upper_camel")
+```
+
+All of the cases like: snake, lower_camel, upper_camel, all_caps, lower_upper, upper_lower and mixed are based on parsed case
+
+```{r, collapse = TRUE}
+to_any_case("THISIsHOW IAmPARSED!", case = "parsed")
+```
+
+Shortcut wrappers like `to_snake_case`, `to_lower_camel_case` etc. are available.
+
+Be aware that automatic case conversion depends on the input string and it is recommended to verify the results. So you might want to pipe these into `dput()` (and hardcode name changes instead of blindly trusting `to_any_case()`'s output)
+
+```{r, collapse = TRUE}
+dput(to_any_case(c("SomeBAdInput", "someGoodInput")))
+```
 
 If you are interested in the design of this package, you can find more information on its [github page](https://github.com/Tazinho/snakecase).

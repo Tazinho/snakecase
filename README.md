@@ -93,6 +93,9 @@ to_any_case("THISIsHOW IAmPARSED!", case = "parsed")
 ## [1] "THIS_Is_HOW_I_Am_PARSED!"
 ```
 
+Shortcut wrappers like `to_snake_case`, `to_lower_camel_case` etc. are
+available.
+
 Be aware that automatic case conversion depends on the input string and
 it is recommended to verify the results. So you might want to pipe these
 into `dput()` (and hardcode name changes instead of blindly trusting

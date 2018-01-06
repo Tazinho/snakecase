@@ -11,10 +11,10 @@ test_that("rules",{
   expect_equal(to_screaming_snake_case(to_snake_case(examples)),
                to_screaming_snake_case(examples)
   ) 
-  expect_equal(to_screaming_snake_case(to_small_camel_case(examples)),
+  expect_equal(to_screaming_snake_case(to_lower_camel_case(examples)),
                to_screaming_snake_case(examples)
   ) 
-  expect_equal(to_screaming_snake_case(to_big_camel_case(examples)),
+  expect_equal(to_screaming_snake_case(to_upper_camel_case(examples)),
                to_screaming_snake_case(examples)
   ) 
   expect_equal(to_screaming_snake_case(to_screaming_snake_case(examples)),

@@ -1,3 +1,9 @@
+#snakecase 0.6.2.9000
+
+* all to_xxx_case functions are now exact wrappers of to_any_case
+* to_small / to_big_camel_case have been renamed to to_lower / to_upper_camel_case
+* minimal vignette update
+
 #snakecase 0.6.1.9000
 
 * more consistency for case none
