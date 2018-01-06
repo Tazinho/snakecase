@@ -130,7 +130,7 @@ to_any_case("so.many_different@separators inThis|sentece",
 
 ```{r, collapse = TRUE}
 to_any_case("some-email@provider.com", 
-            preprocess = "[^[:alnum:]|\\.|@]") # notice: the order is important
+            preprocess = "[^[:alnum:]|^\\.|^@]")
 ```
 
 * `parsing_option`: We can modify the abbreviations example a bit. In this case, another parsing option might be handy

@@ -199,7 +199,7 @@ to_any_case("so.many_different@separators inThis|sentece",
 
 ``` r
 to_any_case("some-email@provider.com", 
-            preprocess = "[^[:alnum:]|\\.|@]") # notice: the order is important
+            preprocess = "[^[:alnum:]|^\\.|^@]")
 ## [1] "some_email@provider.com"
 ```
 
