@@ -1,6 +1,6 @@
 ## Test environments
-* local Windows X install, R 3.4.1
-* default travis-ci environment (R 3.4.1)
+* local Windows X install, R 3.4.2
+* default (linux) travis-ci environment (3.1, 3.2, oldrel, release, devel)
 * default AppVeyor environment (R 3.4.1)
 
 ## R CMD check results
