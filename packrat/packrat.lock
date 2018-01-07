@@ -1,6 +1,6 @@
 PackratFormat: 1.4
 PackratVersion: 0.4.8.12
-RVersion: 3.4.1
+RVersion: 3.4.3
 Repos: BioCsoft=https://bioconductor.org/packages/3.4/bioc,
     BioCann=https://bioconductor.org/packages/3.4/data/annotation,
     BioCexp=https://bioconductor.org/packages/3.4/data/experiment,
@@ -72,6 +72,11 @@ GithubUsername: r-pkgs
 GithubRef: HEAD
 GithubSha1: ce3f15cbdccb6981e94fedb7a3c5424fff152094
 
+Package: cli
+Source: CRAN
+Version: 1.0.0
+Hash: f4239f89feb7ddc65821e4514e9734ae
+
 Package: commonmark
 Source: CRAN
 Version: 1.2
@@ -79,18 +84,18 @@ Hash: 1290583b9d16fb60322126a8698fb729
 
 Package: covr
 Source: CRAN
-Version: 3.0.0
-Hash: 48fd7b88ecf2dda957c03ea1740b5a43
+Version: 3.0.1
+Hash: aab7a1873ad3d943dd4a0ce4edbc2691
 
 Package: crayon
 Source: CRAN
-Version: 1.3.2
-Hash: 576a9d297a567d6a5ebd164ca5221590
+Version: 1.3.4
+Hash: ff2840dd9b0d563fc80377a5a45510cd
 
 Package: curl
 Source: CRAN
-Version: 2.8.1
-Hash: 5a3f385f21add1e944b93b3cd9ce8b48
+Version: 3.1
+Hash: 877149b42d479b93ab15d5cef46c0f1b
 
 Package: debugme
 Source: CRAN
@@ -104,13 +109,13 @@ Hash: 346d3477f87b89692dd1379eaed1a1be
 
 Package: devtools
 Source: CRAN
-Version: 1.13.3
-Hash: 2e91d10786ace8f6258480f576bb91f3
+Version: 1.13.4
+Hash: 80a77b22f641002c7ce0343baeaee300
 
 Package: digest
 Source: CRAN
-Version: 0.6.12
-Hash: e53fb8c58673df868183697e39a6a4d6
+Version: 0.6.13
+Hash: cfce0bc7ed5ba0cdc47182698fae1d24
 
 Package: dplyr
 Source: CRAN
@@ -138,13 +143,18 @@ GithubSha1: d3c0e1c2a591fa4f13a9a2b2af3ebe50ec4245ff
 
 Package: git2r
 Source: CRAN
-Version: 0.19.0
-Hash: f4f7966fc357f60dc62dbffcea917eef
+Version: 0.21.0
+Hash: 64747922e287be74e8e8b46c107fd3ef
 
 Package: glue
 Source: CRAN
 Version: 1.1.1
 Hash: dfd5a27768175ae51d08dc6beba1ef11
+
+Package: gmailr
+Source: CRAN
+Version: 0.7.1
+Hash: 69302be7fe9b4dbb2d1e971e63e4703c
 
 Package: highlight
 Source: CRAN
@@ -163,13 +173,18 @@ Hash: 5b070a04ef8df1953544873db1c5896e
 
 Package: httr
 Source: CRAN
-Version: 1.2.1
-Hash: 7de1f8f760441881804af7c1ff324340
+Version: 1.3.1
+Hash: 2d32e01e53d532c812052e27a1021441
 
 Package: hunspell
 Source: CRAN
 Version: 2.6
 Hash: a4df84575f12d779a024de4ac198c690
+
+Package: igraph
+Source: CRAN
+Version: 1.1.2
+Hash: 07d33f151f94269a4573d354104e81aa
 
 Package: ini
 Source: CRAN
@@ -181,6 +196,11 @@ Source: CRAN
 Version: 0.19.0
 Hash: 5b02af2e8d5904eca4cbf85e68d33499
 
+Package: irlba
+Source: CRAN
+Version: 2.3.1
+Hash: d13f2ae16f48b5c92443f1fba02eb64b
+
 Package: jsonlite
 Source: CRAN
 Version: 1.5
@@ -188,13 +208,18 @@ Hash: 9c51936d8dd00b2f1d4fe9d10499694c
 
 Package: knitr
 Source: CRAN
-Version: 1.16
-Hash: 3b8dc00d51027c6d041d56bc92136452
+Version: 1.18
+Hash: 5be8a90c6aac24e7e0a4f18b829cc6e2
 
 Package: lazyeval
 Source: CRAN
 Version: 0.2.0
 Hash: 3d6e7608e65bbf5cb170dab1e3c9ed8b
+
+Package: lintr
+Source: CRAN
+Version: 1.0.2
+Hash: 9ab51fac036f8724e44ee99d69c4238f
 
 Package: magrittr
 Source: CRAN
@@ -218,8 +243,8 @@ Hash: 463550cf44fb6f0a2359368f42eebe62
 
 Package: openssl
 Source: CRAN
-Version: 0.9.6
-Hash: 5f4711e142a44655dfea4d64fcf2f641
+Version: 0.9.9
+Hash: 3858537ac10388a5db1687450908f257
 
 Package: packrat
 Source: github
@@ -229,6 +254,11 @@ GithubRepo: packrat
 GithubUsername: rstudio
 GithubRef: master
 GithubSha1: b55feb68f662e9e1c58807316bde5ca0d40a3f64
+
+Package: pillar
+Source: CRAN
+Version: 1.0.1
+Hash: 4025a3ad006633faec49105185b99ad8
 
 Package: pkgbuild
 Source: github
@@ -265,32 +295,28 @@ GithubSha1: 28b06e36853ed2d06d499b81e6ada71adc108121
 
 Package: purrr
 Source: CRAN
-Version: 0.2.3
+Version: 0.2.4
+Hash: a80b244ccd3fdb33a0ff2be3c50dd648
 
 Package: purrrlyr
 Source: CRAN
 Version: 0.0.2
 Hash: 40063dc550779f9c9ed42b2155da136a
 
-Package: rematch
-Source: CRAN
-Version: 1.0.1
-Hash: ad4faf59e7611117ff165817074c50c7
-
 Package: rex
 Source: CRAN
-Version: 1.1.1
-Hash: 69e208c6283398d235e507a658ba8079
+Version: 1.1.2
+Hash: 57541aaae58f1a284a398f5c62c95097
 
 Package: rlang
 Source: CRAN
-Version: 0.1.1
-Hash: 86c53487ce7f82f0a7cc11c816060910
+Version: 0.1.6
+Hash: 8eb4b2dce38b8f663cb9364b28eaa76b
 
 Package: rmarkdown
 Source: CRAN
-Version: 1.6
-Hash: 40f4034a7b8e28edc2b384bdb0c4d537
+Version: 1.8
+Hash: 2a7842e3cee62a79dd737d17e9e9d86b
 
 Package: roxygen2
 Source: CRAN
@@ -299,23 +325,28 @@ Hash: 82a85278378502d37455fcfc84951433
 
 Package: rprojroot
 Source: CRAN
-Version: 1.2
-Hash: fdcac51a7f47decd60556ceefc3c26b1
+Version: 1.3-2
+Hash: a25c3f70c166fb3fbabc410eb32b6366
 
 Package: rstudioapi
 Source: CRAN
-Version: 0.6
-Hash: fd256f8bfb9a64cc35f98b0decb1a79f
+Version: 0.7
+Hash: e2ebaff8160aff3e6b32e6e78a693c2d
 
 Package: rversions
 Source: CRAN
 Version: 1.0.3
 Hash: 44837671df6bf1d0b863dc6f83f42a16
 
+Package: stringdist
+Source: CRAN
+Version: 0.9.4.6
+Hash: 0298ec970febd790a28fc7c898854f5e
+
 Package: stringi
 Source: CRAN
-Version: 1.1.5
-Hash: b6308e49357a0b475f433599e0d8b5eb
+Version: 1.1.6
+Hash: 4430faf2bcbe1b8de0d9be55bcfdcc0b
 
 Package: stringr
 Source: CRAN
@@ -324,22 +355,18 @@ Hash: 25a86d7f410513ebb7c0bc6a5e16bdc3
 
 Package: testthat
 Source: CRAN
-Version: 1.0.2
-Hash: 88d5291104227f9dc2e7c7c1d0eb6c74
+Version: 2.0.0
+Hash: 537114b476376c5773bf3c557f5bbd19
 
 Package: tibble
 Source: CRAN
-Version: 1.3.3
-Hash: 6a18f6da2887d2c4c4a6554027161483
+Version: 1.4.1
+Hash: 2e61874117a0824203d426b51e8b365d
 
-Package: usethis
-Source: github
-Version: 0.0.0.9000
-Hash: 38295e64d932ce6d8cd769ee9e13fa42
-GithubRepo: usethis
-GithubUsername: r-lib
-GithubRef: master
-GithubSha1: 6dca914f22b3fef6da108dbf5ba48d34b2ef7e8d
+Package: utf8
+Source: CRAN
+Version: 1.1.3
+Hash: a2fe6a996668ee5850b7719f365e831b
 
 Package: whisker
 Source: CRAN
@@ -348,8 +375,8 @@ Hash: 803d662762e532705c2c066a82d066e7
 
 Package: withr
 Source: CRAN
-Version: 2.0.0
-Hash: cc7e555b8e249aa5cf391592fcae71a2
+Version: 2.1.1
+Hash: a86856ae0b4a7c3daf9a3ef0097a403b
 
 Package: xml2
 Source: CRAN
@@ -358,5 +385,5 @@ Hash: b326a762ddb04eef605cc88987fa71fb
 
 Package: yaml
 Source: CRAN
-Version: 2.1.14
-Hash: c81230c3a7d9ba20607ad6b4331173d1
+Version: 2.1.16
+Hash: 784ea5d8302d4a81f166a32a33c10711
