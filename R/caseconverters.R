@@ -86,18 +86,18 @@ to_snake_case <- function(string,
                           empty_fill = NULL,
                           parsing_option = 1,
                           abbreviations = NULL){
-  to_any_case(string,
+  to_any_case(string = string,
               case = "snake",
-              preprocess = NULL,
+              preprocess = preprocess,
               protect = "_(?![:alnum:])|(?<![:alnum:])_",
-              replace_special_characters = NULL,
-              postprocess = NULL,
-              prefix = "",
-              postfix = "",
-              unique_sep = NULL,
-              empty_fill = NULL,
-              parsing_option = 1,
-              abbreviations = NULL)
+              replace_special_characters = replace_special_characters,
+              postprocess = postprocess,
+              prefix = prefix,
+              postfix = postfix,
+              unique_sep = unique_sep,
+              empty_fill = empty_fill,
+              parsing_option = parsing_option,
+              abbreviations = abbreviations)
 }
 
 #' @rdname caseconverter
@@ -113,18 +113,18 @@ to_lower_camel_case <- function(string,
                                 empty_fill = NULL,
                                 parsing_option = 1,
                                 abbreviations = NULL){
-  to_any_case(string,
+  to_any_case(string = string,
               case = "lower_camel",
-              preprocess = NULL,
+              preprocess = preprocess,
               protect = "_(?![:alnum:])|(?<![:alnum:])_",
-              replace_special_characters = NULL,
-              postprocess = NULL,
-              prefix = "",
-              postfix = "",
-              unique_sep = NULL,
-              empty_fill = NULL,
-              parsing_option = 1,
-              abbreviations = NULL)
+              replace_special_characters = replace_special_characters,
+              postprocess = postprocess,
+              prefix = prefix,
+              postfix = postfix,
+              unique_sep = unique_sep,
+              empty_fill = empty_fill,
+              parsing_option = parsing_option,
+              abbreviations = abbreviations)
 }
 
 #' @rdname caseconverter
@@ -140,18 +140,18 @@ to_upper_camel_case <- function(string,
                               empty_fill = NULL,
                               parsing_option = 1,
                               abbreviations = NULL){
-  to_any_case(string,
+  to_any_case(string = string,
               case = "upper_camel",
-              preprocess = NULL,
+              preprocess = preprocess,
               protect = "_(?![:alnum:])|(?<![:alnum:])_",
-              replace_special_characters = NULL,
-              postprocess = NULL,
-              prefix = "",
-              postfix = "",
-              unique_sep = NULL,
-              empty_fill = NULL,
-              parsing_option = 1,
-              abbreviations = NULL)
+              replace_special_characters = replace_special_characters,
+              postprocess = postprocess,
+              prefix = prefix,
+              postfix = postfix,
+              unique_sep = unique_sep,
+              empty_fill = empty_fill,
+              parsing_option = parsing_option,
+              abbreviations = abbreviations)
 }
 
 #' @rdname caseconverter
@@ -167,18 +167,18 @@ to_screaming_snake_case <- function(string,
                                     empty_fill = NULL,
                                     parsing_option = 1,
                                     abbreviations = NULL){
-  to_any_case(string,
+  to_any_case(string = string,
               case = "screaming_snake",
-              preprocess = NULL,
+              preprocess = preprocess,
               protect = "_(?![:alnum:])|(?<![:alnum:])_",
-              replace_special_characters = NULL,
-              postprocess = NULL,
-              prefix = "",
-              postfix = "",
-              unique_sep = NULL,
-              empty_fill = NULL,
-              parsing_option = 1,
-              abbreviations = NULL)
+              replace_special_characters = replace_special_characters,
+              postprocess = postprocess,
+              prefix = prefix,
+              postfix = postfix,
+              unique_sep = unique_sep,
+              empty_fill = empty_fill,
+              parsing_option = parsing_option,
+              abbreviations = abbreviations)
 }
 
 #' @rdname caseconverter
@@ -194,18 +194,18 @@ to_parsed_case <- function(string,
                            empty_fill = NULL,
                            parsing_option = 1,
                            abbreviations = NULL){
-  to_any_case(string,
+  to_any_case(string = string,
               case = "parsed",
-              preprocess = NULL,
+              preprocess = preprocess,
               protect = "_(?![:alnum:])|(?<![:alnum:])_",
-              replace_special_characters = NULL,
-              postprocess = NULL,
-              prefix = "",
-              postfix = "",
-              unique_sep = NULL,
-              empty_fill = NULL,
-              parsing_option = 1,
-              abbreviations = NULL)
+              replace_special_characters = replace_special_characters,
+              postprocess = postprocess,
+              prefix = prefix,
+              postfix = postfix,
+              unique_sep = unique_sep,
+              empty_fill = empty_fill,
+              parsing_option = parsing_option,
+              abbreviations = abbreviations)
 }
 
 #' @rdname caseconverter
@@ -221,18 +221,18 @@ to_mixed_case <- function(string,
                           empty_fill = NULL,
                           parsing_option = 1,
                           abbreviations = NULL){
-  to_any_case(string,
+  to_any_case(string = string,
               case = "mixed",
-              preprocess = NULL,
+              preprocess = preprocess,
               protect = "_(?![:alnum:])|(?<![:alnum:])_",
-              replace_special_characters = NULL,
-              postprocess = NULL,
-              prefix = "",
-              postfix = "",
-              unique_sep = NULL,
-              empty_fill = NULL,
-              parsing_option = 1,
-              abbreviations = NULL)
+              replace_special_characters = replace_special_characters,
+              postprocess = postprocess,
+              prefix = prefix,
+              postfix = postfix,
+              unique_sep = unique_sep,
+              empty_fill = empty_fill,
+              parsing_option = parsing_option,
+              abbreviations = abbreviations)
 }
 
 #' @rdname caseconverter
@@ -248,18 +248,18 @@ to_lower_upper_case <- function(string,
                                 empty_fill = NULL,
                                 parsing_option = 1,
                                 abbreviations = NULL){
-  to_any_case(string,
+  to_any_case(string = string,
               case = "lower_upper",
-              preprocess = NULL,
+              preprocess = preprocess,
               protect = "_(?![:alnum:])|(?<![:alnum:])_",
-              replace_special_characters = NULL,
-              postprocess = NULL,
-              prefix = "",
-              postfix = "",
-              unique_sep = NULL,
-              empty_fill = NULL,
-              parsing_option = 1,
-              abbreviations = NULL)
+              replace_special_characters = replace_special_characters,
+              postprocess = postprocess,
+              prefix = prefix,
+              postfix = postfix,
+              unique_sep = unique_sep,
+              empty_fill = empty_fill,
+              parsing_option = parsing_option,
+              abbreviations = abbreviations)
 }
 
 #' @rdname caseconverter
@@ -275,16 +275,16 @@ to_upper_lower_case <- function(string,
                                 empty_fill = NULL,
                                 parsing_option = 1,
                                 abbreviations = NULL){
-  to_any_case(string,
+  to_any_case(string = string,
               case = "upper_lower",
-              preprocess = NULL,
+              preprocess = preprocess,
               protect = "_(?![:alnum:])|(?<![:alnum:])_",
-              replace_special_characters = NULL,
-              postprocess = NULL,
-              prefix = "",
-              postfix = "",
-              unique_sep = NULL,
-              empty_fill = NULL,
-              parsing_option = 1,
-              abbreviations = NULL)
+              replace_special_characters = replace_special_characters,
+              postprocess = postprocess,
+              prefix = prefix,
+              postfix = postfix,
+              unique_sep = unique_sep,
+              empty_fill = empty_fill,
+              parsing_option = parsing_option,
+              abbreviations = abbreviations)
 }

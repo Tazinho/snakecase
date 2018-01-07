@@ -1,6 +1,11 @@
-# snakecase 0.7.0
+# snakecase 0.7.1
 
 * CRAN update
+
+* for changes see V 0.7.0
+* additionally fixed obvious bug and forwarded to_xxx_case args to to_any_case
+
+# snakecase 0.7.0
 
 * changes since last CRAN submission include:
     * to_xxx_case shortcuts are now exact wrappers around to_any_case
