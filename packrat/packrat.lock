@@ -151,11 +151,6 @@ Source: CRAN
 Version: 1.1.1
 Hash: dfd5a27768175ae51d08dc6beba1ef11
 
-Package: gmailr
-Source: CRAN
-Version: 0.7.1
-Hash: 69302be7fe9b4dbb2d1e971e63e4703c
-
 Package: highlight
 Source: CRAN
 Version: 0.4.7.1
@@ -180,11 +175,6 @@ Package: hunspell
 Source: CRAN
 Version: 2.6
 Hash: a4df84575f12d779a024de4ac198c690
-
-Package: igraph
-Source: CRAN
-Version: 1.1.2
-Hash: 07d33f151f94269a4573d354104e81aa
 
 Package: ini
 Source: CRAN
