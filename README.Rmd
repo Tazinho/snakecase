@@ -48,7 +48,13 @@ When it is clear that they are separators, you can supply them as a regex to the
 to_any_case(names(iris), preprocess = "\\.")
 ```
 
-This is especially handy, when special characters have a meaning as a separator or for example as a decimal mark
+It is as simple as that to treat all non alpha-numerics as separators
+
+```{r, collapse = TRUE}
+to_any_case("malte.grosser@gmail.com", preprocess = "[^[:alnum:]]")
+```
+
+The regex format is especially handy, when special characters have a meaning as a separator or for example as a decimal mark
 
 ```{r, collapse = TRUE}
 to_any_case("Pi.Value:3.14", preprocess = ":|(?<!\\d)\\.")

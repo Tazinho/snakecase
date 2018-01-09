@@ -59,8 +59,15 @@ to_any_case(names(iris), preprocess = "\\.")
 ## [5] "species"
 ```
 
-This is especially handy, when special characters have a meaning as a
-separator or for example as a decimal mark
+It is as simple as that to treat all non alpha-numerics as separators
+
+``` r
+to_any_case("malte.grosser@gmail.com", preprocess = "[^[:alnum:]]")
+## [1] "malte_grosser_gmail_com"
+```
+
+The regex format is especially handy, when special characters have a
+meaning as a separator or for example as a decimal mark
 
 ``` r
 to_any_case("Pi.Value:3.14", preprocess = ":|(?<!\\d)\\.")
