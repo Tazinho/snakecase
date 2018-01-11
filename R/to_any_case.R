@@ -242,7 +242,10 @@ to_any_case <- function(string,
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if(case == "small_camel"){
       string <- string %>% purrr::map(stringr::str_to_lower)
-      string <- string %>% purrr::map(stringr::str_to_title)
+      string <- string %>% 
+        purrr::map(~ stringr::str_c(stringr::str_sub(.x, 1, 1) %>%
+                                      stringr::str_to_upper(),
+                                    stringr::str_sub(.x, 2)))
       string <- string %>%
         purrr::map_chr(stringr::str_c, collapse = " ") %>% 
         purrr::map_chr(~ stringr::str_c(stringr::str_sub(.x, 1, 1) %>%
