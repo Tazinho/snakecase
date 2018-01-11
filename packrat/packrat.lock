@@ -10,8 +10,13 @@ Repos: BioCsoft=https://bioconductor.org/packages/3.4/bioc,
 
 Package: BH
 Source: CRAN
-Version: 1.62.0-1
-Hash: 14dfb3e8ffe20996118306ff4de1fab2
+Version: 1.65.0-1
+Hash: 95f62be4d6916aae14a310a8b56a6475
+
+Package: MASS
+Source: CRAN
+Version: 7.3-48
+Hash: e7356899b58b6076fa7e850f9e6f7d39
 
 Package: R6
 Source: CRAN
@@ -20,8 +25,8 @@ Hash: b2366cd9d2f3851a5704b4e192b985c2
 
 Package: Rcpp
 Source: CRAN
-Version: 0.12.12
-Hash: 8b3d5ebb9a9a4ab5c86b3a81b0cfb774
+Version: 0.12.14
+Hash: f9a2a481350397e53b0768bf488329cd
 
 Package: assertthat
 Source: CRAN
@@ -30,8 +35,8 @@ Hash: e8805df54c65ac96d50235c44a82615c
 
 Package: backports
 Source: CRAN
-Version: 1.1.0
-Hash: 3f754426ca2b7dbbf63951fe5075373b
+Version: 1.1.2
+Hash: 5ae7b3466e529e4400951ca18c137e40
 
 Package: base64enc
 Source: CRAN
@@ -46,7 +51,7 @@ Hash: e3a02070cf705d3ad1c5af1635a515a3
 Package: bindrcpp
 Source: CRAN
 Version: 0.2
-Hash: 8ab2dbf7ea120cf2d31183e0bf388485
+Hash: 7f7dcd1dc351f84798fd3dc4eb8a0e78
 
 Package: bitops
 Source: CRAN
@@ -77,10 +82,20 @@ Source: CRAN
 Version: 1.0.0
 Hash: f4239f89feb7ddc65821e4514e9734ae
 
+Package: clipr
+Source: CRAN
+Version: 0.4.0
+Hash: 0d4860516c7e3120f8116a639b1ff553
+
+Package: clisymbols
+Source: CRAN
+Version: 1.2.0
+Hash: a76a309884277a4fd8a5d741965fbef5
+
 Package: commonmark
 Source: CRAN
-Version: 1.2
-Hash: 1290583b9d16fb60322126a8698fb729
+Version: 1.4
+Hash: 91d7807331a4a37ef8376fb073960ee4
 
 Package: covr
 Source: CRAN
@@ -99,13 +114,13 @@ Hash: 877149b42d479b93ab15d5cef46c0f1b
 
 Package: debugme
 Source: CRAN
-Version: 1.0.2
-Hash: 28d8f97402746afa3bf2ce392173c957
+Version: 1.1.0
+Hash: c233690edd9fa17a63f7c8d83c1ca153
 
 Package: desc
 Source: CRAN
-Version: 1.1.0
-Hash: 346d3477f87b89692dd1379eaed1a1be
+Version: 1.1.1
+Hash: 2f99e95211c4ba6efcf5538d096587fc
 
 Package: devtools
 Source: CRAN
@@ -119,8 +134,8 @@ Hash: cfce0bc7ed5ba0cdc47182698fae1d24
 
 Package: dplyr
 Source: CRAN
-Version: 0.7.2
-Hash: a4e8be0458f97a40806bcced654de815
+Version: 0.7.4
+Hash: e1c300a22e22086568531c9d0c93bafc
 
 Package: evaluate
 Source: CRAN
@@ -148,13 +163,13 @@ Hash: 64747922e287be74e8e8b46c107fd3ef
 
 Package: glue
 Source: CRAN
-Version: 1.1.1
-Hash: dfd5a27768175ae51d08dc6beba1ef11
+Version: 1.2.0
+Hash: 381e42baedecc633c0e547a0c7ca9de7
 
 Package: highlight
 Source: CRAN
-Version: 0.4.7.1
-Hash: 888789a635beb64b9cddbf7ce3f0acb1
+Version: 0.4.7.2
+Hash: 829e60dc007d762127c653343dc6bfcf
 
 Package: highr
 Source: CRAN
@@ -164,7 +179,7 @@ Hash: aa3d5b7912b5fed4b546ed5cd2a1760b
 Package: htmltools
 Source: CRAN
 Version: 0.3.6
-Hash: 5b070a04ef8df1953544873db1c5896e
+Hash: 10db2fe4e1ac6057e5555db165a0d870
 
 Package: httr
 Source: CRAN
@@ -173,13 +188,13 @@ Hash: 2d32e01e53d532c812052e27a1021441
 
 Package: hunspell
 Source: CRAN
-Version: 2.6
-Hash: a4df84575f12d779a024de4ac198c690
+Version: 2.9
+Hash: c3ed6fb542ba71de83092a648132686c
 
 Package: ini
 Source: CRAN
-Version: 0.2
-Hash: 12df248cc384eb68545a617da2730c8e
+Version: 0.3.0
+Hash: 6f838ce34ea57d28eaf08709680a5501
 
 Package: installr
 Source: CRAN
@@ -203,13 +218,18 @@ Hash: 5be8a90c6aac24e7e0a4f18b829cc6e2
 
 Package: lazyeval
 Source: CRAN
-Version: 0.2.0
-Hash: 3d6e7608e65bbf5cb170dab1e3c9ed8b
+Version: 0.2.1
+Hash: 88926ad9c43581fd0822a37c8ed09f05
 
 Package: lintr
 Source: CRAN
 Version: 1.0.2
 Hash: 9ab51fac036f8724e44ee99d69c4238f
+
+Package: magick
+Source: CRAN
+Version: 1.6
+Hash: 7de1268cdf610abe46670ba92cbfb7db
 
 Package: magrittr
 Source: CRAN
@@ -253,16 +273,34 @@ Hash: 4025a3ad006633faec49105185b99ad8
 Package: pkgbuild
 Source: github
 Version: 0.0.0.9000
-Hash: 0240738ba54f63281313d51faee40fc2
+Hash: 76d3006b5b6052d98d557ec4d1c8d16a
 GithubRepo: pkgbuild
-GithubUsername: r-pkgs
+GithubUsername: r-lib
 GithubRef: master
-GithubSha1: 8aab60b03bb09212881e3544e332d60defc52fd6
+GithubSha1: ce7f6d10052dfbe8b7e148e77189c8c72b4a3ebd
 
 Package: pkgconfig
 Source: CRAN
 Version: 2.0.1
 Hash: 0dda4a2654a22b36a715c2b0b6fbacac
+
+Package: pkgdown
+Source: github
+Version: 0.1.0.9000
+Hash: 82d6c568a7d852fe883f38de292cb241
+GithubRepo: pkgdown
+GithubUsername: r-lib
+GithubRef: master
+GithubSha1: c94e6b2d6ecc69c1a2e4093cd5736aa97dac94f9
+
+Package: pkgload
+Source: github
+Version: 0.0.0.9000
+Hash: 3b674bde546502ccc0c03124690c8178
+GithubRepo: pkgload
+GithubUsername: r-lib
+GithubRef: master
+GithubSha1: 70eaef8e0bcfbd763c61a0dce4a58e0bc22774d8
 
 Package: plogr
 Source: CRAN
@@ -291,7 +329,17 @@ Hash: a80b244ccd3fdb33a0ff2be3c50dd648
 Package: purrrlyr
 Source: CRAN
 Version: 0.0.2
-Hash: 40063dc550779f9c9ed42b2155da136a
+Hash: d4cc505cfee7f92f16270d091532ce66
+
+Package: rematch
+Source: CRAN
+Version: 1.0.1
+Hash: ad4faf59e7611117ff165817074c50c7
+
+Package: rematch2
+Source: CRAN
+Version: 2.0.1
+Hash: b7f86a340a404c69cfb770dfd2081dd9
 
 Package: rex
 Source: CRAN
@@ -311,7 +359,7 @@ Hash: 2a7842e3cee62a79dd737d17e9e9d86b
 Package: roxygen2
 Source: CRAN
 Version: 6.0.1
-Hash: 82a85278378502d37455fcfc84951433
+Hash: 26a452f83365342638a9ee5a860ca8d6
 
 Package: rprojroot
 Source: CRAN
@@ -353,6 +401,15 @@ Source: CRAN
 Version: 1.4.1
 Hash: 2e61874117a0824203d426b51e8b365d
 
+Package: usethis
+Source: github
+Version: 1.1.0.9000
+Hash: f51cd601a83a76ade03e87ff5a496cd1
+GithubRepo: usethis
+GithubUsername: r-lib
+GithubRef: master
+GithubSha1: 390e05b45e38f97232ec088ac5f38e363311d299
+
 Package: utf8
 Source: CRAN
 Version: 1.1.3
@@ -371,7 +428,7 @@ Hash: a86856ae0b4a7c3daf9a3ef0097a403b
 Package: xml2
 Source: CRAN
 Version: 1.1.1
-Hash: b326a762ddb04eef605cc88987fa71fb
+Hash: 37f4615894c8b884529cbefed37f5263
 
 Package: yaml
 Source: CRAN
