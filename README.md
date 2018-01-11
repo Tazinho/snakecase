@@ -258,7 +258,7 @@ If you can provide tranliterations for your (or any other) country, pls
 drop them within [this
 issue](https://github.com/Tazinho/snakecase/issues/107).
 
-  - `case` Sometimems you just need a reasonable case. Make sure to
+  - `case`: Sometimems you just need a reasonable case. Make sure to
     checkout
 
 <!-- end list -->
