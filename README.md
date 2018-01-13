@@ -314,10 +314,10 @@ to_any_case("a_b_c_d", case = "upper_camel")
 
   - Sometimes further pre or postprocessing might be needed. You can
     decide yourself: Open an issue
-    (here)\[<https://github.com/Tazinho/snakecase/issues>\] or build
-    sth. quickly yourself via packages like base,
-    (stringr)\[<https://github.com/tidyverse/stringr>\],
-    (stringi)\[<https://github.com/gagolews/stringi>\] etc.
+    [here](https://github.com/Tazinho/snakecase/issues) or build sth.
+    quickly yourself via packages like base,
+    [stringr](https://github.com/tidyverse/stringr),
+    [stringi](https://github.com/gagolews/stringi) etc.
 
 ## Design Philosophy
 
