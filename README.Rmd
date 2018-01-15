@@ -48,7 +48,7 @@ When it is clear that they are separators, you can supply them as a regex to the
 to_any_case(names(iris), preprocess = "\\.")
 ```
 
-It is as simple as that to treat all non alpha-numerics as separators
+It is as simple as that to treat all non-alphanumerics as separators
 
 ```{r, collapse = TRUE}
 to_any_case("malte.grosser@gmail.com", preprocess = "[^[:alnum:]]")
@@ -127,7 +127,7 @@ to_any_case(c("HHcity", "IDTable1", "KEYtable2", "newUSElections"),
             abbreviations = c("HH", "ID", "KEY", "US"))
 ```
 
-* `preprocess`: Very ofthen you might just want to have all special (non alpha numeric) characters as a separator. You can achive this while providing the regarding regex
+* `preprocess`: Very ofthen you might just want to have all special (non-alphanumeric) characters as a separator. You can achive this while providing the regarding regex
 
 ```{r, collapse = TRUE}
 to_any_case("so.many_different@separators inThis|sentece",
@@ -148,7 +148,7 @@ to_any_case(c("HHcity", "IDtable1", "KEYtable2", "newUSelections"),
             parsing_option = 2)
 ```
 
-* To suppress conversion after a non alpha numeric character (except "_"), you can choose parsing option 5
+* To suppress conversion after a non-alphanumeric character (except "_"), you can choose parsing option 5
 
 ```{r, collapse = TRUE}
 to_any_case("look_AfterThe-hyphen andThe.dot", 

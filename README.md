@@ -59,7 +59,7 @@ to_any_case(names(iris), preprocess = "\\.")
 ## [5] "species"
 ```
 
-It is as simple as that to treat all non alpha-numerics as separators
+It is as simple as that to treat all non-alphanumerics as separators
 
 ``` r
 to_any_case("malte.grosser@gmail.com", preprocess = "[^[:alnum:]]")
@@ -191,7 +191,7 @@ to_any_case(c("HHcity", "IDTable1", "KEYtable2", "newUSElections"),
 ```
 
   - `preprocess`: Very ofthen you might just want to have all special
-    (non alpha numeric) characters as a separator. You can achive this
+    (non-alphanumeric) characters as a separator. You can achive this
     while providing the regarding regex
 
 <!-- end list -->
@@ -225,7 +225,7 @@ to_any_case(c("HHcity", "IDtable1", "KEYtable2", "newUSelections"),
 ## [4] "new_us_elections"
 ```
 
-  - To suppress conversion after a non alpha numeric character (except
+  - To suppress conversion after a non-alphanumeric character (except
     “\_“), you can choose parsing option 5
 
 <!-- end list -->
