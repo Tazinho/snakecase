@@ -41,12 +41,7 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
  \item{\code{"internal_parsing"}: This case is returning the internal parsing
  (suppressing the internal protection mechanism), which means that alphanumeric characters will be surrounded by underscores.
  It should only be used in very rare usecases and is mainly implemented to showcase the internal workings of \code{to_any_case()}}
- }
-
-You should use this feature with care in case of \code{case = "parsed"} and 
-\code{case = "none"}, since for upper case letters, which have transliterations/replacements
- of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
- might not always be what is intended.}
+ }}
 
 \item{abbreviations}{character with (uppercase) abbreviations. This marks
 abbreviations with an underscore behind (in front of the parsing).
@@ -70,7 +65,12 @@ into \code{stringr::regex()}. All matches will be replaced by underscores. Under
 need to be elements of \code{stringi::stri_trans_list()} (like "Latin-ASCII", which is often useful) or names of lookup tables (currently
 only "german" is supported). In the order of the entries the letters of the input
  string will be transliterated via \code{stringi::stri_trans_general()} or replaced via the 
- matches of the lookup table.}
+ matches of the lookup table.
+ 
+You should use this feature with care in case of \code{case = "parsed"} and 
+\code{case = "none"}, since for upper case letters, which have transliterations/replacements
+ of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
+ might not always be what is intended.}
 
 \item{postprocess}{String that will be used as separator. The defaults are \code{"_"} 
 and \code{""}, regarding the specified \code{case}.}
@@ -108,7 +108,7 @@ to_any_case(strings, case = "lower_upper")
 to_any_case(strings, case = "upper_lower")
 to_any_case(strings, case = "parsed")
 to_any_case(strings, case = "mixed")
-to_any_case(strings, case = "internal_protect")
+to_any_case(strings, case = "internal_parsing")
 to_any_case(strings, case = "none")
 
 ### Parsing options
