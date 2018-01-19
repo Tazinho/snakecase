@@ -94,7 +94,7 @@ test_that("janitor-pkg-tests",{
       gsub("^[ ]+", "", .) %>%
       make.names(.) %>%
       to_any_case(case = case, sep_in = "\\.", 
-                  replace_special_characters = c("Latin-ASCII"))
+                  transliterations = c("Latin-ASCII"))
     # Handle duplicated names - they mess up dplyr pipelines
     # This appends the column number to repeated instances of duplicate variable names
     dupe_count <- vapply(1:length(new_names), function(i) { 
@@ -306,13 +306,13 @@ test_that("complex strings", {
   expect_equal(to_any_case(c("R.aStudio", NA, NA, NA, NA), case = "upper_lower"),
                c("R.aSTUDIO", NA, NA, NA, NA))
   
-  expect_equal(to_any_case("ac\u00C4o", replace_special_characters = "Latin-ASCII"),
+  expect_equal(to_any_case("ac\u00C4o", transliterations = "Latin-ASCII"),
                "ac_ao")
   
-  expect_equal(to_any_case("ac\u00C4o", replace_special_characters = c("german", "Latin-ASCII")),
+  expect_equal(to_any_case("ac\u00C4o", transliterations = c("german", "Latin-ASCII")),
                "ac_aeo")
   
-  expect_equal(to_any_case("\u00E6", replace_special_characters = "Latin-ASCII"),
+  expect_equal(to_any_case("\u00E6", transliterations = "Latin-ASCII"),
                 "ae")
   
   expect_equal(to_any_case("bla.bla", case = "none", sep_in = "\\."),

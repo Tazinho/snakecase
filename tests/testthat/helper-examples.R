@@ -55,22 +55,21 @@ string <- c(NA, "_", "s_na_k_er", "SNAKE SNAKE CASE", "snakeSnakECase",
 case <- c("parsed", "snake", "small_camel", "big_camel", "screaming_snake")
 prefix <- c("", "start.")
 postfix <- c("", ".end")
-replace_special_characters <- c(TRUE, FALSE)
+transliterations <- c(TRUE, FALSE)
   
 dat <- expand.grid(string = string,
                      case = case,
                      postfix = postfix,
                      prefix = prefix,
-                     replace_special_characters = replace_special_characters,
+                     transliterations = transliterations,
                      stringsAsFactors = FALSE)
 
 # code to generate new results.
-# purrr::invoke_rows(snakecase::to_any_case, dat,
+# purrrlyr::invoke_rows(snakecase::to_any_case, dat,
 #                    preprocess = NULL,
 #                    postprocess = NULL,
-#                    protect = NULL,
 #                    .collate = "cols",
-#                    .to = "output") %>% .$output, %>% dput
+#                    .to = "output") %>% .$output %>% dput()
 
 # Some Benchmarks:
 # devtools::install_github("Tazinho/snakecase", force = TRUE)

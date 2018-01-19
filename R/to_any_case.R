@@ -25,7 +25,7 @@
 #'  or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will stay in upper case.}
 #'  \item{\code{"none"}: Neither parsing nor case conversion occur. This case might be helpful, when
 #'  one wants to call the function for the quick usage of the other parameters.
-#'  Works with \code{sep_in}, \code{replace_special_characters}, \code{sep_out}, \code{prefix},
+#'  Works with \code{sep_in}, \code{transliterations}, \code{sep_out}, \code{prefix},
 #'   \code{postfix},
 #'   \code{empty_fill} and \code{unique_sep}.}
 #'  \item{\code{"internal_parsing"}: This case is returning the internal parsing
@@ -53,11 +53,13 @@
 #'  \item{any other integer <= 0: no parsing"}
 #'  }
 #'
-#' @param replace_special_characters A character vector (if not \code{NULL}). The entries of this argument
+#' @param transliterations A character vector (if not \code{NULL}). The entries of this argument
 #' need to be elements of \code{stringi::stri_trans_list()} (like "Latin-ASCII", which is often useful) or names of lookup tables (currently
 #' only "german" is supported). In the order of the entries the letters of the input
 #'  string will be transliterated via \code{stringi::stri_trans_general()} or replaced via the 
 #'  matches of the lookup table.
+#'  
+#' @param replace_special_characters deprecated. Pls use \code{transliterations} instead.
 #'  
 #' You should use this feature with care in case of \code{case = "parsed"} and 
 #' \code{case = "none"}, since for upper case letters, which have transliterations/replacements
@@ -129,8 +131,8 @@
 #' to_any_case(string, case = "snake",
 #'             preprocess = ":|(?<!\\d)\\.")
 #' 
-#' ### Replace special characters
-#' to_any_case("\u00E4ngstlicher Has\u00EA", replace_special_characters = c("german", "Latin-ASCII"))
+#' ### Transliterations
+#' to_any_case("\u00E4ngstlicher Has\u00EA", transliterations = c("german", "Latin-ASCII"))
 #' 
 #' ### Postprocess
 #' strings2 <- c("this - Is_-: a Strange_string", "AND THIS ANOTHER_One")
@@ -156,6 +158,7 @@ to_any_case <- function(string,
                         sep_in = NULL,
                         preprocess = NULL,
                         parsing_option = 1,
+                        transliterations = NULL,
                         replace_special_characters = NULL,
                         sep_out = NULL,
                         postprocess = NULL,
@@ -177,6 +180,14 @@ to_any_case <- function(string,
             call. = FALSE)
     if (identical(sep_out, NULL)) {
       sep_out = postprocess
+    }
+  }
+  
+  if (!identical(replace_special_characters, NULL)) {
+    warning("argument replace_special_characters is renamed to transliterations and will be removed in later versions",
+            call. = FALSE)
+    if (identical(transliterations, NULL)) {
+      transliterations = replace_special_characters
     }
   }
   ### Argument matching and checking
@@ -233,9 +244,9 @@ to_any_case <- function(string,
         stringr::str_split(pattern = "(?<!\\d)_|_(?!\\d)")
     }
 ### replacement of special characters_------------------------------------------
-    if(!is.null(replace_special_characters)){
+    if(!is.null(transliterations)){
       string <- string %>%
-        purrr::map(~replace_special_characters_internal(.x, replace_special_characters, case))
+        purrr::map(~replace_special_characters_internal(.x, transliterations, case))
     }
 ### caseconversion--------------------------------------------------------------
     if(case == "mixed"){
@@ -325,8 +336,8 @@ to_any_case <- function(string,
     }
 ### ____________________________________________________________________________
 ### "none"
-  if(case == "none" & !is.null(replace_special_characters)){
-    string <- replace_special_characters_internal(string, replace_special_characters)
+  if(case == "none" & !is.null(transliterations)){
+    string <- replace_special_characters_internal(string, transliterations)
   }
 ### ____________________________________________________________________________
 ### fill empty strings
