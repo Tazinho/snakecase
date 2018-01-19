@@ -51,10 +51,10 @@ to_any_case("malte.grosser@gmail.com")
 ```
 
 When it is clear that they are separators, you can supply them as a
-regex to the `preprocess` argument
+regex to the `sep_in` argument
 
 ``` r
-to_any_case(names(iris), preprocess = "\\.")
+to_any_case(names(iris), sep_in = "\\.")
 ## [1] "sepal_length" "sepal_width"  "petal_length" "petal_width" 
 ## [5] "species"
 ```
@@ -62,7 +62,7 @@ to_any_case(names(iris), preprocess = "\\.")
 It is as simple as that to treat all non-alphanumerics as separators
 
 ``` r
-to_any_case("malte.grosser@gmail.com", preprocess = "[^[:alnum:]]")
+to_any_case("malte.grosser@gmail.com", sep_in = "[^[:alnum:]]")
 ## [1] "malte_grosser_gmail_com"
 ```
 
@@ -70,7 +70,7 @@ The regex format is especially handy, when special characters have a
 meaning as a separator or for example as a decimal mark
 
 ``` r
-to_any_case("Pi.Value:3.14", preprocess = ":|(?<!\\d)\\.")
+to_any_case("Pi.Value:3.14", sep_in = ":|(?<!\\d)\\.")
 ## [1] "pi_value_3.14"
 ```
 
@@ -79,7 +79,7 @@ adjusted
 (`postprocess`)
 
 ``` r
-to_any_case(names(iris), preprocess = "\\.", case = "upper_camel", postprocess = " ")
+to_any_case(names(iris), sep_in = "\\.", case = "upper_camel", postprocess = " ")
 ## [1] "Sepal Length" "Sepal Width"  "Petal Length" "Petal Width" 
 ## [5] "Species"
 ```
@@ -117,7 +117,7 @@ dput(to_any_case(c("SomeBAdInput", "someGoodInput")))
 
 The `to_any_case()` function is the workhorse of the package and
 basically enables you to convert any string into any case via a well
-thought process of **parsing** (`abbreviations`, `preprocess`,
+thought process of **parsing** (`abbreviations`, `sep_in`,
 `parsing_option`), **conversion** (`replace_special_characters`, `case`)
 and **postprocessing** (`postprocess`). The specific arguments allow you
 to customize the pipeline.
@@ -144,7 +144,7 @@ The package is internally build up on the
 that many powerful features are provided “by default”:
 
   - `to_any_case()` is vectorised over most of its arguments like
-    `string`, `preprocess`, `postprocess`, `empty_fill`, `prefix` and
+    `string`, `sep_in`, `postprocess`, `empty_fill`, `prefix` and
     `postfix`.
   - internal character operations are super fast c++. However, a lot of
     speed is lost due to a more systematic and maintainable
@@ -190,7 +190,7 @@ to_any_case(c("HHcity", "IDTable1", "KEYtable2", "newUSElections"),
 ## [4] "new_us_elections"
 ```
 
-  - `preprocess`: Very ofthen you might just want to have all special
+  - `sep_in`: Very ofthen you might just want to have all special
     (non-alphanumeric) characters as a separator. You can achive this
     while providing the regarding regex
 
@@ -198,18 +198,18 @@ to_any_case(c("HHcity", "IDTable1", "KEYtable2", "newUSElections"),
 
 ``` r
 to_any_case("so.many_different@separators inThis|sentece",
-            preprocess = "[^[:alnum:]]")
+            sep_in = "[^[:alnum:]]")
 ## [1] "so_many_different_separators_in_this_sentece"
 ```
 
   - You may want to do exactly the last thing, but for a specific reason
-    you don’t want to preprocess “.” and “@”
+    “.” and “@” are not meant to be input separators
 
 <!-- end list -->
 
 ``` r
 to_any_case("some-email@provider.com", 
-            preprocess = "[^[:alnum:]|^\\.|^@]")
+            sep_in = "[^[:alnum:]|^\\.|^@]")
 ## [1] "some_email@provider.com"
 ```
 
@@ -278,7 +278,7 @@ to_any_case("IWill LookLike aRollerCoasterYouCanPARSEMeWith option2",
 ## [1] "IwillLOOKlikeArollerCOASTERyouCANparseMEwithOPTION2"
 
 to_any_case("Maybé you_just...want to Format me a bit?", case = "none",
-            preprocess = "_|\\.", replace_special_characters = "Latin-ASCII",
+            sep_in = "_|\\.", replace_special_characters = "Latin-ASCII",
             postprocess = " ")
 ## [1] "Maybe you just want to Format me a bit?"
 ```
