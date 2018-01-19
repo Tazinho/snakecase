@@ -25,7 +25,7 @@
 #'  or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will stay in upper case.}
 #'  \item{\code{"none"}: Neither parsing nor case conversion occur. This case might be helpful, when
 #'  one wants to call the function for the quick usage of the other parameters.
-#'  Works with \code{preprocess}, \code{replace_special_characters}, \code{postprocess}, \code{prefix},
+#'  Works with \code{sep_in}, \code{replace_special_characters}, \code{postprocess}, \code{prefix},
 #'   \code{postfix},
 #'   \code{empty_fill} and \code{unique_sep}.}
 #'  \item{\code{"internal_parsing"}: This case is returning the internal parsing
@@ -37,8 +37,10 @@
 #'  abbreviations with an underscore behind (in front of the parsing).
 #'  useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2.
 #'  
-#' @param preprocess A string (if not \code{NULL}) that will be wrapped internally
+#' @param sep_in A string (if not \code{NULL}) that will be wrapped internally
 #' into \code{stringr::regex()}. All matches will be replaced by underscores. Underscores can later turned into another separator via \code{postprocess}.
+#' 
+#' @param preprocess deprecated. Pls use \code{sep_in} instead
 #' 
 #' @param parsing_option An integer that will determine the parsing_option.
 #' \itemize{
@@ -117,7 +119,7 @@
 #' ### Abbreviations
 #' to_any_case(c("RSSfeedRSSfeed", "USPassport", "USpassport"), abbreviations = c("RSS", "US"))
 #' 
-#' ### Preprocess
+#' ### Separator input
 #' string <- "R.St\u00FCdio: v.1.0.143"
 #' to_any_case(string)
 #' to_any_case(string, case = "snake", preprocess = ":|\\.")
@@ -148,6 +150,7 @@ to_any_case <- function(string,
                                  "parsed", "mixed", "lower_upper", "upper_lower",
                                  "all_caps", "lower_camel", "upper_camel", "internal_parsing", "none"),
                         abbreviations = NULL,
+                        sep_in = NULL,
                         preprocess = NULL,
                         parsing_option = 1,
                         replace_special_characters = NULL,
@@ -157,10 +160,13 @@ to_any_case <- function(string,
                         prefix = "",
                         postfix = ""){
   ### Deprecations:
-  # if (!identical(protect,"_(?![:alnum:])|(?<![:alnum:])_")) {
-  #   warning("argument protect is deprecated; If you really need this argument, pls submit an issue on https://github.com/Tazinho/snakecase", 
-  #             call. = FALSE)
-  #   }
+  if (!identical(preprocess, NULL)) {
+    warning("argument preprocess is renamed to sep_in and will be removed in later versions",
+              call. = FALSE)
+    if (identical(sep_in, NULL)) {
+      sep_in = preprocess
+    }
+  }
   ### Argument matching and checking
   case <- match.arg(case)
 ### check input length (necessary for NULL and atomic(0))
@@ -189,7 +195,7 @@ to_any_case <- function(string,
   string <- abbreviation_internal(string, abbreviations)
 ### ____________________________________________________________________________
 ### preprocess (regex into "_") and parsing (surrounding by "_")
-  string <- preprocess_internal(string, preprocess)
+  string <- preprocess_internal(string, sep_in)
   
   if (case != "none"){
     string <- to_parsed_case_internal(string,

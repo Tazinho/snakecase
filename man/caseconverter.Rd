@@ -12,45 +12,45 @@
 \alias{to_upper_lower_case}
 \title{Specific case converter shortcuts}
 \usage{
-to_snake_case(string, abbreviations = NULL, preprocess = NULL,
-  parsing_option = 1, replace_special_characters = NULL,
-  postprocess = NULL, unique_sep = NULL, empty_fill = NULL, prefix = "",
-  postfix = "")
+to_snake_case(string, abbreviations = NULL, sep_in = NULL,
+  preprocess = NULL, parsing_option = 1,
+  replace_special_characters = NULL, postprocess = NULL,
+  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
-to_lower_camel_case(string, abbreviations = NULL, preprocess = NULL,
-  parsing_option = 1, replace_special_characters = NULL,
-  postprocess = NULL, unique_sep = NULL, empty_fill = NULL, prefix = "",
-  postfix = "")
+to_lower_camel_case(string, abbreviations = NULL, sep_in = NULL,
+  preprocess = NULL, parsing_option = 1,
+  replace_special_characters = NULL, postprocess = NULL,
+  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
-to_upper_camel_case(string, abbreviations = NULL, preprocess = NULL,
-  parsing_option = 1, replace_special_characters = NULL,
-  postprocess = NULL, unique_sep = NULL, empty_fill = NULL, prefix = "",
-  postfix = "")
+to_upper_camel_case(string, abbreviations = NULL, sep_in = NULL,
+  preprocess = NULL, parsing_option = 1,
+  replace_special_characters = NULL, postprocess = NULL,
+  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
-to_screaming_snake_case(string, abbreviations = NULL, preprocess = NULL,
-  parsing_option = 1, replace_special_characters = NULL,
-  postprocess = NULL, unique_sep = NULL, empty_fill = NULL, prefix = "",
-  postfix = "")
+to_screaming_snake_case(string, abbreviations = NULL, sep_in = NULL,
+  preprocess = NULL, parsing_option = 1,
+  replace_special_characters = NULL, postprocess = NULL,
+  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
-to_parsed_case(string, abbreviations = NULL, preprocess = NULL,
-  parsing_option = 1, replace_special_characters = NULL,
-  postprocess = NULL, unique_sep = NULL, empty_fill = NULL, prefix = "",
-  postfix = "")
+to_parsed_case(string, abbreviations = NULL, sep_in = NULL,
+  preprocess = NULL, parsing_option = 1,
+  replace_special_characters = NULL, postprocess = NULL,
+  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
-to_mixed_case(string, abbreviations = NULL, preprocess = NULL,
-  parsing_option = 1, replace_special_characters = NULL,
-  postprocess = NULL, unique_sep = NULL, empty_fill = NULL, prefix = "",
-  postfix = "")
+to_mixed_case(string, abbreviations = NULL, sep_in = NULL,
+  preprocess = NULL, parsing_option = 1,
+  replace_special_characters = NULL, postprocess = NULL,
+  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
-to_lower_upper_case(string, abbreviations = NULL, preprocess = NULL,
-  parsing_option = 1, replace_special_characters = NULL,
-  postprocess = NULL, unique_sep = NULL, empty_fill = NULL, prefix = "",
-  postfix = "")
+to_lower_upper_case(string, abbreviations = NULL, sep_in = NULL,
+  preprocess = NULL, parsing_option = 1,
+  replace_special_characters = NULL, postprocess = NULL,
+  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
-to_upper_lower_case(string, abbreviations = NULL, preprocess = NULL,
-  parsing_option = 1, replace_special_characters = NULL,
-  postprocess = NULL, unique_sep = NULL, empty_fill = NULL, prefix = "",
-  postfix = "")
+to_upper_lower_case(string, abbreviations = NULL, sep_in = NULL,
+  preprocess = NULL, parsing_option = 1,
+  replace_special_characters = NULL, postprocess = NULL,
+  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
@@ -59,8 +59,10 @@ to_upper_lower_case(string, abbreviations = NULL, preprocess = NULL,
 abbreviations with an underscore behind (in front of the parsing).
 useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2.}
 
-\item{preprocess}{A string (if not \code{NULL}) that will be wrapped internally
+\item{sep_in}{A string (if not \code{NULL}) that will be wrapped internally
 into \code{stringr::regex()}. All matches will be replaced by underscores. Underscores can later turned into another separator via \code{postprocess}.}
+
+\item{preprocess}{deprecated. Pls use \code{sep_in} instead}
 
 \item{parsing_option}{An integer that will determine the parsing_option.
 #' \itemize{

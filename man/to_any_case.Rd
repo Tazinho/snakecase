@@ -7,9 +7,10 @@
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
   "screaming_snake", "parsed", "mixed", "lower_upper", "upper_lower",
   "all_caps", "lower_camel", "upper_camel", "internal_parsing", "none"),
-  abbreviations = NULL, preprocess = NULL, parsing_option = 1,
-  replace_special_characters = NULL, postprocess = NULL,
-  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
+  abbreviations = NULL, sep_in = NULL, preprocess = NULL,
+  parsing_option = 1, replace_special_characters = NULL,
+  postprocess = NULL, unique_sep = NULL, empty_fill = NULL, prefix = "",
+  postfix = "")
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
@@ -35,7 +36,7 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
  or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will stay in upper case.}
  \item{\code{"none"}: Neither parsing nor case conversion occur. This case might be helpful, when
  one wants to call the function for the quick usage of the other parameters.
- Works with \code{preprocess}, \code{replace_special_characters}, \code{postprocess}, \code{prefix},
+ Works with \code{sep_in}, \code{replace_special_characters}, \code{postprocess}, \code{prefix},
   \code{postfix},
   \code{empty_fill} and \code{unique_sep}.}
  \item{\code{"internal_parsing"}: This case is returning the internal parsing
@@ -47,8 +48,10 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
 abbreviations with an underscore behind (in front of the parsing).
 useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2.}
 
-\item{preprocess}{A string (if not \code{NULL}) that will be wrapped internally
+\item{sep_in}{A string (if not \code{NULL}) that will be wrapped internally
 into \code{stringr::regex()}. All matches will be replaced by underscores. Underscores can later turned into another separator via \code{postprocess}.}
+
+\item{preprocess}{deprecated. Pls use \code{sep_in} instead}
 
 \item{parsing_option}{An integer that will determine the parsing_option.
 \itemize{
@@ -130,7 +133,7 @@ to_any_case("HAMBURGcity", case = "parsed", parsing_option = 0)
 ### Abbreviations
 to_any_case(c("RSSfeedRSSfeed", "USPassport", "USpassport"), abbreviations = c("RSS", "US"))
 
-### Preprocess
+### Separator input
 string <- "R.St\\u00FCdio: v.1.0.143"
 to_any_case(string)
 to_any_case(string, case = "snake", preprocess = ":|\\\\.")

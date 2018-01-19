@@ -93,7 +93,7 @@ test_that("janitor-pkg-tests",{
       gsub("%", ".percent_", .) %>%
       gsub("^[ ]+", "", .) %>%
       make.names(.) %>%
-      to_any_case(case = case, preprocess = "\\.", 
+      to_any_case(case = case, sep_in = "\\.", 
                   replace_special_characters = c("Latin-ASCII"))
     # Handle duplicated names - they mess up dplyr pipelines
     # This appends the column number to repeated instances of duplicate variable names
@@ -220,19 +220,19 @@ test_that("empty_fill",
 test_that("complex strings", {
   strings2 <- c("this - Is_-: a Strange_string", "\u00C4ND THIS ANOTHER_One")
   
-  expect_equal(to_any_case(strings2, case = "snake", preprocess = "-|\\:"),
+  expect_equal(to_any_case(strings2, case = "snake", sep_in = "-|\\:"),
                c("this_is_a_strange_string", "\u00E4nd_this_another_one"))
   
   expect_equal(to_any_case("MERKWUERDIGER-VariablenNAME mit.VIELENMustern_version: 3.7.4",
                            case = "snake",
-                           preprocess = "-|:|(?<!\\d)\\.",
+                           sep_in = "-|:|(?<!\\d)\\.",
                            postprocess = "."),
                "merkwuerdiger.variablen.name.mit.vielen.mustern.version.3.7.4")
   
   expect_equal(to_any_case("R.Studio", case = "big_camel"),
                c("R.Studio"))
   
-  expect_equal(to_any_case("R.Studio: v 1.0.143", case = "big_camel", preprocess = "\\.", postprocess = "_"),
+  expect_equal(to_any_case("R.Studio: v 1.0.143", case = "big_camel", sep_in = "\\.", postprocess = "_"),
                "R_Studio:V_1_0_143")
   
   expect_equal(to_any_case("R.aStudio", case = "snake", postprocess = "-"), "r.a-studio")
@@ -251,7 +251,7 @@ test_that("complex strings", {
   expect_equal(to_any_case("Rstudio_STudio_sssTTT", case = "mixed", parsing_option = 2),
                "Rstudio_St_udio_sss_Ttt")
   
-  expect_equal(to_any_case(names(iris), case = "lower_upper", preprocess = "\\.", postprocess = "-"),
+  expect_equal(to_any_case(names(iris), case = "lower_upper", sep_in = "\\.", postprocess = "-"),
                c("sepal-LENGTH", "sepal-WIDTH", "petal-LENGTH", "petal-WIDTH", "species"))
   
   expect_equal(to_any_case("R.aStudio", case = "lower_upper"),
@@ -315,7 +315,7 @@ test_that("complex strings", {
   expect_equal(to_any_case("\u00E6", replace_special_characters = "Latin-ASCII"),
                 "ae")
   
-  expect_equal(to_any_case("bla.bla", case = "none", preprocess = "\\."),
+  expect_equal(to_any_case("bla.bla", case = "none", sep_in = "\\."),
                "bla_bla")
   
   expect_equal(to_any_case("blaUSABlaGERBlaZDFBla", abbreviations = c("USA", "GER", "ZDF", "BLA"), case = "mixed"),
@@ -368,12 +368,12 @@ test_that("stackoverflow answers", {
   
   expect_equal(to_any_case(c("ICUDays","SexCode","MAX_of_MLD","Age.Group"),
                            case = "snake",
-                           preprocess = "\\."),
+                           sep_in = "\\."),
                c("icu_days", "sex_code", "max_of_mld", "age_group")) 
 
   expect_equal(to_any_case(c("ICUDays","SexCode","MAX_of_MLD","Age.Group"),
                            case = "small_camel",
-                           preprocess = "\\."),
+                           sep_in = "\\."),
                c("icuDays", "sexCode", "maxOfMld", "ageGroup")) 
   
   expect_equal(unlist(strsplit(to_parsed_case("thisIsSomeCamelCase"), "_")),
@@ -386,7 +386,7 @@ test_that("stackoverflow answers", {
   
   expect_equal(to_any_case(c("this.text", "next.text"),
                            case = "big_camel", 
-                           preprocess = "\\."),
+                           sep_in = "\\."),
                c("ThisText", "NextText"))
 })
 
@@ -425,7 +425,7 @@ test_that("expand.grid", {
   #                    replace_special_characters = replace_special_characters,
   #                    stringsAsFactors = FALSE)
   expect_equal(purrrlyr::invoke_rows(snakecase::to_any_case, dat,
-                     preprocess = NULL,
+                     sep_in = NULL,
                      postprocess = NULL,
                      .collate = "cols",
                      .to = "output") %>% .$output, #%>% dput
