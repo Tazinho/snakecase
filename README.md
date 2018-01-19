@@ -88,7 +88,7 @@ And you might want to remove special characters along the way
 
 ``` r
 to_any_case("Doppelgänger is originally german", 
-            replace_special_characters = "german", case = "upper_camel")
+            transliterations = "german", case = "upper_camel")
 ## [1] "DoppelgaengerIsOriginallyGerman"
 ```
 
@@ -118,8 +118,8 @@ dput(to_any_case(c("SomeBAdInput", "someGoodInput")))
 The `to_any_case()` function is the workhorse of the package and
 basically enables you to convert any string into any case via a well
 thought process of **parsing** (`abbreviations`, `sep_in`,
-`parsing_option`), **conversion** (`replace_special_characters`, `case`)
-and **postprocessing** (`sep_out`). The specific arguments allow you to
+`parsing_option`), **conversion** (`transliterations`, `case`) and
+**postprocessing** (`sep_out`). The specific arguments allow you to
 customize the pipeline.
 
 On this example, you can see the pipeline including all implementation
@@ -238,8 +238,8 @@ to_any_case("look_AfterThe-hyphen andThe.dot",
 If you are interested in a specific parsing option, which is not
 implemented, pls open an issue.
 
-  - `replace_special_characters`: To transliterate exotic characters you
-    can use any option from `stringi::stri_trans_list()` (especially
+  - `transliterations`: To transliterate exotic characters you can use
+    any option from `stringi::stri_trans_list()` (especially
     “Latin-ASCII” is useful) or provided lookups introduced (country
     specific) by this package. Currently only “german” is supported.
     When more than one is supplied, the transliterations are performed
@@ -249,7 +249,7 @@ implemented, pls open an issue.
 
 ``` r
 to_any_case("Schönes Café", 
-            replace_special_characters = c("german", "Latin-ASCII"))
+            transliterations = c("german", "Latin-ASCII"))
 ## [1] "schoenes_cafe"
 ```
 
@@ -277,7 +277,7 @@ to_any_case("IWill LookLike aRollerCoasterYouCanPARSEMeWith option2",
 ## [1] "IwillLOOKlikeArollerCOASTERyouCANparseMEwithOPTION2"
 
 to_any_case("Maybé you_just...want to Format me a bit?", case = "none",
-            sep_in = "_|\\.", replace_special_characters = "Latin-ASCII",
+            sep_in = "_|\\.", transliterations = "Latin-ASCII",
             sep_out = " ")
 ## [1] "Maybe you just want to Format me a bit?"
 ```
