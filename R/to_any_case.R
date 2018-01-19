@@ -3,6 +3,7 @@
 #' Function to convert strings to any case
 #'
 #' @param string A string (for example names of a data frame).
+#' 
 #' @param case The desired target case, provided as one of the following:
 #' \itemize{
 #'  \item{snake_case: \code{"snake"}}
@@ -31,33 +32,16 @@
 #'  (suppressing the internal protection mechanism), which means that alphanumeric characters will be surrounded by underscores.
 #'  It should only be used in very rare usecases and is mainly implemented to showcase the internal workings of \code{to_any_case()}}
 #'  }
+#' 
+#' @param abbreviations character with (uppercase) abbreviations. This marks
+#'  abbreviations with an underscore behind (in front of the parsing).
+#'  useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2.
 #'  
 #' @param preprocess A string (if not \code{NULL}) that will be wrapped internally
 #' into \code{stringr::regex()}. All matches will be replaced by underscores. Underscores can later turned into another separator via \code{postprocess}.
 #' 
-#' @param replace_special_characters A character vector (if not \code{NULL}). The entries of this argument
-#' need to be elements of \code{stringi::stri_trans_list()} (like "Latin-ASCII", which is often useful) or names of lookup tables (currently
-#' only "german" is supported). In the order of the entries the letters of the input
-#'  string will be transliterated via \code{stringi::stri_trans_general()} or replaced via the 
-#'  matches of the lookup table.
-#' 
-#' You should use this feature with care in case of \code{case = "parsed"} and 
-#' \code{case = "none"}, since for upper case letters, which have transliterations/replacements
-#'  of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
-#'  might not always be what is intended.
-#' 
-#' @param postprocess String that will be used as separator. The defaults are \code{"_"} 
-#' and \code{""}, regarding the specified \code{case}.
-#' @param prefix prefix (string).
-#' @param postfix postfix (string).
-#' @param empty_fill A string. If it is supplied, then each entry that matches "" will be replaced
-#' by the supplied string to this argument.
-#' @param unique_sep A string. If not \code{NULL}, then duplicated names will get 
-#' a suffix integer
-#' in the order of their appearance. The suffix is separated by the supplied string
-#'  to this argument.
 #' @param parsing_option An integer that will determine the parsing_option.
-#' #' \itemize{
+#' \itemize{
 #'  \item{1: \code{RRRStudio -> RRR_Studio}}
 #'  \item{2: \code{RRRStudio -> RRRS_tudio}}
 #'  \item{3: parses at the beginning like option 1 and the rest like option 2.}
@@ -66,11 +50,33 @@
 #'  In this way case conversion won't apply after these characters. See examples.}
 #'  \item{any other integer <= 0: no parsing"}
 #'  }
+#'
+#' @param replace_special_characters A character vector (if not \code{NULL}). The entries of this argument
+#' need to be elements of \code{stringi::stri_trans_list()} (like "Latin-ASCII", which is often useful) or names of lookup tables (currently
+#' only "german" is supported). In the order of the entries the letters of the input
+#'  string will be transliterated via \code{stringi::stri_trans_general()} or replaced via the 
+#'  matches of the lookup table.
 #'  
-#' @param abbreviations character with (uppercase) abbreviations. This marks
-#'  abbreviations with an underscore behind (in front of the parsing).
-#'  useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2.
+#' You should use this feature with care in case of \code{case = "parsed"} and 
+#' \code{case = "none"}, since for upper case letters, which have transliterations/replacements
+#'  of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
+#'  might not always be what is intended.
 #' 
+#' @param postprocess String that will be used as separator. The defaults are \code{"_"} 
+#' and \code{""}, regarding the specified \code{case}.
+#' 
+#' @param unique_sep A string. If not \code{NULL}, then duplicated names will get 
+#' a suffix integer
+#' in the order of their appearance. The suffix is separated by the supplied string
+#'  to this argument.
+#' 
+#' @param empty_fill A string. If it is supplied, then each entry that matches "" will be replaced
+#' by the supplied string to this argument.
+#' 
+#' @param prefix prefix (string).
+#'
+#' @param postfix postfix (string).
+#'
 #' @return A character vector according the specified parameters above.
 #'
 #' @note \code{to_any_case()} is vectorised over \code{postprocess}, \code{prefix} and \code{postfix}.
@@ -89,7 +95,7 @@
 #' to_any_case(strings, case = "upper_lower")
 #' to_any_case(strings, case = "parsed")
 #' to_any_case(strings, case = "mixed")
-#' to_any_case(strings, case = "internal_protect")
+#' to_any_case(strings, case = "internal_parsing")
 #' to_any_case(strings, case = "none")
 #' 
 #' ### Parsing options
@@ -141,15 +147,15 @@ to_any_case <- function(string,
                         case = c("snake", "small_camel", "big_camel", "screaming_snake", 
                                  "parsed", "mixed", "lower_upper", "upper_lower",
                                  "all_caps", "lower_camel", "upper_camel", "internal_parsing", "none"),
+                        abbreviations = NULL,
                         preprocess = NULL,
+                        parsing_option = 1,
                         replace_special_characters = NULL,
                         postprocess = NULL,
-                        prefix = "",
-                        postfix = "",
                         unique_sep = NULL,
                         empty_fill = NULL,
-                        parsing_option = 1,
-                        abbreviations = NULL){
+                        prefix = "",
+                        postfix = ""){
   ### Deprecations:
   # if (!identical(protect,"_(?![:alnum:])|(?<![:alnum:])_")) {
   #   warning("argument protect is deprecated; If you really need this argument, pls submit an issue on https://github.com/Tazinho/snakecase", 

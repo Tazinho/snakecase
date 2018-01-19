@@ -4,8 +4,23 @@
 #'
 #' @param string A string (for example names of a data frame).
 #'  
+#' @param abbreviations character with (uppercase) abbreviations. This marks
+#'  abbreviations with an underscore behind (in front of the parsing).
+#'  useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2.
+#'  
 #' @param preprocess A string (if not \code{NULL}) that will be wrapped internally
 #' into \code{stringr::regex()}. All matches will be replaced by underscores. Underscores can later turned into another separator via \code{postprocess}.
+#' 
+#' @param parsing_option An integer that will determine the parsing_option.
+#' #' \itemize{
+#'  \item{1: \code{RRRStudio -> RRR_Studio}}
+#'  \item{2: \code{RRRStudio -> RRRS_tudio}}
+#'  \item{3: parses at the beginning like option 1 and the rest like option 2.}
+#'  \item{4: parses at the beginning like option 2 and the rest like option 1.}
+#'  \item{5: parses like option 1 but suppresses "_" around non special characters.
+#'  In this way case conversion won't apply after these characters. See examples.}
+#'  \item{any other integer <= 0: no parsing"}
+#'  }
 #' 
 #' @param replace_special_characters A character vector (if not \code{NULL}). The entries of this argument
 #' need to be elements of \code{stringi::stri_trans_list()} (like "Latin-ASCII", which is often useful) or names of lookup tables (currently
@@ -20,28 +35,18 @@
 #' 
 #' @param postprocess String that will be used as separator. The defaults are \code{"_"} 
 #' and \code{""}, regarding the specified \code{case}.
-#' @param prefix prefix (string).
-#' @param postfix postfix (string).
-#' @param empty_fill A string. If it is supplied, then each entry that matches "" will be replaced
-#' by the supplied string to this argument.
+#' 
 #' @param unique_sep A string. If not \code{NULL}, then duplicated names will get 
 #' a suffix integer
 #' in the order of their appearance. The suffix is separated by the supplied string
 #'  to this argument.
-#' @param parsing_option An integer that will determine the parsing_option.
-#' #' \itemize{
-#'  \item{1: \code{RRRStudio -> RRR_Studio}}
-#'  \item{2: \code{RRRStudio -> RRRS_tudio}}
-#'  \item{3: parses at the beginning like option 1 and the rest like option 2.}
-#'  \item{4: parses at the beginning like option 2 and the rest like option 1.}
-#'  \item{5: parses like option 1 but suppresses "_" around non special characters.
-#'  In this way case conversion won't apply after these characters. See examples.}
-#'  \item{any other integer <= 0: no parsing"}
-#'  }
 #'  
-#' @param abbreviations character with (uppercase) abbreviations. This marks
-#'  abbreviations with an underscore behind (in front of the parsing).
-#'  useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2.
+#' @param empty_fill A string. If it is supplied, then each entry that matches "" will be replaced
+#' by the supplied string to this argument.
+#'  
+#' @param prefix prefix (string).
+#' 
+#' @param postfix postfix (string).
 #' 
 #' @return A character vector according the specified parameters above.
 #'
@@ -77,15 +82,15 @@ NULL
 #' @export
 
 to_snake_case <- function(string,
+                          abbreviations = NULL,
                           preprocess = NULL,
+                          parsing_option = 1,
                           replace_special_characters = NULL,
                           postprocess = NULL,
-                          prefix = "",
-                          postfix = "",
                           unique_sep = NULL,
                           empty_fill = NULL,
-                          parsing_option = 1,
-                          abbreviations = NULL){
+                          prefix = "",
+                          postfix = ""){
   to_any_case(string = string,
               case = "snake",
               preprocess = preprocess,
@@ -103,15 +108,15 @@ to_snake_case <- function(string,
 #' @export
 
 to_lower_camel_case <- function(string,
+                                abbreviations = NULL,
                                 preprocess = NULL,
+                                parsing_option = 1,
                                 replace_special_characters = NULL,
                                 postprocess = NULL,
-                                prefix = "",
-                                postfix = "",
                                 unique_sep = NULL,
                                 empty_fill = NULL,
-                                parsing_option = 1,
-                                abbreviations = NULL){
+                                prefix = "",
+                                postfix = ""){
   to_any_case(string = string,
               case = "lower_camel",
               preprocess = preprocess,
@@ -129,15 +134,15 @@ to_lower_camel_case <- function(string,
 #' @export
 
 to_upper_camel_case <- function(string,
-                              preprocess = NULL,
-                              replace_special_characters = NULL,
-                              postprocess = NULL,
-                              prefix = "",
-                              postfix = "",
-                              unique_sep = NULL,
-                              empty_fill = NULL,
-                              parsing_option = 1,
-                              abbreviations = NULL){
+                                abbreviations = NULL,
+                                preprocess = NULL,
+                                parsing_option = 1,
+                                replace_special_characters = NULL,
+                                postprocess = NULL,
+                                unique_sep = NULL,
+                                empty_fill = NULL,
+                                prefix = "",
+                                postfix = ""){
   to_any_case(string = string,
               case = "upper_camel",
               preprocess = preprocess,
@@ -155,15 +160,15 @@ to_upper_camel_case <- function(string,
 #' @export 
 
 to_screaming_snake_case <- function(string,
+                                    abbreviations = NULL,
                                     preprocess = NULL,
+                                    parsing_option = 1,
                                     replace_special_characters = NULL,
                                     postprocess = NULL,
-                                    prefix = "",
-                                    postfix = "",
                                     unique_sep = NULL,
                                     empty_fill = NULL,
-                                    parsing_option = 1,
-                                    abbreviations = NULL){
+                                    prefix = "",
+                                    postfix = ""){
   to_any_case(string = string,
               case = "screaming_snake",
               preprocess = preprocess,
@@ -181,15 +186,15 @@ to_screaming_snake_case <- function(string,
 #' @export
 
 to_parsed_case <- function(string,
+                           abbreviations = NULL,
                            preprocess = NULL,
+                           parsing_option = 1,
                            replace_special_characters = NULL,
                            postprocess = NULL,
-                           prefix = "",
-                           postfix = "",
                            unique_sep = NULL,
                            empty_fill = NULL,
-                           parsing_option = 1,
-                           abbreviations = NULL){
+                           prefix = "",
+                           postfix = ""){
   to_any_case(string = string,
               case = "parsed",
               preprocess = preprocess,
@@ -207,15 +212,15 @@ to_parsed_case <- function(string,
 #' @export
 
 to_mixed_case <- function(string,
+                          abbreviations = NULL,
                           preprocess = NULL,
+                          parsing_option = 1,
                           replace_special_characters = NULL,
                           postprocess = NULL,
-                          prefix = "",
-                          postfix = "",
                           unique_sep = NULL,
                           empty_fill = NULL,
-                          parsing_option = 1,
-                          abbreviations = NULL){
+                          prefix = "",
+                          postfix = ""){
   to_any_case(string = string,
               case = "mixed",
               preprocess = preprocess,
@@ -233,15 +238,15 @@ to_mixed_case <- function(string,
 #' @export
 
 to_lower_upper_case <- function(string,
+                                abbreviations = NULL,
                                 preprocess = NULL,
+                                parsing_option = 1,
                                 replace_special_characters = NULL,
                                 postprocess = NULL,
-                                prefix = "",
-                                postfix = "",
                                 unique_sep = NULL,
                                 empty_fill = NULL,
-                                parsing_option = 1,
-                                abbreviations = NULL){
+                                prefix = "",
+                                postfix = ""){
   to_any_case(string = string,
               case = "lower_upper",
               preprocess = preprocess,
@@ -259,15 +264,15 @@ to_lower_upper_case <- function(string,
 #' @export
 
 to_upper_lower_case <- function(string,
+                                abbreviations = NULL,
                                 preprocess = NULL,
+                                parsing_option = 1,
                                 replace_special_characters = NULL,
                                 postprocess = NULL,
-                                prefix = "",
-                                postfix = "",
                                 unique_sep = NULL,
                                 empty_fill = NULL,
-                                parsing_option = 1,
-                                abbreviations = NULL){
+                                prefix = "",
+                                postfix = ""){
   to_any_case(string = string,
               case = "upper_lower",
               preprocess = preprocess,

@@ -7,9 +7,9 @@
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
   "screaming_snake", "parsed", "mixed", "lower_upper", "upper_lower",
   "all_caps", "lower_camel", "upper_camel", "internal_parsing", "none"),
-  preprocess = NULL, replace_special_characters = NULL,
-  postprocess = NULL, prefix = "", postfix = "", unique_sep = NULL,
-  empty_fill = NULL, parsing_option = 1, abbreviations = NULL)
+  abbreviations = NULL, preprocess = NULL, parsing_option = 1,
+  replace_special_characters = NULL, postprocess = NULL,
+  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
@@ -41,39 +41,22 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
  \item{\code{"internal_parsing"}: This case is returning the internal parsing
  (suppressing the internal protection mechanism), which means that alphanumeric characters will be surrounded by underscores.
  It should only be used in very rare usecases and is mainly implemented to showcase the internal workings of \code{to_any_case()}}
- }}
-
-\item{preprocess}{A string (if not \code{NULL}) that will be wrapped internally
-into \code{stringr::regex()}. All matches will be replaced by underscores. Underscores can later turned into another separator via \code{postprocess}.}
-
-\item{replace_special_characters}{A character vector (if not \code{NULL}). The entries of this argument
-need to be elements of \code{stringi::stri_trans_list()} (like "Latin-ASCII", which is often useful) or names of lookup tables (currently
-only "german" is supported). In the order of the entries the letters of the input
- string will be transliterated via \code{stringi::stri_trans_general()} or replaced via the 
- matches of the lookup table.
+ }
 
 You should use this feature with care in case of \code{case = "parsed"} and 
 \code{case = "none"}, since for upper case letters, which have transliterations/replacements
  of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
  might not always be what is intended.}
 
-\item{postprocess}{String that will be used as separator. The defaults are \code{"_"} 
-and \code{""}, regarding the specified \code{case}.}
+\item{abbreviations}{character with (uppercase) abbreviations. This marks
+abbreviations with an underscore behind (in front of the parsing).
+useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2.}
 
-\item{prefix}{prefix (string).}
-
-\item{postfix}{postfix (string).}
-
-\item{unique_sep}{A string. If not \code{NULL}, then duplicated names will get 
-a suffix integer
-in the order of their appearance. The suffix is separated by the supplied string
- to this argument.}
-
-\item{empty_fill}{A string. If it is supplied, then each entry that matches "" will be replaced
-by the supplied string to this argument.}
+\item{preprocess}{A string (if not \code{NULL}) that will be wrapped internally
+into \code{stringr::regex()}. All matches will be replaced by underscores. Underscores can later turned into another separator via \code{postprocess}.}
 
 \item{parsing_option}{An integer that will determine the parsing_option.
-#' \itemize{
+\itemize{
  \item{1: \code{RRRStudio -> RRR_Studio}}
  \item{2: \code{RRRStudio -> RRRS_tudio}}
  \item{3: parses at the beginning like option 1 and the rest like option 2.}
@@ -83,9 +66,26 @@ by the supplied string to this argument.}
  \item{any other integer <= 0: no parsing"}
  }}
 
-\item{abbreviations}{character with (uppercase) abbreviations. This marks
-abbreviations with an underscore behind (in front of the parsing).
-useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2.}
+\item{replace_special_characters}{A character vector (if not \code{NULL}). The entries of this argument
+need to be elements of \code{stringi::stri_trans_list()} (like "Latin-ASCII", which is often useful) or names of lookup tables (currently
+only "german" is supported). In the order of the entries the letters of the input
+ string will be transliterated via \code{stringi::stri_trans_general()} or replaced via the 
+ matches of the lookup table.}
+
+\item{postprocess}{String that will be used as separator. The defaults are \code{"_"} 
+and \code{""}, regarding the specified \code{case}.}
+
+\item{unique_sep}{A string. If not \code{NULL}, then duplicated names will get 
+a suffix integer
+in the order of their appearance. The suffix is separated by the supplied string
+ to this argument.}
+
+\item{empty_fill}{A string. If it is supplied, then each entry that matches "" will be replaced
+by the supplied string to this argument.}
+
+\item{prefix}{prefix (string).}
+
+\item{postfix}{postfix (string).}
 }
 \value{
 A character vector according the specified parameters above.
