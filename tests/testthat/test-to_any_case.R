@@ -208,10 +208,10 @@ test_that("janitor-pkg-tests",{
 test_that("random examples", 
           expect_equal(to_any_case("string123", case = "snake"),
                        "string_123"))
-test_that("deprecated",
-          expect_warning(to_any_case("bla", protect = "_"),
-                         "argument protect is deprecated; If you really need this argument, pls submit an issue on https://github.com/Tazinho/snakecase")
-          )
+# test_that("deprecated",
+#           expect_warning(to_any_case("bla", protect = "_"),
+#                          "argument protect is deprecated; If you really need this argument, pls submit an issue on https://github.com/Tazinho/snakecase")
+#           )
 
 test_that("empty_fill",
           expect_equal(to_any_case("", empty_fill = "bla"),

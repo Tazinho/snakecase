@@ -27,6 +27,9 @@
 #'  Works with \code{preprocess}, \code{replace_special_characters}, \code{postprocess}, \code{prefix},
 #'   \code{postfix},
 #'   \code{empty_fill} and \code{unique_sep}.}
+#'  \item{\code{"internal_parsing"}: This case is returning the internal parsing
+#'  (suppressing the internal protection mechanism), which means that alphanumeric characters will be surrounded by underscores.
+#'  It should only be used in very rare usecases and is mainly implemented to showcase the internal workings of \code{to_any_case()}}
 #'  }
 #'  
 #' @param preprocess A string (if not \code{NULL}) that will be wrapped internally
@@ -142,9 +145,8 @@
 to_any_case <- function(string,
                         case = c("snake", "small_camel", "big_camel", "screaming_snake", 
                                  "parsed", "mixed", "lower_upper", "upper_lower",
-                                 "all_caps", "lower_camel", "upper_camel", "none"),
+                                 "all_caps", "lower_camel", "upper_camel", "internal_parsing", "none"),
                         preprocess = NULL,
-                        protect = "_(?![:alnum:])|(?<![:alnum:])_",
                         replace_special_characters = NULL,
                         postprocess = NULL,
                         prefix = "",
@@ -154,10 +156,10 @@ to_any_case <- function(string,
                         parsing_option = 1,
                         abbreviations = NULL){
   ### Deprecations:
-  if (!identical(protect,"_(?![:alnum:])|(?<![:alnum:])_")) {
-    warning("argument protect is deprecated; If you really need this argument, pls submit an issue on https://github.com/Tazinho/snakecase", 
-              call. = FALSE)
-    }
+  # if (!identical(protect,"_(?![:alnum:])|(?<![:alnum:])_")) {
+  #   warning("argument protect is deprecated; If you really need this argument, pls submit an issue on https://github.com/Tazinho/snakecase", 
+  #             call. = FALSE)
+  #   }
   ### Argument matching and checking
   case <- match.arg(case)
 ### check input length (necessary for NULL and atomic(0))
@@ -287,8 +289,8 @@ to_any_case <- function(string,
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     # Protect (only internal, not via an argument).
     # Replace all "_" by "" which are around a not alphanumeric character
-    if (!is.null(protect)){
-      string <- stringr::str_replace_all(string, protect, "")
+    if (case != "internal_parsing"){
+      string <- stringr::str_replace_all(string, "_(?![:alnum:])|(?<![:alnum:])_", "")
     }
 ### ----------------------------------------------------------------------------
 }

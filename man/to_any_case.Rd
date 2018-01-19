@@ -6,11 +6,10 @@
 \usage{
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
   "screaming_snake", "parsed", "mixed", "lower_upper", "upper_lower",
-  "all_caps", "lower_camel", "upper_camel", "none"), preprocess = NULL,
-  protect = "_(?![:alnum:])|(?<![:alnum:])_",
-  replace_special_characters = NULL, postprocess = NULL, prefix = "",
-  postfix = "", unique_sep = NULL, empty_fill = NULL,
-  parsing_option = 1, abbreviations = NULL)
+  "all_caps", "lower_camel", "upper_camel", "internal_parsing", "none"),
+  preprocess = NULL, replace_special_characters = NULL,
+  postprocess = NULL, prefix = "", postfix = "", unique_sep = NULL,
+  empty_fill = NULL, parsing_option = 1, abbreviations = NULL)
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
@@ -39,16 +38,13 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
  Works with \code{preprocess}, \code{replace_special_characters}, \code{postprocess}, \code{prefix},
   \code{postfix},
   \code{empty_fill} and \code{unique_sep}.}
+ \item{\code{"internal_parsing"}: This case is returning the internal parsing
+ (suppressing the internal protection mechanism), which means that alphanumeric characters will be surrounded by underscores.
+ It should only be used in very rare usecases and is mainly implemented to showcase the internal workings of \code{to_any_case()}}
  }}
 
 \item{preprocess}{A string (if not \code{NULL}) that will be wrapped internally
 into \code{stringr::regex()}. All matches will be replaced by underscores. Underscores can later turned into another separator via \code{postprocess}.}
-
-\item{protect}{A string (default: \code{"_(?![:alnum:])|(?<![:alnum:])_"}).
-Every internal match to the supplied regular expression won't have an output separator
-around (in older versions conversions like "sepal_._length" occured by default).
-This argument should usually never be used anymore. Hence, it will be removed in one of the following versions.
-If you need to make usage of this argument in your code, pls drop me an email, so that I can see if there might be a better solution.}
 
 \item{replace_special_characters}{A character vector (if not \code{NULL}). The entries of this argument
 need to be elements of \code{stringi::stri_trans_list()} (like "Latin-ASCII", which is often useful) or names of lookup tables (currently
@@ -90,6 +86,12 @@ by the supplied string to this argument.}
 \item{abbreviations}{character with (uppercase) abbreviations. This marks
 abbreviations with an underscore behind (in front of the parsing).
 useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2.}
+
+\item{protect}{A string (default: \code{"_(?![:alnum:])|(?<![:alnum:])_"}).
+Every internal match to the supplied regular expression won't have an output separator
+around (in older versions conversions like "sepal_._length" occured by default).
+This argument should usually never be used anymore. Hence, it will be removed in one of the following versions.
+If you need to make usage of this argument in your code, pls drop me an email, so that I can see if there might be a better solution.}
 }
 \value{
 A character vector according the specified parameters above.
