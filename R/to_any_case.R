@@ -35,12 +35,6 @@
 #' @param preprocess A string (if not \code{NULL}) that will be wrapped internally
 #' into \code{stringr::regex()}. All matches will be replaced by underscores. Underscores can later turned into another separator via \code{postprocess}.
 #' 
-#' @param protect A string (default: \code{"_(?![:alnum:])|(?<![:alnum:])_"}).
-#' Every internal match to the supplied regular expression won't have an output separator
-#' around (in older versions conversions like "sepal_._length" occured by default).
-#' This argument should usually never be used anymore. Hence, it will be removed in one of the following versions.
-#' If you need to make usage of this argument in your code, pls drop me an email, so that I can see if there might be a better solution.
-#' 
 #' @param replace_special_characters A character vector (if not \code{NULL}). The entries of this argument
 #' need to be elements of \code{stringi::stri_trans_list()} (like "Latin-ASCII", which is often useful) or names of lookup tables (currently
 #' only "german" is supported). In the order of the entries the letters of the input
