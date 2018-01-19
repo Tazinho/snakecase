@@ -36,10 +36,10 @@ This is especially handy, when special characters have a meaning as a separator 
 to_any_case("Pi.Value:3.14", sep_in = ":|(?<!\\d)\\.")
 ```
 
-Of course other cases are supported (`case`) and separators can be adjusted (`postprocess`)
+Of course other cases are supported (`case`) and separators can be adjusted (`sep_out`)
 
 ```{r, collapse = TRUE}
-to_any_case(names(iris), sep_in = "\\.", case = "upper_camel", postprocess = " ")
+to_any_case(names(iris), sep_in = "\\.", case = "upper_camel", sep_out = " ")
 ```
 
 And you might want to remove special characters along the way

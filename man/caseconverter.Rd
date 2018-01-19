@@ -14,42 +14,42 @@
 \usage{
 to_snake_case(string, abbreviations = NULL, sep_in = NULL,
   preprocess = NULL, parsing_option = 1,
-  replace_special_characters = NULL, postprocess = NULL,
+  replace_special_characters = NULL, sep_out = NULL, postprocess = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
 to_lower_camel_case(string, abbreviations = NULL, sep_in = NULL,
   preprocess = NULL, parsing_option = 1,
-  replace_special_characters = NULL, postprocess = NULL,
+  replace_special_characters = NULL, sep_out = NULL, postprocess = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
 to_upper_camel_case(string, abbreviations = NULL, sep_in = NULL,
   preprocess = NULL, parsing_option = 1,
-  replace_special_characters = NULL, postprocess = NULL,
+  replace_special_characters = NULL, sep_out = NULL, postprocess = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
 to_screaming_snake_case(string, abbreviations = NULL, sep_in = NULL,
   preprocess = NULL, parsing_option = 1,
-  replace_special_characters = NULL, postprocess = NULL,
+  replace_special_characters = NULL, sep_out = NULL, postprocess = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
 to_parsed_case(string, abbreviations = NULL, sep_in = NULL,
   preprocess = NULL, parsing_option = 1,
-  replace_special_characters = NULL, postprocess = NULL,
+  replace_special_characters = NULL, sep_out = NULL, postprocess = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
 to_mixed_case(string, abbreviations = NULL, sep_in = NULL,
   preprocess = NULL, parsing_option = 1,
-  replace_special_characters = NULL, postprocess = NULL,
+  replace_special_characters = NULL, sep_out = NULL, postprocess = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
 to_lower_upper_case(string, abbreviations = NULL, sep_in = NULL,
   preprocess = NULL, parsing_option = 1,
-  replace_special_characters = NULL, postprocess = NULL,
+  replace_special_characters = NULL, sep_out = NULL, postprocess = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
 to_upper_lower_case(string, abbreviations = NULL, sep_in = NULL,
   preprocess = NULL, parsing_option = 1,
-  replace_special_characters = NULL, postprocess = NULL,
+  replace_special_characters = NULL, sep_out = NULL, postprocess = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 }
 \arguments{
@@ -59,8 +59,8 @@ to_upper_lower_case(string, abbreviations = NULL, sep_in = NULL,
 abbreviations with an underscore behind (in front of the parsing).
 useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2.}
 
-\item{sep_in}{A string (if not \code{NULL}) that will be wrapped internally
-into \code{stringr::regex()}. All matches will be replaced by underscores. Underscores can later turned into another separator via \code{postprocess}.}
+\item{sep_in}{(short for separator input) A regex supplied as a character (if not \code{NULL}), which will be wrapped internally
+into \code{stringr::regex()}. All matches will be replaced by underscores. Underscores can later turned into another separator via \code{sep_out}.}
 
 \item{preprocess}{deprecated. Pls use \code{sep_in} instead}
 
@@ -86,8 +86,10 @@ You should use this feature with care in case of \code{case = "parsed"} and
  of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
  might not always be what is intended.}
 
-\item{postprocess}{String that will be used as separator. The defaults are \code{"_"} 
+\item{sep_out}{(short for separator output) String that will be used as separator. The defaults are \code{"_"} 
 and \code{""}, regarding the specified \code{case}.}
+
+\item{postprocess}{deprecated. Pls use \code{sep_out} instead.}
 
 \item{unique_sep}{A string. If not \code{NULL}, then duplicated names will get 
 a suffix integer
@@ -110,8 +112,8 @@ A character vector according the specified target case.
 Wrappers around \code{to_any_case()}
 }
 \note{
-caseconverters are vectorised over \code{postprocess}, \code{prefix} and \code{postfix}.
-\code{postprocess} might follow in the future.
+caseconverters are vectorised over \code{string}, \code{sep_in}, \code{sep_out},
+ \code{empty_fill}, \code{prefix} and \code{postfix}.
 }
 \examples{
 strings <- c("this Is a Strange_string", "AND THIS ANOTHER_One", NA)

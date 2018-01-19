@@ -8,7 +8,7 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
   "screaming_snake", "parsed", "mixed", "lower_upper", "upper_lower",
   "all_caps", "lower_camel", "upper_camel", "internal_parsing", "none"),
   abbreviations = NULL, sep_in = NULL, preprocess = NULL,
-  parsing_option = 1, replace_special_characters = NULL,
+  parsing_option = 1, replace_special_characters = NULL, sep_out = NULL,
   postprocess = NULL, unique_sep = NULL, empty_fill = NULL, prefix = "",
   postfix = "")
 }
@@ -36,7 +36,7 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
  or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will stay in upper case.}
  \item{\code{"none"}: Neither parsing nor case conversion occur. This case might be helpful, when
  one wants to call the function for the quick usage of the other parameters.
- Works with \code{sep_in}, \code{replace_special_characters}, \code{postprocess}, \code{prefix},
+ Works with \code{sep_in}, \code{replace_special_characters}, \code{sep_out}, \code{prefix},
   \code{postfix},
   \code{empty_fill} and \code{unique_sep}.}
  \item{\code{"internal_parsing"}: This case is returning the internal parsing
@@ -48,10 +48,10 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
 abbreviations with an underscore behind (in front of the parsing).
 useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2.}
 
-\item{sep_in}{A string (if not \code{NULL}) that will be wrapped internally
+\item{sep_in}{(short for separator input) A regex supplied as a character (if not \code{NULL}), which will be wrapped internally
 into \code{stringr::regex()}. All matches will be replaced by underscores. Underscores can later turned into another separator via \code{postprocess}.}
 
-\item{preprocess}{deprecated. Pls use \code{sep_in} instead}
+\item{preprocess}{deprecated. Pls use \code{sep_in} instead.}
 
 \item{parsing_option}{An integer that will determine the parsing_option.
 \itemize{
@@ -75,8 +75,10 @@ You should use this feature with care in case of \code{case = "parsed"} and
  of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
  might not always be what is intended.}
 
-\item{postprocess}{String that will be used as separator. The defaults are \code{"_"} 
+\item{sep_out}{(short for separator output) String that will be used as separator. The defaults are \code{"_"} 
 and \code{""}, regarding the specified \code{case}.}
+
+\item{postprocess}{deprecated. Pls use \code{sep_out} instead.}
 
 \item{unique_sep}{A string. If not \code{NULL}, then duplicated names will get 
 a suffix integer
@@ -97,8 +99,8 @@ A character vector according the specified parameters above.
 Function to convert strings to any case
 }
 \note{
-\code{to_any_case()} is vectorised over \code{postprocess}, \code{prefix} and \code{postfix}.
-\code{postprocess} might follow in the future.
+\code{to_any_case()} is vectorised over \code{string}, \code{sep_in}, \code{sep_out},
+ \code{empty_fill}, \code{prefix} and \code{postfix}.
 }
 \examples{
 ### Cases

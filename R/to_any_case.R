@@ -25,7 +25,7 @@
 #'  or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will stay in upper case.}
 #'  \item{\code{"none"}: Neither parsing nor case conversion occur. This case might be helpful, when
 #'  one wants to call the function for the quick usage of the other parameters.
-#'  Works with \code{sep_in}, \code{replace_special_characters}, \code{postprocess}, \code{prefix},
+#'  Works with \code{sep_in}, \code{replace_special_characters}, \code{sep_out}, \code{prefix},
 #'   \code{postfix},
 #'   \code{empty_fill} and \code{unique_sep}.}
 #'  \item{\code{"internal_parsing"}: This case is returning the internal parsing
@@ -37,10 +37,10 @@
 #'  abbreviations with an underscore behind (in front of the parsing).
 #'  useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2.
 #'  
-#' @param sep_in A string (if not \code{NULL}) that will be wrapped internally
+#' @param sep_in (short for separator input) A regex supplied as a character (if not \code{NULL}), which will be wrapped internally
 #' into \code{stringr::regex()}. All matches will be replaced by underscores. Underscores can later turned into another separator via \code{postprocess}.
 #' 
-#' @param preprocess deprecated. Pls use \code{sep_in} instead
+#' @param preprocess deprecated. Pls use \code{sep_in} instead.
 #' 
 #' @param parsing_option An integer that will determine the parsing_option.
 #' \itemize{
@@ -64,8 +64,10 @@
 #'  of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
 #'  might not always be what is intended.
 #' 
-#' @param postprocess String that will be used as separator. The defaults are \code{"_"} 
+#' @param sep_out (short for separator output) String that will be used as separator. The defaults are \code{"_"} 
 #' and \code{""}, regarding the specified \code{case}.
+#' 
+#' @param postprocess deprecated. Pls use \code{sep_out} instead.
 #' 
 #' @param unique_sep A string. If not \code{NULL}, then duplicated names will get 
 #' a suffix integer
@@ -81,8 +83,9 @@
 #'
 #' @return A character vector according the specified parameters above.
 #'
-#' @note \code{to_any_case()} is vectorised over \code{postprocess}, \code{prefix} and \code{postfix}.
-#' \code{postprocess} might follow in the future.
+#' @note \code{to_any_case()} is vectorised over \code{string}, \code{sep_in}, \code{sep_out},
+#'  \code{empty_fill}, \code{prefix} and \code{postfix}.
+#'  
 #' @author Malte Grosser, \email{malte.grosser@@gmail.com}
 #' @keywords utilities
 #'
@@ -154,6 +157,7 @@ to_any_case <- function(string,
                         preprocess = NULL,
                         parsing_option = 1,
                         replace_special_characters = NULL,
+                        sep_out = NULL,
                         postprocess = NULL,
                         unique_sep = NULL,
                         empty_fill = NULL,
@@ -162,9 +166,17 @@ to_any_case <- function(string,
   ### Deprecations:
   if (!identical(preprocess, NULL)) {
     warning("argument preprocess is renamed to sep_in and will be removed in later versions",
-              call. = FALSE)
+            call. = FALSE)
     if (identical(sep_in, NULL)) {
       sep_in = preprocess
+    }
+  }
+  
+  if (!identical(postprocess, NULL)) {
+    warning("argument postprocess is renamed to sep_out and will be removed in later versions",
+            call. = FALSE)
+    if (identical(sep_out, NULL)) {
+      sep_out = postprocess
     }
   }
   ### Argument matching and checking
@@ -301,13 +313,13 @@ to_any_case <- function(string,
     }
 ### ----------------------------------------------------------------------------
 }
-### postprocessing--------------------------------------------------------------
-    if(!is.null(postprocess) & !identical(string, character(0))){
+### postprocessing (ouput separator)s--------------------------------------------
+    if(!is.null(sep_out) & !identical(string, character(0))){
       string <- purrr::map2_chr(string,
-                                postprocess,
+                                sep_out,
                                 ~ stringr::str_replace_all(.x, "_", .y))}
     
-    if(is.null(postprocess) & case %in% c("small_camel", "big_camel", 
+    if(is.null(sep_out) & case %in% c("small_camel", "big_camel", 
                                             "lower_upper", "upper_lower")){
       string <- stringr::str_replace_all(string, "(?<!\\d)_|_(?!\\d)", "")
     }

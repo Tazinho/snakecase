@@ -8,8 +8,8 @@
 #'  abbreviations with an underscore behind (in front of the parsing).
 #'  useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2.
 #'  
-#' @param sep_in A string (if not \code{NULL}) that will be wrapped internally
-#' into \code{stringr::regex()}. All matches will be replaced by underscores. Underscores can later turned into another separator via \code{postprocess}.
+#' @param sep_in (short for separator input) A regex supplied as a character (if not \code{NULL}), which will be wrapped internally
+#' into \code{stringr::regex()}. All matches will be replaced by underscores. Underscores can later turned into another separator via \code{sep_out}.
 #' 
 #' @param preprocess deprecated. Pls use \code{sep_in} instead
 #' 
@@ -35,8 +35,10 @@
 #'  of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
 #'  might not always be what is intended.
 #' 
-#' @param postprocess String that will be used as separator. The defaults are \code{"_"} 
+#' @param sep_out (short for separator output) String that will be used as separator. The defaults are \code{"_"} 
 #' and \code{""}, regarding the specified \code{case}.
+#' 
+#' @param postprocess deprecated. Pls use \code{sep_out} instead.
 #' 
 #' @param unique_sep A string. If not \code{NULL}, then duplicated names will get 
 #' a suffix integer
@@ -52,8 +54,8 @@
 #' 
 #' @return A character vector according the specified parameters above.
 #'
-#' @note caseconverters are vectorised over \code{postprocess}, \code{prefix} and \code{postfix}.
-#' \code{postprocess} might follow in the future.
+#' @note caseconverters are vectorised over \code{string}, \code{sep_in}, \code{sep_out},
+#'  \code{empty_fill}, \code{prefix} and \code{postfix}.
 #' @author Malte Grosser, \email{malte.grosser@@gmail.com}
 #' @keywords utilities
 #' 
@@ -89,6 +91,7 @@ to_snake_case <- function(string,
                           preprocess = NULL,
                           parsing_option = 1,
                           replace_special_characters = NULL,
+                          sep_out = NULL,
                           postprocess = NULL,
                           unique_sep = NULL,
                           empty_fill = NULL,
@@ -99,6 +102,7 @@ to_snake_case <- function(string,
               sep_in = sep_in,
               preprocess = preprocess,
               replace_special_characters = replace_special_characters,
+              sep_out = sep_out,
               postprocess = postprocess,
               prefix = prefix,
               postfix = postfix,
@@ -117,6 +121,7 @@ to_lower_camel_case <- function(string,
                                 preprocess = NULL,
                                 parsing_option = 1,
                                 replace_special_characters = NULL,
+                                sep_out = NULL,
                                 postprocess = NULL,
                                 unique_sep = NULL,
                                 empty_fill = NULL,
@@ -127,6 +132,7 @@ to_lower_camel_case <- function(string,
               sep_in = sep_in,
               preprocess = preprocess,
               replace_special_characters = replace_special_characters,
+              sep_out = sep_out,
               postprocess = postprocess,
               prefix = prefix,
               postfix = postfix,
@@ -145,6 +151,7 @@ to_upper_camel_case <- function(string,
                                 preprocess = NULL,
                                 parsing_option = 1,
                                 replace_special_characters = NULL,
+                                sep_out = NULL,
                                 postprocess = NULL,
                                 unique_sep = NULL,
                                 empty_fill = NULL,
@@ -155,6 +162,7 @@ to_upper_camel_case <- function(string,
               sep_in = sep_in,
               preprocess = preprocess,
               replace_special_characters = replace_special_characters,
+              sep_out = sep_out,
               postprocess = postprocess,
               prefix = prefix,
               postfix = postfix,
@@ -173,6 +181,7 @@ to_screaming_snake_case <- function(string,
                                     preprocess = NULL,
                                     parsing_option = 1,
                                     replace_special_characters = NULL,
+                                    sep_out = NULL,
                                     postprocess = NULL,
                                     unique_sep = NULL,
                                     empty_fill = NULL,
@@ -183,6 +192,7 @@ to_screaming_snake_case <- function(string,
               sep_in = sep_in,
               preprocess = preprocess,
               replace_special_characters = replace_special_characters,
+              sep_out = sep_out,
               postprocess = postprocess,
               prefix = prefix,
               postfix = postfix,
@@ -201,6 +211,7 @@ to_parsed_case <- function(string,
                            preprocess = NULL,
                            parsing_option = 1,
                            replace_special_characters = NULL,
+                           sep_out = NULL,
                            postprocess = NULL,
                            unique_sep = NULL,
                            empty_fill = NULL,
@@ -211,6 +222,7 @@ to_parsed_case <- function(string,
               sep_in = sep_in,
               preprocess = preprocess,
               replace_special_characters = replace_special_characters,
+              sep_out = sep_out,
               postprocess = postprocess,
               prefix = prefix,
               postfix = postfix,
@@ -229,6 +241,7 @@ to_mixed_case <- function(string,
                           preprocess = NULL,
                           parsing_option = 1,
                           replace_special_characters = NULL,
+                          sep_out = NULL,
                           postprocess = NULL,
                           unique_sep = NULL,
                           empty_fill = NULL,
@@ -239,6 +252,7 @@ to_mixed_case <- function(string,
               sep_in = sep_in,
               preprocess = preprocess,
               replace_special_characters = replace_special_characters,
+              sep_out = sep_out,
               postprocess = postprocess,
               prefix = prefix,
               postfix = postfix,
@@ -257,6 +271,7 @@ to_lower_upper_case <- function(string,
                                 preprocess = NULL,
                                 parsing_option = 1,
                                 replace_special_characters = NULL,
+                                sep_out = NULL,
                                 postprocess = NULL,
                                 unique_sep = NULL,
                                 empty_fill = NULL,
@@ -267,6 +282,7 @@ to_lower_upper_case <- function(string,
               sep_in = sep_in,
               preprocess = preprocess,
               replace_special_characters = replace_special_characters,
+              sep_out = sep_out,
               postprocess = postprocess,
               prefix = prefix,
               postfix = postfix,
@@ -285,6 +301,7 @@ to_upper_lower_case <- function(string,
                                 preprocess = NULL,
                                 parsing_option = 1,
                                 replace_special_characters = NULL,
+                                sep_out = NULL,
                                 postprocess = NULL,
                                 unique_sep = NULL,
                                 empty_fill = NULL,
@@ -295,6 +312,7 @@ to_upper_lower_case <- function(string,
               sep_in = sep_in,
               preprocess = preprocess,
               replace_special_characters = replace_special_characters,
+              sep_out = sep_out,
               postprocess = postprocess,
               prefix = prefix,
               postfix = postfix,
