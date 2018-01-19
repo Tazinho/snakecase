@@ -89,6 +89,7 @@
 #' to_any_case(strings, case = "upper_lower")
 #' to_any_case(strings, case = "parsed")
 #' to_any_case(strings, case = "mixed")
+#' to_any_case(strings, case = "internal_protect")
 #' to_any_case(strings, case = "none")
 #' 
 #' ### Parsing options

@@ -86,12 +86,6 @@ by the supplied string to this argument.}
 \item{abbreviations}{character with (uppercase) abbreviations. This marks
 abbreviations with an underscore behind (in front of the parsing).
 useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2.}
-
-\item{protect}{A string (default: \code{"_(?![:alnum:])|(?<![:alnum:])_"}).
-Every internal match to the supplied regular expression won't have an output separator
-around (in older versions conversions like "sepal_._length" occured by default).
-This argument should usually never be used anymore. Hence, it will be removed in one of the following versions.
-If you need to make usage of this argument in your code, pls drop me an email, so that I can see if there might be a better solution.}
 }
 \value{
 A character vector according the specified parameters above.
@@ -114,6 +108,7 @@ to_any_case(strings, case = "lower_upper")
 to_any_case(strings, case = "upper_lower")
 to_any_case(strings, case = "parsed")
 to_any_case(strings, case = "mixed")
+to_any_case(strings, case = "internal_protect")
 to_any_case(strings, case = "none")
 
 ### Parsing options
