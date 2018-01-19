@@ -76,10 +76,10 @@ to_any_case("Pi.Value:3.14", sep_in = ":|(?<!\\d)\\.")
 
 Of course other cases are supported (`case`) and separators can be
 adjusted
-(`postprocess`)
+(`sep_out`)
 
 ``` r
-to_any_case(names(iris), sep_in = "\\.", case = "upper_camel", postprocess = " ")
+to_any_case(names(iris), sep_in = "\\.", case = "upper_camel", sep_out = " ")
 ## [1] "Sepal Length" "Sepal Width"  "Petal Length" "Petal Width" 
 ## [5] "Species"
 ```
@@ -119,8 +119,8 @@ The `to_any_case()` function is the workhorse of the package and
 basically enables you to convert any string into any case via a well
 thought process of **parsing** (`abbreviations`, `sep_in`,
 `parsing_option`), **conversion** (`replace_special_characters`, `case`)
-and **postprocessing** (`postprocess`). The specific arguments allow you
-to customize the pipeline.
+and **postprocessing** (`sep_out`). The specific arguments allow you to
+customize the pipeline.
 
 On this example, you can see the pipeline including all implementation
 details.
@@ -144,8 +144,7 @@ The package is internally build up on the
 that many powerful features are provided “by default”:
 
   - `to_any_case()` is vectorised over most of its arguments like
-    `string`, `sep_in`, `postprocess`, `empty_fill`, `prefix` and
-    `postfix`.
+    `string`, `sep_in`, `sep_out`, `empty_fill`, `prefix` and `postfix`.
   - internal character operations are super fast c++. However, a lot of
     speed is lost due to a more systematic and maintainable
     implementation. (This might be optimized in the long run)
@@ -279,7 +278,7 @@ to_any_case("IWill LookLike aRollerCoasterYouCanPARSEMeWith option2",
 
 to_any_case("Maybé you_just...want to Format me a bit?", case = "none",
             sep_in = "_|\\.", replace_special_characters = "Latin-ASCII",
-            postprocess = " ")
+            sep_out = " ")
 ## [1] "Maybe you just want to Format me a bit?"
 ```
 
