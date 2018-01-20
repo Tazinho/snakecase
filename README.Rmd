@@ -70,7 +70,7 @@ And you might want to remove special characters along the way
 
 ```{r, collapse = TRUE}
 to_any_case("Doppelgänger is originally german", 
-            replace_special_characters = "german", case = "upper_camel")
+            transliterations = "german", case = "upper_camel")
 ```
 
 All of the cases like: snake, lower_camel, upper_camel, all_caps, lower_upper, upper_lower and mixed are based on parsed case
@@ -89,7 +89,7 @@ dput(to_any_case(c("SomeBAdInput", "someGoodInput")))
 
 ### Big picture (a parameterized workflow)
 
-The `to_any_case()` function is the workhorse of the package and basically enables you to convert any string into any case via a well thought process of __parsing__ (`abbreviations`, `sep_in`, `parsing_option`), __conversion__ (`replace_special_characters`, `case`) and __postprocessing__ (`sep_out`). The specific arguments allow you to customize the pipeline.
+The `to_any_case()` function is the workhorse of the package and basically enables you to convert any string into any case via a well thought process of __parsing__ (`abbreviations`, `sep_in`, `parsing_option`), __conversion__ (`transliterations`, `case`) and __postprocessing__ (`sep_out`). The specific arguments allow you to customize the pipeline.
 
 On this example, you can see the pipeline including all implementation details.
 
@@ -157,11 +157,11 @@ to_any_case("look_AfterThe-hyphen andThe.dot",
 
 If you are interested in a specific parsing option, which is not implemented, pls open an issue.
 
-* `replace_special_characters`: To transliterate exotic characters you can use any option from `stringi::stri_trans_list()` (especially "Latin-ASCII" is useful) or provided lookups introduced (country specific) by this package. Currently only "german" is supported. When more than one is supplied, the transliterations are performed iteratively
+* `transliterations`: To transliterate exotic characters you can use any option from `stringi::stri_trans_list()` (especially "Latin-ASCII" is useful) or provided lookups introduced (country specific) by this package. Currently only "german" is supported. When more than one is supplied, the transliterations are performed iteratively
 
 ```{r, collapse = TRUE}
 to_any_case("Schönes Café", 
-            replace_special_characters = c("german", "Latin-ASCII"))
+            transliterations = c("german", "Latin-ASCII"))
 ```
 
 If you can provide tranliterations for your (or any other) country, pls drop them within [this issue](https://github.com/Tazinho/snakecase/issues/107).
@@ -179,7 +179,7 @@ to_any_case("IWill LookLike aRollerCoasterYouCanPARSEMeWith option2",
             case = "upper_lower") # or lower_upper
 
 to_any_case("Maybé you_just...want to Format me a bit?", case = "none",
-            sep_in = "_|\\.", replace_special_characters = "Latin-ASCII",
+            sep_in = "_|\\.", transliterations = "Latin-ASCII",
             sep_out = " ")
 ```
 

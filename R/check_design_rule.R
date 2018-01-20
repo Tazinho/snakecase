@@ -4,7 +4,7 @@
 #' @param preprocess String that will be wrapped internally into \code{stringr::regex()}. 
 #' All matches will be treated as additional splitting parameters besides the default ones 
 #' (\code{"_"} and \code{" "}), when parsing the input string.
-#' @param replace_special_characters Logical, if \code{TRUE}, special characters 
+#' @param transliterations Logical, if \code{TRUE}, special characters 
 #' will be translated to characters which are more likely to be understood by 
 #' different programs. For example german umlauts will be translated to ae, oe, ue etc.
 #' @param postprocess String that will be used as separator. The defaults are \code{"_"} 
@@ -26,11 +26,11 @@
 #' @keywords utilities
 #'
 check_design_rule <- function(string, preprocess = NULL,
-                             replace_special_characters = FALSE, postprocess = NULL, prefix = "",
+                             transliterations = FALSE, postprocess = NULL, prefix = "",
                              postfix = "", unique_sep = NULL, empty_fill = NULL, parsing_option = 1){
   test_c <- function(string, case){
     to_any_case(string = string, case = case, preprocess = preprocess, 
-                replace_special_characters = replace_special_characters,
+                transliterations = transliterations,
                 postprocess = postprocess, prefix = prefix, postfix = postfix,
                 unique_sep = unique_sep, empty_fill = empty_fill, 
                 parsing_option = parsing_option)

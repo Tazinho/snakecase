@@ -4,10 +4,9 @@
 \alias{check_design_rule}
 \title{Internal helper to test the design rules for any string and setting of \code{to_any_case()}}
 \usage{
-check_design_rule(string, preprocess = NULL,
-  replace_special_characters = FALSE, postprocess = NULL, prefix = "",
-  postfix = "", unique_sep = NULL, empty_fill = NULL,
-  parsing_option = 1)
+check_design_rule(string, preprocess = NULL, transliterations = FALSE,
+  postprocess = NULL, prefix = "", postfix = "", unique_sep = NULL,
+  empty_fill = NULL, parsing_option = 1)
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
@@ -16,7 +15,7 @@ check_design_rule(string, preprocess = NULL,
 All matches will be treated as additional splitting parameters besides the default ones 
 (\code{"_"} and \code{" "}), when parsing the input string.}
 
-\item{replace_special_characters}{Logical, if \code{TRUE}, special characters 
+\item{transliterations}{Logical, if \code{TRUE}, special characters 
 will be translated to characters which are more likely to be understood by 
 different programs. For example german umlauts will be translated to ae, oe, ue etc.}
 

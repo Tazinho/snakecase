@@ -8,9 +8,9 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
   "screaming_snake", "parsed", "mixed", "lower_upper", "upper_lower",
   "all_caps", "lower_camel", "upper_camel", "internal_parsing", "none"),
   abbreviations = NULL, sep_in = NULL, preprocess = NULL,
-  parsing_option = 1, replace_special_characters = NULL, sep_out = NULL,
-  postprocess = NULL, unique_sep = NULL, empty_fill = NULL, prefix = "",
-  postfix = "")
+  parsing_option = 1, transliterations = NULL,
+  replace_special_characters = NULL, sep_out = NULL, postprocess = NULL,
+  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
@@ -36,7 +36,7 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
  or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will stay in upper case.}
  \item{\code{"none"}: Neither parsing nor case conversion occur. This case might be helpful, when
  one wants to call the function for the quick usage of the other parameters.
- Works with \code{sep_in}, \code{replace_special_characters}, \code{sep_out}, \code{prefix},
+ Works with \code{sep_in}, \code{transliterations}, \code{sep_out}, \code{prefix},
   \code{postfix},
   \code{empty_fill} and \code{unique_sep}.}
  \item{\code{"internal_parsing"}: This case is returning the internal parsing
@@ -64,7 +64,7 @@ into \code{stringr::regex()}. All matches will be replaced by underscores. Under
  \item{any other integer <= 0: no parsing"}
  }}
 
-\item{replace_special_characters}{A character vector (if not \code{NULL}). The entries of this argument
+\item{transliterations}{A character vector (if not \code{NULL}). The entries of this argument
 need to be elements of \code{stringi::stri_trans_list()} (like "Latin-ASCII", which is often useful) or names of lookup tables (currently
 only "german" is supported). In the order of the entries the letters of the input
  string will be transliterated via \code{stringi::stri_trans_general()} or replaced via the 
@@ -74,6 +74,8 @@ You should use this feature with care in case of \code{case = "parsed"} and
 \code{case = "none"}, since for upper case letters, which have transliterations/replacements
  of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
  might not always be what is intended.}
+
+\item{replace_special_characters}{deprecated. Pls use \code{transliterations} instead.}
 
 \item{sep_out}{(short for separator output) String that will be used as separator. The defaults are \code{"_"} 
 and \code{""}, regarding the specified \code{case}.}
@@ -142,8 +144,8 @@ to_any_case(string, case = "snake", preprocess = ":|\\\\.")
 to_any_case(string, case = "snake",
             preprocess = ":|(?<!\\\\d)\\\\.")
 
-### Replace special characters
-to_any_case("\\u00E4ngstlicher Has\\u00EA", replace_special_characters = c("german", "Latin-ASCII"))
+### Transliterations
+to_any_case("\\u00E4ngstlicher Has\\u00EA", transliterations = c("german", "Latin-ASCII"))
 
 ### Postprocess
 strings2 <- c("this - Is_-: a Strange_string", "AND THIS ANOTHER_One")
