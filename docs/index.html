@@ -99,23 +99,23 @@ in general) to different cases like snake_case, smallCamel- and BigCamelCase amo
 <p>Dots and other special characters may have a special intention</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"malte.grosser@gmail.com"</span>)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">## [1] "malte.grosser@gmail.com"</a></code></pre></div>
-<p>When it is clear that they are separators, you can supply them as a regex to the <code>preprocess</code> argument</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="kw">names</span>(iris), <span class="dt">preprocess =</span> <span class="st">"</span><span class="ch">\\</span><span class="st">."</span>)</a>
+<p>When it is clear that they are separators, you can supply them as a regex to the <code>sep_in</code> argument</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="kw">names</span>(iris), <span class="dt">sep_in =</span> <span class="st">"</span><span class="ch">\\</span><span class="st">."</span>)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">## [1] "sepal_length" "sepal_width"  "petal_length" "petal_width" </a>
 <a class="sourceLine" id="cb4-3" data-line-number="3">## [5] "species"</a></code></pre></div>
-<p>It is as simple as that to treat all non alpha-numerics as separators</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"malte.grosser@gmail.com"</span>, <span class="dt">preprocess =</span> <span class="st">"[^[:alnum:]]"</span>)</a>
+<p>It is as simple as that to treat all non-alphanumerics as separators</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"malte.grosser@gmail.com"</span>, <span class="dt">sep_in =</span> <span class="st">"[^[:alnum:]]"</span>)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">## [1] "malte_grosser_gmail_com"</a></code></pre></div>
 <p>The regex format is especially handy, when special characters have a meaning as a separator or for example as a decimal mark</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"Pi.Value:3.14"</span>, <span class="dt">preprocess =</span> <span class="st">":|(?&lt;!</span><span class="ch">\\</span><span class="st">d)</span><span class="ch">\\</span><span class="st">."</span>)</a>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"Pi.Value:3.14"</span>, <span class="dt">sep_in =</span> <span class="st">":|(?&lt;!</span><span class="ch">\\</span><span class="st">d)</span><span class="ch">\\</span><span class="st">."</span>)</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">## [1] "pi_value_3.14"</a></code></pre></div>
-<p>Of course other cases are supported (<code>case</code>) and separators can be adjusted (<code>postprocess</code>)</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="kw">names</span>(iris), <span class="dt">preprocess =</span> <span class="st">"</span><span class="ch">\\</span><span class="st">."</span>, <span class="dt">case =</span> <span class="st">"upper_camel"</span>, <span class="dt">postprocess =</span> <span class="st">" "</span>)</a>
+<p>Of course other cases are supported (<code>case</code>) and output separators can be adjusted (<code>sep_out</code>)</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="kw">names</span>(iris), <span class="dt">sep_in =</span> <span class="st">"</span><span class="ch">\\</span><span class="st">."</span>, <span class="dt">case =</span> <span class="st">"upper_camel"</span>, <span class="dt">sep_out =</span> <span class="st">" "</span>)</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2">## [1] "Sepal Length" "Sepal Width"  "Petal Length" "Petal Width" </a>
 <a class="sourceLine" id="cb7-3" data-line-number="3">## [5] "Species"</a></code></pre></div>
 <p>And you might want to remove special characters along the way</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"Doppelgänger is originally german"</span>, </a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">            <span class="dt">replace_special_characters =</span> <span class="st">"german"</span>, <span class="dt">case =</span> <span class="st">"upper_camel"</span>)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">            <span class="dt">transliterations =</span> <span class="st">"german"</span>, <span class="dt">case =</span> <span class="st">"upper_camel"</span>)</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3">## [1] "DoppelgaengerIsOriginallyGerman"</a></code></pre></div>
 <p>All of the cases like: snake, lower_camel, upper_camel, all_caps, lower_upper, upper_lower and mixed are based on parsed case</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"THISIsHOW IAmPARSED!"</span>, <span class="dt">case =</span> <span class="st">"parsed"</span>)</a>
@@ -125,7 +125,7 @@ in general) to different cases like snake_case, smallCamel- and BigCamelCase amo
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">dput</span>(<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="kw">c</span>(<span class="st">"SomeBAdInput"</span>, <span class="st">"someGoodInput"</span>)))</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2">## c("some_b_ad_input", "some_good_input")</a></code></pre></div>
 </section><section id="big-picture-a-parameterized-workflow" class="level3"><h3>Big picture (a parameterized workflow)</h3>
-<p>The <code><a href="reference/to_any_case.html">to_any_case()</a></code> function is the workhorse of the package and basically enables you to convert any string into any case via a well thought process of <strong>parsing</strong> (<code>abbreviations</code>, <code>preprocess</code>, <code>parsing_option</code>), <strong>conversion</strong> (<code>replace_special_characters</code>, <code>case</code>) and <strong>postprocessing</strong> (<code>postprocess</code>). The specific arguments allow you to customize the pipeline.</p>
+<p>The <code><a href="reference/to_any_case.html">to_any_case()</a></code> function is the workhorse of the package and basically enables you to convert any string into any case via a well thought process of <strong>parsing</strong> (<code>abbreviations</code>, <code>sep_in</code>, <code>parsing_option</code>), <strong>conversion</strong> (<code>transliterations</code>, <code>case</code>) and <strong>postprocessing</strong> (<code>sep_out</code>). The specific arguments allow you to customize the pipeline.</p>
 <p>On this example, you can see the pipeline including all implementation details.</p>
 <p><img src="reference/figures/Workflow01.PNG" width="100%"></p>
 <p>Some further cosmetics can be added to the output via the following arguments:</p>
@@ -145,7 +145,7 @@ in general) to different cases like snake_case, smallCamel- and BigCamelCase amo
 <p>The package is internally build up on the <a href="https://github.com/tidyverse/stringr">stringr</a> package, which means that many powerful features are provided “by default”:</p>
 <ul>
 <li>
-<code><a href="reference/to_any_case.html">to_any_case()</a></code> is vectorised over most of its arguments like <code>string</code>, <code>preprocess</code>, <code>postprocess</code>, <code>empty_fill</code>, <code>prefix</code> and <code>postfix</code>.</li>
+<code><a href="reference/to_any_case.html">to_any_case()</a></code> is vectorised over most of its arguments like <code>string</code>, <code>sep_in</code>, <code>sep_out</code>, <code>empty_fill</code>, <code>prefix</code> and <code>postfix</code>.</li>
 <li>internal character operations are super fast c++. However, a lot of speed is lost due to a more systematic and maintainable implementation. (This might be optimized in the long run)</li>
 <li>special input like <code>character(0)</code>, <code>NA</code> etc. is handled in exactly the same consistent and convenient manner as in the stringr package</li>
 </ul></section></section><section id="recommended-settings" class="level2"><h2>Recommended settings</h2>
@@ -162,16 +162,16 @@ in general) to different cases like snake_case, smallCamel- and BigCamelCase amo
 <a class="sourceLine" id="cb11-4" data-line-number="4">## [4] "new_us_elections"</a></code></pre></div>
 <ul>
 <li>
-<code>preprocess</code>: Very ofthen you might just want to have all special (non alpha numeric) characters as a separator. You can achive this while providing the regarding regex</li>
+<code>sep_in</code>: Very ofthen you might just want to have all special (non-alphanumeric) characters as a separator. You can achive this while providing the regarding regex</li>
 </ul>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"so.many_different@separators inThis|sentece"</span>,</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">            <span class="dt">preprocess =</span> <span class="st">"[^[:alnum:]]"</span>)</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">            <span class="dt">sep_in =</span> <span class="st">"[^[:alnum:]]"</span>)</a>
 <a class="sourceLine" id="cb12-3" data-line-number="3">## [1] "so_many_different_separators_in_this_sentece"</a></code></pre></div>
 <ul>
-<li>You may want to do exactly the last thing, but for a specific reason you don’t want to preprocess “.” and “@”</li>
+<li>You may want to do exactly the last thing, but for a specific reason “.” and “@” are not meant to be input separators</li>
 </ul>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"some-email@provider.com"</span>, </a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">            <span class="dt">preprocess =</span> <span class="st">"[^[:alnum:]|^</span><span class="ch">\\</span><span class="st">.|^@]"</span>)</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">            <span class="dt">sep_in =</span> <span class="st">"[^[:alnum:]|^</span><span class="ch">\\</span><span class="st">.|^@]"</span>)</a>
 <a class="sourceLine" id="cb13-3" data-line-number="3">## [1] "some_email@provider.com"</a></code></pre></div>
 <ul>
 <li>
@@ -182,7 +182,7 @@ in general) to different cases like snake_case, smallCamel- and BigCamelCase amo
 <a class="sourceLine" id="cb14-3" data-line-number="3">## [1] "hh_city"          "id_table_1"       "key_table_2"     </a>
 <a class="sourceLine" id="cb14-4" data-line-number="4">## [4] "new_us_elections"</a></code></pre></div>
 <ul>
-<li>To suppress conversion after a non alpha numeric character (except “_“), you can choose parsing option 5</li>
+<li>To suppress conversion after a non-alphanumeric character (except “_“), you can choose parsing option 5</li>
 </ul>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"look_AfterThe-hyphen andThe.dot"</span>, </a>
 <a class="sourceLine" id="cb15-2" data-line-number="2">            <span class="dt">case =</span> <span class="st">"upper_camel"</span>, <span class="dt">parsing_option =</span> <span class="dv">5</span>)</a>
@@ -190,10 +190,10 @@ in general) to different cases like snake_case, smallCamel- and BigCamelCase amo
 <p>If you are interested in a specific parsing option, which is not implemented, pls open an issue.</p>
 <ul>
 <li>
-<code>replace_special_characters</code>: To transliterate exotic characters you can use any option from <code><a href="http://www.rdocumentation.org/packages/stringi/topics/stri_trans_list">stringi::stri_trans_list()</a></code> (especially “Latin-ASCII” is useful) or provided lookups introduced (country specific) by this package. Currently only “german” is supported. When more than one is supplied, the transliterations are performed iteratively</li>
+<code>transliterations</code>: To transliterate exotic characters you can use any option from <code><a href="http://www.rdocumentation.org/packages/stringi/topics/stri_trans_list">stringi::stri_trans_list()</a></code> (especially “Latin-ASCII” is useful) or provided lookups introduced (country specific) by this package. Currently only “german” is supported. When more than one is supplied, the transliterations are performed iteratively</li>
 </ul>
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"Schönes Café"</span>, </a>
-<a class="sourceLine" id="cb16-2" data-line-number="2">            <span class="dt">replace_special_characters =</span> <span class="kw">c</span>(<span class="st">"german"</span>, <span class="st">"Latin-ASCII"</span>))</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">            <span class="dt">transliterations =</span> <span class="kw">c</span>(<span class="st">"german"</span>, <span class="st">"Latin-ASCII"</span>))</a>
 <a class="sourceLine" id="cb16-3" data-line-number="3">## [1] "schoenes_cafe"</a></code></pre></div>
 <p>If you can provide tranliterations for your (or any other) country, pls drop them within <a href="https://github.com/Tazinho/snakecase/issues/107">this issue</a>.</p>
 <ul>
@@ -214,8 +214,8 @@ in general) to different cases like snake_case, smallCamel- and BigCamelCase amo
 <a class="sourceLine" id="cb17-12" data-line-number="12">## [1] "IwillLOOKlikeArollerCOASTERyouCANparseMEwithOPTION2"</a>
 <a class="sourceLine" id="cb17-13" data-line-number="13"></a>
 <a class="sourceLine" id="cb17-14" data-line-number="14"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"Maybé you_just...want to Format me a bit?"</span>, <span class="dt">case =</span> <span class="st">"none"</span>,</a>
-<a class="sourceLine" id="cb17-15" data-line-number="15">            <span class="dt">preprocess =</span> <span class="st">"_|</span><span class="ch">\\</span><span class="st">."</span>, <span class="dt">replace_special_characters =</span> <span class="st">"Latin-ASCII"</span>,</a>
-<a class="sourceLine" id="cb17-16" data-line-number="16">            <span class="dt">postprocess =</span> <span class="st">" "</span>)</a>
+<a class="sourceLine" id="cb17-15" data-line-number="15">            <span class="dt">sep_in =</span> <span class="st">"_|</span><span class="ch">\\</span><span class="st">."</span>, <span class="dt">transliterations =</span> <span class="st">"Latin-ASCII"</span>,</a>
+<a class="sourceLine" id="cb17-16" data-line-number="16">            <span class="dt">sep_out =</span> <span class="st">" "</span>)</a>
 <a class="sourceLine" id="cb17-17" data-line-number="17">## [1] "Maybe you just want to Format me a bit?"</a></code></pre></div>
 <ul>
 <li>cosmetics: <code>empty_fill</code>, <code>unique_sep</code>, <code>prefix</code>, <code>postfix</code>
@@ -239,7 +239,7 @@ in general) to different cases like snake_case, smallCamel- and BigCamelCase amo
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"a_b_c_d"</span>, <span class="dt">case =</span> <span class="st">"upper_camel"</span>)</a>
 <a class="sourceLine" id="cb19-2" data-line-number="2">## [1] "ABCD"</a></code></pre></div>
 <ul>
-<li>Sometimes further pre or postprocessing might be needed. You can decide yourself: Open an issue (here)[<a href="https://github.com/Tazinho/snakecase/issues" class="uri">https://github.com/Tazinho/snakecase/issues</a>] or build sth. quickly yourself via packages like base, (stringr)[<a href="https://github.com/tidyverse/stringr" class="uri">https://github.com/tidyverse/stringr</a>], (stringi)[<a href="https://github.com/gagolews/stringi" class="uri">https://github.com/gagolews/stringi</a>] etc.</li>
+<li>Sometimes further pre or postprocessing might be needed. You can decide yourself: Open an issue <a href="https://github.com/Tazinho/snakecase/issues">here</a> or build sth. quickly yourself via packages like base, <a href="https://github.com/tidyverse/stringr">stringr</a>, <a href="https://github.com/gagolews/stringi">stringi</a> etc.</li>
 </ul></section><section id="design-philosophy" class="level2"><h2>Design Philosophy</h2>
 <section id="practical-influences" class="level3"><h3>Practical influences</h3>
 <p>Conversion to a specific target case is not always obvious or unique. In general a clean conversion can only be guaranteed, when the input-string is meaningful.</p>

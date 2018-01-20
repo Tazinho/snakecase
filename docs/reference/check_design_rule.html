@@ -102,10 +102,9 @@
     <p>Internal helper to test the design rules for any string and setting of <code><a href='to_any_case.html'>to_any_case()</a></code></p>
     
 
-    <pre class="usage"><span class='fu'>check_design_rule</span>(<span class='no'>string</span>, <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>replace_special_characters</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
+    <pre class="usage"><span class='fu'>check_design_rule</span>(<span class='no'>string</span>, <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>transliterations</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -121,7 +120,7 @@ All matches will be treated as additional splitting parameters besides the defau
 (<code>"_"</code> and <code>" "</code>), when parsing the input string.</p></td>
     </tr>
     <tr>
-      <th>replace_special_characters</th>
+      <th>transliterations</th>
       <td><p>Logical, if <code>TRUE</code>, special characters 
 will be translated to characters which are more likely to be understood by 
 different programs. For example german umlauts will be translated to ae, oe, ue etc.</p></td>

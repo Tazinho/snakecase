@@ -75,7 +75,7 @@
       <h1>Case converters</h1>
                         <h4 class="author">Malte Grosser</h4>
             
-            <h4 class="date">2018-01-11</h4>
+            <h4 class="date">2018-01-20</h4>
           </div>
 
     
@@ -89,20 +89,20 @@
 <p>Dots and other special characters may have a special intention</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../reference/to_any_case.html">to_any_case</a></span>(<span class="st">"malte.grosser@gmail.com"</span>)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2">## [1] "malte.grosser@gmail.com"</a></code></pre></div>
-<p>When it is clear that they are separators, you can supply them as a regex to the <code>preprocess</code> argument</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="../reference/to_any_case.html">to_any_case</a></span>(<span class="kw">names</span>(iris), <span class="dt">preprocess =</span> <span class="st">"</span><span class="ch">\\</span><span class="st">."</span>)</a>
+<p>When it is clear that they are separators, you can supply them as a regex to the <code>sep_in</code> argument</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="../reference/to_any_case.html">to_any_case</a></span>(<span class="kw">names</span>(iris), <span class="dt">sep_in =</span> <span class="st">"</span><span class="ch">\\</span><span class="st">."</span>)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">## [1] "sepal_length" "sepal_width"  "petal_length" "petal_width" </a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">## [5] "species"</a></code></pre></div>
 <p>This is especially handy, when special characters have a meaning as a separator or for example as a decimal mark</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/to_any_case.html">to_any_case</a></span>(<span class="st">"Pi.Value:3.14"</span>, <span class="dt">preprocess =</span> <span class="st">":|(?&lt;!</span><span class="ch">\\</span><span class="st">d)</span><span class="ch">\\</span><span class="st">."</span>)</a>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/to_any_case.html">to_any_case</a></span>(<span class="st">"Pi.Value:3.14"</span>, <span class="dt">sep_in =</span> <span class="st">":|(?&lt;!</span><span class="ch">\\</span><span class="st">d)</span><span class="ch">\\</span><span class="st">."</span>)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2">## [1] "pi_value_3.14"</a></code></pre></div>
-<p>Of course other cases are supported (<code>case</code>) and separators can be adjusted (<code>postprocess</code>)</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../reference/to_any_case.html">to_any_case</a></span>(<span class="kw">names</span>(iris), <span class="dt">preprocess =</span> <span class="st">"</span><span class="ch">\\</span><span class="st">."</span>, <span class="dt">case =</span> <span class="st">"upper_camel"</span>, <span class="dt">postprocess =</span> <span class="st">" "</span>)</a>
+<p>Of course other cases are supported (<code>case</code>) and separators can be adjusted (<code>sep_out</code>)</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="../reference/to_any_case.html">to_any_case</a></span>(<span class="kw">names</span>(iris), <span class="dt">sep_in =</span> <span class="st">"</span><span class="ch">\\</span><span class="st">."</span>, <span class="dt">case =</span> <span class="st">"upper_camel"</span>, <span class="dt">sep_out =</span> <span class="st">" "</span>)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">## [1] "Sepal Length" "Sepal Width"  "Petal Length" "Petal Width" </a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">## [5] "Species"</a></code></pre></div>
 <p>And you might want to remove special characters along the way</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="../reference/to_any_case.html">to_any_case</a></span>(<span class="st">"Doppelgänger is originally german"</span>, </a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">            <span class="dt">replace_special_characters =</span> <span class="st">"german"</span>, <span class="dt">case =</span> <span class="st">"upper_camel"</span>)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">            <span class="dt">transliterations =</span> <span class="st">"german"</span>, <span class="dt">case =</span> <span class="st">"upper_camel"</span>)</a>
 <a class="sourceLine" id="cb6-3" data-line-number="3">## [1] "DoppelgaengerIsOriginallyGerman"</a></code></pre></div>
 <p>All of the cases like: snake, lower_camel, upper_camel, all_caps, lower_upper, upper_lower and mixed are based on parsed case</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../reference/to_any_case.html">to_any_case</a></span>(<span class="st">"THISIsHOW IAmPARSED!"</span>, <span class="dt">case =</span> <span class="st">"parsed"</span>)</a>

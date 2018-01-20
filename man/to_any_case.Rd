@@ -25,7 +25,7 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
  \item{UPPERlower: \code{"upper_lower"}}
  }
 
- There are three "special" cases available:
+ There are four "special" cases available:
 \itemize{
  \item{\code{"parsed"}: This case is underlying all other cases. 
  Every substring a string consists

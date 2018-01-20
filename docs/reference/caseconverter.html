@@ -102,42 +102,45 @@
     <p>Wrappers around <code><a href='to_any_case.html'>to_any_case()</a></code></p>
     
 
-    <pre class="usage"><span class='fu'>to_snake_case</span>(<span class='no'>string</span>, <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>replace_special_characters</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+    <pre class="usage"><span class='fu'>to_snake_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>transliterations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>replace_special_characters</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>)
 
-<span class='fu'>to_lower_camel_case</span>(<span class='no'>string</span>, <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>replace_special_characters</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>to_lower_camel_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>transliterations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>replace_special_characters</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>)
 
-<span class='fu'>to_upper_camel_case</span>(<span class='no'>string</span>, <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>replace_special_characters</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>to_upper_camel_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>transliterations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>replace_special_characters</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>)
 
-<span class='fu'>to_screaming_snake_case</span>(<span class='no'>string</span>, <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>replace_special_characters</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>to_screaming_snake_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>transliterations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>replace_special_characters</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>)
 
-<span class='fu'>to_parsed_case</span>(<span class='no'>string</span>, <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>replace_special_characters</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>to_parsed_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>transliterations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>replace_special_characters</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>)
 
-<span class='fu'>to_mixed_case</span>(<span class='no'>string</span>, <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>replace_special_characters</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>to_mixed_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>transliterations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>replace_special_characters</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>)
 
-<span class='fu'>to_lower_upper_case</span>(<span class='no'>string</span>, <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>replace_special_characters</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+<span class='fu'>to_lower_upper_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>transliterations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>replace_special_characters</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>)
 
-<span class='fu'>to_upper_lower_case</span>(<span class='no'>string</span>, <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>replace_special_characters</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>to_upper_lower_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>transliterations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>replace_special_characters</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>postprocess</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -147,46 +150,19 @@
       <td><p>A string (for example names of a data frame).</p></td>
     </tr>
     <tr>
+      <th>abbreviations</th>
+      <td><p>character with (uppercase) abbreviations. This marks
+abbreviations with an underscore behind (in front of the parsing).
+useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2.</p></td>
+    </tr>
+    <tr>
+      <th>sep_in</th>
+      <td><p>(short for separator input) A regex supplied as a character (if not <code>NULL</code>), which will be wrapped internally
+into <code><a href='http://www.rdocumentation.org/packages/stringr/topics/modifiers'>stringr::regex()</a></code>. All matches will be replaced by underscores. Underscores can later turned into another separator via <code>sep_out</code>.</p></td>
+    </tr>
+    <tr>
       <th>preprocess</th>
-      <td><p>A string (if not <code>NULL</code>) that will be wrapped internally
-into <code><a href='http://www.rdocumentation.org/packages/stringr/topics/modifiers'>stringr::regex()</a></code>. All matches will be replaced by underscores. Underscores can later turned into another separator via <code>postprocess</code>.</p></td>
-    </tr>
-    <tr>
-      <th>replace_special_characters</th>
-      <td><p>A character vector (if not <code>NULL</code>). The entries of this argument
-need to be elements of <code><a href='http://www.rdocumentation.org/packages/stringi/topics/stri_trans_list'>stringi::stri_trans_list()</a></code> (like "Latin-ASCII", which is often useful) or names of lookup tables (currently
-only "german" is supported). In the order of the entries the letters of the input
- string will be transliterated via <code><a href='http://www.rdocumentation.org/packages/stringi/topics/stri_trans_general'>stringi::stri_trans_general()</a></code> or replaced via the 
- matches of the lookup table.</p>
-<p>You should use this feature with care in case of <code>case = "parsed"</code> and 
-<code>case = "none"</code>, since for upper case letters, which have transliterations/replacements
- of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
- might not always be what is intended.</p></td>
-    </tr>
-    <tr>
-      <th>postprocess</th>
-      <td><p>String that will be used as separator. The defaults are <code>"_"</code> 
-and <code>""</code>, regarding the specified <code>case</code>.</p></td>
-    </tr>
-    <tr>
-      <th>prefix</th>
-      <td><p>prefix (string).</p></td>
-    </tr>
-    <tr>
-      <th>postfix</th>
-      <td><p>postfix (string).</p></td>
-    </tr>
-    <tr>
-      <th>unique_sep</th>
-      <td><p>A string. If not <code>NULL</code>, then duplicated names will get 
-a suffix integer
-in the order of their appearance. The suffix is separated by the supplied string
- to this argument.</p></td>
-    </tr>
-    <tr>
-      <th>empty_fill</th>
-      <td><p>A string. If it is supplied, then each entry that matches "" will be replaced
-by the supplied string to this argument.</p></td>
+      <td><p>deprecated. Pls use <code>sep_in</code> instead</p></td>
     </tr>
     <tr>
       <th>parsing_option</th>
@@ -202,10 +178,49 @@ by the supplied string to this argument.</p></td>
 </ul></td>
     </tr>
     <tr>
-      <th>abbreviations</th>
-      <td><p>character with (uppercase) abbreviations. This marks
-abbreviations with an underscore behind (in front of the parsing).
-useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2.</p></td>
+      <th>transliterations</th>
+      <td><p>A character vector (if not <code>NULL</code>). The entries of this argument
+need to be elements of <code><a href='http://www.rdocumentation.org/packages/stringi/topics/stri_trans_list'>stringi::stri_trans_list()</a></code> (like "Latin-ASCII", which is often useful) or names of lookup tables (currently
+only "german" is supported). In the order of the entries the letters of the input
+ string will be transliterated via <code><a href='http://www.rdocumentation.org/packages/stringi/topics/stri_trans_general'>stringi::stri_trans_general()</a></code> or replaced via the 
+ matches of the lookup table.</p> 
+<p>You should use this feature with care in case of <code>case = "parsed"</code> and 
+<code>case = "none"</code>, since for upper case letters, which have transliterations/replacements
+ of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
+ might not always be what is intended.</p></td>
+    </tr>
+    <tr>
+      <th>replace_special_characters</th>
+      <td><p>deprecated. Pls use <code>transliterations</code> instead.</p></td>
+    </tr>
+    <tr>
+      <th>sep_out</th>
+      <td><p>(short for separator output) String that will be used as separator. The defaults are <code>"_"</code> 
+and <code>""</code>, regarding the specified <code>case</code>.</p></td>
+    </tr>
+    <tr>
+      <th>postprocess</th>
+      <td><p>deprecated. Pls use <code>sep_out</code> instead.</p></td>
+    </tr>
+    <tr>
+      <th>unique_sep</th>
+      <td><p>A string. If not <code>NULL</code>, then duplicated names will get 
+a suffix integer
+in the order of their appearance. The suffix is separated by the supplied string
+ to this argument.</p></td>
+    </tr>
+    <tr>
+      <th>empty_fill</th>
+      <td><p>A string. If it is supplied, then each entry that matches "" will be replaced
+by the supplied string to this argument.</p></td>
+    </tr>
+    <tr>
+      <th>prefix</th>
+      <td><p>prefix (string).</p></td>
+    </tr>
+    <tr>
+      <th>postfix</th>
+      <td><p>postfix (string).</p></td>
     </tr>
     </table>
     
@@ -216,8 +231,8 @@ useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2
     
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>caseconverters are vectorised over <code>postprocess</code>, <code>prefix</code> and <code>postfix</code>.
-<code>postprocess</code> might follow in the future.</p>
+    <p>caseconverters are vectorised over <code>string</code>, <code>sep_in</code>, <code>sep_out</code>,
+ <code>empty_fill</code>, <code>prefix</code> and <code>postfix</code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
