@@ -1,3 +1,7 @@
+# snakecase 0.8.1
+
+* CRAN releases
+
 # snakecase 0.8.0.9000
 
 * some breaking changes:
