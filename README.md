@@ -74,8 +74,8 @@ to_any_case("Pi.Value:3.14", sep_in = ":|(?<!\\d)\\.")
 ## [1] "pi_value_3.14"
 ```
 
-Of course other cases are supported (`case`) and separators can be
-adjusted
+Of course other cases are supported (`case`) and output separators can
+be adjusted
 (`sep_out`)
 
 ``` r
