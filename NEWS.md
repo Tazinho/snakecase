@@ -1,3 +1,10 @@
+# snakecase 0.8.0.9000
+
+* some breaking changes:
+    * reordering of the arguments of all `to_xxx_case()` functions
+    * renaming `preprocess` to `sep_in`, `postprocess` to `sep_out`, 
+    `replace_special_characters` to `transliterations`.
+
 # snakecase 0.7.1
 
 * CRAN update
