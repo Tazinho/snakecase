@@ -79,14 +79,24 @@ into \code{stringr::regex()}. All matches will be replaced by underscores. Under
 need to be elements of \code{stringi::stri_trans_list()} (like "Latin-ASCII", which is often useful) or names of lookup tables (currently
 only "german" is supported). In the order of the entries the letters of the input
  string will be transliterated via \code{stringi::stri_trans_general()} or replaced via the 
+<<<<<<< HEAD
  matches of the lookup table.}
 
 \item{replace_special_characters}{deprecated. Pls use \code{transliterations} instead.
 
+||||||| merged common ancestors
+ matches of the lookup table.
+
+=======
+ matches of the lookup table.
+ 
+>>>>>>> devversion-01
 You should use this feature with care in case of \code{case = "parsed"} and 
 \code{case = "none"}, since for upper case letters, which have transliterations/replacements
  of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
  might not always be what is intended.}
+
+\item{replace_special_characters}{deprecated. Pls use \code{transliterations} instead.}
 
 \item{sep_out}{(short for separator output) String that will be used as separator. The defaults are \code{"_"} 
 and \code{""}, regarding the specified \code{case}.}

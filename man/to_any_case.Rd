@@ -77,6 +77,8 @@ You should use this feature with care in case of \code{case = "parsed"} and
  of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
  might not always be what is intended.}
 
+\item{replace_special_characters}{deprecated. Pls use \code{transliterations} instead.}
+
 \item{sep_out}{(short for separator output) String that will be used as separator. The defaults are \code{"_"} 
 and \code{""}, regarding the specified \code{case}.}
 

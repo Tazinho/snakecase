@@ -29,13 +29,21 @@
 #' only "german" is supported). In the order of the entries the letters of the input
 #'  string will be transliterated via \code{stringi::stri_trans_general()} or replaced via the 
 #'  matches of the lookup table.
+<<<<<<< HEAD
 #'  
 #' @param replace_special_characters deprecated. Pls use \code{transliterations} instead.
 #' 
+||||||| merged common ancestors
+#' 
+=======
+#'  
+>>>>>>> devversion-01
 #' You should use this feature with care in case of \code{case = "parsed"} and 
 #' \code{case = "none"}, since for upper case letters, which have transliterations/replacements
 #'  of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
 #'  might not always be what is intended.
+#' 
+#' @param replace_special_characters deprecated. Pls use \code{transliterations} instead.
 #' 
 #' @param sep_out (short for separator output) String that will be used as separator. The defaults are \code{"_"} 
 #' and \code{""}, regarding the specified \code{case}.
@@ -91,8 +99,14 @@ to_snake_case <- function(string,
                           abbreviations = NULL,
                           sep_in = NULL,
                           preprocess = NULL,
+<<<<<<< HEAD
                           parsing_option = 1,
                           transliterations = NULL,
+||||||| merged common ancestors
+                          parsing_option = 1,
+=======
+                          parsing_option = 1, transliterations = NULL, 
+>>>>>>> devversion-01
                           replace_special_characters = NULL,
                           sep_out = NULL,
                           postprocess = NULL,
@@ -112,7 +126,7 @@ to_snake_case <- function(string,
               postfix = postfix,
               unique_sep = unique_sep,
               empty_fill = empty_fill,
-              parsing_option = parsing_option,
+              parsing_option = parsing_option, transliterations = transliterations, 
               abbreviations = abbreviations)
 }
 
@@ -123,8 +137,14 @@ to_lower_camel_case <- function(string,
                                 abbreviations = NULL,
                                 sep_in = NULL,
                                 preprocess = NULL,
+<<<<<<< HEAD
                                 parsing_option = 1,
                                 transliterations = NULL,
+||||||| merged common ancestors
+                                parsing_option = 1,
+=======
+                                parsing_option = 1, transliterations = NULL, 
+>>>>>>> devversion-01
                                 replace_special_characters = NULL,
                                 sep_out = NULL,
                                 postprocess = NULL,
@@ -144,7 +164,7 @@ to_lower_camel_case <- function(string,
               postfix = postfix,
               unique_sep = unique_sep,
               empty_fill = empty_fill,
-              parsing_option = parsing_option,
+              parsing_option = parsing_option, transliterations = transliterations, 
               abbreviations = abbreviations)
 }
 
@@ -155,8 +175,14 @@ to_upper_camel_case <- function(string,
                                 abbreviations = NULL,
                                 sep_in = NULL,
                                 preprocess = NULL,
+<<<<<<< HEAD
                                 parsing_option = 1,
                                 transliterations = NULL,
+||||||| merged common ancestors
+                                parsing_option = 1,
+=======
+                                parsing_option = 1, transliterations = NULL, 
+>>>>>>> devversion-01
                                 replace_special_characters = NULL,
                                 sep_out = NULL,
                                 postprocess = NULL,
@@ -176,7 +202,7 @@ to_upper_camel_case <- function(string,
               postfix = postfix,
               unique_sep = unique_sep,
               empty_fill = empty_fill,
-              parsing_option = parsing_option,
+              parsing_option = parsing_option, transliterations = transliterations, 
               abbreviations = abbreviations)
 }
 
@@ -187,8 +213,14 @@ to_screaming_snake_case <- function(string,
                                     abbreviations = NULL,
                                     sep_in = NULL,
                                     preprocess = NULL,
+<<<<<<< HEAD
                                     parsing_option = 1,
                                     transliterations = NULL,
+||||||| merged common ancestors
+                                    parsing_option = 1,
+=======
+                                    parsing_option = 1, transliterations = NULL, 
+>>>>>>> devversion-01
                                     replace_special_characters = NULL,
                                     sep_out = NULL,
                                     postprocess = NULL,
@@ -208,7 +240,7 @@ to_screaming_snake_case <- function(string,
               postfix = postfix,
               unique_sep = unique_sep,
               empty_fill = empty_fill,
-              parsing_option = parsing_option,
+              parsing_option = parsing_option, transliterations = transliterations, 
               abbreviations = abbreviations)
 }
 
@@ -219,8 +251,14 @@ to_parsed_case <- function(string,
                            abbreviations = NULL,
                            sep_in = NULL,
                            preprocess = NULL,
+<<<<<<< HEAD
                            parsing_option = 1,
                            transliterations = NULL,
+||||||| merged common ancestors
+                           parsing_option = 1,
+=======
+                           parsing_option = 1, transliterations = NULL, 
+>>>>>>> devversion-01
                            replace_special_characters = NULL,
                            sep_out = NULL,
                            postprocess = NULL,
@@ -240,7 +278,7 @@ to_parsed_case <- function(string,
               postfix = postfix,
               unique_sep = unique_sep,
               empty_fill = empty_fill,
-              parsing_option = parsing_option,
+              parsing_option = parsing_option, transliterations = transliterations, 
               abbreviations = abbreviations)
 }
 
@@ -251,8 +289,14 @@ to_mixed_case <- function(string,
                           abbreviations = NULL,
                           sep_in = NULL,
                           preprocess = NULL,
+<<<<<<< HEAD
                           parsing_option = 1,
                           transliterations = NULL,
+||||||| merged common ancestors
+                          parsing_option = 1,
+=======
+                          parsing_option = 1, transliterations = NULL, 
+>>>>>>> devversion-01
                           replace_special_characters = NULL,
                           sep_out = NULL,
                           postprocess = NULL,
@@ -272,7 +316,7 @@ to_mixed_case <- function(string,
               postfix = postfix,
               unique_sep = unique_sep,
               empty_fill = empty_fill,
-              parsing_option = parsing_option,
+              parsing_option = parsing_option, transliterations = transliterations, 
               abbreviations = abbreviations)
 }
 
@@ -283,8 +327,14 @@ to_lower_upper_case <- function(string,
                                 abbreviations = NULL,
                                 sep_in = NULL,
                                 preprocess = NULL,
+<<<<<<< HEAD
                                 parsing_option = 1,
                                 transliterations = NULL,
+||||||| merged common ancestors
+                                parsing_option = 1,
+=======
+                                parsing_option = 1, transliterations = NULL, 
+>>>>>>> devversion-01
                                 replace_special_characters = NULL,
                                 sep_out = NULL,
                                 postprocess = NULL,
@@ -304,7 +354,7 @@ to_lower_upper_case <- function(string,
               postfix = postfix,
               unique_sep = unique_sep,
               empty_fill = empty_fill,
-              parsing_option = parsing_option,
+              parsing_option = parsing_option, transliterations = transliterations, 
               abbreviations = abbreviations)
 }
 
@@ -315,8 +365,14 @@ to_upper_lower_case <- function(string,
                                 abbreviations = NULL,
                                 sep_in = NULL,
                                 preprocess = NULL,
+<<<<<<< HEAD
                                 parsing_option = 1,
                                 transliterations = NULL,
+||||||| merged common ancestors
+                                parsing_option = 1,
+=======
+                                parsing_option = 1, transliterations = NULL, 
+>>>>>>> devversion-01
                                 replace_special_characters = NULL,
                                 sep_out = NULL,
                                 postprocess = NULL,
@@ -336,6 +392,6 @@ to_upper_lower_case <- function(string,
               postfix = postfix,
               unique_sep = unique_sep,
               empty_fill = empty_fill,
-              parsing_option = parsing_option,
+              parsing_option = parsing_option, transliterations = transliterations, 
               abbreviations = abbreviations)
 }
