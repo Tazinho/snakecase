@@ -59,8 +59,6 @@
 #'  string will be transliterated via \code{stringi::stri_trans_general()} or replaced via the 
 #'  matches of the lookup table.
 #'  
-#' @param replace_special_characters deprecated. Pls use \code{transliterations} instead.
-#'  
 #' You should use this feature with care in case of \code{case = "parsed"} and 
 #' \code{case = "none"}, since for upper case letters, which have transliterations/replacements
 #'  of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
