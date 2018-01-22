@@ -1,13 +1,13 @@
 #' Internal helper to test the design rules for any string and setting of \code{to_any_case()}
 #'
 #' @param string A string (for example names of a data frame).
-#' @param preprocess String that will be wrapped internally into \code{stringr::regex()}. 
+#' @param sep_in String that will be wrapped internally into \code{stringr::regex()}. 
 #' All matches will be treated as additional splitting parameters besides the default ones 
 #' (\code{"_"} and \code{" "}), when parsing the input string.
 #' @param transliterations Logical, if \code{TRUE}, special characters 
 #' will be translated to characters which are more likely to be understood by 
 #' different programs. For example german umlauts will be translated to ae, oe, ue etc.
-#' @param postprocess String that will be used as separator. The defaults are \code{"_"} 
+#' @param sep_out String that will be used as separator. The defaults are \code{"_"} 
 #' and \code{""}, regarding the specified \code{case}.
 #' @param prefix prefix (string).
 #' @param postfix postfix (string).
@@ -25,13 +25,13 @@
 #' @author Malte Grosser, \email{malte.grosser@@gmail.com}
 #' @keywords utilities
 #'
-check_design_rule <- function(string, preprocess = NULL,
-                             transliterations = FALSE, postprocess = NULL, prefix = "",
+check_design_rule <- function(string, sep_in = NULL,
+                             transliterations = FALSE, sep_out = NULL, prefix = "",
                              postfix = "", unique_sep = NULL, empty_fill = NULL, parsing_option = 1){
   test_c <- function(string, case){
-    to_any_case(string = string, case = case, preprocess = preprocess, 
+    to_any_case(string = string, case = case, sep_in = sep_in, 
                 transliterations = transliterations,
-                postprocess = postprocess, prefix = prefix, postfix = postfix,
+                sep_out = sep_out, prefix = prefix, postfix = postfix,
                 unique_sep = unique_sep, empty_fill = empty_fill, 
                 parsing_option = parsing_option)
   }

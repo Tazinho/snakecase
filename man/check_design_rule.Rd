@@ -4,14 +4,14 @@
 \alias{check_design_rule}
 \title{Internal helper to test the design rules for any string and setting of \code{to_any_case()}}
 \usage{
-check_design_rule(string, preprocess = NULL, transliterations = FALSE,
-  postprocess = NULL, prefix = "", postfix = "", unique_sep = NULL,
+check_design_rule(string, sep_in = NULL, transliterations = FALSE,
+  sep_out = NULL, prefix = "", postfix = "", unique_sep = NULL,
   empty_fill = NULL, parsing_option = 1)
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
 
-\item{preprocess}{String that will be wrapped internally into \code{stringr::regex()}. 
+\item{sep_in}{String that will be wrapped internally into \code{stringr::regex()}. 
 All matches will be treated as additional splitting parameters besides the default ones 
 (\code{"_"} and \code{" "}), when parsing the input string.}
 
@@ -19,7 +19,7 @@ All matches will be treated as additional splitting parameters besides the defau
 will be translated to characters which are more likely to be understood by 
 different programs. For example german umlauts will be translated to ae, oe, ue etc.}
 
-\item{postprocess}{String that will be used as separator. The defaults are \code{"_"} 
+\item{sep_out}{String that will be used as separator. The defaults are \code{"_"} 
 and \code{""}, regarding the specified \code{case}.}
 
 \item{prefix}{prefix (string).}
