@@ -1,3 +1,7 @@
+# snakecase 0.8.2.9000
+
+* added parsing option 6, which doesn't surround digits with separators.
+
 # snakecase 0.8.1
 
 * CRAN releases

@@ -61,6 +61,7 @@ into \code{stringr::regex()}. All matches will be replaced by underscores. Under
  \item{4: parses at the beginning like option 2 and the rest like option 1.}
  \item{5: parses like option 1 but suppresses "_" around non special characters.
  In this way case conversion won't apply after these characters. See examples.}
+ \item{6: parses like option 1, but digits directly behind/in front non-digits, will stay as is.}
  \item{any other integer <= 0: no parsing"}
  }}
 

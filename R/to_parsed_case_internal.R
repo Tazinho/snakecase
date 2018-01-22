@@ -9,6 +9,7 @@
 #'  \item{4: parses at the beginning like option 2 and the rest like option 1.}
 #'  \item{5: parses like option 1 but suppresses "_" around non alpha-numeric characters.
 #'  In this way this option suppresses splits and resulting case conversion after these characters.}
+#'  \item{6: parses like option 1, but digits directly behind/in front non-digits, will stay as is.}
 #'  \item{any other integer <= 0: no parsing"}
 #'  }
 #'  
@@ -21,8 +22,8 @@
 #'
 to_parsed_case_internal <- function(string, parsing_option = 1L){
   ### input checking
-  if(parsing_option >= 6L){
-    stop("parsing_option must be 1,2,3,4,5 or <= 0 for no parsing.")
+  if(parsing_option >= 7L){
+    stop("parsing_option must be 1,2,3,4,5,6 or <= 0 for no parsing.")
   }
   ### preprocessing:
   # catch everything that should be handled like underscores
@@ -65,7 +66,15 @@ to_parsed_case_internal <- function(string, parsing_option = 1L){
     parse6_pat_caps2_first = function(string){
       pat_caps2_first <- "^([[:upper:]\u00C4\u00D6\u00DC]{2,})"
       string <- stringr::str_replace(string, pat_caps2_first, "_\\1_")
-      string}
+      string},
+    # Inserts _ and space between non-alpanumerics and digits
+    parse7_mark_digits = function(string){
+      digit_marker_before <- "(?<=[^_|\\d])(\\d)"
+      digit_marker_after <- "(\\d)(?=[^_|\\d])"
+      string <- stringr::str_replace_all(string, digit_marker_before, "_ \\1")
+      string <- stringr::str_replace_all(string, digit_marker_after , "\\1 _")
+      string
+    }
   )
   
   ### applying parsing functions  
@@ -96,6 +105,15 @@ to_parsed_case_internal <- function(string, parsing_option = 1L){
     string <- parsing_functions[["parse2_pat_caps2"]](string)
     string <- parsing_functions[["parse3_pat_cap_lonely"]](string)
     string <- parsing_functions[["parse4_separate_non_characters"]](string)}
+  # case:6 email1_2 -> email 1_2
+  if(parsing_option == 6){
+    string <- parsing_functions[["parse7_mark_digits"]](string)
+    string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
+    string <- parsing_functions[["parse2_pat_caps2"]](string)
+    string <- parsing_functions[["parse3_pat_cap_lonely"]](string)
+    string <- parsing_functions[["parse4_separate_non_characters"]](string)
+  }
+  
   ### customize the output
   # remove more than one "_" and starting/ending "_"
   string <- string %>%

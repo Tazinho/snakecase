@@ -17,6 +17,7 @@ to_parsed_case_internal(string, parsing_option = 1L)
  \item{4: parses at the beginning like option 2 and the rest like option 1.}
  \item{5: parses like option 1 but suppresses "_" around non alpha-numeric characters.
  In this way this option suppresses splits and resulting case conversion after these characters.}
+ \item{6: parses like option 1, but digits directly behind/in front non-digits, will stay as is.}
  \item{any other integer <= 0: no parsing"}
  }}
 }
