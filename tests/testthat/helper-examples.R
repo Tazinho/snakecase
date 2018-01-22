@@ -55,7 +55,7 @@ string <- c(NA, "_", "s_na_k_er", "SNAKE SNAKE CASE", "snakeSnakECase",
 case <- c("parsed", "snake", "small_camel", "big_camel", "screaming_snake")
 prefix <- c("", "start.")
 postfix <- c("", ".end")
-transliterations <- c(TRUE, FALSE)
+transliterations <- c("german", "Latin-ASCII")
   
 dat <- expand.grid(string = string,
                      case = case,

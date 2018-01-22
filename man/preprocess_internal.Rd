@@ -4,13 +4,14 @@
 \alias{preprocess_internal}
 \title{Internal function that replaces regex matches with underscores}
 \usage{
-preprocess_internal(string, preprocess)
+preprocess_internal(string, sep_in)
 }
 \arguments{
 \item{string}{A string.}
 
-\item{preprocess}{Character string that will be wrapped internally into stringr::regex. 
-All matches will be padded with underscores.}
+\item{sep_in}{(short for separator input) A regex supplied as a character (if not \code{NULL}), which will be wrapped internally
+into \code{stringr::regex()}. All matches will be replaced by underscores (aditionally to 
+\code{"_"} and \code{" "}, for which this is always true). Underscores can later turned into another separator via \code{postprocess}.}
 }
 \value{
 A character containing the parsed string.

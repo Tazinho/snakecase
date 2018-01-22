@@ -4,14 +4,16 @@
 \alias{replace_special_characters_internal}
 \title{Internal helper to replace special characters.}
 \usage{
-replace_special_characters_internal(string, replace_special_characters, case)
+replace_special_characters_internal(string, transliterations, case)
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
 
-\item{replace_special_characters}{Logical, if \code{TRUE}, special characters 
-will be translated to characters which are more likely to be understood by 
-different programs. For example german umlauts will be translated to ae, oe, ue etc.}
+\item{transliterations}{A character vector (if not \code{NULL}). The entries of this argument
+need to be elements of \code{stringi::stri_trans_list()} (like "Latin-ASCII", which is often useful) or names of lookup tables (currently
+only "german" is supported). In the order of the entries the letters of the input
+ string will be transliterated via \code{stringi::stri_trans_general()} or replaced via the 
+ matches of the lookup table.}
 
 \item{case}{Length one character, from the input options of \code{to_any_case}.}
 }
