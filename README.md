@@ -235,6 +235,17 @@ to_any_case("look_AfterThe-hyphen andThe.dot",
 ## [1] "LookAfterThe-hyphenAndThe.dot"
 ```
 
+  - If you want to leave digits as is (not surrounging with a
+    separator), use parsing option 6
+
+<!-- end list -->
+
+``` r
+to_any_case("species42value 23month", 
+            case = "snake", parsing_option = 6)
+## [1] "species42value_23month"
+```
+
 If you are interested in a specific parsing option, which is not
 implemented, pls open an issue.
 
@@ -269,8 +280,9 @@ to_any_case("parsed_case", case = "parsed")
 to_any_case("My_first_LettersWONTChange", case = "mixed")
 ## [1] "My_first_Letters_Wont_Change"
 
-to_any_case("IalsoWORKWith abbreviations", case = "mixed", abbreviations = "WORK")
-## [1] "Ialso_WORK_With_abbreviations"
+to_any_case("IalsoWORKWith abbreviations", case = "mixed", 
+            abbreviations = c("I", "WORK"))
+## [1] "I_also_WORK_With_abbreviations"
 
 to_any_case("IWill LookLike aRollerCoasterYouCanPARSEMeWith option2",
             case = "upper_lower") # or lower_upper

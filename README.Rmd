@@ -180,7 +180,8 @@ to_any_case("parsed_case", case = "parsed")
 
 to_any_case("My_first_LettersWONTChange", case = "mixed")
 
-to_any_case("IalsoWORKWith abbreviations", case = "mixed", abbreviations = "WORK")
+to_any_case("IalsoWORKWith abbreviations", case = "mixed", 
+            abbreviations = c("I", "WORK"))
 
 to_any_case("IWill LookLike aRollerCoasterYouCanPARSEMeWith option2",
             case = "upper_lower") # or lower_upper
