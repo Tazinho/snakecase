@@ -9,7 +9,7 @@ Status](https://travis-ci.org/Tazinho/snakecase.svg?branch=master)](https://trav
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg)](https://codecov.io/github/Tazinho/snakecase?branch=master)
 [![downloads](http://cranlogs.r-pkg.org/badges/snakecase)](http://cranlogs.r-pkg.org/)
-[![total](http://cranlogs.r-pkg.org/badges/grand-total/snakecase)](http://cranlogs.r-pkg.org/)
+[![total](http://cranlogs.r-pkg.org/badges/grand-total/snakecase)](http://cranlogs.r-pkg.org/)![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
 
 ## Overview
 
