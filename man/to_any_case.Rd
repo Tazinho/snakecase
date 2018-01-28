@@ -7,10 +7,9 @@
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
   "screaming_snake", "parsed", "mixed", "lower_upper", "upper_lower",
   "all_caps", "lower_camel", "upper_camel", "internal_parsing", "none"),
-  abbreviations = NULL, sep_in = NULL, preprocess = NULL,
-  parsing_option = 1, transliterations = NULL,
-  replace_special_characters = NULL, sep_out = NULL, postprocess = NULL,
-  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
+  abbreviations = NULL, sep_in = NULL, parsing_option = 1,
+  transliterations = NULL, sep_out = NULL, unique_sep = NULL,
+  empty_fill = NULL, prefix = "", postfix = "")
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
@@ -50,9 +49,7 @@ useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2
 
 \item{sep_in}{(short for separator input) A regex supplied as a character (if not \code{NULL}), which will be wrapped internally
 into \code{stringr::regex()}. All matches will be replaced by underscores (aditionally to 
-\code{"_"} and \code{" "}, for which this is always true). Underscores can later turned into another separator via \code{postprocess}.}
-
-\item{preprocess}{deprecated. Pls use \code{sep_in} instead.}
+\code{"_"} and \code{" "}, for which this is always true). Underscores can later turned into another separator via \code{sep_out}.}
 
 \item{parsing_option}{An integer that will determine the parsing_option.
 \itemize{
@@ -77,12 +74,8 @@ You should use this feature with care in case of \code{case = "parsed"} and
  of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
  might not always be what is intended.}
 
-\item{replace_special_characters}{deprecated. Pls use \code{transliterations} instead.}
-
 \item{sep_out}{(short for separator output) String that will be used as separator. The defaults are \code{"_"} 
 and \code{""}, regarding the specified \code{case}.}
-
-\item{postprocess}{deprecated. Pls use \code{sep_out} instead.}
 
 \item{unique_sep}{A string. If not \code{NULL}, then duplicated names will get 
 a suffix integer
@@ -142,20 +135,20 @@ to_any_case(c("RSSfeedRSSfeed", "USPassport", "USpassport"), abbreviations = c("
 ### Separator input
 string <- "R.St\\u00FCdio: v.1.0.143"
 to_any_case(string)
-to_any_case(string, case = "snake", preprocess = ":|\\\\.")
+to_any_case(string, case = "snake", sep_in = ":|\\\\.")
 to_any_case(string, case = "snake",
-            preprocess = ":|(?<!\\\\d)\\\\.")
+            sep_in = ":|(?<!\\\\d)\\\\.")
 
 ### Transliterations
 to_any_case("\\u00E4ngstlicher Has\\u00EA", transliterations = c("german", "Latin-ASCII"))
 
-### Postprocess
+### sep_out
 strings2 <- c("this - Is_-: a Strange_string", "AND THIS ANOTHER_One")
-to_any_case(strings2, case = "snake", preprocess = "-|\\\\:", postprocess = " ")
-to_any_case(strings2, case = "big_camel", preprocess = "-|\\\\:", postprocess = "//")
+to_any_case(strings2, case = "snake", sep_in = "-|\\\\:", sep_out = " ")
+to_any_case(strings2, case = "big_camel", sep_in = "-|\\\\:", sep_out = "//")
 
 ### Pre -and postfix
-to_any_case(strings2, case = "big_camel", preprocess = "-|\\\\:", postprocess = "//",
+to_any_case(strings2, case = "big_camel", sep_in = "-|\\\\:", sep_out = "//",
             prefix = "USER://", postfix = ".exe")
 
 }

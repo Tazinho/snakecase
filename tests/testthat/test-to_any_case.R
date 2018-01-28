@@ -379,7 +379,7 @@ test_that("stackoverflow answers", {
                            sep_in = "\\."),
                c("icuDays", "sexCode", "maxOfMld", "ageGroup")) 
   
-  expect_equal(unlist(strsplit(to_parsed_case("thisIsSomeCamelCase"), "_")),
+  expect_equal(unlist(strsplit(snakecase::to_parsed_case("thisIsSomeCamelCase"), "_")),
                c("this", "Is", "Some", "Camel", "Case"))
   
   expect_equal(to_any_case(c("zip code", "state", "final count"),

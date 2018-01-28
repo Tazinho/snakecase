@@ -39,9 +39,7 @@
 #'  
 #' @param sep_in (short for separator input) A regex supplied as a character (if not \code{NULL}), which will be wrapped internally
 #' into \code{stringr::regex()}. All matches will be replaced by underscores (aditionally to 
-#' \code{"_"} and \code{" "}, for which this is always true). Underscores can later turned into another separator via \code{postprocess}.
-#' 
-#' @param preprocess deprecated. Pls use \code{sep_in} instead.
+#' \code{"_"} and \code{" "}, for which this is always true). Underscores can later turned into another separator via \code{sep_out}.
 #' 
 #' @param parsing_option An integer that will determine the parsing_option.
 #' \itemize{
@@ -66,12 +64,8 @@
 #'  of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
 #'  might not always be what is intended.
 #' 
-#' @param replace_special_characters deprecated. Pls use \code{transliterations} instead.
-#' 
 #' @param sep_out (short for separator output) String that will be used as separator. The defaults are \code{"_"} 
 #' and \code{""}, regarding the specified \code{case}.
-#' 
-#' @param postprocess deprecated. Pls use \code{sep_out} instead.
 #' 
 #' @param unique_sep A string. If not \code{NULL}, then duplicated names will get 
 #' a suffix integer
@@ -129,20 +123,20 @@
 #' ### Separator input
 #' string <- "R.St\u00FCdio: v.1.0.143"
 #' to_any_case(string)
-#' to_any_case(string, case = "snake", preprocess = ":|\\.")
+#' to_any_case(string, case = "snake", sep_in = ":|\\.")
 #' to_any_case(string, case = "snake",
-#'             preprocess = ":|(?<!\\d)\\.")
+#'             sep_in = ":|(?<!\\d)\\.")
 #' 
 #' ### Transliterations
 #' to_any_case("\u00E4ngstlicher Has\u00EA", transliterations = c("german", "Latin-ASCII"))
 #' 
-#' ### Postprocess
+#' ### sep_out
 #' strings2 <- c("this - Is_-: a Strange_string", "AND THIS ANOTHER_One")
-#' to_any_case(strings2, case = "snake", preprocess = "-|\\:", postprocess = " ")
-#' to_any_case(strings2, case = "big_camel", preprocess = "-|\\:", postprocess = "//")
+#' to_any_case(strings2, case = "snake", sep_in = "-|\\:", sep_out = " ")
+#' to_any_case(strings2, case = "big_camel", sep_in = "-|\\:", sep_out = "//")
 #' 
 #' ### Pre -and postfix
-#' to_any_case(strings2, case = "big_camel", preprocess = "-|\\:", postprocess = "//",
+#' to_any_case(strings2, case = "big_camel", sep_in = "-|\\:", sep_out = "//",
 #'             prefix = "USER://", postfix = ".exe")
 #' 
 #' @importFrom magrittr "%>%"
@@ -158,40 +152,21 @@ to_any_case <- function(string,
                                  "all_caps", "lower_camel", "upper_camel", "internal_parsing", "none"),
                         abbreviations = NULL,
                         sep_in = NULL,
-                        preprocess = NULL,
                         parsing_option = 1,
                         transliterations = NULL,
-                        replace_special_characters = NULL,
                         sep_out = NULL,
-                        postprocess = NULL,
                         unique_sep = NULL,
                         empty_fill = NULL,
                         prefix = "",
                         postfix = ""){
   ### Deprecations:
-  if (!identical(preprocess, NULL)) {
-    warning("argument preprocess is renamed to sep_in and will be removed in later versions",
-            call. = FALSE)
-    if (identical(sep_in, NULL)) {
-      sep_in = preprocess
-    }
-  }
-  
-  if (!identical(postprocess, NULL)) {
-    warning("argument postprocess is renamed to sep_out and will be removed in later versions",
-            call. = FALSE)
-    if (identical(sep_out, NULL)) {
-      sep_out = postprocess
-    }
-  }
-  
-  if (!identical(replace_special_characters, NULL)) {
-    warning("argument replace_special_characters is renamed to transliterations and will be removed in later versions",
-            call. = FALSE)
-    if (identical(transliterations, NULL)) {
-      transliterations = replace_special_characters
-    }
-  }
+  # if (!identical(preprocess, NULL)) {
+  #   warning("argument preprocess is renamed to sep_in and will be removed in later versions",
+  #           call. = FALSE)
+  #   if (identical(sep_in, NULL)) {
+  #     sep_in = preprocess
+  #   }
+  # }
   ### Argument matching and checking
   case <- match.arg(case)
 ### check input length (necessary for NULL and atomic(0))

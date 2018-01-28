@@ -13,43 +13,35 @@
 \title{Specific case converter shortcuts}
 \usage{
 to_snake_case(string, abbreviations = NULL, sep_in = NULL,
-  preprocess = NULL, parsing_option = 1, transliterations = NULL,
-  replace_special_characters = NULL, sep_out = NULL, postprocess = NULL,
+  parsing_option = 1, transliterations = NULL, sep_out = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
 to_lower_camel_case(string, abbreviations = NULL, sep_in = NULL,
-  preprocess = NULL, parsing_option = 1, transliterations = NULL,
-  replace_special_characters = NULL, sep_out = NULL, postprocess = NULL,
+  parsing_option = 1, transliterations = NULL, sep_out = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
 to_upper_camel_case(string, abbreviations = NULL, sep_in = NULL,
-  preprocess = NULL, parsing_option = 1, transliterations = NULL,
-  replace_special_characters = NULL, sep_out = NULL, postprocess = NULL,
+  parsing_option = 1, transliterations = NULL, sep_out = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
 to_screaming_snake_case(string, abbreviations = NULL, sep_in = NULL,
-  preprocess = NULL, parsing_option = 1, transliterations = NULL,
-  replace_special_characters = NULL, sep_out = NULL, postprocess = NULL,
+  parsing_option = 1, transliterations = NULL, sep_out = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
 to_parsed_case(string, abbreviations = NULL, sep_in = NULL,
-  preprocess = NULL, parsing_option = 1, transliterations = NULL,
-  replace_special_characters = NULL, sep_out = NULL, postprocess = NULL,
+  parsing_option = 1, transliterations = NULL, sep_out = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
 to_mixed_case(string, abbreviations = NULL, sep_in = NULL,
-  preprocess = NULL, parsing_option = 1, transliterations = NULL,
-  replace_special_characters = NULL, sep_out = NULL, postprocess = NULL,
+  parsing_option = 1, transliterations = NULL, sep_out = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
 to_lower_upper_case(string, abbreviations = NULL, sep_in = NULL,
-  preprocess = NULL, parsing_option = 1, transliterations = NULL,
-  replace_special_characters = NULL, sep_out = NULL, postprocess = NULL,
+  parsing_option = 1, transliterations = NULL, sep_out = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
 to_upper_lower_case(string, abbreviations = NULL, sep_in = NULL,
-  preprocess = NULL, parsing_option = 1, transliterations = NULL,
-  replace_special_characters = NULL, sep_out = NULL, postprocess = NULL,
+  parsing_option = 1, transliterations = NULL, sep_out = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 }
 \arguments{
@@ -61,8 +53,6 @@ useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2
 
 \item{sep_in}{(short for separator input) A regex supplied as a character (if not \code{NULL}), which will be wrapped internally
 into \code{stringr::regex()}. All matches will be replaced by underscores. Underscores can later turned into another separator via \code{sep_out}.}
-
-\item{preprocess}{deprecated. Pls use \code{sep_in} instead}
 
 \item{parsing_option}{An integer that will determine the parsing_option.
 #' \itemize{
@@ -86,12 +76,8 @@ You should use this feature with care in case of \code{case = "parsed"} and
  of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
  might not always be what is intended.}
 
-\item{replace_special_characters}{deprecated. Pls use \code{transliterations} instead.}
-
 \item{sep_out}{(short for separator output) String that will be used as separator. The defaults are \code{"_"} 
 and \code{""}, regarding the specified \code{case}.}
-
-\item{postprocess}{deprecated. Pls use \code{sep_out} instead.}
 
 \item{unique_sep}{A string. If not \code{NULL}, then duplicated names will get 
 a suffix integer
