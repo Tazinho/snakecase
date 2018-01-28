@@ -21,12 +21,6 @@ test_that("examples", {
   expect_equal(to_any_case("R.Studio", case = "big_camel", sep_out = "-"),
                "R.Studio")
   
-  expect_equal(to_any_case("HAMBURGcityGERUsa", case = "parsed", parsing_option = 3),
-               "HAMBURG_city_GERU_sa")
-  
-  expect_equal(to_any_case("HAMBURGcityGERUsa", case = "parsed", parsing_option = 4),
-               "HAMBURG_city_GER_Usa")
-  
   expect_equal(to_any_case("HAMBURGcity", case = "parsed", parsing_option = 0),
                "HAMBURGcity")
   
@@ -334,12 +328,12 @@ test_that("complex strings", {
   # 
   # expect_equal(to_any_case(c(NA, NA, NA), "upper_lower"),
   #              rep(NA_character_, 3))
-  expect_equal(to_any_case("blaBla.bla", case = "big_camel", parsing_option = 5),
+  expect_equal(snakecase::to_any_case("blaBla.bla", case = "big_camel", parsing_option = 3),
                "BlaBla.bla")
   
-  expect_equal(to_any_case("bla-bla", case = "upper_camel", parsing_option = 5),
+  expect_equal(to_any_case("bla-bla", case = "upper_camel", parsing_option = 3),
                "Bla-bla")
-  expect_equal(to_any_case("bla.bla", case = "upper_camel", parsing_option = 5),
+  expect_equal(to_any_case("bla.bla", case = "upper_camel", parsing_option = 3),
                "Bla.bla")
   expect_equal(to_any_case("bla.bla", case = "upper_camel"),
                "Bla.Bla")
@@ -355,7 +349,7 @@ test_that("complex strings", {
   expect_equal(to_any_case("some11 21 31numbers_11 21 32_With11 11_diffs11 22 d", case = "lower_upper"),
                "some11_21_31NUMBERS11_21_32with11_11DIFFS11_22d")
   
-  expect_equal(to_any_case("email22Version_33 test", parsing_option = 6),
+  expect_equal(to_any_case("email22Version_33 test", parsing_option = 4),
                "email22version_33_test")
   
 })

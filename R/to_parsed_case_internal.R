@@ -5,11 +5,9 @@
 #' \itemize{
 #'  \item{1: \code{RRRStudio -> RRR_Studio}}
 #'  \item{2: \code{RRRStudio -> RRRS_tudio}}
-#'  \item{3: parses at the beginning like option 1 and the rest like option 2.}
-#'  \item{4: parses at the beginning like option 2 and the rest like option 1.}
-#'  \item{5: parses like option 1 but suppresses "_" around non alpha-numeric characters.
+#'  \item{3: parses like option 1 but suppresses "_" around non alpha-numeric characters.
 #'  In this way this option suppresses splits and resulting case conversion after these characters.}
-#'  \item{6: parses like option 1, but digits directly behind/in front non-digits, will stay as is.}
+#'  \item{4: parses like option 1, but digits directly behind/in front non-digits, will stay as is.}
 #'  \item{any other integer <= 0: no parsing"}
 #'  }
 #'  
@@ -22,8 +20,8 @@
 #'
 to_parsed_case_internal <- function(string, parsing_option = 1L){
   ### input checking
-  if(parsing_option >= 7L){
-    stop("parsing_option must be 1,2,3,4,5,6 or <= 0 for no parsing.")
+  if(parsing_option >= 5L){
+    stop("parsing_option must be 1,2,3,4 or <= 0 for no parsing.")
   }
   ### preprocessing:
   # catch everything that should be handled like underscores
@@ -56,19 +54,8 @@ to_parsed_case_internal <- function(string, parsing_option = 1L){
       sep_signs_around <- "([\u00C4\u00D6\u00DC[:upper:]\u00E4\u00F6\u00FC\u00DF[:lower:]\\d]*)"
       string <- stringr::str_replace_all(string, sep_signs_around, "_\\1")
       string},
-    # Inserts underscores around groups of only the first group of one upper case letter
-    # followed by lower case letters.
-    parse5_pat_cap_smalls_first = function(string){
-      pat_cap_smalls_first <- "^([\u00C4\u00D6\u00DC[:upper:]][\u00E4\u00F6\u00FC\u00DF[:lower:]]+|\\d+)"
-      string <- stringr::str_replace(string, pat_cap_smalls_first, "_\\1_")
-      string},
-    # Inserts underscores around the first capital letter group with length >= 2
-    parse6_pat_caps2_first = function(string){
-      pat_caps2_first <- "^([[:upper:]\u00C4\u00D6\u00DC]{2,})"
-      string <- stringr::str_replace(string, pat_caps2_first, "_\\1_")
-      string},
     # Inserts _ and space between non-alpanumerics and digits
-    parse7_mark_digits = function(string){
+    parse5_mark_digits = function(string){
       digit_marker_before <- "(?<=[^_|\\d])(\\d)"
       digit_marker_after <- "(\\d)(?=[^_|\\d])"
       string <- stringr::str_replace_all(string, digit_marker_before, "_ \\1")
@@ -79,7 +66,7 @@ to_parsed_case_internal <- function(string, parsing_option = 1L){
   
   ### applying parsing functions  
   # case: 1 RRRStudioSStudioStudio -> RRR_Studio_S_Studio_Studio
-  if(parsing_option == 1 | parsing_option == 5){
+  if(parsing_option == 1 | parsing_option == 3){
     string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
     string <- parsing_functions[["parse2_pat_caps2"]](string)
     string <- parsing_functions[["parse3_pat_cap_lonely"]](string)
@@ -91,23 +78,9 @@ to_parsed_case_internal <- function(string, parsing_option = 1L){
     string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
     string <- parsing_functions[["parse3_pat_cap_lonely"]](string)
     string <- parsing_functions[["parse4_separate_non_characters"]](string)}
-  # case:3 RRRStudioSStudioStudio -> RRR_Studio_SS_tudio_Studio
-  if(parsing_option == 3){
-    string <- parsing_functions[["parse5_pat_cap_smalls_first"]](string)
-    string <- parsing_functions[["parse2_pat_caps2"]](string)
-    string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
-    string <- parsing_functions[["parse3_pat_cap_lonely"]](string)
-    string <- parsing_functions[["parse4_separate_non_characters"]](string)}
-  # case:4 RRRStudioSStudioStudio -> RRRS_tudio_S_Studio_Studio
-  if(parsing_option == 4){
-    string <- parsing_functions[["parse6_pat_caps2_first"]](string)
-    string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
-    string <- parsing_functions[["parse2_pat_caps2"]](string)
-    string <- parsing_functions[["parse3_pat_cap_lonely"]](string)
-    string <- parsing_functions[["parse4_separate_non_characters"]](string)}
   # case:6 email1_2 -> email 1_2
-  if(parsing_option == 6){
-    string <- parsing_functions[["parse7_mark_digits"]](string)
+  if(parsing_option == 4){
+    string <- parsing_functions[["parse5_mark_digits"]](string)
     string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
     string <- parsing_functions[["parse2_pat_caps2"]](string)
     string <- parsing_functions[["parse3_pat_cap_lonely"]](string)
@@ -119,7 +92,7 @@ to_parsed_case_internal <- function(string, parsing_option = 1L){
   string <- string %>%
     purrr::map_chr(~ stringr::str_replace_all(.x, "_+", "_")) %>% 
     purrr::map_chr(~ stringr::str_replace_all(.x, "^_|_$", ""))
-  if(parsing_option == 5){
+  if(parsing_option == 3){
     string <- stringr::str_replace_all(string, "_(?![:alnum:])|(?<![:alnum:])_", "")
   }
   # return

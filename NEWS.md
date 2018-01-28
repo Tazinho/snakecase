@@ -1,3 +1,7 @@
+# snakecase 0.8.3
+
+* replaced `parsing_option`s 3 and 4 with 5 and 6. 
+
 # snakecase 0.8.2.9002
 
 * remove `replace_special_characters`, `preprocess`, `postprocess`.

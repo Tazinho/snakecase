@@ -55,13 +55,12 @@ useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2
 into \code{stringr::regex()}. All matches will be replaced by underscores. Underscores can later turned into another separator via \code{sep_out}.}
 
 \item{parsing_option}{An integer that will determine the parsing_option.
-#' \itemize{
+\itemize{
  \item{1: \code{RRRStudio -> RRR_Studio}}
  \item{2: \code{RRRStudio -> RRRS_tudio}}
- \item{3: parses at the beginning like option 1 and the rest like option 2.}
- \item{4: parses at the beginning like option 2 and the rest like option 1.}
- \item{5: parses like option 1 but suppresses "_" around non special characters.
+ \item{3: parses like option 1 but suppresses "_" around non special characters.
  In this way case conversion won't apply after these characters. See examples.}
+ \item{4: parses like option 1, but digits directly behind/in front non-digits, will stay as is.}
  \item{any other integer <= 0: no parsing"}
  }}
 

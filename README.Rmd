@@ -12,7 +12,7 @@ output: rmarkdown::github_document
 
 <!--A small package with functions to convert column names of data.frames (or strings
 in general) to different cases like snake_case, smallCamel- and BigCamelCase among others. Also high level features for more advanced case conversions are provided via `to_any_case()`.-->
-The snakecase package introduces a fresh and straightforward approach on case conversion of strings, based upon a concise design philosophy. 
+The snakecase package introduces a fresh and straightforward approach on case conversion of strings, based upon a consistent design philosophy. 
 
 (If you are interested on (the history of) this package, you can watch this [(older) talk](https://www.youtube.com/watch?v=T6p0l8XzP64).)
 
@@ -81,7 +81,7 @@ to_any_case("THISIsHOW IAmPARSED!", case = "parsed")
 
 Shortcut wrappers like `to_snake_case()`, `to_lower_camel_case()` etc. are available.
 
-Be aware that automatic case conversion depends on the input string and it is recommended to verify the results. So you might want to pipe these into `dput()` (and hardcode name changes instead of blindly trusting `to_any_case()`'s output)
+Be aware that automatic case conversion depends on the input string and it is recommendesd to verify the results. So you might want to pipe these into `dput()` (and hardcode name changes instead of blindly trusting `to_any_case()`'s output)
 
 ```{r, collapse = TRUE}
 dput(to_any_case(c("SomeBAdInput", "someGoodInput")))
@@ -148,18 +148,18 @@ to_any_case(c("HHcity", "IDtable1", "KEYtable2", "newUSelections"),
             parsing_option = 2)
 ```
 
-* To suppress conversion after a non-alphanumeric character (except "_"), you can choose parsing option 5
+* To suppress conversion after a non-alphanumeric character (except "_"), you can choose parsing option 3
 
 ```{r, collapse = TRUE}
 to_any_case("look_AfterThe-hyphen andThe.dot", 
-            case = "upper_camel", parsing_option = 5)
+            case = "upper_camel", parsing_option = 3)
 ```
 
-* If you want to leave digits as is (not surrounging with a separator), use parsing option 6
+* If you want to leave digits as is (not surrounging with a separator), use parsing option 4
 
 ```{r, collapse = TRUE}
 to_any_case("species42value 23month", 
-            case = "snake", parsing_option = 6)
+            case = "snake", parsing_option = 4)
 ```
 
 If you are interested in a specific parsing option, which is not implemented, pls open an issue.
@@ -209,7 +209,9 @@ to_any_case(c("customer", "product"), case = "big_camel",
 to_any_case("a_b_c_d", case = "upper_camel")
 ```
 
-* Sometimes further pre or postprocessing might be needed. You can decide yourself: Open an issue [here](https://github.com/Tazinho/snakecase/issues) or build sth. quickly yourself via packages like base, [stringr](https://github.com/tidyverse/stringr), [stringi](https://github.com/gagolews/stringi) etc.
+* Sometimes further pre or postprocessing might be needed. For example you can easily write your own parsing via a sequence of calls like `str_replace_all(string, some_pattern, "_\\1_")`. It's also a `str_replace_all()` to replace special symbols like `%` or `€` with `"percent"` or `"euro"` 
+
+* You can decide yourself: Open an issue [here](https://github.com/Tazinho/snakecase/issues) or build sth. quickly yourself via packages like base, [stringr](https://github.com/tidyverse/stringr), [stringi](https://github.com/gagolews/stringi) etc.
 
 ## Design Philosophy
 
