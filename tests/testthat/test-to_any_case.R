@@ -212,6 +212,11 @@ test_that("random examples",
 #           expect_warning(to_any_case("bla", protect = "_"),
 #                          "argument protect is deprecated; If you really need this argument, pls submit an issue on https://github.com/Tazinho/snakecase")
 #           )
+test_that("transliterations_error", 
+          expect_error(to_any_case("bla", transliterations = "bla"),
+                       "Input to `transliterations` must be `NULL` or a string containing elements
+               from the internal lookup dictionaries or from `stringi::stri_trans_list()`.",
+                       fixed = TRUE))
 
 test_that("empty_fill",
           expect_equal(to_any_case("", empty_fill = "bla"),
