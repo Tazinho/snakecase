@@ -196,8 +196,8 @@ to_any_case <- function(string,
                                       parsing_option = parsing_option)
   } else {
     string <- string %>%
-      purrr::map_chr(~ stringr::str_replace_all(.x, "_+", "_")) %>% 
-      purrr::map_chr(~ stringr::str_replace_all(.x, "^_|_$", ""))
+      vapply(stringr::str_replace_all, "","_+", "_", USE.NAMES = FALSE) %>% 
+      vapply(stringr::str_replace_all, "","^_|_$", "", USE.NAMES = FALSE)
   }
   
 ### ____________________________________________________________________________
@@ -217,48 +217,50 @@ to_any_case <- function(string,
 ### replacement of special characters_------------------------------------------
     if(!is.null(transliterations)){
       string <- string %>%
-        purrr::map(~replace_special_characters_internal(.x, transliterations, case))
+        lapply(function (x) 
+          replace_special_characters_internal(x, transliterations, case))
     }
 ### caseconversion--------------------------------------------------------------
     if(case == "mixed"){
       string <- string %>% 
-        purrr::map(~ifelse(!.x %in% abbreviations, 
-                           stringr::str_c(stringr::str_sub(.x, 1, 1),
-                                          stringr::str_sub(.x, 2) %>%
+        lapply(function(x) ifelse(!x %in% abbreviations, 
+                           stringr::str_c(stringr::str_sub(x, 1, 1),
+                                          stringr::str_sub(x, 2) %>%
                                             stringr::str_to_lower()),
-                           .x)
-                   )
+                           x)
+        )
       }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if(case == "snake"){
       string <- string %>%
-        purrr::map(~ stringr::str_to_lower(.x))
+        lapply(stringr::str_to_lower)
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if(case == "big_camel"){
-      string <- string %>% purrr::map(stringr::str_to_lower)
+      string <- string %>% lapply(stringr::str_to_lower)
       string <- string %>% 
-        purrr::map(~ stringr::str_c(stringr::str_sub(.x, 1, 1) %>%
+        lapply(function(x) stringr::str_c(stringr::str_sub(x, 1, 1) %>%
                                           stringr::str_to_upper(),
-                                        stringr::str_sub(.x, 2)))
+                                        stringr::str_sub(x, 2)))
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if(case == "small_camel"){
-      string <- string %>% purrr::map(stringr::str_to_lower)
+      string <- string %>% lapply(stringr::str_to_lower)
       string <- string %>% 
-        purrr::map(~ stringr::str_c(stringr::str_sub(.x, 1, 1) %>%
+        lapply(function(x) stringr::str_c(stringr::str_sub(x, 1, 1) %>%
                                       stringr::str_to_upper(),
-                                    stringr::str_sub(.x, 2)))
+                                    stringr::str_sub(x, 2)))
       string <- string %>%
-        purrr::map_chr(stringr::str_c, collapse = " ") %>% 
-        purrr::map_chr(~ stringr::str_c(stringr::str_sub(.x, 1, 1) %>%
+        vapply(stringr::str_c, "", collapse = " ", USE.NAMES = FALSE) %>% 
+        vapply(function(x) stringr::str_c(stringr::str_sub(x, 1, 1) %>%
                                           stringr::str_to_lower(),
-                                        stringr::str_sub(.x, 2))) %>% 
+                                        stringr::str_sub(x, 2)), "",
+               USE.NAMES = FALSE) %>% 
         stringr::str_split(" ")
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if(case == "screaming_snake"){
-      string <- string %>% purrr::map(stringr::str_to_upper)
+      string <- string %>% lapply(stringr::str_to_upper)
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if (case == "lower_upper"){
