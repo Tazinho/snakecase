@@ -287,7 +287,8 @@ to_any_case <- function(string,
 ### collapsing------------------------------------------------------------------
     if(case %in% c("none", "mixed", "snake", "screaming_snake", "parsed",
                    "small_camel", "big_camel", "lower_upper", "upper_lower")) {
-      string <- string %>% purrr::map_chr(~stringr::str_c(.x, collapse = "_"))
+      string <- string %>% 
+        vapply(function(x) stringr::str_c(x, collapse = "_"), "", USE.NAMES = FALSE)
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     # Protect (only internal, not via an argument).

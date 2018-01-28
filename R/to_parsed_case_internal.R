@@ -90,8 +90,8 @@ to_parsed_case_internal <- function(string, parsing_option = 1L){
   ### customize the output
   # remove more than one "_" and starting/ending "_"
   string <- string %>%
-    purrr::map_chr(~ stringr::str_replace_all(.x, "_+", "_")) %>% 
-    purrr::map_chr(~ stringr::str_replace_all(.x, "^_|_$", ""))
+    vapply(stringr::str_replace_all, "", "_+"   , "_", USE.NAMES = FALSE) %>%
+    vapply(stringr::str_replace_all, "", "^_|_$", "" , USE.NAMES = FALSE) 
   if(parsing_option == 3){
     string <- stringr::str_replace_all(string, "_(?![:alnum:])|(?<![:alnum:])_", "")
   }
