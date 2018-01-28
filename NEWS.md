@@ -1,4 +1,8 @@
-# snakecase 0.8.2.9000
+# snakecase 0.8.2.9002
+
+* remove `replace_special_characters`, `preprocess`, `postprocess`.
+
+# snakecase 0.8.2.9001
 
 * added parsing option 6, which doesn't surround digits with separators.
 
