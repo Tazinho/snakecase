@@ -2,6 +2,7 @@
 
 * replaced `parsing_option`s 3 and 4 with 5 and 6. 
 * removed __purrr__ dependecy
+* removed __magrittr__ dependency
 
 # snakecase 0.8.2.9002
 
