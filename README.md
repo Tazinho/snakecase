@@ -9,7 +9,7 @@ Status](https://travis-ci.org/Tazinho/snakecase.svg?branch=master)](https://trav
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg)](https://codecov.io/github/Tazinho/snakecase?branch=master)
 [![downloads](http://cranlogs.r-pkg.org/badges/snakecase)](http://cranlogs.r-pkg.org/)
-[![total](http://cranlogs.r-pkg.org/badges/grand-total/snakecase)](http://cranlogs.r-pkg.org/)![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
+[![total](http://cranlogs.r-pkg.org/badges/grand-total/snakecase)](http://cranlogs.r-pkg.org/)![](https://img.shields.io/badge/lifecycle-Stable-blue.svg)
 
 ## Overview
 
@@ -17,7 +17,7 @@ Status](https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg)](h
 in general) to different cases like snake_case, smallCamel- and BigCamelCase among others. Also high level features for more advanced case conversions are provided via `to_any_case()`.-->
 
 The snakecase package introduces a fresh and straightforward approach on
-case conversion of strings, based upon a concise design philosophy.
+case conversion of strings, based upon a consistent design philosophy.
 
 (If you are interested on (the history of) this package, you can watch
 this [(older) talk](https://www.youtube.com/watch?v=T6p0l8XzP64).)
@@ -104,9 +104,9 @@ Shortcut wrappers like `to_snake_case()`, `to_lower_camel_case()` etc.
 are available.
 
 Be aware that automatic case conversion depends on the input string and
-it is recommended to verify the results. So you might want to pipe these
-into `dput()` (and hardcode name changes instead of blindly trusting
-`to_any_case()`’s output)
+it is recommendesd to verify the results. So you might want to pipe
+these into `dput()` (and hardcode name changes instead of blindly
+trusting `to_any_case()`’s output)
 
 ``` r
 dput(to_any_case(c("SomeBAdInput", "someGoodInput")))
@@ -225,25 +225,25 @@ to_any_case(c("HHcity", "IDtable1", "KEYtable2", "newUSelections"),
 ```
 
   - To suppress conversion after a non-alphanumeric character (except
-    “\_“), you can choose parsing option 5
+    “\_“), you can choose parsing option 3
 
 <!-- end list -->
 
 ``` r
 to_any_case("look_AfterThe-hyphen andThe.dot", 
-            case = "upper_camel", parsing_option = 5)
-## [1] "LookAfterThe-hyphenAndThe.dot"
+            case = "upper_camel", parsing_option = 3)
+## [1] "LookAfterThe-HyphenAndThe.Dot"
 ```
 
   - If you want to leave digits as is (not surrounging with a
-    separator), use parsing option 6
+    separator), use parsing option 4
 
 <!-- end list -->
 
 ``` r
 to_any_case("species42value 23month", 
-            case = "snake", parsing_option = 6)
-## [1] "species42value_23month"
+            case = "snake", parsing_option = 4)
+## [1] "species_42_value_23_month"
 ```
 
 If you are interested in a specific parsing option, which is not
@@ -323,8 +323,13 @@ to_any_case("a_b_c_d", case = "upper_camel")
 ## [1] "ABCD"
 ```
 
-  - Sometimes further pre or postprocessing might be needed. You can
-    decide yourself: Open an issue
+  - Sometimes further pre or postprocessing might be needed. For example
+    you can easily write your own parsing via a sequence of calls like
+    `str_replace_all(string, some_pattern, "_\\1_")`. It’s also a
+    `str_replace_all()` to replace special symbols like `%` or `€` with
+    `"percent"` or `"euro"`
+
+  - You can decide yourself: Open an issue
     [here](https://github.com/Tazinho/snakecase/issues) or build sth.
     quickly yourself via packages like base,
     [stringr](https://github.com/tidyverse/stringr),
