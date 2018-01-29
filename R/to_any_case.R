@@ -174,7 +174,7 @@ to_any_case <- function(string,
   # second string of those which contain an alphabetic character
   if(case == "upper_lower" | case == "lower_upper") {
     relevant <- function(string){
-      relevant <- string %>% stringr::str_detect("[:alpha:]")
+      relevant <- stringr::str_detect(string, "[:alpha:]")
       relevant[relevant] <- rep_len(c(TRUE, FALSE), sum(relevant))
       relevant
     }
@@ -195,11 +195,11 @@ to_any_case <- function(string,
     string <- to_parsed_case_internal(string,
                                       parsing_option = parsing_option)
   } else {
-    string <- string %>%
-      vapply(stringr::str_replace_all, "","_+", "_", USE.NAMES = FALSE) %>% 
-      vapply(stringr::str_replace_all, "","^_|_$", "", USE.NAMES = FALSE)
+    string <- vapply(string, stringr::str_replace_all, "","_+", "_", 
+                     USE.NAMES = FALSE) 
+    string <- vapply(string, stringr::str_replace_all, "","^_|_$", "",
+                     USE.NAMES = FALSE)
   }
-  
 ### ____________________________________________________________________________
 ### "mixed", "snake", "small_camel", "big_camel", "screaming_case", "parsed"
   if(case %in% c("mixed", "snake", "small_camel",
@@ -207,60 +207,55 @@ to_any_case <- function(string,
                  "lower_upper", "upper_lower")){
 ### split-----------------------------------------------------------------------
     if(case %in% c("mixed", "snake", "screaming_snake", "parsed", "lower_upper", "upper_lower")){
-      string <- string %>% stringr::str_split("_")
+      string <- stringr::str_split(string, "_")
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if(case %in% c("small_camel", "big_camel")){
-      string <- string %>% 
-        stringr::str_split(pattern = "(?<!\\d)_|_(?!\\d)")
+      string <- stringr::str_split(string, pattern = "(?<!\\d)_|_(?!\\d)")
     }
 ### replacement of special characters_------------------------------------------
     if(!is.null(transliterations)){
-      string <- string %>%
-        lapply(function (x) 
-          replace_special_characters_internal(x, transliterations, case))
+      string <- lapply(string, function (x)
+        replace_special_characters_internal(x, transliterations, case))
     }
 ### caseconversion--------------------------------------------------------------
     if(case == "mixed"){
-      string <- string %>% 
-        lapply(function(x) ifelse(!x %in% abbreviations, 
+      string <- lapply(string,
+                       function(x) ifelse(!x %in% abbreviations, 
                            stringr::str_c(stringr::str_sub(x, 1, 1),
-                                          stringr::str_sub(x, 2) %>%
-                                            stringr::str_to_lower()),
+                                          stringr::str_to_lower(stringr::str_sub(x, 2))),
                            x)
         )
       }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if(case == "snake"){
-      string <- string %>%
-        lapply(stringr::str_to_lower)
+      string <- lapply(string, stringr::str_to_lower)
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if(case == "big_camel"){
-      string <- string %>% lapply(stringr::str_to_lower)
-      string <- string %>% 
-        lapply(function(x) stringr::str_c(stringr::str_sub(x, 1, 1) %>%
-                                          stringr::str_to_upper(),
-                                        stringr::str_sub(x, 2)))
+      string <- lapply(string, stringr::str_to_lower)
+      string <- lapply(string,
+                       function(x) stringr::str_c(stringr::str_to_upper(stringr::str_sub(x, 1, 1)),
+                                                  stringr::str_sub(x, 2)))
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if(case == "small_camel"){
-      string <- string %>% lapply(stringr::str_to_lower)
-      string <- string %>% 
-        lapply(function(x) stringr::str_c(stringr::str_sub(x, 1, 1) %>%
-                                      stringr::str_to_upper(),
+      string <- lapply(string, stringr::str_to_lower)
+      string <- lapply(string, 
+                       function(x) stringr::str_c(stringr::str_to_upper(stringr::str_sub(x, 1, 1)),
                                     stringr::str_sub(x, 2)))
-      string <- string %>%
-        vapply(stringr::str_c, "", collapse = " ", USE.NAMES = FALSE) %>% 
-        vapply(function(x) stringr::str_c(stringr::str_sub(x, 1, 1) %>%
-                                          stringr::str_to_lower(),
+      string <- vapply(string, 
+                       stringr::str_c, "", collapse = " ",
+                       USE.NAMES = FALSE)
+      string <- vapply(string, 
+                       function(x) stringr::str_c(stringr::str_to_lower(stringr::str_sub(x, 1, 1)),
                                         stringr::str_sub(x, 2)), "",
-               USE.NAMES = FALSE) %>% 
-        stringr::str_split(" ")
+               USE.NAMES = FALSE)
+      string <- stringr::str_split(string, " ")
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if(case == "screaming_snake"){
-      string <- string %>% lapply(stringr::str_to_upper)
+      string <- lapply(string, stringr::str_to_upper)
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if (case == "lower_upper"){
@@ -291,8 +286,9 @@ to_any_case <- function(string,
 ### collapsing------------------------------------------------------------------
     if(case %in% c("none", "mixed", "snake", "screaming_snake", "parsed",
                    "small_camel", "big_camel", "lower_upper", "upper_lower")) {
-      string <- string %>% 
-        vapply(function(x) stringr::str_c(x, collapse = "_"), "", USE.NAMES = FALSE)
+      string <- vapply(string, 
+                       function(x) stringr::str_c(x, collapse = "_"), "",
+                       USE.NAMES = FALSE)
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     # Protect (only internal, not via an argument).

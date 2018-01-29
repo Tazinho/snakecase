@@ -10,7 +10,8 @@ Depends:
     R (>= 3.1)
 Imports:
     stringr,
-    magrittr
+    magrittr,
+    stringi
 Suggests:
     testthat,
     covr,
