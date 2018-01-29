@@ -264,26 +264,30 @@ to_any_case <- function(string,
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if (case == "lower_upper"){
-      string[!is.na(string)] <- purrr::map2(string[!is.na(string)],
-                                            purrr::map(string[!is.na(string)],
-                                                       ~ relevant(.x)),
-                            # odds to lower
-                            ~{.x[.y] <- stringr::str_to_lower(.x[.y]);
-                            # others to upper
-                            .x[!.y] <- stringr::str_to_upper(.x[!.y]);
-                            .x}) 
+      string[!is.na(string)] <- mapply(function(x, y) { 
+        # odds to lower
+        x[y] <- stringr::str_to_lower(x[y]);
+        # others to upper
+        x[!y] <- stringr::str_to_upper(x[!y]);
+        x},
+        string[!is.na(string)],
+        lapply(string[!is.na(string)], relevant),
+        SIMPLIFY = FALSE,
+        USE.NAMES = TRUE)
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if (case == "upper_lower") {
-      string[!is.na(string)] <- purrr::map2(string[!is.na(string)], 
-                                            purrr::map(string[!is.na(string)],
-                                                       ~ relevant(.x)),
-                            # odds to upper
-                            ~{.x[.y] <- stringr::str_to_upper(.x[.y]);
-                            # others to lower
-                            .x[!.y] <- stringr::str_to_lower(.x[!.y]);
-                            .x}) 
-    }
+      string[!is.na(string)] <- mapply(function(x, y) {
+        # odds to upper
+        x[y] <- stringr::str_to_upper(x[y]);
+        # others to lower
+        x[!y] <- stringr::str_to_lower(x[!y]);
+        x},
+        string[!is.na(string)],
+        lapply(string[!is.na(string)], relevant),
+        SIMPLIFY = FALSE,
+        USE.NAMES = TRUE)
+      }
 ### collapsing------------------------------------------------------------------
     if(case %in% c("none", "mixed", "snake", "screaming_snake", "parsed",
                    "small_camel", "big_camel", "lower_upper", "upper_lower")) {
@@ -304,9 +308,12 @@ to_any_case <- function(string,
 }
 ### postprocessing (ouput separator)s--------------------------------------------
     if(!is.null(sep_out) & !identical(string, character(0))){
-      string <- purrr::map2_chr(string,
-                                sep_out,
-                                ~ stringr::str_replace_all(.x, "_", .y))}
+      string <- mapply(function(x, y) 
+        stringr::str_replace_all(x, "_", y),
+                                 string,
+                                 sep_out,
+        USE.NAMES = FALSE)
+      }
     
     if(is.null(sep_out) & case %in% c("small_camel", "big_camel", 
                                             "lower_upper", "upper_lower")){
