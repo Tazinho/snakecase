@@ -81,13 +81,12 @@ test_that("preserve-names-attribute", {
 
 test_that("janitor-pkg-tests",{
   clean_names3 <- function(old_names, case = "snake"){
-    new_names <- old_names %>%
-      gsub("'", "", .) %>% # remove quotation marks
-      gsub("\"", "", .) %>% # remove quotation marks
-      gsub("%", ".percent_", .) %>%
-      gsub("^[ ]+", "", .) %>%
-      make.names(.) %>%
-      to_any_case(case = case, sep_in = "\\.", 
+    new_names <- gsub("'", "", old_names) # remove quotation marks
+    new_names <- gsub("\"", "", new_names) # remove quotation marks
+    new_names <- gsub("%", ".percent_", new_names)
+    new_names <- gsub("^[ ]+", "", new_names)
+    new_names <- make.names(new_names)
+    new_names <- to_any_case(new_names, case = case, sep_in = "\\.", 
                   transliterations = c("Latin-ASCII"))
     # Handle duplicated names - they mess up dplyr pipelines
     # This appends the column number to repeated instances of duplicate variable names
@@ -430,7 +429,7 @@ test_that("expand.grid", {
                      sep_in = NULL,
                      sep_out = NULL,
                      .collate = "cols",
-                     .to = "output") %>% .$output, #%>% dput
+                     .to = "output")$output, #%>% dput
                c(NA, "", "s_na_k_er", "SNAKE_SNAKE_CASE", "snake_Snak_E_Case", 
                  "SNAKE_snak_E_case", "ss_R_Rss", "ss_RRRR", "this_Is_Some_Camel_Case", 
                  "this.text", "final_count", "Bob_Dylan_USA", "Mikhail_Gorbachev_USSR", 
