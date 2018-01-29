@@ -13,6 +13,7 @@ Imports:
     stringi
 Suggests:
     testthat,
+    magrittr,
     covr,
     tibble,
     purrrlyr,
