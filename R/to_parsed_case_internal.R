@@ -16,8 +16,6 @@
 #' @author Malte Grosser, \email{malte.grosser@@gmail.com}
 #' @keywords utilities
 #'
-#' @importFrom magrittr "%>%"
-#'
 to_parsed_case_internal <- function(string, parsing_option = 1L){
   ### input checking
   if(parsing_option >= 5L){
@@ -89,9 +87,12 @@ to_parsed_case_internal <- function(string, parsing_option = 1L){
   
   ### customize the output
   # remove more than one "_" and starting/ending "_"
-  string <- string %>%
-    vapply(stringr::str_replace_all, "", "_+"   , "_", USE.NAMES = FALSE) %>%
-    vapply(stringr::str_replace_all, "", "^_|_$", "" , USE.NAMES = FALSE) 
+  string <- vapply(string, 
+                   stringr::str_replace_all, "", "_+"   , "_", 
+                   USE.NAMES = FALSE)
+  string <- vapply(string, 
+                   stringr::str_replace_all, "", "^_|_$", "" , 
+                   USE.NAMES = FALSE) 
   if(parsing_option == 3){
     string <- stringr::str_replace_all(string, "_(?![:alnum:])|(?<![:alnum:])_", "")
   }

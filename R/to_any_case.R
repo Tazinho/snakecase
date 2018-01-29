@@ -132,8 +132,6 @@
 #' ### Pre -and postfix
 #' to_any_case(strings2, case = "big_camel", sep_in = "-|\\:", sep_out = "//",
 #'             prefix = "USER://", postfix = ".exe")
-#' 
-#' @importFrom magrittr "%>%"
 #'
 #' @seealso \href{https://github.com/Tazinho/snakecase}{snakecase on github} or 
 #' \code{\link{caseconverter}} for some handy shortcuts.

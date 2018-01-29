@@ -73,9 +73,6 @@
 #' to_mixed_case(strings)
 #' 
 #' 
-#' @importFrom magrittr "%>%"
-NULL
-
 #' @rdname caseconverter
 #' @seealso \href{https://github.com/Tazinho/snakecase}{snakecase on github}, \code{\link{to_any_case}} for flexible high level conversion.
 #' @export
