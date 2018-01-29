@@ -10,10 +10,10 @@ Depends:
     R (>= 3.1)
 Imports:
     stringr,
+    magrittr,
     stringi
 Suggests:
     testthat,
-    magrittr,
     covr,
     tibble,
     purrrlyr,
