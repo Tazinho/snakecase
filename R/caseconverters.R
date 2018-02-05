@@ -74,7 +74,7 @@
 #' 
 #' 
 #' @rdname caseconverter
-#' @seealso \href{https://github.com/Tazinho/snakecase}{snakecase on github}, \code{\link{to_any_case}} for flexible high level conversion.
+#' @seealso \href{https://github.com/Tazinho/snakecase}{snakecase on github}, \code{\link{to_any_case}} for flexible high level conversion and more examples.
 #' @export
 
 to_snake_case <- function(string,

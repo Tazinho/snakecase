@@ -117,10 +117,11 @@ to_any_case("HAMBURGcity", case = "parsed", parsing_option = 1)
 # so the second parsing option is the way to address this example
 to_any_case("HAMBURGcity", case = "parsed", parsing_option = 2)
 # By default (option 1) characters are converted after non alpha numeric characters.
-# This option (5) suppresses this behaviour
+# This option (3) suppresses this behaviour
 to_any_case("blaBla.bla", case = "big_camel", parsing_option = 3)
+# Numbers are always separated from characters via an underscore. To suppress this behaviour choose parsing_option 4
+snakecase::to_any_case("d3 library", case = "upper_camel", parsing_option = 4, sep_out = " ")
 # there might be reasons to suppress the parsing, while choosing neither one or two
-
 to_any_case("HAMBURGcity", case = "parsed", parsing_option = 0)
 
 ### Abbreviations
@@ -140,6 +141,11 @@ to_any_case("\\u00E4ngstlicher Has\\u00EA", transliterations = c("german", "Lati
 strings2 <- c("this - Is_-: a Strange_string", "AND THIS ANOTHER_One")
 to_any_case(strings2, case = "snake", sep_in = "-|\\\\:", sep_out = " ")
 to_any_case(strings2, case = "big_camel", sep_in = "-|\\\\:", sep_out = "//")
+
+### Empty fill and unique sep
+to_any_case(c("","",""), empty_fill = c("empty", "empty", "also empty"))
+
+to_any_case(c("same", "same", "same", "other"), unique_sep = c(">"))
 
 ### Pre -and postfix
 to_any_case(strings2, case = "big_camel", sep_in = "-|\\\\:", sep_out = "//",

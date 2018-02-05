@@ -117,7 +117,7 @@ to_mixed_case(strings)
 
 }
 \seealso{
-\href{https://github.com/Tazinho/snakecase}{snakecase on github}, \code{\link{to_any_case}} for flexible high level conversion.
+\href{https://github.com/Tazinho/snakecase}{snakecase on github}, \code{\link{to_any_case}} for flexible high level conversion and more examples.
 }
 \author{
 Malte Grosser, \email{malte.grosser@gmail.com}
