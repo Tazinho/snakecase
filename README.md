@@ -232,7 +232,7 @@ to_any_case(c("HHcity", "IDtable1", "KEYtable2", "newUSelections"),
 ``` r
 to_any_case("look_AfterThe-hyphen andThe.dot", 
             case = "upper_camel", parsing_option = 3)
-## [1] "LookAfterThe-HyphenAndThe.Dot"
+## [1] "LookAfterThe-hyphenAndThe.dot"
 ```
 
   - If you want to leave digits as is (not surrounging with a
@@ -243,7 +243,7 @@ to_any_case("look_AfterThe-hyphen andThe.dot",
 ``` r
 to_any_case("species42value 23month", 
             case = "snake", parsing_option = 4)
-## [1] "species_42_value_23_month"
+## [1] "species42value_23month"
 ```
 
 If you are interested in a specific parsing option, which is not
