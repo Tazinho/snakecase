@@ -67,7 +67,7 @@ only "german" is supported). In the order of the entries the letters of the inpu
  string will be transliterated via \code{stringi::stri_trans_general()} or replaced via the 
  matches of the lookup table.
  
-You should use this feature with care in case of \code{case = "parsed"} and 
+You should use this feature with care in case of \code{case = "parsed"}, \code{case = "internal_parsing"} and 
 \code{case = "none"}, since for upper case letters, which have transliterations/replacements
  of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
  might not always be what is intended.}
