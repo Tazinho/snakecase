@@ -194,7 +194,7 @@ to_any_case("Maybé you_just...want to Format me a bit?", case = "none",
 * cosmetics: `empty_fill`, `unique_sep`, `prefix`, `postfix`
 
 ```{r, collapse=TRUE}
-to_any_case(c("","_",""), empty_fill = c("empty", "also empty"))
+to_any_case(c("","",""), empty_fill = c("empty", "empty", "also empty"))
 
 to_any_case(c("same", "same", "same", "other"), unique_sep = c(">"))
 

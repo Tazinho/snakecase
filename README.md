@@ -299,10 +299,8 @@ to_any_case("Maybé you_just...want to Format me a bit?", case = "none",
 <!-- end list -->
 
 ``` r
-to_any_case(c("","_",""), empty_fill = c("empty", "also empty"))
-## Warning in string[string == ""] <- empty_fill: Anzahl der zu ersetzenden
-## Elemente ist kein Vielfaches der Ersetzungslänge
-## [1] "empty"      "also empty" "empty"
+to_any_case(c("","",""), empty_fill = c("empty", "empty", "also empty"))
+## [1] "empty"      "empty"      "also empty"
 
 to_any_case(c("same", "same", "same", "other"), unique_sep = c(">"))
 ## [1] "same"   "same>1" "same>2" "other"
