@@ -26,7 +26,38 @@ test_that("examples", {
   
   expect_equal(to_any_case(c("RSSfeedRSSfeed", "USPassport", "USpassport"), abbreviations = c("RSS", "US")),
                c("rss_feed_rss_feed", "us_passport", "us_passport"))
-}
+  
+  expect_equal(to_any_case("NBAGame", abbreviations = "NBA", case = "parsed"),
+               "NBA_Game")
+  expect_equal(to_any_case("NBAGame", abbreviations = "NBA", case = "mixed"),
+               "NBA_Game")
+  expect_equal(to_any_case("NBAGame", abbreviations = "NBA", case = "snake"),
+               "nba_game")
+  expect_equal(to_any_case("NBAGame", abbreviations = "NBA", case = "screaming_snake"),
+               "NBA_GAME")
+  expect_equal(to_any_case("NBAGame", abbreviations = "NBA", case = "internal_parsing"),
+               "NBA_Game")
+  expect_equal(to_any_case("NBAGame", abbreviations = "NBA", case = "upper_camel"),
+               "NBAGame")
+  expect_equal(to_any_case("nba_game", abbreviations = "NBA", case = "lower_camel"),
+               "nbaGame")
+  expect_equal(to_any_case("NBA_game", abbreviations = "NBA", case = "upper_camel"),
+               "NBAGame")
+  expect_equal(to_any_case("nba_game", abbreviations = "NBA", case = "upper_camel"),
+               "NBAGame")
+  expect_equal(to_any_case("NBA_game_NBA", abbreviations = "NBA", case = "lower_camel"),
+               "nbaGameNBA")
+  expect_equal(to_any_case("NBA_game_NBA", abbreviations = "NBA", case = "lower_upper"),
+               "nbaGAMEnba")
+  expect_equal(to_any_case("NBA_game", abbreviations = "NBA", case = "mixed"),
+               "NBA_game")
+  expect_equal(to_any_case("NBA_game_NBA", abbreviations = "NBA", case = "mixed"),
+               "NBA_game_NBA")
+  expect_equal(to_snake_case(c("NBAGame", "NBAgame"), abbreviations = "NBA"),
+               c("nba_game", "nba_game"))
+  expect_equal(to_upper_camel_case(c("nba_game", "nba_game"), abbreviations = "NBA"),
+               c("NBAGame", "NBAGame"))
+  }
 )
 
 test_that("preserve-names-attribute", {

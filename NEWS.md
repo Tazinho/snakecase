@@ -1,3 +1,6 @@
+# snakecase 0.8.3.1
+* abbreviations work now also in conversions to lower- and upper camel case.
+
 # snakecase 0.8.3
 
 * replaced `parsing_option`s 3 and 4 with 5 and 6. 

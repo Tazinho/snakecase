@@ -35,7 +35,8 @@
 #' 
 #' @param abbreviations character with (uppercase) abbreviations. This marks
 #'  abbreviations with an underscore behind (in front of the parsing).
-#'  useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2.
+#'  useful if parsinoption 1 is needed, but some abbreviations within the string need parsing_option 2.
+#'  Use this feature with care: One letter abbreviations and abbreviations next to each other may not be handled correctly, since those cases would introduce ambiguity in parsing.
 #'  
 #' @param sep_in (short for separator input) A regex supplied as a character (if not \code{NULL}), which will be wrapped internally
 #' into \code{stringr::regex()}. All matches will be replaced by underscores (aditionally to 
@@ -238,6 +239,13 @@ to_any_case <- function(string,
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if(case == "big_camel"){
       string <- lapply(string, stringr::str_to_lower)
+      if(!is.null(abbreviations)){
+      string <- lapply(string, 
+                       function(x) ifelse(x %in% stringr::str_to_lower(abbreviations), 
+                                          stringr::str_to_upper(x),
+                                          x)
+      )
+      }
       string <- lapply(string,
                        function(x) stringr::str_c(stringr::str_to_upper(stringr::str_sub(x, 1, 1)),
                                                   stringr::str_sub(x, 2)))
@@ -256,6 +264,12 @@ to_any_case <- function(string,
                                         stringr::str_sub(x, 2)), "",
                USE.NAMES = FALSE)
       string <- stringr::str_split(string, " ")
+      if(!is.null(abbreviations)){ # handle abbreviations
+      string <- lapply(string,
+                       function(x) c(stringr::str_to_lower(x[1]), 
+                                     ifelse(stringr::str_to_lower(x[-1]) %in% stringr::str_to_lower(abbreviations),
+                                            stringr::str_to_upper(x[-1]), x[-1])))
+      }
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if(case == "screaming_snake"){
