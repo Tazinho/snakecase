@@ -66,6 +66,15 @@ to_any_case("malte.grosser@gmail.com", sep_in = "[^[:alnum:]]")
 ## [1] "malte_grosser_gmail_com"
 ```
 
+Whit a bit of regex knowledge you can decide to leave in whatever you
+want, while remoing the rest
+
+``` r
+to_any_case("keep @ # . , * remove - & |",
+            sep_in = "[^[:alnum:] @#\\.,\\*]")
+## [1] "keep@#.,*remove"
+```
+
 The regex format is especially handy, when special characters have a
 meaning as a separator or for example as a decimal mark
 
