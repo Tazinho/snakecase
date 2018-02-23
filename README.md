@@ -67,7 +67,7 @@ to_any_case("malte.grosser@gmail.com", sep_in = "[^[:alnum:]]")
 ```
 
 Whit a bit of regex knowledge you can decide to leave in whatever you
-want, while remoing the rest
+want, while removing the rest
 
 ``` r
 to_any_case("keep @ # . , * remove - & |",

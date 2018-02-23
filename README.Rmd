@@ -54,7 +54,7 @@ It is as simple as that to treat all non-alphanumerics as separators
 to_any_case("malte.grosser@gmail.com", sep_in = "[^[:alnum:]]")
 ```
 
-Whit a bit of regex knowledge you can decide to leave in whatever you want, while remoing the rest
+With a bit of regex knowledge you can decide to leave in whatever you want, while removing the rest
 
 ```{r, collapse = TRUE}
 to_any_case("keep @ # . , * remove - & |",
