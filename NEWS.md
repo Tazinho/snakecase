@@ -1,3 +1,26 @@
+# snakecase 0.9.0
+
+* CRAN release
+
+* Changes since last update:
+
+  * parsing_options:
+    * old parsing_options 3 and 4 are replaced now by new
+      * parsing_option 3, which suppreses case conversion around alpha numerics
+      * parsing_option 4, which introduces less formatting of numerals in the output,
+      and leaves them very close to the way that they appeared in the input strings.
+  * abbreviations:
+    * they work now more consistent with cases like lower- and upper camel case
+  * new converters:
+    * to_swap_case is new. Within to_any_case this conversion can be called also via `case = "flip"`.
+  * removed deprecated arguments 
+    * `replace_special_characters`, which is now called `transliterations`
+    * `preprocess`, which is now called `sep_in`
+    * `postprocess`, which is now called `sep_out`
+  * removed dependencies:
+    * purrr and magrittr are not longer dependencies
+    * stringr is the only dependency now (including stringi of course).
+
 # snakecase 0.8.4
 * Introduced `to_swap_case()`, which is also available in `to_any_case()` via 
   `case = "swap"` or `case = "flip"`
@@ -13,7 +36,7 @@
 
 # snakecase 0.8.2.9002
 
-* remove `replace_special_characters`, `preprocess`, `postprocess`.
+* remove `replace_special_characters`, `preprocess` and `postprocess`.
 
 # snakecase 0.8.2.9001
 

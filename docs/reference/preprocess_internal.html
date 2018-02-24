@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Internal function that replaces regex matches with underscores � preprocess_internal • snakecase</title>
+<title>Internal function that replaces regex matches with underscores — preprocess_internal â€¢ snakecase</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,6 +18,8 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -25,6 +27,10 @@
 <script src="../pkgdown.js"></script>
   
   
+<meta property="og:title" content="Internal function that replaces regex matches with underscores — preprocess_internal" />
+
+<meta property="og:description" content="Internal function that replaces regex matches with underscores" />
+<meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -102,7 +108,7 @@
     <p>Internal function that replaces regex matches with underscores</p>
     
 
-    <pre class="usage"><span class='fu'>preprocess_internal</span>(<span class='no'>string</span>, <span class='no'>preprocess</span>)</pre>
+    <pre class="usage"><span class='fu'>preprocess_internal</span>(<span class='no'>string</span>, <span class='no'>sep_in</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -112,9 +118,10 @@
       <td><p>A string.</p></td>
     </tr>
     <tr>
-      <th>preprocess</th>
-      <td><p>Character string that will be wrapped internally into stringr::regex. 
-All matches will be padded with underscores.</p></td>
+      <th>sep_in</th>
+      <td><p>(short for separator input) A regex supplied as a character (if not <code>NULL</code>), which will be wrapped internally
+into <code><a href='http://www.rdocumentation.org/packages/stringr/topics/modifiers'>stringr::regex()</a></code>. All matches will be replaced by underscores (aditionally to 
+<code>"_"</code> and <code>" "</code>, for which this is always true). Underscores can later turned into another separator via <code>postprocess</code>.</p></td>
     </tr>
     </table>
     

@@ -66,7 +66,7 @@ to_any_case("malte.grosser@gmail.com", sep_in = "[^[:alnum:]]")
 ## [1] "malte_grosser_gmail_com"
 ```
 
-Whit a bit of regex knowledge you can decide to leave in whatever you
+With a bit of regex knowledge you can decide to leave in whatever you
 want, while removing the rest
 
 ``` r
@@ -101,7 +101,7 @@ to_any_case("Doppelgänger is originally german",
 ## [1] "DoppelgaengerIsOriginallyGerman"
 ```
 
-All of the cases like: snake, lower\_camel, upper\_camel, all\_caps,
+All of the cases like snake, lower\_camel, upper\_camel, all\_caps,
 lower\_upper, upper\_lower and mixed are based on parsed case
 
 ``` r
