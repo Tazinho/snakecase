@@ -10,6 +10,7 @@
 \alias{to_mixed_case}
 \alias{to_lower_upper_case}
 \alias{to_upper_lower_case}
+\alias{to_swap_case}
 \title{Specific case converter shortcuts}
 \usage{
 to_snake_case(string, abbreviations = NULL, sep_in = NULL,
@@ -41,6 +42,10 @@ to_lower_upper_case(string, abbreviations = NULL, sep_in = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
 to_upper_lower_case(string, abbreviations = NULL, sep_in = NULL,
+  parsing_option = 1, transliterations = NULL, sep_out = NULL,
+  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
+
+to_swap_case(string, abbreviations = NULL, sep_in = NULL,
   parsing_option = 1, transliterations = NULL, sep_out = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 }
@@ -114,6 +119,7 @@ to_lower_upper_case(strings)
 to_upper_lower_case(strings)
 to_parsed_case(strings)
 to_mixed_case(strings)
+to_swap_case(strings)
 
 
 }
