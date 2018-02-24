@@ -32,7 +32,7 @@
 #'   \code{empty_fill} and \code{unique_sep}.}
 #'  \item{\code{"internal_parsing"}: This case is returning the internal parsing
 #'  (suppressing the internal protection mechanism), which means that alphanumeric characters will be surrounded by underscores.
-#'  It should only be used in very rare usecases and is mainly implemented to showcase the internal workings of \code{to_any_case()}}
+#'  It should only be used in very rare use cases and is mainly implemented to showcase the internal workings of \code{to_any_case()}}
 #'  }
 #' 
 #' @param abbreviations character with (uppercase) abbreviations. This marks
