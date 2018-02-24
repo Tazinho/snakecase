@@ -41,7 +41,7 @@
 #'  Use this feature with care: One letter abbreviations and abbreviations next to each other may not be handled correctly, since those cases would introduce ambiguity in parsing.
 #'  
 #' @param sep_in (short for separator input) A regex supplied as a character (if not \code{NULL}), which will be wrapped internally
-#' into \code{stringr::regex()}. All matches will be replaced by underscores (aditionally to 
+#' into \code{stringr::regex()}. All matches will be replaced by underscores (additionally to 
 #' \code{"_"} and \code{" "}, for which this is always true). Underscores can later turned into another separator via \code{sep_out}.
 #' 
 #' @param parsing_option An integer that will determine the parsing_option.
