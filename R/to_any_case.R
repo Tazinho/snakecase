@@ -110,7 +110,8 @@
 #' # By default (option 1) characters are converted after non alpha numeric characters.
 #' # This option (3) suppresses this behaviour
 #' to_any_case("blaBla.bla", case = "big_camel", parsing_option = 3)
-#' # Numbers are always separated from characters via an underscore. To suppress this behaviour choose parsing_option 4
+#' # Numbers are always separated from characters via an underscore. 
+#' # To suppress this behaviour choose parsing_option 4
 #' snakecase::to_any_case("d3 library", case = "upper_camel", parsing_option = 4, sep_out = " ")
 #' # there might be reasons to suppress the parsing, while choosing neither one or two
 #' to_any_case("HAMBURGcity", case = "parsed", parsing_option = 0)
