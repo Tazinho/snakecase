@@ -6,7 +6,7 @@
 #'  
 #' @param abbreviations character with (uppercase) abbreviations. This marks
 #'  abbreviations with an underscore behind (in front of the parsing).
-#'  useful if parsinoption 1 is needed, but some abbreviations within the string need parsing_option 2.
+#'  Useful if \code{parsing_option} 1 is needed, but some abbreviations within the string need \code{parsing_option} 2.
 #'  Use this feature with care: One letter abbreviations and abbreviations next to each other may not be handled correctly, since those cases would introduce ambiguity in parsing.
 #'  
 #' @param sep_in (short for separator input) A regex supplied as a character (if not \code{NULL}), which will be wrapped internally
@@ -72,6 +72,7 @@
 #' to_upper_lower_case(strings)
 #' to_parsed_case(strings)
 #' to_mixed_case(strings)
+#' to_swap_case(strings)
 #' 
 #' 
 #' @rdname caseconverter
@@ -272,6 +273,32 @@ to_upper_lower_case <- function(string,
                                 postfix = ""){
   to_any_case(string = string,
               case = "upper_lower",
+              sep_in = sep_in,
+              transliterations = transliterations,
+              sep_out = sep_out,
+              prefix = prefix,
+              postfix = postfix,
+              unique_sep = unique_sep,
+              empty_fill = empty_fill,
+              parsing_option = parsing_option,
+              abbreviations = abbreviations)
+}
+
+#' @rdname caseconverter
+#' @export
+
+to_swap_case <- function(string,
+                                abbreviations = NULL,
+                                sep_in = NULL,
+                                parsing_option = 1,
+                                transliterations = NULL,
+                                sep_out = NULL,
+                                unique_sep = NULL,
+                                empty_fill = NULL,
+                                prefix = "",
+                                postfix = ""){
+  to_any_case(string = string,
+              case = "swap",
               sep_in = sep_in,
               transliterations = transliterations,
               sep_out = sep_out,

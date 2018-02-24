@@ -5,8 +5,8 @@
 \title{General case conversion}
 \usage{
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
-  "screaming_snake", "parsed", "mixed", "lower_upper", "upper_lower",
-  "all_caps", "lower_camel", "upper_camel", "internal_parsing", "none"),
+  "screaming_snake", "parsed", "mixed", "lower_upper", "upper_lower", "swap",
+  "all_caps", "lower_camel", "upper_camel", "internal_parsing", "none", "flip"),
   abbreviations = NULL, sep_in = NULL, parsing_option = 1,
   transliterations = NULL, sep_out = NULL, unique_sep = NULL,
   empty_fill = NULL, prefix = "", postfix = "")
@@ -24,7 +24,7 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
  \item{UPPERlower: \code{"upper_lower"}}
  }
 
- There are four "special" cases available:
+ There are five "special" cases available:
 \itemize{
  \item{\code{"parsed"}: This case is underlying all other cases. 
  Every substring a string consists
@@ -33,6 +33,7 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
  upper case pattern from the input string are changed.}
  \item{\code{"mixed"}: Almost the same as \code{case = "parsed"}. Every letter which is not at the start
  or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will stay in upper case.}
+ \item{\code{"swap"}: Upper case letters will turnec into lower case and vice versa. Also \code{"flip"} will work.}
  \item{\code{"none"}: Neither parsing nor case conversion occur. This case might be helpful, when
  one wants to call the function for the quick usage of the other parameters.
  Works with \code{sep_in}, \code{transliterations}, \code{sep_out}, \code{prefix},
@@ -45,7 +46,7 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
 
 \item{abbreviations}{character with (uppercase) abbreviations. This marks
 abbreviations with an underscore behind (in front of the parsing).
-useful if parsinoption 1 is needed, but some abbreviations within the string need parsing_option 2.
+Useful if \code{parsing_option} 1 is needed, but some abbreviations within the string need \code{parsing_option} 2.
 Use this feature with care: One letter abbreviations and abbreviations next to each other may not be handled correctly, since those cases would introduce ambiguity in parsing.}
 
 \item{sep_in}{(short for separator input) A regex supplied as a character (if not \code{NULL}), which will be wrapped internally

@@ -246,6 +246,12 @@ test_that("empty_fill",
           expect_equal(to_any_case("", empty_fill = "bla"),
           "bla"))
 
+test_that("flip and swap", {
+          expect_equal(to_any_case("rSTUDIO", case = "flip"), "Rstudio")
+          
+          expect_equal(to_any_case("rSTUDIO", case = "swap"), "Rstudio")
+})
+
 test_that("complex strings", {
   strings2 <- c("this - Is_-: a Strange_string", "\u00C4ND THIS ANOTHER_One")
   

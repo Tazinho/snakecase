@@ -1,6 +1,6 @@
 Package: snakecase
-Version: 0.8.3.1
-Date: 2018-02-07
+Version: 0.8.4
+Date: 2018-02-24
 Title: Convert Strings into any Case
 Description: A consistent, flexible and easy to use tool to parse and convert strings into cases like snake or camel among others.
 Authors@R: c(
