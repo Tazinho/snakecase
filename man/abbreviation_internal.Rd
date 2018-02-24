@@ -3,7 +3,7 @@
 \name{abbreviation_internal}
 \alias{abbreviation_internal}
 \title{Internal abbreviation marker, marks abbreviations with an underscore behind.
-Useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2.}
+Useful if \code{parsing_option} 1 is needed, but some abbreviations need \code{parsing_option} 2.}
 \usage{
 abbreviation_internal(string, abbreviations = NULL)
 }
@@ -12,14 +12,14 @@ abbreviation_internal(string, abbreviations = NULL)
 
 \item{abbreviations}{character with (uppercase) abbreviations. This marks
 abbreviations with an underscore behind (in front of the parsing).
-useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2.}
+Useful if \code{parsing_option} 1 is needed, but some abbreviations need \code{parsing_option} 2.}
 }
 \value{
 A character vector.
 }
 \description{
 Internal abbreviation marker, marks abbreviations with an underscore behind.
-Useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2.
+Useful if \code{parsing_option} 1 is needed, but some abbreviations need \code{parsing_option} 2.
 }
 \author{
 Malte Grosser, \email{malte.grosser@gmail.com}

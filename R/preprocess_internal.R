@@ -2,7 +2,7 @@
 #'
 #' @param string A string.
 #' @param sep_in (short for separator input) A regex supplied as a character (if not \code{NULL}), which will be wrapped internally
-#' into \code{stringr::regex()}. All matches will be replaced by underscores (aditionally to 
+#' into \code{stringr::regex()}. All matches will be replaced by underscores (additionally to 
 #' \code{"_"} and \code{" "}, for which this is always true). Underscores can later turned into another separator via \code{postprocess}.
 #' 
 #' @return A character containing the parsed string.

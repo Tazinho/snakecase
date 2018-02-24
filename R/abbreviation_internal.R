@@ -1,10 +1,10 @@
 #' Internal abbreviation marker, marks abbreviations with an underscore behind.
-#' Useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2.
+#' Useful if \code{parsing_option} 1 is needed, but some abbreviations need \code{parsing_option} 2.
 #'
 #' @param string A string (for example names of a data frame).
 #' @param abbreviations character with (uppercase) abbreviations. This marks
 #'  abbreviations with an underscore behind (in front of the parsing).
-#'  useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2.
+#'  Useful if \code{parsing_option} 1 is needed, but some abbreviations need \code{parsing_option} 2.
 #' 
 #' @return A character vector.
 #'
