@@ -23,7 +23,8 @@
 #'  upper case pattern from the input string are changed.}
 #'  \item{\code{"mixed"}: Almost the same as \code{case = "parsed"}. Every letter which is not at the start
 #'  or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will stay in upper case.}
-#'  \item{\code{"swap"}: Upper case letters will turnec into lower case and vice versa. Also \code{"flip"} will work.}
+#'  \item{\code{"swap"}: Upper case letters will be turned into lower case and vice versa. Also \code{case = "flip"} will work.
+#'  Doesn't work with any of the other arguments except \code{unique_sep}, \code{empty_fill}, \code{prefix} and \code{postfix}.}
 #'  \item{\code{"none"}: Neither parsing nor case conversion occur. This case might be helpful, when
 #'  one wants to call the function for the quick usage of the other parameters.
 #'  Works with \code{sep_in}, \code{transliterations}, \code{sep_out}, \code{prefix},
@@ -198,17 +199,18 @@ to_any_case <- function(string,
                    perl = TRUE,
                    replacement = "\\L\\1\\U\\2",
                    string)
-    names(string) <- string_names
-    return(string)
   }
   
 ### abbreviation handling
   # mark abbreviation with an underscore behind (in front of the parsing)
   # useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2
-  string <- abbreviation_internal(string, abbreviations)
+  if (case != "swap"){
+    string <- abbreviation_internal(string, abbreviations)
+  }
 ### ____________________________________________________________________________
 ### preprocess (regex into "_") and parsing (surrounding by "_")
-  string <- preprocess_internal(string, sep_in)
+if (case != "swap") {
+    string <- preprocess_internal(string, sep_in)
   
   if (!case %in% c("none")){
     string <- to_parsed_case_internal(string,
@@ -352,6 +354,8 @@ to_any_case <- function(string,
   if(case == "none" & !is.null(transliterations)){
     string <- replace_special_characters_internal(string, transliterations)
   }
+### ____________________________________________________________________________    
+} # close swap
 ### ____________________________________________________________________________
 ### fill empty strings
   if(!is.null(empty_fill) & any(string == "")){

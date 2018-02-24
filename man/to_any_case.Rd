@@ -33,7 +33,8 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
  upper case pattern from the input string are changed.}
  \item{\code{"mixed"}: Almost the same as \code{case = "parsed"}. Every letter which is not at the start
  or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will stay in upper case.}
- \item{\code{"swap"}: Upper case letters will turnec into lower case and vice versa. Also \code{"flip"} will work.}
+ \item{\code{"swap"}: Upper case letters will be turned into lower case and vice versa. Also \code{case = "flip"} will work.
+ Doesn't work with any of the other arguments except \code{unique_sep}, \code{empty_fill}, \code{prefix} and \code{postfix}.}
  \item{\code{"none"}: Neither parsing nor case conversion occur. This case might be helpful, when
  one wants to call the function for the quick usage of the other parameters.
  Works with \code{sep_in}, \code{transliterations}, \code{sep_out}, \code{prefix},
