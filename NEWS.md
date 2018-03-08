@@ -1,3 +1,7 @@
+# snakecase 0.9.1
+
+* Change default `sep_in` from `NULL` to `"[^[:alnum:]]"`. This will make it easier for beginners and in general also faster to modify cases from names like `names(iris)`.
+
 # snakecase 0.9.0
 
 * CRAN release
@@ -22,10 +26,12 @@
     * stringr is the only dependency now (including stringi of course).
 
 # snakecase 0.8.4
+
 * Introduced `to_swap_case()`, which is also available in `to_any_case()` via 
   `case = "swap"` or `case = "flip"`
 
 # snakecase 0.8.3.1
+
 * abbreviations work now also in conversions to lower- and upper camel case.
 
 # snakecase 0.8.3
