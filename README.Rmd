@@ -5,18 +5,16 @@ output: rmarkdown::github_document
 # snakecase <img src="man/figures/snakecase05.png" height="200" align="right">
 
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/Tazinho/snakecase?branch=master&svg=true)](https://ci.appveyor.com/project/Tazinho/snakecase) [![Travis-CI Build Status](https://travis-ci.org/Tazinho/snakecase.svg?branch=master)](https://travis-ci.org/Tazinho/snakecase) [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/snakecase)](https://cran.r-project.org/package=snakecase) [![Coverage Status](https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg)](https://codecov.io/github/Tazinho/snakecase?branch=master)
-[![downloads](http://cranlogs.r-pkg.org/badges/snakecase)](http://cranlogs.r-pkg.org/) [![total](http://cranlogs.r-pkg.org/badges/grand-total/snakecase)](http://cranlogs.r-pkg.org/)![](https://img.shields.io/badge/lifecycle-Stable-blue.svg)
+[![downloads](http://cranlogs.r-pkg.org/badges/snakecase)](http://cranlogs.r-pkg.org/) [![total](http://cranlogs.r-pkg.org/badges/grand-total/snakecase)](http://cranlogs.r-pkg.org/)![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
 
 
 ## Overview 
 
-<!--A small package with functions to convert column names of data.frames (or strings
-in general) to different cases like snake_case, smallCamel- and BigCamelCase among others. Also high level features for more advanced case conversions are provided via `to_any_case()`.-->
-The snakecase package introduces a fresh and straightforward approach on case conversion of strings, based upon a consistent design philosophy. 
+The snakecase package introduces a fresh and straightforward approach on case conversion, based upon a consistent design philosophy.
 
-(If you are interested on (the history of) this package, you can watch this [(older) talk](https://www.youtube.com/watch?v=T6p0l8XzP64).)
+For a short intro regarding typical use cases, see the blog article [Introducing the snakecase package](http://www.malte-grosser.com/post/introducing-the-snakecase-package/).
 
-### Install
+### Install and load
 
 ```{r, results='hide', message=FALSE, warning=FALSE, eval = TRUE}
 # install snakecase from cran
@@ -24,25 +22,163 @@ The snakecase package introduces a fresh and straightforward approach on case co
 
 # or the (stable) development version hosted on github
 install.packages("devtools")
-devtools::install_github("Tazinho/snakecase")
-```
+devtools::install_github("Tazinho/snakecase", ref = "devversion-01")
 
-### Basic examples
-
-Default case is snake case
-
-```{r, collapse = TRUE}
+# load snakecase
 library(snakecase)
-to_any_case("veryComplicatedString")
 ```
 
-Dots and other special characters may have a special intention
+### Basic usage
+
+The workhorse function of this package, `to_any_case()`, converts by default into snake case:
 
 ```{r, collapse = TRUE}
-to_any_case("malte.grosser@gmail.com")
+string <- c("lowerCamelCase", "ALL_CAPS", "IDontKNOWWhat_thisCASE_is")
+
+to_any_case(string)
 ```
 
-When it is clear that they are separators, you can supply them as a regex to the `sep_in` argument
+One can choose between many other cases like `"lower_camel"`, `"upper_camel"`, `"all_caps"`, `"lower_upper"`, `"upper_lower"` and `"mixed"`, which are based on `"parsed"` case:
+
+```{r, collapse = TRUE}
+to_any_case(string, case = "parsed")
+```
+
+Also shortcuts (wrappers around `to_any_case()`) are available:
+
+```{r, collapse = TRUE}
+to_upper_camel_case(string)
+```
+
+Be aware that automatic case conversion depends on the input string and it is recommendesd to verify the results. So you might want to pipe these into `dput()` (and hardcode name changes instead of blindly trusting the output)
+
+```{r, collapse = TRUE}
+library(magrittr)
+
+to_snake_case(c("SomeBAdInput", "someGoodInput")) %>% dput()
+```
+
+### Big picture (a parameterized workflow)
+
+The `to_any_case()` function is the workhorse of the package and basically enables you to convert any string into any case via a well thought process of __parsing__ (`abbreviations`, `sep_in`, `parsing_option`), __conversion__ (`transliterations`, `case`) and __postprocessing__ (`sep_out`). The specific arguments allow you to customize the pipeline.
+
+On this example, you can see the pipeline including all implementation details.
+
+```{r echo=FALSE, out.width='100%'}
+knitr::include_graphics('./man/figures/Workflow01.PNG')
+```
+
+Some further **cosmetics** (`unique_sep`, `empty_fill`, `prefix`, `postfix`) can be applied to the output, see arguments.
+
+## Arguments
+
+**string**: A character vector, containing the input strings.
+
+#### Parsing
+
+**abbreviations**: One challenge in case conversion are odd looking "mixed cases". These might be introduced due to country codes or other abbreviations, which are usually written in upper case. Before you consider a different `parsing_option` (see below), you might just want to use the abbreviations argument:
+
+```{r, collapse = TRUE}
+to_snake_case(c("HHcity", "IDTable1", "KEYtable2", "newUSElections"),
+              abbreviations = c("HH", "ID", "KEY", "US"))
+```
+
+**sep_in**: By default non-alphanumeric characters are treated as separators:
+
+```{r, collapse = TRUE}
+to_snake_case("malte.grosser@gmail.com")
+```
+
+To suppress this behaviour, just set `sep_in = NULL`:
+
+```{r, collapse = TRUE}
+to_snake_case("malte.grosser@gmail.com", sep_in = NULL)
+```
+
+Since `sep_in` takes regular expressions as input, `to_any_case()` becomes very flexible. We can for example express that dots behind digits should not be treated as separators, since they might be intended as decimal marks:
+
+```{r, collapse = TRUE}
+to_snake_case("Pi.Value:3.14", sep_in = ":|(?<!\\d)\\.")
+```
+
+**parsing_option**: We can modify the abbreviations example a bit. In this case, another parsing option might be handy:
+
+```{r, collapse = TRUE}
+to_snake_case(c("HHcity", "IDtable1", "KEYtable2", "newUSelections"),
+              parsing_option = 2)
+```
+
+To suppress conversion after a non-alphanumeric character (except `"_"`), you can choose parsing option 3:
+
+```{r, collapse = TRUE}
+to_upper_camel_case("look_AfterThe-hyphen andThe.dot",
+                    sep_in = NULL,
+                    parsing_option = 3)
+```
+
+If you want to leave digits as is (not surrounding with a separator), use parsing option 4:
+
+```{r, collapse = TRUE}
+to_snake_case("species42value 23month",
+              parsing_option = 4)
+```
+
+If you are interested in a specific parsing option, which is not implemented, please open an issue. When typical pattern - like handling of numerals  - arise in the future, the `parsing_option` argument might be split into several more low level arguments.
+
+#### Conversion
+
+**transliterations**: To turn special characters (for example) into ASCII one can incorporate transliterations from `stringi::stri_trans_list()` or [this package](https://github.com/Tazinho/snakecase/issues/107) (also in combination):
+
+```{r, collapse = TRUE}
+to_upper_camel_case("Doppelgänger is originally german",
+                    transliterations = "german")
+
+to_snake_case("Schönes Café",
+              transliterations = c("german", "Latin-ASCII"))
+```
+
+If you can provide tranliterations for your (or any other) country, pls drop them within [this issue](https://github.com/Tazinho/snakecase/issues/107).
+
+**case**: The desired target case, provided as one of the following:
+
+* snake_case: `"snake"`
+* lowerCamel: `"lower_camel"` or `"small_camel"`
+* UpperCamel: `"upper_camel"` or `"big_camel"`
+* ALL_CAPS: `"all_caps"` or `"screaming_snake"`
+* lowerUPPER: `"lower_upper"`
+* UPPERlower: `"upper_lower"`
+
+There are five "special" cases available:
+
+* `"parsed"`: This case is underlying all other cases. Every substring a string consists of becomes surrounded by an underscore (depending on the parsing_option). Underscores at the start and end are trimmed. No lower or upper case pattern from the input string are changed.
+* `"mixed"`: Almost the same as `case = "parsed"`. Every letter which is not at the start or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will stay in upper case.
+* `"swap"`: Upper case letters will be turned into lower case and vice versa. Also `case = "flip"` will work. Doesn't work with any of the other arguments except `unique_sep`, `empty_fill`, `prefix` and `postfix`.
+* `"none"`: Neither parsing nor case conversion occur. This case might be helpful, when one wants to call the function for the quick usage of the other parameters. To suppress replacement of spaces to underscores set `sep_out = NULL`. Works with `sep_in`, `transliterations`, `sep_out`, `unique_sep`, `empty_fill`, `prefix` and `postfix`.
+* `"internal_parsing"`: This case is returning the internal parsing (suppressing the internal protection mechanism), which means that alphanumeric characters will be surrounded by underscores. It should only be used in very rare use cases and is mainly implemented to showcase the internal workings of `to_any_case()`.
+
+#### Postprocessing
+
+**sep_out**: For the creation of other well known or completely new cases it is possible to adjust the ouput separator (`sep_out`):
+
+```{r, collapse = TRUE}
+to_snake_case(string, sep_out = ".")
+
+to_mixed_case(string, sep_out = " ")
+
+to_screaming_snake_case(string, sep_out = "=")
+```
+
+#### Cosmetics
+
+**unique_sep**: (character): When not `NULL` non unique output strings will get an integer suffix separated with the supplied string.  
+
+**empty_fill**: (character): Empty output (`""`) will be replaced by this string.
+
+**prefix**: (character): simple prefix.
+
+**postfix**: (character): simple post-/suffix.
+
+<!-- When it is clear that they are separators, you can supply them as a regex to the `sep_in` argument
 
 ```{r, collapse = TRUE}
 to_any_case(names(iris), sep_in = "\\.")
@@ -73,61 +209,47 @@ Of course other cases are supported (`case`) and output separators can be adjust
 to_any_case(names(iris), sep_in = "\\.", case = "upper_camel", sep_out = " ")
 ```
 
-And you might want to remove special characters along the way
-
-```{r, collapse = TRUE}
-to_any_case("Doppelgänger is originally german", 
-            transliterations = "german", case = "upper_camel")
-```
-
 All of the cases like snake, lower_camel, upper_camel, all_caps, lower_upper, upper_lower and mixed are based on parsed case
 
 ```{r, collapse = TRUE}
 to_any_case("THISIsHOW IAmPARSED!", case = "parsed")
 ```
 
-Shortcut wrappers like `to_snake_case()`, `to_lower_camel_case()` etc. are available.
+Shortcut wrappers like `to_snake_case()`, `to_lower_camel_case()` etc. are available.-->
 
-Be aware that automatic case conversion depends on the input string and it is recommendesd to verify the results. So you might want to pipe these into `dput()` (and hardcode name changes instead of blindly trusting `to_any_case()`'s output)
+## Design decisions
 
-```{r, collapse = TRUE}
-dput(to_any_case(c("SomeBAdInput", "someGoodInput")))
-```
+### Scope
 
-### Big picture (a parameterized workflow)
+`to_any_case()` is an attempt to provide good low level control, while still being high level enough for daily usage. If you want case conversion with good default settings, you can choose the `clean_names()` function from the [janitor](https://github.com/sfirke/janitor) package, which works directly on data frames. You can also look into the [sjPlot](https://github.com/strengejacke/sjPlot) package, where automatic case conversion is used to provide nice default labels within graphics.
 
-The `to_any_case()` function is the workhorse of the package and basically enables you to convert any string into any case via a well thought process of __parsing__ (`abbreviations`, `sep_in`, `parsing_option`), __conversion__ (`transliterations`, `case`) and __postprocessing__ (`sep_out`). The specific arguments allow you to customize the pipeline.
-
-On this example, you can see the pipeline including all implementation details.
-
-```{r echo=FALSE, out.width='100%'}
-knitr::include_graphics('./man/figures/Workflow01.PNG')
-```
-
-Some further cosmetics can be added to the output via the following arguments:
-
-* `unique_sep` (character): When not `NULL` non unique will get an integer suffix separated with the supplied string  
-* `empty_fill` (character): Empty output (`""`) will be replaced by this string  
-* `prefix` (character): simple prefix  
-* `postfix` (character): simple post-/suffix  
-
-### Vectorisation, speed and special input handling
+### Dependencies, vectorisation, speed and special input handling
 
 The package is internally build up on the [stringr](https://github.com/tidyverse/stringr) package, which means that many powerful features are provided "by default":
 
 * `to_any_case()` is vectorised over most of its arguments like `string`, `sep_in`, `sep_out`, `empty_fill`, `prefix` and `postfix`.
-* internal character operations are super fast c++. However, a lot of speed is lost due to a more systematic and maintainable implementation. (This might be optimized in the long run)
-* special input like `character(0)`, `NA` etc. is handled in exactly the same consistent and convenient manner as in the stringr package
+* internal character operations are super fast c++. However, some speed is lost due to a more systematic and maintainable implementation. (This might be optimized in the long run).
+* special input like `character(0)`, `NA` etc. is handled in exactly the same consistent and convenient manner as in the stringr package.
 
-## Recommended settings
+### Known limitations
 
-`to_any_case()` is an attempt to provide good low level control, while still being high level enough for daily usage. If you want case conversion with good default settings, you can choose the `clean_names()` function from the [janitor](https://github.com/sfirke/janitor) package, which works directly on data frames. You can also look into the [sjPlot](https://github.com/strengejacke/sjPlot) package, where automatic case conversion is used to provide nice default labels within graphics.
+* In general combinations of one letter words are hard to convert back from cases with `""` as default separator
+
+    ```{r, collapse=TRUE}
+    to_any_case("a_b_c_d", case = "upper_camel")
+    ```
+
+* Sometimes further pre or postprocessing might be needed. For example you can easily write your own parsing via a sequence of calls like `str_replace_all(string, some_pattern, "_\\1_")`. It's also a `str_replace_all()` to replace special symbols like `%` or `€` with `"percent"` or `"euro"` 
+
+* You can decide yourself: Open an issue [here](https://github.com/Tazinho/snakecase/issues) or build sth. quickly yourself via packages like base, [stringr](https://github.com/tidyverse/stringr), [stringi](https://github.com/gagolews/stringi) etc.
+
+<!--`to_any_case()` is an attempt to provide good low level control, while still being high level enough for daily usage. If you want case conversion with good default settings, you can choose the `clean_names()` function from the [janitor](https://github.com/sfirke/janitor) package, which works directly on data frames. You can also look into the [sjPlot](https://github.com/strengejacke/sjPlot) package, where automatic case conversion is used to provide nice default labels within graphics.
 
 For daily usage (especially when preparing fixed scripts) I recommend to combine `to_any_case()` with `dput()`. In this way, you can quickly inspect, if the output is as intended and hardcode the results (which is basically safer and good practice in my opinion). In very complex cases you might just want to manually fix the output instead of tweeking with the arguments too much.
 
 However, if you have a really hard time on a specific example or you want to have appropriate settings for a specific usecase, the following might help you getting started...
 
-* `abbreviations`: In the wild you might meet abbreviations like country codes, which are often written in upper case and can lead to odd looking "mixed cases". Before you consider a different `parsing_option`, you might just want to use the abbreviations argument
+* `abbreviations`: In the wild you might meet abbreviations like country codes, which are often written in upper case and can lead to odd looking "mixed cases". Before you consider a different `parsing_option`, you might just want to use the `abbreviations` argument
 
 ```{r, collapse = TRUE}
 to_any_case(c("HHcity", "IDTable1", "KEYtable2", "newUSElections"),
@@ -210,16 +332,7 @@ to_any_case(c("customer", "product"), case = "big_camel",
             postfix = c("ID"))
 ```
 
-* In general combinations of one letter words are hard to convert back from cases with `""` as default separator
-
-```{r, collapse=TRUE}
-to_any_case("a_b_c_d", case = "upper_camel")
-```
-
-* Sometimes further pre or postprocessing might be needed. For example you can easily write your own parsing via a sequence of calls like `str_replace_all(string, some_pattern, "_\\1_")`. It's also a `str_replace_all()` to replace special symbols like `%` or `€` with `"percent"` or `"euro"` 
-
-* You can decide yourself: Open an issue [here](https://github.com/Tazinho/snakecase/issues) or build sth. quickly yourself via packages like base, [stringr](https://github.com/tidyverse/stringr), [stringi](https://github.com/gagolews/stringi) etc.
-
+-->
 ## Design Philosophy
 
 ### Practical influences
@@ -241,7 +354,7 @@ Since the computer can't know, that we want "c_id" by himself. It is easiest, if
 to_snake_case("CId")
 ```
 
-In this way it is guaranteed to get the correct conversion and the only chance of an error lies in an accidentally wrong provided input string or a bug in the converter function `to_snake_case()`.
+In this way it is guaranteed to get the correct conversion and the only chance of an error lies in an accidentally wrong provided input string or a bug in the converter function `to_snake_case()` (or a sequence of one letter abbreviations, see known limitations).
 
 ### Consistent behaviour
 
@@ -345,6 +458,7 @@ knitr::kable(tibble::tibble(nr = seq_along(cases),
 
 ## Related Resources
 
+* If you are interested on (the history of) this package, you can watch this [(older) talk](https://www.youtube.com/watch?v=T6p0l8XzP64).
 * [The state of naming conventions in R, Bååth 2012, R Journal](https://lup.lub.lu.se/search/publication/e324f252-1d1c-4416-ad1f-284d4ba84bf9) [Download article](journal.r-project.org/archive/2012-2/RJournal_2012-2_Baaaath.pdf)
 * [Consistent naming conventions in R, Lovelace 2014, RBloggers](https://www.r-bloggers.com/consistent-naming-conventions-in-r/)
 * [What is your preferred style for naming variables in R?, Stackoverflowquestion 2009](http://stackoverflow.com/questions/1944910/what-is-your-preferred-style-for-naming-variables-in-r)
