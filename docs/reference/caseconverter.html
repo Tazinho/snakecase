@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Specific case converter shortcuts — caseconverter â€¢ snakecase</title>
+<title>Specific case converter shortcuts — caseconverter • snakecase</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -25,12 +25,12 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
 <meta property="og:title" content="Specific case converter shortcuts — caseconverter" />
 
 <meta property="og:description" content="Wrappers around to_any_case()" />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -53,8 +53,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">snakecase</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">snakecase</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.9.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -79,7 +83,7 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -102,49 +106,51 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Specific case converter shortcuts</h1>
+    <small>Source: <a href='https://github.com/Tazinho/snakecase/blob/master/R/caseconverters.R'><code>R/caseconverters.R</code></a></small>
     </div>
 
     
     <p>Wrappers around <code><a href='to_any_case.html'>to_any_case()</a></code></p>
     
 
-    <pre class="usage"><span class='fu'>to_snake_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>to_snake_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='st'>"[^[:alnum:]]"</span>,
   <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>transliterations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>)
 
-<span class='fu'>to_lower_camel_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+<span class='fu'>to_lower_camel_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='st'>"[^[:alnum:]]"</span>,
   <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>transliterations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>)
 
-<span class='fu'>to_upper_camel_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+<span class='fu'>to_upper_camel_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='st'>"[^[:alnum:]]"</span>,
   <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>transliterations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>)
 
-<span class='fu'>to_screaming_snake_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+<span class='fu'>to_screaming_snake_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='st'>"[^[:alnum:]]"</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>transliterations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sep_out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>)
+
+<span class='fu'>to_parsed_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='st'>"[^[:alnum:]]"</span>,
   <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>transliterations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>)
 
-<span class='fu'>to_parsed_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+<span class='fu'>to_mixed_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='st'>"[^[:alnum:]]"</span>,
   <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>transliterations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>)
 
-<span class='fu'>to_mixed_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+<span class='fu'>to_lower_upper_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='st'>"[^[:alnum:]]"</span>,
   <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>transliterations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>)
 
-<span class='fu'>to_lower_upper_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+<span class='fu'>to_upper_lower_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='st'>"[^[:alnum:]]"</span>,
   <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>transliterations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>)
 
-<span class='fu'>to_upper_lower_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>transliterations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>)
-
-<span class='fu'>to_swap_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+<span class='fu'>to_swap_case</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='st'>"[^[:alnum:]]"</span>,
   <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>transliterations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -160,17 +166,22 @@ Use this feature with care: One letter abbreviations and abbreviations next to e
     </tr>
     <tr>
       <th>sep_in</th>
-      <td><p>(short for separator input) A regex supplied as a character (if not <code>NULL</code>), which will be wrapped internally
-into <code><a href='http://www.rdocumentation.org/packages/stringr/topics/modifiers'>stringr::regex()</a></code>. All matches will be replaced by underscores. Underscores can later turned into another separator via <code>sep_out</code>.</p></td>
+      <td><p>(short for separator input) if character, is interpreted as a
+regular expression (wrapped internally into <code><a href='http://www.rdocumentation.org/packages/stringr/topics/modifiers'>stringr::regex()</a></code>). 
+The default value is a regular expression that matches any sequence of
+non-alphanumeric values. All matches will be replaced by underscores 
+(additionally to <code>"_"</code> and <code>" "</code>, for which this is always true, even
+if <code>NULL</code> is supplied). These underscores are used internally to split
+the strings into substrings and specify the word boundaries.</p></td>
     </tr>
     <tr>
       <th>parsing_option</th>
       <td><p>An integer that will determine the parsing_option.</p><ul>
 <li><p>1: <code>RRRStudio -&gt; RRR_Studio</code></p></li>
 <li><p>2: <code>RRRStudio -&gt; RRRS_tudio</code></p></li>
-<li><p>3: parses like option 1 but suppresses "_" around non special characters.
- In this way case conversion won't apply after these characters. See examples.</p></li>
-<li><p>4: parses like option 1, but digits directly behind/in front non-digits, will stay as is.</p></li>
+<li><p>3: This <code>parsing_option</code> will suppress the conversion after non-alphanumeric
+ values. See examples.</p></li>
+<li><p>4: digits directly behind/in front non-digits, will stay as is.</p></li>
 <li><p>any other integer &lt;= 0: no parsing"</p></li>
 </ul></td>
     </tr>
@@ -277,3 +288,4 @@ Malte Grosser, <a href='mailto:malte.grosser@gmail.com'>malte.grosser@gmail.com<
 
   </body>
 </html>
+

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Convert Strings into any Case â€¢ snakecase</title>
+<title>Convert Strings into any Case • snakecase</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
@@ -27,8 +27,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">snakecase</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="index.html">snakecase</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.9.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
@@ -53,7 +57,7 @@
   </ul>
 </li>
 <li>
-  <a href="news/index.html">News</a>
+  <a href="news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -79,211 +83,406 @@
     
     
 <div class="contents">
-<section id="snakecase" class="level1"><div class="page-header"><h1>snakecase <img src="reference/figures/snakecase05.png" height="200" align="right">
+<div id="snakecase" class="section level1">
+<div class="page-header"><h1 class="hasAnchor">
+<a href="#snakecase" class="anchor"></a>snakecase <img src="reference/figures/snakecase05.png" height="200" align="right">
 </h1></div>
-<p><a href="https://ci.appveyor.com/project/Tazinho/snakecase"><img src="https://ci.appveyor.com/api/projects/status/github/Tazinho/snakecase?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a> <a href="https://travis-ci.org/Tazinho/snakecase"><img src="https://travis-ci.org/Tazinho/snakecase.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://cran.r-project.org/package=snakecase"><img src="http://www.r-pkg.org/badges/version/snakecase" alt="CRAN_Status_Badge"></a> <a href="https://codecov.io/github/Tazinho/snakecase?branch=master"><img src="https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg" alt="Coverage Status"></a> <a href="http://cranlogs.r-pkg.org/"><img src="http://cranlogs.r-pkg.org/badges/snakecase" alt="downloads"></a> <a href="http://cranlogs.r-pkg.org/"><img src="http://cranlogs.r-pkg.org/badges/grand-total/snakecase" alt="total"></a><img src="https://img.shields.io/badge/lifecycle-Stable-blue.svg"></p>
-<section id="overview" class="level2"><h2>Overview</h2>
-<!--A small package with functions to convert column names of data.frames (or strings
-in general) to different cases like snake_case, smallCamel- and BigCamelCase among others. Also high level features for more advanced case conversions are provided via `to_any_case()`.-->
-<p>The snakecase package introduces a fresh and straightforward approach on case conversion of strings, based upon a consistent design philosophy.</p>
-<p>(If you are interested on (the history of) this package, you can watch this <a href="https://www.youtube.com/watch?v=T6p0l8XzP64">(older) talk</a>.)</p>
-<section id="install" class="level3"><h3>Install</h3>
+<p><a href="https://ci.appveyor.com/project/Tazinho/snakecase"><img src="https://ci.appveyor.com/api/projects/status/github/Tazinho/snakecase?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a> <a href="https://travis-ci.org/Tazinho/snakecase"><img src="https://travis-ci.org/Tazinho/snakecase.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://cran.r-project.org/package=snakecase"><img src="http://www.r-pkg.org/badges/version/snakecase" alt="CRAN_Status_Badge"></a> <a href="https://codecov.io/github/Tazinho/snakecase?branch=master"><img src="https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg" alt="Coverage Status"></a> <a href="http://cranlogs.r-pkg.org/"><img src="http://cranlogs.r-pkg.org/badges/snakecase" alt="downloads"></a> <a href="http://cranlogs.r-pkg.org/"><img src="http://cranlogs.r-pkg.org/badges/grand-total/snakecase" alt="total"></a><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg"></p>
+<div id="overview" class="section level2">
+<h2 class="hasAnchor">
+<a href="#overview" class="anchor"></a>Overview</h2>
+<p>The snakecase package introduces a fresh and straightforward approach on case conversion, based upon a consistent design philosophy.</p>
+<p>For a short intro regarding typical use cases, see the blog article <a href="http://www.malte-grosser.com/post/introducing-the-snakecase-package/">Introducing the snakecase package</a>.</p>
+<div id="install-and-load" class="section level3">
+<h3 class="hasAnchor">
+<a href="#install-and-load" class="anchor"></a>Install and load</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install snakecase from cran</span></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co"># install.packages("snakecase")</span></a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># or the (stable) development version hosted on github</span></a>
 <a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw">install.packages</span>(<span class="st">"devtools"</span>)</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"Tazinho/snakecase"</span>)</a></code></pre></div>
-</section><section id="basic-examples" class="level3"><h3>Basic examples</h3>
-<p>Default case is snake case</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(snakecase)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"veryComplicatedString"</span>)</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">## [1] "very_complicated_string"</a></code></pre></div>
-<p>Dots and other special characters may have a special intention</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"malte.grosser@gmail.com"</span>)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">## [1] "malte.grosser@gmail.com"</a></code></pre></div>
-<p>When it is clear that they are separators, you can supply them as a regex to the <code>sep_in</code> argument</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="kw">names</span>(iris), <span class="dt">sep_in =</span> <span class="st">"</span><span class="ch">\\</span><span class="st">."</span>)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">## [1] "sepal_length" "sepal_width"  "petal_length" "petal_width" </a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">## [5] "species"</a></code></pre></div>
-<p>It is as simple as that to treat all non-alphanumerics as separators</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"malte.grosser@gmail.com"</span>, <span class="dt">sep_in =</span> <span class="st">"[^[:alnum:]]"</span>)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">## [1] "malte_grosser_gmail_com"</a></code></pre></div>
-<p>With a bit of regex knowledge you can decide to leave in whatever you want, while removing the rest</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"keep @ # . , * remove - &amp; |"</span>,</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">            <span class="dt">sep_in =</span> <span class="st">"[^[:alnum:] @#</span><span class="ch">\\</span><span class="st">.,</span><span class="ch">\\</span><span class="st">*]"</span>)</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">## [1] "keep@#.,*remove"</a></code></pre></div>
-<p>The regex format is especially handy, when special characters have a meaning as a separator or for example as a decimal mark</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"Pi.Value:3.14"</span>, <span class="dt">sep_in =</span> <span class="st">":|(?&lt;!</span><span class="ch">\\</span><span class="st">d)</span><span class="ch">\\</span><span class="st">."</span>)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">## [1] "pi_value_3.14"</a></code></pre></div>
-<p>Of course other cases are supported (<code>case</code>) and output separators can be adjusted (<code>sep_out</code>)</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="kw">names</span>(iris), <span class="dt">sep_in =</span> <span class="st">"</span><span class="ch">\\</span><span class="st">."</span>, <span class="dt">case =</span> <span class="st">"upper_camel"</span>, <span class="dt">sep_out =</span> <span class="st">" "</span>)</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">## [1] "Sepal Length" "Sepal Width"  "Petal Length" "Petal Width" </a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">## [5] "Species"</a></code></pre></div>
-<p>And you might want to remove special characters along the way</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"Doppelgänger is originally german"</span>, </a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">            <span class="dt">transliterations =</span> <span class="st">"german"</span>, <span class="dt">case =</span> <span class="st">"upper_camel"</span>)</a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">## [1] "DoppelgaengerIsOriginallyGerman"</a></code></pre></div>
-<p>All of the cases like snake, lower_camel, upper_camel, all_caps, lower_upper, upper_lower and mixed are based on parsed case</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"THISIsHOW IAmPARSED!"</span>, <span class="dt">case =</span> <span class="st">"parsed"</span>)</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">## [1] "THIS_Is_HOW_I_Am_PARSED!"</a></code></pre></div>
-<p>Shortcut wrappers like <code><a href="reference/caseconverter.html">to_snake_case()</a></code>, <code><a href="reference/caseconverter.html">to_lower_camel_case()</a></code> etc. are available.</p>
-<p>Be aware that automatic case conversion depends on the input string and it is recommendesd to verify the results. So you might want to pipe these into <code>dput()</code> (and hardcode name changes instead of blindly trusting <code><a href="reference/to_any_case.html">to_any_case()</a></code>’s output)</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">dput</span>(<span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="kw">c</span>(<span class="st">"SomeBAdInput"</span>, <span class="st">"someGoodInput"</span>)))</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">## c("some_b_ad_input", "some_good_input")</a></code></pre></div>
-</section><section id="big-picture-a-parameterized-workflow" class="level3"><h3>Big picture (a parameterized workflow)</h3>
+<a class="sourceLine" id="cb1-6" data-line-number="6">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"Tazinho/snakecase"</span>)</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co"># load snakecase</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="kw">library</span>(snakecase)</a></code></pre></div>
+</div>
+<div id="basic-usage" class="section level3">
+<h3 class="hasAnchor">
+<a href="#basic-usage" class="anchor"></a>Basic usage</h3>
+<p>The workhorse function of this package, <code><a href="reference/to_any_case.html">to_any_case()</a></code>, converts by default into snake case:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">string &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">"lowerCamelCase"</span>, <span class="st">"ALL_CAPS"</span>, <span class="st">"IDontKNOWWhat_thisCASE_is"</span>)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(string)</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">## [1] "lower_camel_case"              "all_caps"                     </a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">## [3] "i_dont_know_what_this_case_is"</a></code></pre></div>
+<p>One can choose between many other cases like <code>"lower_camel"</code>, <code>"upper_camel"</code>, <code>"all_caps"</code>, <code>"lower_upper"</code>, <code>"upper_lower"</code> and <code>"mixed"</code>, which are based on <code>"parsed"</code> case:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(string, <span class="dt">case =</span> <span class="st">"parsed"</span>)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">## [1] "lower_Camel_Case"              "ALL_CAPS"                     </a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">## [3] "I_Dont_KNOW_What_this_CASE_is"</a></code></pre></div>
+<p>Also shortcuts (wrappers around <code><a href="reference/to_any_case.html">to_any_case()</a></code>) are available:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_upper_camel_case</a></span>(string)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">## [1] "LowerCamelCase"          "AllCaps"                </a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">## [3] "IDontKnowWhatThisCaseIs"</a></code></pre></div>
+<p>Be aware that automatic case conversion depends on the input string and it is recommended to verify the results. So you might want to pipe these into <code>dput()</code> and hardcode name changes instead of blindly trusting the output:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">library</span>(magrittr)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(<span class="kw">c</span>(<span class="st">"SomeBAdInput"</span>, <span class="st">"someGoodInput"</span>)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">dput</span>()</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">## c("some_b_ad_input", "some_good_input")</a></code></pre></div>
+</div>
+<div id="big-picture-a-parameterized-workflow" class="section level3">
+<h3 class="hasAnchor">
+<a href="#big-picture-a-parameterized-workflow" class="anchor"></a>Big picture (a parameterized workflow)</h3>
 <p>The <code><a href="reference/to_any_case.html">to_any_case()</a></code> function is the workhorse of the package and basically enables you to convert any string into any case via a well thought process of <strong>parsing</strong> (<code>abbreviations</code>, <code>sep_in</code>, <code>parsing_option</code>), <strong>conversion</strong> (<code>transliterations</code>, <code>case</code>) and <strong>postprocessing</strong> (<code>sep_out</code>). The specific arguments allow you to customize the pipeline.</p>
 <p>On this example, you can see the pipeline including all implementation details.</p>
 <p><img src="reference/figures/Workflow01.PNG" width="100%"></p>
-<p>Some further cosmetics can be added to the output via the following arguments:</p>
+<p>Some further <strong>cosmetics</strong> (<code>unique_sep</code>, <code>empty_fill</code>, <code>prefix</code>, <code>postfix</code>) can be applied to the output, see arguments.</p>
+</div>
+</div>
+<div id="arguments" class="section level2">
+<h2 class="hasAnchor">
+<a href="#arguments" class="anchor"></a>Arguments</h2>
+<p><strong>string</strong>: A character vector, containing the input strings.</p>
+<div id="parsing" class="section level4">
+<h4 class="hasAnchor">
+<a href="#parsing" class="anchor"></a>Parsing</h4>
+<p><strong>abbreviations</strong>: One challenge in case conversion are odd looking “mixed cases”. These might be introduced due to country codes or other abbreviations, which are usually written in upper case. Before you consider a different <code>parsing_option</code> (see below), you might just want to use the abbreviations argument:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(<span class="kw">c</span>(<span class="st">"HHcity"</span>, <span class="st">"IDTable1"</span>, <span class="st">"KEYtable2"</span>, <span class="st">"newUSElections"</span>),</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">              <span class="dt">abbreviations =</span> <span class="kw">c</span>(<span class="st">"HH"</span>, <span class="st">"ID"</span>, <span class="st">"KEY"</span>, <span class="st">"US"</span>))</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">## [1] "hh_city"          "id_table_1"       "key_table_2"     </a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">## [4] "new_us_elections"</a></code></pre></div>
+<p><strong>sep_in</strong>: By default non-alphanumeric characters are treated as separators:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(<span class="st">"malte.grosser@gmail.com"</span>)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">## [1] "malte_grosser_gmail_com"</a></code></pre></div>
+<p>To suppress this behaviour, just set <code>sep_in = NULL</code>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(<span class="st">"malte.grosser@gmail.com"</span>, <span class="dt">sep_in =</span> <span class="ot">NULL</span>)</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">## [1] "malte.grosser@gmail.com"</a></code></pre></div>
+<p>Since <code>sep_in</code> takes regular expressions as input, <code><a href="reference/to_any_case.html">to_any_case()</a></code> becomes very flexible. We can for example express that dots behind digits should not be treated as separators, since they might be intended as decimal marks:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(<span class="st">"Pi.Value:3.14"</span>, <span class="dt">sep_in =</span> <span class="st">":|(?&lt;!</span><span class="ch">\\</span><span class="st">d)</span><span class="ch">\\</span><span class="st">."</span>)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">## [1] "pi_value_3.14"</a></code></pre></div>
+<p><strong>parsing_option</strong>: We can modify the abbreviations example a bit. In this case, another parsing option might be handy:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(<span class="kw">c</span>(<span class="st">"HHcity"</span>, <span class="st">"IDtable1"</span>, <span class="st">"KEYtable2"</span>, <span class="st">"newUSelections"</span>),</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">              <span class="dt">parsing_option =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">## [1] "hh_city"          "id_table_1"       "key_table_2"     </a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">## [4] "new_us_elections"</a></code></pre></div>
+<p>To suppress conversion after a non-alphanumeric character (except <code>"_"</code>), you can choose parsing option 3:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_upper_camel_case</a></span>(<span class="st">"look_AfterThe-hyphen andThe.dot"</span>,</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">                    <span class="dt">sep_in =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">                    <span class="dt">parsing_option =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">## [1] "LookAfterThe-hyphenAndThe.dot"</a></code></pre></div>
+<p>If you want to leave digits as is (not surrounding with a separator), use parsing option 4:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(<span class="st">"species42value 23month"</span>,</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">              <span class="dt">parsing_option =</span> <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">## [1] "species42value_23month"</a></code></pre></div>
+<p>If you are interested in a specific parsing option, which is not implemented, please open an issue. When typical pattern - like handling of numerals - arise in the future, the <code>parsing_option</code> argument might be split into several more low level arguments.</p>
+</div>
+<div id="conversion" class="section level4">
+<h4 class="hasAnchor">
+<a href="#conversion" class="anchor"></a>Conversion</h4>
+<p><strong>transliterations</strong>: To turn special characters (for example) into ASCII one can incorporate transliterations from <code><a href="http://www.rdocumentation.org/packages/stringi/topics/stri_trans_list">stringi::stri_trans_list()</a></code> or <a href="https://github.com/Tazinho/snakecase/issues/107">this package</a> (also in combination):</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_upper_camel_case</a></span>(<span class="st">"Doppelgänger is originally german"</span>,</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">                    <span class="dt">transliterations =</span> <span class="st">"german"</span>)</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">## [1] "DoppelgaengerIsOriginallyGerman"</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(<span class="st">"Schönes Café"</span>,</a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">              <span class="dt">transliterations =</span> <span class="kw">c</span>(<span class="st">"german"</span>, <span class="st">"Latin-ASCII"</span>))</a>
+<a class="sourceLine" id="cb13-7" data-line-number="7">## [1] "schoenes_cafe"</a></code></pre></div>
+<p>If you can provide transliterations for your (or any other) country, please drop them within <a href="https://github.com/Tazinho/snakecase/issues/107">this issue</a>.</p>
+<p><strong>case</strong>: The desired target case, provided as one of the following:</p>
+<ul>
+<li>snake_case: <code>"snake"</code>
+</li>
+<li>lowerCamel: <code>"lower_camel"</code> or <code>"small_camel"</code>
+</li>
+<li>UpperCamel: <code>"upper_camel"</code> or <code>"big_camel"</code>
+</li>
+<li>ALL_CAPS: <code>"all_caps"</code> or <code>"screaming_snake"</code>
+</li>
+<li>lowerUPPER: <code>"lower_upper"</code>
+</li>
+<li>UPPERlower: <code>"upper_lower"</code>
+</li>
+</ul>
+<p>There are five “special” cases available:</p>
 <ul>
 <li>
-<code>unique_sep</code> (character): When not <code>NULL</code> non unique will get an integer suffix separated with the supplied string<br>
-</li>
+<code>"parsed"</code>: This case is underlying all other cases. Every substring a string consists of becomes surrounded by an underscore (depending on the parsing_option). Underscores at the start and end are trimmed. No lower or upper case pattern from the input string are changed.</li>
 <li>
-<code>empty_fill</code> (character): Empty output (<code>""</code>) will be replaced by this string<br>
-</li>
+<code>"mixed"</code>: Almost the same as <code>case = "parsed"</code>. Every letter which is not at the start or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will stay in upper case.</li>
 <li>
-<code>prefix</code> (character): simple prefix<br>
-</li>
+<code>"swap"</code>: Upper case letters will be turned into lower case and vice versa. Also <code>case = "flip"</code> will work. Doesn’t work with any of the other arguments except <code>unique_sep</code>, <code>empty_fill</code>, <code>prefix</code> and <code>postfix</code>.</li>
 <li>
-<code>postfix</code> (character): simple post-/suffix</li>
-</ul></section><section id="vectorisation-speed-and-special-input-handling" class="level3"><h3>Vectorisation, speed and special input handling</h3>
+<code>"none"</code>: Neither parsing nor case conversion occur. This case might be helpful, when one wants to call the function for the quick usage of the other parameters. To suppress replacement of spaces to underscores set <code>sep_out = NULL</code>. Works with <code>sep_in</code>, <code>transliterations</code>, <code>sep_out</code>, <code>unique_sep</code>, <code>empty_fill</code>, <code>prefix</code> and <code>postfix</code>.</li>
+<li>
+<code>"internal_parsing"</code>: This case is returning the internal parsing (suppressing the internal protection mechanism), which means that alphanumeric characters will be surrounded by underscores. It should only be used in very rare use cases and is mainly implemented to showcase the internal workings of <code><a href="reference/to_any_case.html">to_any_case()</a></code>.</li>
+</ul>
+</div>
+<div id="postprocessing" class="section level4">
+<h4 class="hasAnchor">
+<a href="#postprocessing" class="anchor"></a>Postprocessing</h4>
+<p><strong>sep_out</strong>: For the creation of other well known or completely new cases it is possible to adjust the output separator (<code>sep_out</code>):</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(string, <span class="dt">sep_out =</span> <span class="st">"."</span>)</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">## [1] "lower.camel.case"              "all.caps"                     </a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">## [3] "i.dont.know.what.this.case.is"</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="kw"><a href="reference/caseconverter.html">to_mixed_case</a></span>(string, <span class="dt">sep_out =</span> <span class="st">" "</span>)</a>
+<a class="sourceLine" id="cb14-6" data-line-number="6">## [1] "lower Camel Case"              "All Caps"                     </a>
+<a class="sourceLine" id="cb14-7" data-line-number="7">## [3] "I Dont Know What this Case is"</a>
+<a class="sourceLine" id="cb14-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb14-9" data-line-number="9"><span class="kw"><a href="reference/caseconverter.html">to_screaming_snake_case</a></span>(string, <span class="dt">sep_out =</span> <span class="st">"="</span>)</a>
+<a class="sourceLine" id="cb14-10" data-line-number="10">## [1] "LOWER=CAMEL=CASE"              "ALL=CAPS"                     </a>
+<a class="sourceLine" id="cb14-11" data-line-number="11">## [3] "I=DONT=KNOW=WHAT=THIS=CASE=IS"</a></code></pre></div>
+</div>
+<div id="cosmetics" class="section level4">
+<h4 class="hasAnchor">
+<a href="#cosmetics" class="anchor"></a>Cosmetics</h4>
+<p><strong>unique_sep</strong>: (character): When not <code>NULL</code> non unique output strings will get an integer suffix separated with the supplied string.</p>
+<p><strong>empty_fill</strong>: (character): Empty output (<code>""</code>) will be replaced by this string.</p>
+<p><strong>prefix</strong>: (character): simple prefix.</p>
+<p><strong>postfix</strong>: (character): simple post-/suffix.</p>
+<!-- When it is clear that they are separators, you can supply them as a regex to the `sep_in` argument
+
+
+```r
+to_any_case(names(iris), sep_in = "\\.")
+## [1] "sepal_length" "sepal_width"  "petal_length" "petal_width" 
+## [5] "species"
+```
+
+It is as simple as that to treat all non-alphanumerics as separators
+
+
+```r
+to_any_case("malte.grosser@gmail.com", sep_in = "[^[:alnum:]]")
+## [1] "malte_grosser_gmail_com"
+```
+
+With a bit of regex knowledge you can decide to leave in whatever you want, while removing the rest
+
+
+```r
+to_any_case("keep @ # . , * remove - & |",
+            sep_in = "[^[:alnum:] @#\\.,\\*]")
+## [1] "keep@#.,*remove"
+```
+
+The regex format is especially handy, when special characters have a meaning as a separator or for example as a decimal mark
+
+
+```r
+to_any_case("Pi.Value:3.14", sep_in = ":|(?<!\\d)\\.")
+## [1] "pi_value_3.14"
+```
+
+Of course other cases are supported (`case`) and output separators can be adjusted (`sep_out`)
+
+
+```r
+to_any_case(names(iris), sep_in = "\\.", case = "upper_camel", sep_out = " ")
+## [1] "Sepal Length" "Sepal Width"  "Petal Length" "Petal Width" 
+## [5] "Species"
+```
+
+All of the cases like snake, lower_camel, upper_camel, all_caps, lower_upper, upper_lower and mixed are based on parsed case
+
+
+```r
+to_any_case("THISIsHOW IAmPARSED!", case = "parsed")
+## [1] "THIS_Is_HOW_I_Am_PARSED"
+```
+
+Shortcut wrappers like `to_snake_case()`, `to_lower_camel_case()` etc. are available.-->
+</div>
+</div>
+<div id="design-decisions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#design-decisions" class="anchor"></a>Design decisions</h2>
+<div id="scope" class="section level3">
+<h3 class="hasAnchor">
+<a href="#scope" class="anchor"></a>Scope</h3>
+<p><code><a href="reference/to_any_case.html">to_any_case()</a></code> is an attempt to provide good low level control, while still being high level enough for daily usage. If you want case conversion with good default settings, you can look into the <code>clean_names()</code> function from the <a href="https://github.com/sfirke/janitor">janitor</a> package, which works directly on data frames. You can also look into the <a href="https://github.com/strengejacke/sjPlot">sjPlot</a> package, where automatic case conversion is used to provide nice default labels within graphics.</p>
+</div>
+<div id="dependencies-vectorisation-speed-and-special-input-handling" class="section level3">
+<h3 class="hasAnchor">
+<a href="#dependencies-vectorisation-speed-and-special-input-handling" class="anchor"></a>Dependencies, vectorisation, speed and special input handling</h3>
 <p>The package is internally build up on the <a href="https://github.com/tidyverse/stringr">stringr</a> package, which means that many powerful features are provided “by default”:</p>
 <ul>
 <li>
 <code><a href="reference/to_any_case.html">to_any_case()</a></code> is vectorised over most of its arguments like <code>string</code>, <code>sep_in</code>, <code>sep_out</code>, <code>empty_fill</code>, <code>prefix</code> and <code>postfix</code>.</li>
-<li>internal character operations are super fast c++. However, a lot of speed is lost due to a more systematic and maintainable implementation. (This might be optimized in the long run)</li>
-<li>special input like <code>character(0)</code>, <code>NA</code> etc. is handled in exactly the same consistent and convenient manner as in the stringr package</li>
-</ul></section></section><section id="recommended-settings" class="level2"><h2>Recommended settings</h2>
-<p><code><a href="reference/to_any_case.html">to_any_case()</a></code> is an attempt to provide good low level control, while still being high level enough for daily usage. If you want case conversion with good default settings, you can choose the <code>clean_names()</code> function from the <a href="https://github.com/sfirke/janitor">janitor</a> package, which works directly on data frames. You can also look into the <a href="https://github.com/strengejacke/sjPlot">sjPlot</a> package, where automatic case conversion is used to provide nice default labels within graphics.</p>
-<p>For daily usage (especially when preparing fixed scripts) I recommend to combine <code><a href="reference/to_any_case.html">to_any_case()</a></code> with <code>dput()</code>. In this way, you can quickly inspect, if the output is as intended and hardcode the results (which is basically safer and good practice in my opinion). In very complex cases you might just want to manually fix the output instead of tweeking with the arguments too much.</p>
-<p>However, if you have a really hard time on a specific example or you want to have appropriate settings for a specific usecase, the following might help you getting started…</p>
+<li>internal character operations are super fast c++. However, some speed is lost due to a more systematic and maintainable implementation. (This might be optimized in the long run).</li>
+<li>special input like <code>character(0)</code>, <code>NA</code> etc. is handled in exactly the same consistent and convenient manner as in the stringr package.</li>
+</ul>
+</div>
+<div id="known-limitations" class="section level3">
+<h3 class="hasAnchor">
+<a href="#known-limitations" class="anchor"></a>Known limitations</h3>
 <ul>
 <li>
-<code>abbreviations</code>: In the wild you might meet abbreviations like country codes, which are often written in upper case and can lead to odd looking “mixed cases”. Before you consider a different <code>parsing_option</code>, you might just want to use the abbreviations argument</li>
-</ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="kw">c</span>(<span class="st">"HHcity"</span>, <span class="st">"IDTable1"</span>, <span class="st">"KEYtable2"</span>, <span class="st">"newUSElections"</span>),</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">            <span class="dt">abbreviations =</span> <span class="kw">c</span>(<span class="st">"HH"</span>, <span class="st">"ID"</span>, <span class="st">"KEY"</span>, <span class="st">"US"</span>))</a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">## [1] "hh_city"          "id_table_1"       "key_table_2"     </a>
-<a class="sourceLine" id="cb12-4" data-line-number="4">## [4] "new_us_elections"</a></code></pre></div>
-<ul>
-<li>
-<code>sep_in</code>: Very ofthen you might just want to have all special (non-alphanumeric) characters as a separator. You can achive this while providing the regarding regex</li>
-</ul>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"so.many_different@separators inThis|sentece"</span>,</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">            <span class="dt">sep_in =</span> <span class="st">"[^[:alnum:]]"</span>)</a>
-<a class="sourceLine" id="cb13-3" data-line-number="3">## [1] "so_many_different_separators_in_this_sentece"</a></code></pre></div>
-<ul>
-<li>You may want to do exactly the last thing, but for a specific reason “.” and “@” are not meant to be input separators</li>
-</ul>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"some-email@provider.com"</span>, </a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">            <span class="dt">sep_in =</span> <span class="st">"[^[:alnum:]|^</span><span class="ch">\\</span><span class="st">.|^@]"</span>)</a>
-<a class="sourceLine" id="cb14-3" data-line-number="3">## [1] "some_email@provider.com"</a></code></pre></div>
-<ul>
-<li>
-<code>parsing_option</code>: We can modify the abbreviations example a bit. In this case, another parsing option might be handy</li>
-</ul>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="kw">c</span>(<span class="st">"HHcity"</span>, <span class="st">"IDtable1"</span>, <span class="st">"KEYtable2"</span>, <span class="st">"newUSelections"</span>),</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2">            <span class="dt">parsing_option =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb15-3" data-line-number="3">## [1] "hh_city"          "id_table_1"       "key_table_2"     </a>
-<a class="sourceLine" id="cb15-4" data-line-number="4">## [4] "new_us_elections"</a></code></pre></div>
-<ul>
-<li>To suppress conversion after a non-alphanumeric character (except “_“), you can choose parsing option 3</li>
-</ul>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"look_AfterThe-hyphen andThe.dot"</span>, </a>
-<a class="sourceLine" id="cb16-2" data-line-number="2">            <span class="dt">case =</span> <span class="st">"upper_camel"</span>, <span class="dt">parsing_option =</span> <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb16-3" data-line-number="3">## [1] "LookAfterThe-hyphenAndThe.dot"</a></code></pre></div>
-<ul>
-<li>If you want to leave digits as is (not surrounging with a separator), use parsing option 4</li>
-</ul>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"species42value 23month"</span>, </a>
-<a class="sourceLine" id="cb17-2" data-line-number="2">            <span class="dt">case =</span> <span class="st">"snake"</span>, <span class="dt">parsing_option =</span> <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb17-3" data-line-number="3">## [1] "species42value_23month"</a></code></pre></div>
-<p>If you are interested in a specific parsing option, which is not implemented, pls open an issue.</p>
-<ul>
-<li>
-<code>transliterations</code>: To transliterate exotic characters you can use any option from <code><a href="http://www.rdocumentation.org/packages/stringi/topics/stri_trans_list">stringi::stri_trans_list()</a></code> (especially “Latin-ASCII” is useful) or provided lookups introduced (country specific) by this package. Currently only “german” is supported. When more than one is supplied, the transliterations are performed iteratively</li>
-</ul>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"Schönes Café"</span>, </a>
-<a class="sourceLine" id="cb18-2" data-line-number="2">            <span class="dt">transliterations =</span> <span class="kw">c</span>(<span class="st">"german"</span>, <span class="st">"Latin-ASCII"</span>))</a>
-<a class="sourceLine" id="cb18-3" data-line-number="3">## [1] "schoenes_cafe"</a></code></pre></div>
-<p>If you can provide tranliterations for your (or any other) country, pls drop them within <a href="https://github.com/Tazinho/snakecase/issues/107">this issue</a>.</p>
-<ul>
-<li>
-<code>case</code>: Sometimems you just need a reasonable case. Make sure to checkout</li>
-</ul>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"parsed_case"</span>, <span class="dt">case =</span> <span class="st">"parsed"</span>)</a>
-<a class="sourceLine" id="cb19-2" data-line-number="2">## [1] "parsed_case"</a>
-<a class="sourceLine" id="cb19-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"My_first_LettersWONTChange"</span>, <span class="dt">case =</span> <span class="st">"mixed"</span>)</a>
-<a class="sourceLine" id="cb19-5" data-line-number="5">## [1] "My_first_Letters_Wont_Change"</a>
-<a class="sourceLine" id="cb19-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb19-7" data-line-number="7"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"IalsoWORKWith abbreviations"</span>, <span class="dt">case =</span> <span class="st">"mixed"</span>, </a>
-<a class="sourceLine" id="cb19-8" data-line-number="8">            <span class="dt">abbreviations =</span> <span class="kw">c</span>(<span class="st">"I"</span>, <span class="st">"WORK"</span>))</a>
-<a class="sourceLine" id="cb19-9" data-line-number="9">## [1] "I_also_WORK_With_abbreviations"</a>
-<a class="sourceLine" id="cb19-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb19-11" data-line-number="11"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"IWill LookLike aRollerCoasterYouCanPARSEMeWith option2"</span>,</a>
-<a class="sourceLine" id="cb19-12" data-line-number="12">            <span class="dt">case =</span> <span class="st">"upper_lower"</span>) <span class="co"># or lower_upper</span></a>
-<a class="sourceLine" id="cb19-13" data-line-number="13">## [1] "IwillLOOKlikeArollerCOASTERyouCANparseMEwithOPTION2"</a>
-<a class="sourceLine" id="cb19-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb19-15" data-line-number="15"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"Maybé you_just...want to Format me a bit?"</span>, <span class="dt">case =</span> <span class="st">"none"</span>,</a>
-<a class="sourceLine" id="cb19-16" data-line-number="16">            <span class="dt">sep_in =</span> <span class="st">"_|</span><span class="ch">\\</span><span class="st">."</span>, <span class="dt">transliterations =</span> <span class="st">"Latin-ASCII"</span>,</a>
-<a class="sourceLine" id="cb19-17" data-line-number="17">            <span class="dt">sep_out =</span> <span class="st">" "</span>)</a>
-<a class="sourceLine" id="cb19-18" data-line-number="18">## [1] "Maybe you just want to Format me a bit?"</a></code></pre></div>
-<ul>
-<li>cosmetics: <code>empty_fill</code>, <code>unique_sep</code>, <code>prefix</code>, <code>postfix</code>
+<p>In general combinations of one letter words are hard to convert back from cases with <code>""</code> as default separator:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"a_b_c_d"</span>, <span class="dt">case =</span> <span class="st">"upper_camel"</span>)</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">## [1] "ABCD"</a></code></pre></div>
 </li>
-</ul>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="kw">c</span>(<span class="st">""</span>,<span class="st">""</span>,<span class="st">""</span>), <span class="dt">empty_fill =</span> <span class="kw">c</span>(<span class="st">"empty"</span>, <span class="st">"empty"</span>, <span class="st">"also empty"</span>))</a>
-<a class="sourceLine" id="cb20-2" data-line-number="2">## [1] "empty"      "empty"      "also empty"</a>
-<a class="sourceLine" id="cb20-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="kw">c</span>(<span class="st">"same"</span>, <span class="st">"same"</span>, <span class="st">"same"</span>, <span class="st">"other"</span>), <span class="dt">unique_sep =</span> <span class="kw">c</span>(<span class="st">"&gt;"</span>))</a>
-<a class="sourceLine" id="cb20-5" data-line-number="5">## [1] "same"   "same&gt;1" "same&gt;2" "other"</a>
-<a class="sourceLine" id="cb20-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb20-7" data-line-number="7"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="kw">c</span>(<span class="st">"customer"</span>, <span class="st">"product"</span>), <span class="dt">case =</span> <span class="st">"big_camel"</span>, </a>
-<a class="sourceLine" id="cb20-8" data-line-number="8">            <span class="dt">prefix =</span> <span class="kw">c</span>(<span class="st">"table_1."</span>, <span class="st">"table_2."</span>),</a>
-<a class="sourceLine" id="cb20-9" data-line-number="9">            <span class="dt">postfix =</span> <span class="kw">c</span>(<span class="st">"ID"</span>))</a>
-<a class="sourceLine" id="cb20-10" data-line-number="10">## [1] "table_1.CustomerID" "table_2.ProductID"</a></code></pre></div>
-<ul>
-<li>In general combinations of one letter words are hard to convert back from cases with <code>""</code> as default separator</li>
-</ul>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"a_b_c_d"</span>, <span class="dt">case =</span> <span class="st">"upper_camel"</span>)</a>
-<a class="sourceLine" id="cb21-2" data-line-number="2">## [1] "ABCD"</a></code></pre></div>
-<ul>
-<li><p>Sometimes further pre or postprocessing might be needed. For example you can easily write your own parsing via a sequence of calls like <code>str_replace_all(string, some_pattern, "_\\1_")</code>. It’s also a <code>str_replace_all()</code> to replace special symbols like <code>%</code> or <code>€</code> with <code>"percent"</code> or <code>"euro"</code></p></li>
+<li><p>Sometimes further pre- or postprocessing might be needed. For example you can easily write your own parsing via a sequence of calls like <code>str_replace_all(string, some_pattern, "_\\1_")</code>. It’s also a <code>str_replace_all()</code> to replace special symbols like <code>%</code> or <code>€</code> with <code>"percent"</code> or <code>"euro"</code></p></li>
 <li><p>You can decide yourself: Open an issue <a href="https://github.com/Tazinho/snakecase/issues">here</a> or build sth. quickly yourself via packages like base, <a href="https://github.com/tidyverse/stringr">stringr</a>, <a href="https://github.com/gagolews/stringi">stringi</a> etc.</p></li>
-</ul></section><section id="design-philosophy" class="level2"><h2>Design Philosophy</h2>
-<section id="practical-influences" class="level3"><h3>Practical influences</h3>
+</ul>
+<!--`to_any_case()` is an attempt to provide good low level control, while still being high level enough for daily usage. If you want case conversion with good default settings, you can choose the `clean_names()` function from the [janitor](https://github.com/sfirke/janitor) package, which works directly on data frames. You can also look into the [sjPlot](https://github.com/strengejacke/sjPlot) package, where automatic case conversion is used to provide nice default labels within graphics.
+
+For daily usage (especially when preparing fixed scripts) I recommend to combine `to_any_case()` with `dput()`. In this way, you can quickly inspect, if the output is as intended and hardcode the results (which is basically safer and good practice in my opinion). In very complex cases you might just want to manually fix the output instead of tweeking with the arguments too much.
+
+However, if you have a really hard time on a specific example or you want to have appropriate settings for a specific usecase, the following might help you getting started...
+
+* `abbreviations`: In the wild you might meet abbreviations like country codes, which are often written in upper case and can lead to odd looking "mixed cases". Before you consider a different `parsing_option`, you might just want to use the `abbreviations` argument
+
+
+```r
+to_any_case(c("HHcity", "IDTable1", "KEYtable2", "newUSElections"),
+            abbreviations = c("HH", "ID", "KEY", "US"))
+## [1] "hh_city"          "id_table_1"       "key_table_2"     
+## [4] "new_us_elections"
+```
+
+* `sep_in`: Very ofthen you might just want to have all special (non-alphanumeric) characters as a separator. You can achive this while providing the regarding regex
+
+
+```r
+to_any_case("so.many_different@separators inThis|sentece",
+            sep_in = "[^[:alnum:]]")
+## [1] "so_many_different_separators_in_this_sentece"
+```
+
+* You may want to do exactly the last thing, but for a specific reason "." and "@" are not meant to be input separators
+
+
+```r
+to_any_case("some-email@provider.com", 
+            sep_in = "[^[:alnum:]|^\\.|^@]")
+## [1] "some_email@provider.com"
+```
+
+* `parsing_option`: We can modify the abbreviations example a bit. In this case, another parsing option might be handy
+
+
+```r
+to_any_case(c("HHcity", "IDtable1", "KEYtable2", "newUSelections"),
+            parsing_option = 2)
+## [1] "hh_city"          "id_table_1"       "key_table_2"     
+## [4] "new_us_elections"
+```
+
+* To suppress conversion after a non-alphanumeric character (except "_"), you can choose parsing option 3
+
+
+```r
+to_any_case("look_AfterThe-hyphen andThe.dot", 
+            case = "upper_camel", parsing_option = 3)
+## [1] "LookAfterTheHyphenAndTheDot"
+```
+
+* If you want to leave digits as is (not surrounging with a separator), use parsing option 4
+
+
+```r
+to_any_case("species42value 23month", 
+            case = "snake", parsing_option = 4)
+## [1] "species42value_23month"
+```
+
+If you are interested in a specific parsing option, which is not implemented, pls open an issue.
+
+* `transliterations`: To transliterate exotic characters you can use any option from `stringi::stri_trans_list()` (especially "Latin-ASCII" is useful) or provided lookups introduced (country specific) by this package. Currently only "german" is supported. When more than one is supplied, the transliterations are performed iteratively
+
+
+```r
+to_any_case("Schönes Café", 
+            transliterations = c("german", "Latin-ASCII"))
+## [1] "schoenes_cafe"
+```
+
+If you can provide tranliterations for your (or any other) country, pls drop them within [this issue](https://github.com/Tazinho/snakecase/issues/107).
+
+* `case`: Sometimems you just need a reasonable case. Make sure to checkout
+
+
+```r
+to_any_case("parsed_case", case = "parsed")
+## [1] "parsed_case"
+
+to_any_case("My_first_LettersWONTChange", case = "mixed")
+## [1] "My_first_Letters_Wont_Change"
+
+to_any_case("IalsoWORKWith abbreviations", case = "mixed", 
+            abbreviations = c("I", "WORK"))
+## [1] "I_also_WORK_With_abbreviations"
+
+to_any_case("IWill LookLike aRollerCoasterYouCanPARSEMeWith option2",
+            case = "upper_lower") # or lower_upper
+## [1] "IwillLOOKlikeArollerCOASTERyouCANparseMEwithOPTION2"
+
+to_any_case("Maybé you_just...want to Format me a bit?", case = "none",
+            sep_in = "_|\\.", transliterations = "Latin-ASCII",
+            sep_out = " ")
+## [1] "Maybe you just want to Format me a bit?"
+```
+
+* cosmetics: `empty_fill`, `unique_sep`, `prefix`, `postfix`
+
+
+```r
+to_any_case(c("","",""), empty_fill = c("empty", "empty", "also empty"))
+## [1] "empty"      "empty"      "also empty"
+
+to_any_case(c("same", "same", "same", "other"), unique_sep = c(">"))
+## [1] "same"   "same>1" "same>2" "other"
+
+to_any_case(c("customer", "product"), case = "big_camel", 
+            prefix = c("table_1.", "table_2."),
+            postfix = c("ID"))
+## [1] "table_1.CustomerID" "table_2.ProductID"
+```
+
+-->
+</div>
+</div>
+<div id="design-philosophy" class="section level2">
+<h2 class="hasAnchor">
+<a href="#design-philosophy" class="anchor"></a>Design Philosophy</h2>
+<div id="practical-influences" class="section level3">
+<h3 class="hasAnchor">
+<a href="#practical-influences" class="anchor"></a>Practical influences</h3>
 <p>Conversion to a specific target case is not always obvious or unique. In general a clean conversion can only be guaranteed, when the input-string is meaningful.</p>
 <p>Take for example a situation where you have IDs for some customers. Instead of calling the column “CustomerID” you abbreviate it to “CID”. Without further knowledge about the meaning of CID it will be impossible to know that it should be converted to “c_id”, when using <code><a href="reference/caseconverter.html">to_snake_case()</a></code>. Instead it will be converted to:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(<span class="st">"CID"</span>)</a>
-<a class="sourceLine" id="cb22-2" data-line-number="2">## [1] "cid"</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(<span class="st">"CID"</span>)</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">## [1] "cid"</a></code></pre></div>
 <p>We could have also converted to “c_i_d” and if we don’t know the meaning of “CID”, we can’t decide which one is the better solution. However, it is easy to exclude specific approaches by counterexamples. So in practice it might be nicer to convert “SCREAMING_SNAKE_CASE” to “screaming_snake_case” instead of “s_c_r_e_a_m_i_n_g_s_n_a_k_e_c_a_s_e” (or “screamin_g_snak_e_cas_e” or “s_creaming_s_nake_c_ase”), which means that also “cid” is preferable to “c_i_d” (or “c_id” or “ci_d”) without further knowledge.</p>
 <p>Since the computer can’t know, that we want “c_id” by himself. It is easiest, if we provide him with the right information (here in form of a valid PascalCase syntax):</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(<span class="st">"CId"</span>)</a>
-<a class="sourceLine" id="cb23-2" data-line-number="2">## [1] "c_id"</a></code></pre></div>
-<p>In this way it is guaranteed to get the correct conversion and the only chance of an error lies in an accidentally wrong provided input string or a bug in the converter function <code><a href="reference/caseconverter.html">to_snake_case()</a></code>.</p>
-</section><section id="consistent-behaviour" class="level3"><h3>Consistent behaviour</h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(<span class="st">"CId"</span>)</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">## [1] "c_id"</a></code></pre></div>
+<p>In this way it is guaranteed to get the correct conversion and the only chance of an error lies in an accidentally wrong provided input string or a bug in the converter function <code><a href="reference/caseconverter.html">to_snake_case()</a></code> (or a sequence of one letter abbreviations, see known limitations).</p>
+</div>
+<div id="consistent-behaviour" class="section level3">
+<h3 class="hasAnchor">
+<a href="#consistent-behaviour" class="anchor"></a>Consistent behaviour</h3>
 <p>In many scenarios the analyst doesn’t have a big influence on naming conventions and sometimes there might occur situations where it is not possible to find out the exact meaning of a variable name, even if we ask the original author. In some cases data might also have been named by a machine and the results can be relatively technically. So in general it is a good idea to compare the input of the case converter functions with their output, to see if the intended meanings at least seem to be preserved.</p>
 <p>To make this as painless as possible, it is best to provide a logic that is robust and can handle also relatively complex cases. Note for example the string “RStudio”. How should one convert it to snake case? We have seen a similar example with “CId”, but for now we focus on sth. different. In case of “RStudio”, we could convert to:</p>
-<ol type="1">
+<ol style="list-style-type: decimal">
 <li>“r_s_tudio”,</li>
 <li>“rs_tudio” or</li>
 <li>“r_studio”.</li>
 </ol>
 <p>If we are conservative about any assumptions on the meaning of “RStudio”, we can’t decide which is the correct conversion. It is also not valid to assume that “RStudio” was intentionally written in PascalCase. Of course we know that “r_studio” is the correct solution, but we can get there also via different considerations. Let us try to convert our three possible translations (back) to PascalCase and from there back to snake case. What should the output look like?</p>
-<ol type="1">
+<ol style="list-style-type: decimal">
 <li>r_s_tudio -&gt; RSTudio -&gt; r_s_t_udio</li>
 <li>rs_tudio -&gt; RsTudio -&gt; rs_tudio</li>
 <li>r_studio -&gt; RStudio -&gt; r_studio</li>
 </ol>
 <p>Both of the first two alternatives can’t be consistently converted back to a valid Pascal case input (“RStudio”) and with the first logic the further snake case conversion seems to be complete nonsense. Only the latter case is consistent, when converting back to PascalCase, which is the case of the input “RStudio”. It is also consistent to itself, when converting from PascalCase back to snake_case.</p>
 <p>In this way, we can get a good starting point on how to convert specific strings to valid snake_case. Once we have a clean snake_case conversion, we can easily convert further to smallCamelCase, BigCamelCase, SCREAMING_SNAKE_CASE or anything else.</p>
-</section><section id="three-rules-of-consistency" class="level3"><h3>Three rules of consistency</h3>
+</div>
+<div id="three-rules-of-consistency" class="section level3">
+<h3 class="hasAnchor">
+<a href="#three-rules-of-consistency" class="anchor"></a>Three rules of consistency</h3>
 <p>In the last sections we have seen, that it is reasonable to bring a specific conversion from an input string to some standardized case into question. We have also seen, that it is helpful to introduce some tests on the behavior of a specific conversion pattern in related cases. The latter can help to detect inappropriate conversions and also establishes a consistent behavior when converting exotic cases or switching between standardized cases. Maybe we can generalize some of these tests and introduce some kind of consistency patterns. This would enable us that whenever inappropriate or non-unique possibilities for conversions appear, we have rules that help us to deal with this situation and help to exclude some inconsistent conversion alternatives.</p>
-<p>During the development of this package I recognized three specific rules that seem reasonable to be valid whenever cases are converted. To be more general we just use <code>to_x()</code> and <code>to_y()</code> to refer to any two differing converter functions from the set of fucntions including <code><a href="reference/caseconverter.html">to_snake_case()</a></code>, <code><a href="reference/caseconverter.html">to_screaming_snake_case()</a></code>, <code>to_lower_camel_case</code> and <code><a href="reference/caseconverter.html">to_upper_camel_case()</a></code>. (Other cases like “lower_upper” or “upper_lower” could be included, if we consider <code>parsing_option = 2</code> within the equations.)</p>
-<ol type="1">
+<p>During the development of this package I recognized three specific rules that seem reasonable to be valid whenever cases are converted. To be more general we just use <code>to_x()</code> and <code>to_y()</code> to refer to any two differing converter functions from the set of functions including <code><a href="reference/caseconverter.html">to_snake_case()</a></code>, <code><a href="reference/caseconverter.html">to_screaming_snake_case()</a></code>, <code>to_lower_camel_case</code> and <code><a href="reference/caseconverter.html">to_upper_camel_case()</a></code>. (Other cases like “lower_upper” or “upper_lower” could be included, if we consider <code>parsing_option = 2</code> within the equations.)</p>
+<ol style="list-style-type: decimal">
 <li>
 <p>When we have converted to a standardized case, a new conversion to the case should not change the output:</p>
 <p><code>to_x(to_x(string)) = to_x(string)</code></p>
@@ -298,12 +497,20 @@ in general) to different cases like snake_case, smallCamel- and BigCamelCase amo
 </li>
 </ol>
 <p>Note that it can easily be shown, that rule three follows from the first and the second rule. However, it seems reasonable to express each by its own, since they all have an interpretation and together they give a really good intuition about the properties of the converter functions.</p>
-</section></section><section id="testing" class="level2"><h2>Testing</h2>
+</div>
+</div>
+<div id="testing" class="section level2">
+<h2 class="hasAnchor">
+<a href="#testing" class="anchor"></a>Testing</h2>
 <p>To give a meaningful conversion for different cases, we systematically designed test-cases for conversion to snake, small- and big camel case among others. To be consistent regarding the conversion between different cases, we also test the rules above on all test-cases. <!--Note that equality in this equation is only one criterion and it still doesn't
 imply a unique solution on how to translate an initial string argument to snake or camel case. (Note that also `to_xxx(string) = to_xxx(string)` seems desirable). However, for the 
 following testcases, also these two equations are tested.--></p>
-</section><section id="related-resources" class="level2"><h2>Related Resources</h2>
+</div>
+<div id="related-resources" class="section level2">
+<h2 class="hasAnchor">
+<a href="#related-resources" class="anchor"></a>Related Resources</h2>
 <ul>
+<li>If you are interested on (the history of) this package, you can watch this <a href="https://www.youtube.com/watch?v=T6p0l8XzP64">(older) talk</a>.</li>
 <li>
 <a href="https://lup.lub.lu.se/search/publication/e324f252-1d1c-4416-ad1f-284d4ba84bf9">The state of naming conventions in R, Bååth 2012, R Journal</a> <a href="journal.r-project.org/archive/2012-2/RJournal_2012-2_Baaaath.pdf">Download article</a>
 </li>
@@ -317,28 +524,38 @@ following testcases, also these two equations are tested.--></p>
 <a href="https://github.com/Rapporter/rapportools/blob/master/R/utils.R"><code>to_camel()</code> function</a> from the <a href="https://github.com/Rapporter/rapportools">rapporttools package</a>
 </li>
 <li><a href="https://cran.r-project.org/web/packages/lettercase/index.html">lettercase-pkg</a></li>
-</ul></section></section>
+</ul>
+</div>
+</div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2 class="hasAnchor">
-<a href="#sidebar" class="anchor"></a>Links</h2>
+    <div class="links">
+<h2>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cran.r-project.org/package=snakecase">https://​cran.r-project.org/​package=snakecase</a>
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=snakecase">https://​cloud.r-project.org/​package=snakecase</a>
 </li>
 <li>Browse source code at <br><a href="https://github.com/Tazinho/snakecase">https://​github.com/​Tazinho/​snakecase</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/Tazinho/snakecase/issues">https://​github.com/​Tazinho/​snakecase/​issues</a>
 </li>
 </ul>
+</div>
+<div class="license">
 <h2>License</h2>
-<p><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></p>
-<h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Malte Grosser <br><small class="roles"> Author, maintainer </small> </li>
+<li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>
 </ul>
 </div>
+<div class="developers">
+<h2>Developers</h2>
+<ul class="list-unstyled">
+<li>Malte Grosser <br><small class="roles"> Author, maintainer </small>  </li>
+</ul>
+</div>
+
+      </div>
 
 </div>
 

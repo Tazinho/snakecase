@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All news â€¢ snakecase</title>
+<title>Changelog • snakecase</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -25,9 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
-<meta property="og:title" content="All news" />
+<meta property="og:title" content="Changelog" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -50,8 +50,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">snakecase</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">snakecase</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.9.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -76,7 +80,7 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -99,12 +103,23 @@
 
   <div class="col-md-9">
     <div class="page-header">
-      <h1>Change log <small>All releases</small></h1>
+      <h1>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/Tazinho/snakecase/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
     <div class="contents">
-    <div class="section level1">
-<h1>snakecase 0.9.0</h1>
+    <div id="snakecase-0-9-1" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-9-1" class="anchor"></a>snakecase 0.9.1<small> Unreleased </small>
+</h1>
+<ul>
+<li>Change default <code>sep_in</code> from <code>NULL</code> to <code>"[^[:alnum:]]"</code>. This will make it easier for beginners and in general also faster to modify cases from names like <code>names(iris)</code>. Updated the regarding sections in the vignette and readme.</li>
+</ul>
+</div>
+    <div id="snakecase-0-9-0" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-9-0" class="anchor"></a>snakecase 0.9.0<small> 2018-02-25 </small>
+</h1>
 <ul>
 <li><p>CRAN release</p></li>
 <li>
@@ -127,7 +142,8 @@
 </li>
 <li>new converters:
 <ul>
-<li>to_swap_case is new. Within to_any_case this conversion can be called also via <code>case = "flip"</code>.</li>
+<li>
+<code><a href="../reference/caseconverter.html">to_swap_case()</a></code> is new. Within <code><a href="../reference/to_any_case.html">to_any_case()</a></code> this conversion can be called also via <code>case = "flip"</code>.</li>
 </ul>
 </li>
 <li>removed deprecated arguments
@@ -153,47 +169,61 @@
 </li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.8.4</h1>
+    <div id="snakecase-0-8-4" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-8-4" class="anchor"></a>snakecase 0.8.4<small> Unreleased </small>
+</h1>
 <ul>
 <li>Introduced <code><a href="../reference/caseconverter.html">to_swap_case()</a></code>, which is also available in <code><a href="../reference/to_any_case.html">to_any_case()</a></code> via <code>case = "swap"</code> or <code>case = "flip"</code>
 </li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.8.3.1</h1>
+    <div id="snakecase-0-8-3-1" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-8-3-1" class="anchor"></a>snakecase 0.8.3.1<small> Unreleased </small>
+</h1>
 <ul>
 <li>abbreviations work now also in conversions to lower- and upper camel case.</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.8.3</h1>
+    <div id="snakecase-0-8-3" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-8-3" class="anchor"></a>snakecase 0.8.3<small> Unreleased </small>
+</h1>
 <ul>
 <li>replaced <code>parsing_option</code>s 3 and 4 with 5 and 6.</li>
 <li>removed <strong>purrr</strong> dependecy</li>
 <li>removed <strong>magrittr</strong> dependency</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.8.2.9002</h1>
+    <div id="snakecase-0-8-2-9002" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-8-2-9002" class="anchor"></a>snakecase 0.8.2.9002<small> Unreleased </small>
+</h1>
 <ul>
 <li>remove <code>replace_special_characters</code>, <code>preprocess</code> and <code>postprocess</code>.</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.8.2.9001</h1>
+    <div id="snakecase-0-8-2-9001" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-8-2-9001" class="anchor"></a>snakecase 0.8.2.9001<small> Unreleased </small>
+</h1>
 <ul>
-<li>added parsing option 6, which doesnâ€™t surround digits with separators.</li>
+<li>added parsing option 6, which doesn’t surround digits with separators.</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.8.1</h1>
+    <div id="snakecase-0-8-1" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-8-1" class="anchor"></a>snakecase 0.8.1<small> 2018-01-21 </small>
+</h1>
 <ul>
 <li>CRAN releases</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.8.0.9000</h1>
+    <div id="snakecase-0-8-0-9000" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-8-0-9000" class="anchor"></a>snakecase 0.8.0.9000<small> Unreleased </small>
+</h1>
 <ul>
 <li>some breaking changes:
 <ul>
@@ -203,16 +233,20 @@
 </li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.7.1</h1>
+    <div id="snakecase-0-7-1" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-7-1" class="anchor"></a>snakecase 0.7.1<small> 2018-01-08 </small>
+</h1>
 <ul>
 <li><p>CRAN update</p></li>
 <li>for changes see V 0.7.0</li>
 <li><p>additionally fixed obvious bug and forwarded to_xxx_case args to to_any_case</p></li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.7.0</h1>
+    <div id="snakecase-0-7-0" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-7-0" class="anchor"></a>snakecase 0.7.0<small> Unreleased </small>
+</h1>
 <ul>
 <li>changes since last CRAN submission include:
 <ul>
@@ -239,23 +273,29 @@
 </li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.6.2.9000</h1>
+    <div id="snakecase-0-6-2-9000" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-6-2-9000" class="anchor"></a>snakecase 0.6.2.9000<small> Unreleased </small>
+</h1>
 <ul>
 <li>all to_xxx_case functions are now exact wrappers of to_any_case</li>
 <li>to_small / to_big_camel_case have been renamed to to_lower / to_upper_camel_case</li>
 <li>minimal vignette update</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.6.1.9000</h1>
+    <div id="snakecase-0-6-1-9000" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-6-1-9000" class="anchor"></a>snakecase 0.6.1.9000<small> Unreleased </small>
+</h1>
 <ul>
 <li>more consistency for case none</li>
 <li>bugfix for parsing option 5</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.6.0.9000</h1>
+    <div id="snakecase-0-6-0-9000" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-6-0-9000" class="anchor"></a>snakecase 0.6.0.9000<small> Unreleased </small>
+</h1>
 <ul>
 <li>overhaul readme</li>
 <li>renamed <code>parsingoption</code> argument to <code>parsing_option</code>
@@ -265,20 +305,26 @@
 <li>make modifications to case none, which allows now more parsing options</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.5.4.9000</h1>
+    <div id="snakecase-0-5-4-9000" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-5-4-9000" class="anchor"></a>snakecase 0.5.4.9000<small> Unreleased </small>
+</h1>
 <ul>
-<li>added special behaviour for abbreviations within â€œmixed_caseâ€</li>
+<li>added special behaviour for abbreviations within “mixed_case”</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.5.3.9000</h1>
+    <div id="snakecase-0-5-3-9000" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-5-3-9000" class="anchor"></a>snakecase 0.5.3.9000<small> Unreleased </small>
+</h1>
 <ul>
 <li>added abbreviations argument for better mixed case handling</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.5.2.9000</h1>
+    <div id="snakecase-0-5-2-9000" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-5-2-9000" class="anchor"></a>snakecase 0.5.2.9000<small> Unreleased </small>
+</h1>
 <ul>
 <li>
 <p>improve consistency with stringr pkg regarding special input handlig</p>
@@ -286,8 +332,10 @@
 </li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.5.1</h1>
+    <div id="snakecase-0-5-1" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-5-1" class="anchor"></a>snakecase 0.5.1<small> 2017-09-20 </small>
+</h1>
 <ul>
 <li>Changes since last update:
 <ul>
@@ -298,22 +346,26 @@
 </li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.5.0.9001</h1>
+    <div id="snakecase-0-5-0-9001" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-5-0-9001" class="anchor"></a>snakecase 0.5.0.9001<small> Unreleased </small>
+</h1>
 <ul>
 <li>
 <code><a href="../reference/to_any_case.html">to_any_case()</a></code> and the other converter function now preserve the names attribute. (Thanks to <a href='http://github.com/straegejacke'>@straegejacke</a>)</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.5.0</h1>
+    <div id="snakecase-0-5-0" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-5-0" class="anchor"></a>snakecase 0.5.0<small> 2017-08-08 </small>
+</h1>
 <ul>
 <li><p>CRAN update</p></li>
 <li>Changes since last CRAN submission include:
 <ul>
 <li>string transliteration via updated <code>replace_special_character</code> argument</li>
-<li>some new cases: â€œnoneâ€, â€œmixedâ€, â€œupper_lowerâ€, â€œlower_upperâ€</li>
-<li>aliases: â€œall_capsâ€, â€œlower_camelâ€, â€œupper_camelâ€</li>
+<li>some new cases: “none”, “mixed”, “upper_lower”, “lower_upper”</li>
+<li>aliases: “all_caps”, “lower_camel”, “upper_camel”</li>
 <li>different parsing options</li>
 <li>several bugfixes</li>
 <li>improved internal testing</li>
@@ -322,27 +374,35 @@
 </li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.4.0.9016</h1>
+    <div id="snakecase-0-4-0-9016" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-4-0-9016" class="anchor"></a>snakecase 0.4.0.9016<small> Unreleased </small>
+</h1>
 <ul>
 <li>
 <code>case == "none"</code> works now with <code>preprocess</code>.</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.4.0.9015</h1>
+    <div id="snakecase-0-4-0-9015" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-4-0-9015" class="anchor"></a>snakecase 0.4.0.9015<small> Unreleased </small>
+</h1>
 <ul>
-<li>fixed bug so that <code>case = upper_lower</code> no also works for <code>NA</code>â€™s.</li>
+<li>fixed bug so that <code>case = upper_lower</code> no also works for <code>NA</code>’s.</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.4.0.9014</h1>
+    <div id="snakecase-0-4-0-9014" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-4-0-9014" class="anchor"></a>snakecase 0.4.0.9014<small> Unreleased </small>
+</h1>
 <ul>
 <li>added shortcutfunctions <code><a href="../reference/caseconverter.html">to_mixed_case()</a></code>, <code><a href="../reference/caseconverter.html">to_lower_upper_case()</a></code> and <code><a href="../reference/caseconverter.html">to_upper_lower_case()</a></code>.</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.4.0.9013</h1>
+    <div id="snakecase-0-4-0-9013" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-4-0-9013" class="anchor"></a>snakecase 0.4.0.9013<small> Unreleased </small>
+</h1>
 <p>Implemented two further parsingoptopions:</p>
 <ul>
 <li>3: parses the first UPPER letter group like parsingoption 2 and the rest like option 1<br>
@@ -350,148 +410,194 @@
 <li>4: parses the first UPPERlowercase letter group like parsingoption 1 and the rest like option 2</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.4.0.9012</h1>
+    <div id="snakecase-0-4-0-9012" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-4-0-9012" class="anchor"></a>snakecase 0.4.0.9012<small> Unreleased </small>
+</h1>
 <p>bug fix in devversion: protect works now for beginning and end of substrings and not anymore only for complete substrings.</p>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.4.0.9011</h1>
+    <div id="snakecase-0-4-0-9011" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-4-0-9011" class="anchor"></a>snakecase 0.4.0.9011<small> Unreleased </small>
+</h1>
 <p>Fix bug for <code>character(0)</code> in combination with <code>postprocess</code></p>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.4.0.9010</h1>
-<p>Input of <code>replace special character</code> is now a character vector. Itâ€™s entries have to be elements of <code><a href="http://www.rdocumentation.org/packages/stringi/topics/stri_trans_list">stringi::stri_trans_list()</a></code> or names of the transliteration dictionary list, which comes with this package. This update enables users to transliterate strings from different encodings, in a flexible way. For example UTF8 to Ascii, â€¦ .</p>
+    <div id="snakecase-0-4-0-9010" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-4-0-9010" class="anchor"></a>snakecase 0.4.0.9010<small> Unreleased </small>
+</h1>
+<p>Input of <code>replace special character</code> is now a character vector. It’s entries have to be elements of <code><a href="http://www.rdocumentation.org/packages/stringi/topics/stri_trans_list">stringi::stri_trans_list()</a></code> or names of the transliteration dictionary list, which comes with this package. This update enables users to transliterate strings from different encodings, in a flexible way. For example UTF8 to Ascii, … .</p>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.4.0.9009</h1>
+    <div id="snakecase-0-4-0-9009" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-4-0-9009" class="anchor"></a>snakecase 0.4.0.9009<small> Unreleased </small>
+</h1>
 <ul>
 <li>provided aliases <code>"all_caps"</code>, <code>"lower_camel"</code> and <code>"upper_camel"</code> for <code>"screaming_snake"</code>, <code>"small_camel"</code> and <code>"big_camel"</code>.</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.4.0.9008</h1>
+    <div id="snakecase-0-4-0-9008" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-4-0-9008" class="anchor"></a>snakecase 0.4.0.9008<small> Unreleased </small>
+</h1>
 <ul>
 <li>small bug fix for upper_lower/lower_upper regarding the behaviour for the combination of preprocess and protect (similar to an earlier bug in the camel cases).</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.4.0.9007</h1>
+    <div id="snakecase-0-4-0-9007" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-4-0-9007" class="anchor"></a>snakecase 0.4.0.9007<small> Unreleased </small>
+</h1>
 <ul>
 <li>small bug fix for behaviour of upper_lower/lower_upper. Now substrings with without alphabetical characters are ignored.</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.4.0.9006</h1>
+    <div id="snakecase-0-4-0-9006" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-4-0-9006" class="anchor"></a>snakecase 0.4.0.9006<small> Unreleased </small>
+</h1>
 <ul>
-<li>new implemented cases: â€œnoneâ€, â€œmixedâ€, â€œupper_lowerâ€, â€œlower_upperâ€.</li>
+<li>new implemented cases: “none”, “mixed”, “upper_lower”, “lower_upper”.</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.4.0.9005</h1>
+    <div id="snakecase-0-4-0-9005" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-4-0-9005" class="anchor"></a>snakecase 0.4.0.9005<small> Unreleased </small>
+</h1>
 <ul>
 <li>empty_fill runs again in the end, before the pre and postprocess</li>
-<li>fixed bug: <code><a href="../reference/to_any_case.html">to_any_case("r.aStudio", protect = "a", postprocess = "-", case = "big_camel")</a></code> will now correctly return â€œR-.AStudioâ€ (so the protection will be triggered by the input and not by the output). In contrast <code>protect = A</code> will yield in unprotected output (<code>-A-</code>)</li>
+<li>fixed bug: <code><a href="../reference/to_any_case.html">to_any_case("r.aStudio", protect = "a", postprocess = "-", case = "big_camel")</a></code> will now correctly return “R-.AStudio” (so the protection will be triggered by the input and not by the output). In contrast <code>protect = A</code> will yield in unprotected output (<code>-A-</code>)</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.4.0.9004</h1>
+    <div id="snakecase-0-4-0-9004" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-4-0-9004" class="anchor"></a>snakecase 0.4.0.9004<small> Unreleased </small>
+</h1>
 <ul>
 <li>empty_fill runs now at the beginning of to any case function (after the first parsing) and a second parsing is introduced in case anything is filled.</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.4.0.9003</h1>
+    <div id="snakecase-0-4-0-9003" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-4-0-9003" class="anchor"></a>snakecase 0.4.0.9003<small> Unreleased </small>
+</h1>
 <ul>
-<li>fixed bug in camelcases, for letters after protected symbols (usually one wouldnâ€™t protect in these cases anywayâ€¦)</li>
+<li>fixed bug in camelcases, for letters after protected symbols (usually one wouldn’t protect in these cases anyway…)</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.4.0.9002</h1>
+    <div id="snakecase-0-4-0-9002" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-4-0-9002" class="anchor"></a>snakecase 0.4.0.9002<small> Unreleased </small>
+</h1>
 <ul>
 <li>implemented <code><a href="../reference/check_design_rule.html">check_design_rule()</a></code> (not exported)</li>
 <li>resolved bugs in other design options (also deleted one which is not valid for screaming snake case)</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.4.0.9001</h1>
+    <div id="snakecase-0-4-0-9001" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-4-0-9001" class="anchor"></a>snakecase 0.4.0.9001<small> Unreleased </small>
+</h1>
 <ul>
-<li>included several parsingoptions for <code><a href="../reference/to_any_case.html">to_any_case()</a></code>.<br><strong>1:</strong> â€œRRRStudioâ€ -&gt; â€œRRR_Studioâ€ stays as default<br><strong>2:</strong> â€œRRRStudio -&gt; RRRS_tudioâ€<br><strong>any other number</strong> will suppress the parsing (only spaces will be converted into â€œ_â€œ)</li>
+<li>included several parsingoptions for <code><a href="../reference/to_any_case.html">to_any_case()</a></code>.<br><strong>1:</strong> “RRRStudio” -&gt; “RRR_Studio” stays as default<br><strong>2:</strong> “RRRStudio -&gt; RRRS_tudio”<br><strong>any other number</strong> will suppress the parsing (only spaces will be converted into “_“)</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.4.0.9000</h1>
+    <div id="snakecase-0-4-0-9000" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-4-0-9000" class="anchor"></a>snakecase 0.4.0.9000<small> Unreleased </small>
+</h1>
 <ul>
 <li>This is the (stable) development version now. You can find snakecase on cran <a href="https://CRAN.R-project.org/package=snakecase">here</a>
 </li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.4.0</h1>
+    <div id="snakecase-0-4-0" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-4-0" class="anchor"></a>snakecase 0.4.0<small> 2017-05-18 </small>
+</h1>
 <ul>
 <li>CRAN submission</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.3.5.3</h1>
+    <div id="snakecase-0-3-5-3" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-3-5-3" class="anchor"></a>snakecase 0.3.5.3<small> Unreleased </small>
+</h1>
 <ul>
 <li>changed order of the customizing arguments of <code><a href="../reference/to_any_case.html">to_any_case()</a></code>
 </li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.3.5.2</h1>
+    <div id="snakecase-0-3-5-2" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-3-5-2" class="anchor"></a>snakecase 0.3.5.2<small> Unreleased </small>
+</h1>
 <ul>
 <li>fixed bug for combination of protect and postprocess. Therefore clarified and rewrote the internal order of <code><a href="../reference/to_any_case.html">to_any_case()</a></code>
 </li>
 <li>resolved all internal build warnings and notes</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.3.5.1</h1>
+    <div id="snakecase-0-3-5-1" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-3-5-1" class="anchor"></a>snakecase 0.3.5.1<small> Unreleased </small>
+</h1>
 <ul>
 <li>fixed bug in replace_special_characters combined with screaming snake case.</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.3.5</h1>
+    <div id="snakecase-0-3-5" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-3-5" class="anchor"></a>snakecase 0.3.5<small> Unreleased </small>
+</h1>
 <ul>
 <li>any local special characters are now supported.</li>
-<li>added 2 arguments to <code><a href="../reference/to_any_case.html">to_any_case()</a></code>: empty_fill, which allows to fill strings matching to â€œâ€ with the supplied string. unique_sep adds an integer suffix separated with the supplied string, when not <code>NULL</code>.</li>
+<li>added 2 arguments to <code><a href="../reference/to_any_case.html">to_any_case()</a></code>: empty_fill, which allows to fill strings matching to “” with the supplied string. unique_sep adds an integer suffix separated with the supplied string, when not <code>NULL</code>.</li>
 <li>fixed a bug in to_snake_case_internal(). groups of digits are not separated in between anymore.</li>
-<li>digits that are not direct next to each other, will be split via â€œ_" in both camel case versions. This is a meaningful exception. Otherwise information would be lost and also the consistency rules in the readme wouldnâ€™t hold in this case.</li>
+<li>digits that are not direct next to each other, will be split via “_" in both camel case versions. This is a meaningful exception. Otherwise information would be lost and also the consistency rules in the readme wouldn’t hold in this case.</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.3.4</h1>
+    <div id="snakecase-0-3-4" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-3-4" class="anchor"></a>snakecase 0.3.4<small> Unreleased </small>
+</h1>
 <ul>
 <li>any_case() is now vectorised over pre-/postprocess, pre-/postfix for all case arguments</li>
-<li>introduces protect as (vectorised) argument to to_any_case(). it accepts regular expressions and cleans â€œ_" or whatever the preprocessing did, between matches.</li>
+<li>introduces protect as (vectorised) argument to to_any_case(). it accepts regular expressions and cleans “_" or whatever the preprocessing did, between matches.</li>
 <li>some more tests, documentation and fixes.</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.3.3</h1>
+    <div id="snakecase-0-3-3" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-3-3" class="anchor"></a>snakecase 0.3.3<small> Unreleased </small>
+</h1>
 <ul>
-<li>introduced case = â€œparsedâ€ in to_any_case()</li>
+<li>introduced case = “parsed” in to_any_case()</li>
 <li>introduced to_parsed_case()</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.3.2</h1>
+    <div id="snakecase-0-3-2" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-3-2" class="anchor"></a>snakecase 0.3.2<small> Unreleased </small>
+</h1>
 <ul>
 <li>finished vignette (title: Caseconverters) and replaced the usage part in readme with it.</li>
 <li>changed behaviour in snake_case_internal to always treat whitespaces as underscores. for whitespaces in output postprocess = " " is recommended.</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.3.1</h1>
+    <div id="snakecase-0-3-1" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-3-1" class="anchor"></a>snakecase 0.3.1<small> Unreleased </small>
+</h1>
 <ul>
 <li>started testing <code>to_any_case</code> and removed a bug.</li>
 <li>added vignette</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.3.0</h1>
+    <div id="snakecase-0-3-0" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-3-0" class="anchor"></a>snakecase 0.3.0<small> Unreleased </small>
+</h1>
 <ul>
 <li>supports behaviour for german umlauts on all platforms</li>
 <li>intoduced internal function <code>to_snake_case_internal()</code> which does the preprocessing and simplifies all other functions (especially <code><a href="../reference/to_any_case.html">to_any_case()</a></code>) a little bit.</li>
@@ -502,14 +608,18 @@
 <li>updated tests and highly modularized all tests. (just to_any_case lacks some tests now and in general more examples testcases have to be written)</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.2.2</h1>
+    <div id="snakecase-0-2-2" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-2-2" class="anchor"></a>snakecase 0.2.2<small> Unreleased </small>
+</h1>
 <ul>
 <li>introduced <code><a href="../reference/to_any_case.html">to_any_case()</a></code> (all functionality and documentation provided, but implementation has to be cleaned and also tests have to be written)</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.2.1</h1>
+    <div id="snakecase-0-2-1" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-2-1" class="anchor"></a>snakecase 0.2.1<small> Unreleased </small>
+</h1>
 <ul>
 <li>fixed bug: <code>to_snake_case_dev(c("ssRRss"))</code> returns now <code>ss_r_rss</code> instead of<code>"ss_r_r_ss"</code>
 </li>
@@ -518,8 +628,10 @@
 <li>functionality to treat different stuff like dots will be added via a new function:<br><code><a href="../reference/to_any_case.html">to_any_case()</a></code>, which will wrap the other three and will have pre- and postprocess arguments</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.2.0</h1>
+    <div id="snakecase-0-2-0" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-2-0" class="anchor"></a>snakecase 0.2.0<small> Unreleased </small>
+</h1>
 <ul>
 <li>renamed the single input parameters consistent to <code>string</code> (without deprecating the old name before, since the package was in early dev-stage anyway).</li>
 <li>started a to develop and implement consistent logic (which still has to be better documented in the readme)</li>
@@ -529,8 +641,10 @@
 <li>added badges for cran status and codecoverage to readme</li>
 </ul>
 </div>
-    <div class="section level1">
-<h1>snakecase 0.1.0</h1>
+    <div id="snakecase-0-1-0" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0-1-0" class="anchor"></a>snakecase 0.1.0<small> Unreleased </small>
+</h1>
 <ul>
 <li>Introduced <code><a href="../reference/caseconverter.html">to_snake_case()</a></code> which converts strings to snake_case.</li>
 <li>added functions <code>to_small_camel_case()</code> and <code>to_big_camel_case()</code> which internally build up on <code><a href="../reference/caseconverter.html">to_snake_case()</a></code> and convert to the appropriate target case.</li>
@@ -545,56 +659,57 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#NA">0.9.0</a></li>
-        <li><a href="#NA">0.8.4</a></li>
-        <li><a href="#NA">0.8.3.1</a></li>
-        <li><a href="#NA">0.8.3</a></li>
-        <li><a href="#NA">0.8.2.9002</a></li>
-        <li><a href="#NA">0.8.2.9001</a></li>
-        <li><a href="#NA">0.8.1</a></li>
-        <li><a href="#NA">0.8.0.9000</a></li>
-        <li><a href="#NA">0.7.1</a></li>
-        <li><a href="#NA">0.7.0</a></li>
-        <li><a href="#NA">0.6.2.9000</a></li>
-        <li><a href="#NA">0.6.1.9000</a></li>
-        <li><a href="#NA">0.6.0.9000</a></li>
-        <li><a href="#NA">0.5.4.9000</a></li>
-        <li><a href="#NA">0.5.3.9000</a></li>
-        <li><a href="#NA">0.5.2.9000</a></li>
-        <li><a href="#NA">0.5.1</a></li>
-        <li><a href="#NA">0.5.0.9001</a></li>
-        <li><a href="#NA">0.5.0</a></li>
-        <li><a href="#NA">0.4.0.9016</a></li>
-        <li><a href="#NA">0.4.0.9015</a></li>
-        <li><a href="#NA">0.4.0.9014</a></li>
-        <li><a href="#NA">0.4.0.9013</a></li>
-        <li><a href="#NA">0.4.0.9012</a></li>
-        <li><a href="#NA">0.4.0.9011</a></li>
-        <li><a href="#NA">0.4.0.9010</a></li>
-        <li><a href="#NA">0.4.0.9009</a></li>
-        <li><a href="#NA">0.4.0.9008</a></li>
-        <li><a href="#NA">0.4.0.9007</a></li>
-        <li><a href="#NA">0.4.0.9006</a></li>
-        <li><a href="#NA">0.4.0.9005</a></li>
-        <li><a href="#NA">0.4.0.9004</a></li>
-        <li><a href="#NA">0.4.0.9003</a></li>
-        <li><a href="#NA">0.4.0.9002</a></li>
-        <li><a href="#NA">0.4.0.9001</a></li>
-        <li><a href="#NA">0.4.0.9000</a></li>
-        <li><a href="#NA">0.4.0</a></li>
-        <li><a href="#NA">0.3.5.3</a></li>
-        <li><a href="#NA">0.3.5.2</a></li>
-        <li><a href="#NA">0.3.5.1</a></li>
-        <li><a href="#NA">0.3.5</a></li>
-        <li><a href="#NA">0.3.4</a></li>
-        <li><a href="#NA">0.3.3</a></li>
-        <li><a href="#NA">0.3.2</a></li>
-        <li><a href="#NA">0.3.1</a></li>
-        <li><a href="#NA">0.3.0</a></li>
-        <li><a href="#NA">0.2.2</a></li>
-        <li><a href="#NA">0.2.1</a></li>
-        <li><a href="#NA">0.2.0</a></li>
-        <li><a href="#NA">0.1.0</a></li>
+        <li><a href="#snakecase-0-9-1">0.9.1</a></li>
+        <li><a href="#snakecase-0-9-0">0.9.0</a></li>
+        <li><a href="#snakecase-0-8-4">0.8.4</a></li>
+        <li><a href="#snakecase-0-8-3-1">0.8.3.1</a></li>
+        <li><a href="#snakecase-0-8-3">0.8.3</a></li>
+        <li><a href="#snakecase-0-8-2-9002">0.8.2.9002</a></li>
+        <li><a href="#snakecase-0-8-2-9001">0.8.2.9001</a></li>
+        <li><a href="#snakecase-0-8-1">0.8.1</a></li>
+        <li><a href="#snakecase-0-8-0-9000">0.8.0.9000</a></li>
+        <li><a href="#snakecase-0-7-1">0.7.1</a></li>
+        <li><a href="#snakecase-0-7-0">0.7.0</a></li>
+        <li><a href="#snakecase-0-6-2-9000">0.6.2.9000</a></li>
+        <li><a href="#snakecase-0-6-1-9000">0.6.1.9000</a></li>
+        <li><a href="#snakecase-0-6-0-9000">0.6.0.9000</a></li>
+        <li><a href="#snakecase-0-5-4-9000">0.5.4.9000</a></li>
+        <li><a href="#snakecase-0-5-3-9000">0.5.3.9000</a></li>
+        <li><a href="#snakecase-0-5-2-9000">0.5.2.9000</a></li>
+        <li><a href="#snakecase-0-5-1">0.5.1</a></li>
+        <li><a href="#snakecase-0-5-0-9001">0.5.0.9001</a></li>
+        <li><a href="#snakecase-0-5-0">0.5.0</a></li>
+        <li><a href="#snakecase-0-4-0-9016">0.4.0.9016</a></li>
+        <li><a href="#snakecase-0-4-0-9015">0.4.0.9015</a></li>
+        <li><a href="#snakecase-0-4-0-9014">0.4.0.9014</a></li>
+        <li><a href="#snakecase-0-4-0-9013">0.4.0.9013</a></li>
+        <li><a href="#snakecase-0-4-0-9012">0.4.0.9012</a></li>
+        <li><a href="#snakecase-0-4-0-9011">0.4.0.9011</a></li>
+        <li><a href="#snakecase-0-4-0-9010">0.4.0.9010</a></li>
+        <li><a href="#snakecase-0-4-0-9009">0.4.0.9009</a></li>
+        <li><a href="#snakecase-0-4-0-9008">0.4.0.9008</a></li>
+        <li><a href="#snakecase-0-4-0-9007">0.4.0.9007</a></li>
+        <li><a href="#snakecase-0-4-0-9006">0.4.0.9006</a></li>
+        <li><a href="#snakecase-0-4-0-9005">0.4.0.9005</a></li>
+        <li><a href="#snakecase-0-4-0-9004">0.4.0.9004</a></li>
+        <li><a href="#snakecase-0-4-0-9003">0.4.0.9003</a></li>
+        <li><a href="#snakecase-0-4-0-9002">0.4.0.9002</a></li>
+        <li><a href="#snakecase-0-4-0-9001">0.4.0.9001</a></li>
+        <li><a href="#snakecase-0-4-0-9000">0.4.0.9000</a></li>
+        <li><a href="#snakecase-0-4-0">0.4.0</a></li>
+        <li><a href="#snakecase-0-3-5-3">0.3.5.3</a></li>
+        <li><a href="#snakecase-0-3-5-2">0.3.5.2</a></li>
+        <li><a href="#snakecase-0-3-5-1">0.3.5.1</a></li>
+        <li><a href="#snakecase-0-3-5">0.3.5</a></li>
+        <li><a href="#snakecase-0-3-4">0.3.4</a></li>
+        <li><a href="#snakecase-0-3-3">0.3.3</a></li>
+        <li><a href="#snakecase-0-3-2">0.3.2</a></li>
+        <li><a href="#snakecase-0-3-1">0.3.1</a></li>
+        <li><a href="#snakecase-0-3-0">0.3.0</a></li>
+        <li><a href="#snakecase-0-2-2">0.2.2</a></li>
+        <li><a href="#snakecase-0-2-1">0.2.1</a></li>
+        <li><a href="#snakecase-0-2-0">0.2.0</a></li>
+        <li><a href="#snakecase-0-1-0">0.1.0</a></li>
       </ul>
     </div>
   </div>
@@ -615,3 +730,4 @@
 
   </body>
 </html>
+

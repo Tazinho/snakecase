@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Internal abbreviation marker, marks abbreviations with an underscore behind.
-Useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2. — abbreviation_internal â€¢ snakecase</title>
+Useful if <code>parsing_option</code> 1 is needed, but some abbreviations need <code>parsing_option</code> 2. — abbreviation_internal • snakecase</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -26,14 +26,14 @@ Useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2.
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
 <meta property="og:title" content="Internal abbreviation marker, marks abbreviations with an underscore behind.
-Useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2. — abbreviation_internal" />
+Useful if <code>parsing_option</code> 1 is needed, but some abbreviations need <code>parsing_option</code> 2. — abbreviation_internal" />
 
 <meta property="og:description" content="Internal abbreviation marker, marks abbreviations with an underscore behind.
-Useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2." />
+Useful if parsing_option 1 is needed, but some abbreviations need parsing_option 2." />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -56,8 +56,12 @@ Useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2.
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">snakecase</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">snakecase</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.9.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -82,7 +86,7 @@ Useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2.
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -105,17 +109,18 @@ Useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2.
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Internal abbreviation marker, marks abbreviations with an underscore behind.
-Useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2.</h1>
+Useful if <code>parsing_option</code> 1 is needed, but some abbreviations need <code>parsing_option</code> 2.</h1>
+    <small>Source: <a href='https://github.com/Tazinho/snakecase/blob/master/R/abbreviation_internal.R'><code>R/abbreviation_internal.R</code></a></small>
     </div>
 
     
     <p>Internal abbreviation marker, marks abbreviations with an underscore behind.
-Useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2.</p>
+Useful if <code>parsing_option</code> 1 is needed, but some abbreviations need <code>parsing_option</code> 2.</p>
     
 
     <pre class="usage"><span class='fu'>abbreviation_internal</span>(<span class='no'>string</span>, <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -126,7 +131,7 @@ Useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2.
       <th>abbreviations</th>
       <td><p>character with (uppercase) abbreviations. This marks
 abbreviations with an underscore behind (in front of the parsing).
-useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2.</p></td>
+Useful if <code>parsing_option</code> 1 is needed, but some abbreviations need <code>parsing_option</code> 2.</p></td>
     </tr>
     </table>
     
@@ -165,3 +170,4 @@ Malte Grosser, <a href='mailto:malte.grosser@gmail.com'>malte.grosser@gmail.com<
 
   </body>
 </html>
+

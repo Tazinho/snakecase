@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference â€¢ snakecase</title>
+<title>Function reference • snakecase</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -25,9 +25,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
 <meta property="og:title" content="Function reference" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -50,8 +50,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">snakecase</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">snakecase</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.9.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -76,7 +80,7 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -98,10 +102,7 @@
       <div class="row">
   <div class="col-md-9">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;0.9.0</small>
-      </h1>
+      <h1>Reference</h1>
     </div>
 
     <div class="contents">
@@ -122,44 +123,44 @@
         <tr>
           <!--  -->
           <td>
-            <p><code><a href="abbreviation_internal.html">abbreviation_internal</a></code> </p>
+            <p><code><a href="abbreviation_internal.html">abbreviation_internal()</a></code> </p>
           </td>
           <td><p>Internal abbreviation marker, marks abbreviations with an underscore behind.
-Useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2.</p></td>
+Useful if <code>parsing_option</code> 1 is needed, but some abbreviations need <code>parsing_option</code> 2.</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="caseconverter.html">to_snake_case</a></code> <code><a href="caseconverter.html">to_lower_camel_case</a></code> <code><a href="caseconverter.html">to_upper_camel_case</a></code> <code><a href="caseconverter.html">to_screaming_snake_case</a></code> <code><a href="caseconverter.html">to_parsed_case</a></code> <code><a href="caseconverter.html">to_mixed_case</a></code> <code><a href="caseconverter.html">to_lower_upper_case</a></code> <code><a href="caseconverter.html">to_upper_lower_case</a></code> <code><a href="caseconverter.html">to_swap_case</a></code> </p>
+            <p><code><a href="caseconverter.html">to_snake_case()</a></code> <code><a href="caseconverter.html">to_lower_camel_case()</a></code> <code><a href="caseconverter.html">to_upper_camel_case()</a></code> <code><a href="caseconverter.html">to_screaming_snake_case()</a></code> <code><a href="caseconverter.html">to_parsed_case()</a></code> <code><a href="caseconverter.html">to_mixed_case()</a></code> <code><a href="caseconverter.html">to_lower_upper_case()</a></code> <code><a href="caseconverter.html">to_upper_lower_case()</a></code> <code><a href="caseconverter.html">to_swap_case()</a></code> </p>
           </td>
           <td><p>Specific case converter shortcuts</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="check_design_rule.html">check_design_rule</a></code> </p>
+            <p><code><a href="check_design_rule.html">check_design_rule()</a></code> </p>
           </td>
           <td><p>Internal helper to test the design rules for any string and setting of <code>to_any_case()</code></p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="preprocess_internal.html">preprocess_internal</a></code> </p>
+            <p><code><a href="preprocess_internal.html">preprocess_internal()</a></code> </p>
           </td>
           <td><p>Internal function that replaces regex matches with underscores</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="replace_special_characters_internal.html">replace_special_characters_internal</a></code> </p>
+            <p><code><a href="replace_special_characters_internal.html">replace_special_characters_internal()</a></code> </p>
           </td>
           <td><p>Internal helper to replace special characters.</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="to_any_case.html">to_any_case</a></code> </p>
+            <p><code><a href="to_any_case.html">to_any_case()</a></code> </p>
           </td>
           <td><p>General case conversion</p></td>
         </tr><tr>
           <!--  -->
           <td>
-            <p><code><a href="to_parsed_case_internal.html">to_parsed_case_internal</a></code> </p>
+            <p><code><a href="to_parsed_case_internal.html">to_parsed_case_internal()</a></code> </p>
           </td>
           <td><p>Internal parser, which is relevant for preprocessing, parsing and parsing options</p></td>
         </tr>
@@ -190,3 +191,4 @@ Useful if parsinoption 1 is needed, but some abbreviations need parsingoption 2.
 
   </body>
 </html>
+
