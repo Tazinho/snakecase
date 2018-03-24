@@ -1,6 +1,6 @@
 # snakecase 0.9.1
 
-* Change default `sep_in` from `NULL` to `"[^[:alnum:]]"`. This will make it easier for beginners and in general also faster to modify cases from names like `names(iris)`.
+* Change default `sep_in` from `NULL` to `"[^[:alnum:]]"`. This will make it easier for beginners and in general also faster to modify cases from names like `names(iris)`. Updated the regarding sections in the vignette and readme.
 
 # snakecase 0.9.0
 
@@ -16,7 +16,7 @@
   * abbreviations:
     * they work now more consistent with cases like lower- and upper camel case
   * new converters:
-    * to_swap_case is new. Within to_any_case this conversion can be called also via `case = "flip"`.
+    * `to_swap_case()` is new. Within `to_any_case()` this conversion can be called also via `case = "flip"`.
   * removed deprecated arguments 
     * `replace_special_characters`, which is now called `transliterations`
     * `preprocess`, which is now called `sep_in`
