@@ -7,7 +7,7 @@
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
   "screaming_snake", "parsed", "mixed", "lower_upper", "upper_lower", "swap",
   "all_caps", "lower_camel", "upper_camel", "internal_parsing", "none", "flip"),
-  abbreviations = NULL, sep_in = NULL, parsing_option = 1,
+  abbreviations = NULL, sep_in = "[^[:alnum:]]", parsing_option = 1,
   transliterations = NULL, sep_out = NULL, unique_sep = NULL,
   empty_fill = NULL, prefix = "", postfix = "")
 }
@@ -37,6 +37,7 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
  Doesn't work with any of the other arguments except \code{unique_sep}, \code{empty_fill}, \code{prefix} and \code{postfix}.}
  \item{\code{"none"}: Neither parsing nor case conversion occur. This case might be helpful, when
  one wants to call the function for the quick usage of the other parameters.
+ To suppress replacement of spaces to underscores set \code{sep_out = NULL}.
  Works with \code{sep_in}, \code{transliterations}, \code{sep_out}, \code{prefix},
   \code{postfix},
   \code{empty_fill} and \code{unique_sep}.}
@@ -50,17 +51,21 @@ abbreviations with an underscore behind (in front of the parsing).
 Useful if \code{parsing_option} 1 is needed, but some abbreviations within the string need \code{parsing_option} 2.
 Use this feature with care: One letter abbreviations and abbreviations next to each other may not be handled correctly, since those cases would introduce ambiguity in parsing.}
 
-\item{sep_in}{(short for separator input) A regex supplied as a character (if not \code{NULL}), which will be wrapped internally
-into \code{stringr::regex()}. All matches will be replaced by underscores (additionally to 
-\code{"_"} and \code{" "}, for which this is always true). Underscores can later turned into another separator via \code{sep_out}.}
+\item{sep_in}{(short for separator input) if character, is interpreted as a
+regular expression (wrapped internally into \code{stringr::regex()}). 
+The default value is a regular expression that matches any sequence of
+non-alphanumeric values. All matches will be replaced by underscores 
+(additionally to \code{"_"} and \code{" "}, for which this is always true, even
+if \code{NULL} is supplied). These underscores are used internally to split
+the strings into substrings and specify the word boundaries.}
 
 \item{parsing_option}{An integer that will determine the parsing_option.
 \itemize{
  \item{1: \code{RRRStudio -> RRR_Studio}}
  \item{2: \code{RRRStudio -> RRRS_tudio}}
- \item{3: parses like option 1 but suppresses "_" around non special characters.
- In this way case conversion won't apply after these characters. See examples.}
- \item{4: parses like option 1, but digits directly behind/in front non-digits, will stay as is.}
+ \item{3: This \code{parsing_option} will suppress the conversion after non-alphanumeric
+ values. See examples.}
+ \item{4: digits directly behind/in front non-digits, will stay as is.}
  \item{any other integer <= 0: no parsing"}
  }}
 

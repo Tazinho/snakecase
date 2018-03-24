@@ -13,39 +13,40 @@
 \alias{to_swap_case}
 \title{Specific case converter shortcuts}
 \usage{
-to_snake_case(string, abbreviations = NULL, sep_in = NULL,
+to_snake_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
   parsing_option = 1, transliterations = NULL, sep_out = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
-to_lower_camel_case(string, abbreviations = NULL, sep_in = NULL,
+to_lower_camel_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
   parsing_option = 1, transliterations = NULL, sep_out = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
-to_upper_camel_case(string, abbreviations = NULL, sep_in = NULL,
+to_upper_camel_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
   parsing_option = 1, transliterations = NULL, sep_out = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
-to_screaming_snake_case(string, abbreviations = NULL, sep_in = NULL,
+to_screaming_snake_case(string, abbreviations = NULL,
+  sep_in = "[^[:alnum:]]", parsing_option = 1, transliterations = NULL,
+  sep_out = NULL, unique_sep = NULL, empty_fill = NULL, prefix = "",
+  postfix = "")
+
+to_parsed_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
   parsing_option = 1, transliterations = NULL, sep_out = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
-to_parsed_case(string, abbreviations = NULL, sep_in = NULL,
+to_mixed_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
   parsing_option = 1, transliterations = NULL, sep_out = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
-to_mixed_case(string, abbreviations = NULL, sep_in = NULL,
+to_lower_upper_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
   parsing_option = 1, transliterations = NULL, sep_out = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
-to_lower_upper_case(string, abbreviations = NULL, sep_in = NULL,
+to_upper_lower_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
   parsing_option = 1, transliterations = NULL, sep_out = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
-to_upper_lower_case(string, abbreviations = NULL, sep_in = NULL,
-  parsing_option = 1, transliterations = NULL, sep_out = NULL,
-  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
-
-to_swap_case(string, abbreviations = NULL, sep_in = NULL,
+to_swap_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
   parsing_option = 1, transliterations = NULL, sep_out = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 }
@@ -57,16 +58,21 @@ abbreviations with an underscore behind (in front of the parsing).
 Useful if \code{parsing_option} 1 is needed, but some abbreviations within the string need \code{parsing_option} 2.
 Use this feature with care: One letter abbreviations and abbreviations next to each other may not be handled correctly, since those cases would introduce ambiguity in parsing.}
 
-\item{sep_in}{(short for separator input) A regex supplied as a character (if not \code{NULL}), which will be wrapped internally
-into \code{stringr::regex()}. All matches will be replaced by underscores. Underscores can later turned into another separator via \code{sep_out}.}
+\item{sep_in}{(short for separator input) if character, is interpreted as a
+regular expression (wrapped internally into \code{stringr::regex()}). 
+The default value is a regular expression that matches any sequence of
+non-alphanumeric values. All matches will be replaced by underscores 
+(additionally to \code{"_"} and \code{" "}, for which this is always true, even
+if \code{NULL} is supplied). These underscores are used internally to split
+the strings into substrings and specify the word boundaries.}
 
 \item{parsing_option}{An integer that will determine the parsing_option.
 \itemize{
  \item{1: \code{RRRStudio -> RRR_Studio}}
  \item{2: \code{RRRStudio -> RRRS_tudio}}
- \item{3: parses like option 1 but suppresses "_" around non special characters.
- In this way case conversion won't apply after these characters. See examples.}
- \item{4: parses like option 1, but digits directly behind/in front non-digits, will stay as is.}
+ \item{3: This \code{parsing_option} will suppress the conversion after non-alphanumeric
+ values. See examples.}
+ \item{4: digits directly behind/in front non-digits, will stay as is.}
  \item{any other integer <= 0: no parsing"}
  }}
 

@@ -5,7 +5,7 @@ test_that("random stuff", {
                "RstudioRRRstudio")
   
   expect_equal(to_upper_lower_case(c("R.aStudio", NA, NA, NA, NA)),
-               c("R.aSTUDIO", NA, NA, NA, NA))
+               c("RaSTUDIO", NA, NA, NA, NA))
   }
 )
 
