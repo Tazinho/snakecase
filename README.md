@@ -28,7 +28,7 @@ package](http://www.malte-grosser.com/post/introducing-the-snakecase-package/).
 
 # or the (stable) development version hosted on github
 install.packages("devtools")
-devtools::install_github("Tazinho/snakecase", ref = "devversion-01")
+devtools::install_github("Tazinho/snakecase")
 
 # load snakecase
 library(snakecase)
@@ -346,7 +346,7 @@ that many powerful features are provided “by default”:
 ### Known limitations
 
   - In general combinations of one letter words are hard to convert back
-    from cases with `""` as default separator
+    from cases with `""` as default separator:
     
     ``` r
     to_any_case("a_b_c_d", case = "upper_camel")

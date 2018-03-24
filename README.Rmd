@@ -22,7 +22,7 @@ For a short intro regarding typical use cases, see the blog article [Introducing
 
 # or the (stable) development version hosted on github
 install.packages("devtools")
-devtools::install_github("Tazinho/snakecase", ref = "devversion-01")
+devtools::install_github("Tazinho/snakecase")
 
 # load snakecase
 library(snakecase)
@@ -233,7 +233,7 @@ The package is internally build up on the [stringr](https://github.com/tidyverse
 
 ### Known limitations
 
-* In general combinations of one letter words are hard to convert back from cases with `""` as default separator
+* In general combinations of one letter words are hard to convert back from cases with `""` as default separator:
 
     ```{r, collapse=TRUE}
     to_any_case("a_b_c_d", case = "upper_camel")
