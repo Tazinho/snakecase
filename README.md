@@ -66,9 +66,9 @@ to_upper_camel_case(string)
 ```
 
 Be aware that automatic case conversion depends on the input string and
-it is recommendesd to verify the results. So you might want to pipe
-these into `dput()` (and hardcode name changes instead of blindly
-trusting the output)
+it is recommended to verify the results. So you might want to pipe these
+into `dput()` and hardcode name changes instead of blindly trusting the
+output:
 
 ``` r
 library(magrittr)
@@ -190,8 +190,8 @@ to_snake_case("Schönes Café",
 ## [1] "schoenes_cafe"
 ```
 
-If you can provide tranliterations for your (or any other) country, pls
-drop them within [this
+If you can provide transliterations for your (or any other) country,
+please drop them within [this
 issue](https://github.com/Tazinho/snakecase/issues/107).
 
 **case**: The desired target case, provided as one of the following:
@@ -233,7 +233,7 @@ There are five “special” cases available:
 #### Postprocessing
 
 **sep\_out**: For the creation of other well known or completely new
-cases it is possible to adjust the ouput separator (`sep_out`):
+cases it is possible to adjust the output separator (`sep_out`):
 
 ``` r
 to_snake_case(string, sep_out = ".")
@@ -321,7 +321,7 @@ Shortcut wrappers like `to_snake_case()`, `to_lower_camel_case()` etc. are avail
 
 `to_any_case()` is an attempt to provide good low level control, while
 still being high level enough for daily usage. If you want case
-conversion with good default settings, you can choose the
+conversion with good default settings, you can look into the
 `clean_names()` function from the
 [janitor](https://github.com/sfirke/janitor) package, which works
 directly on data frames. You can also look into the
@@ -353,11 +353,11 @@ that many powerful features are provided “by default”:
     ## [1] "ABCD"
     ```
 
-  - Sometimes further pre or postprocessing might be needed. For example
-    you can easily write your own parsing via a sequence of calls like
-    `str_replace_all(string, some_pattern, "_\\1_")`. It’s also a
-    `str_replace_all()` to replace special symbols like `%` or `€` with
-    `"percent"` or `"euro"`
+  - Sometimes further pre- or postprocessing might be needed. For
+    example you can easily write your own parsing via a sequence of
+    calls like `str_replace_all(string, some_pattern, "_\\1_")`. It’s
+    also a `str_replace_all()` to replace special symbols like `%` or
+    `€` with `"percent"` or `"euro"`
 
   - You can decide yourself: Open an issue
     [here](https://github.com/Tazinho/snakecase/issues) or build sth.
@@ -523,7 +523,8 @@ to_snake_case("CId")
 
 In this way it is guaranteed to get the correct conversion and the only
 chance of an error lies in an accidentally wrong provided input string
-or a bug in the converter function `to_snake_case()`.
+or a bug in the converter function `to_snake_case()` (or a sequence of
+one letter abbreviations, see known limitations).
 
 ### Consistent behaviour
 
@@ -587,7 +588,7 @@ to exclude some inconsistent conversion alternatives.
 During the development of this package I recognized three specific rules
 that seem reasonable to be valid whenever cases are converted. To be
 more general we just use `to_x()` and `to_y()` to refer to any two
-differing converter functions from the set of fucntions including
+differing converter functions from the set of functions including
 `to_snake_case()`, `to_screaming_snake_case()`, `to_lower_camel_case`
 and `to_upper_camel_case()`. (Other cases like “lower\_upper” or
 “upper\_lower” could be included, if we consider `parsing_option = 2`
@@ -625,9 +626,9 @@ following testcases, also these two equations are tested.-->
 
 ## Related Resources
 
-  - (If you are interested on (the history of) this package, you can
+  - If you are interested on (the history of) this package, you can
     watch this [(older)
-    talk](https://www.youtube.com/watch?v=T6p0l8XzP64).)
+    talk](https://www.youtube.com/watch?v=T6p0l8XzP64).
   - [The state of naming conventions in R, Bååth 2012, R
     Journal](https://lup.lub.lu.se/search/publication/e324f252-1d1c-4416-ad1f-284d4ba84bf9)
     [Download

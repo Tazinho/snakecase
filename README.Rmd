@@ -50,7 +50,7 @@ Also shortcuts (wrappers around `to_any_case()`) are available:
 to_upper_camel_case(string)
 ```
 
-Be aware that automatic case conversion depends on the input string and it is recommendesd to verify the results. So you might want to pipe these into `dput()` (and hardcode name changes instead of blindly trusting the output)
+Be aware that automatic case conversion depends on the input string and it is recommended to verify the results. So you might want to pipe these into `dput()` and hardcode name changes instead of blindly trusting the output:
 
 ```{r, collapse = TRUE}
 library(magrittr)
@@ -137,7 +137,7 @@ to_snake_case("Schönes Café",
               transliterations = c("german", "Latin-ASCII"))
 ```
 
-If you can provide tranliterations for your (or any other) country, pls drop them within [this issue](https://github.com/Tazinho/snakecase/issues/107).
+If you can provide transliterations for your (or any other) country, please drop them within [this issue](https://github.com/Tazinho/snakecase/issues/107).
 
 **case**: The desired target case, provided as one of the following:
 
@@ -158,7 +158,7 @@ There are five "special" cases available:
 
 #### Postprocessing
 
-**sep_out**: For the creation of other well known or completely new cases it is possible to adjust the ouput separator (`sep_out`):
+**sep_out**: For the creation of other well known or completely new cases it is possible to adjust the output separator (`sep_out`):
 
 ```{r, collapse = TRUE}
 to_snake_case(string, sep_out = ".")
@@ -221,7 +221,7 @@ Shortcut wrappers like `to_snake_case()`, `to_lower_camel_case()` etc. are avail
 
 ### Scope
 
-`to_any_case()` is an attempt to provide good low level control, while still being high level enough for daily usage. If you want case conversion with good default settings, you can choose the `clean_names()` function from the [janitor](https://github.com/sfirke/janitor) package, which works directly on data frames. You can also look into the [sjPlot](https://github.com/strengejacke/sjPlot) package, where automatic case conversion is used to provide nice default labels within graphics.
+`to_any_case()` is an attempt to provide good low level control, while still being high level enough for daily usage. If you want case conversion with good default settings, you can look into the `clean_names()` function from the [janitor](https://github.com/sfirke/janitor) package, which works directly on data frames. You can also look into the [sjPlot](https://github.com/strengejacke/sjPlot) package, where automatic case conversion is used to provide nice default labels within graphics.
 
 ### Dependencies, vectorisation, speed and special input handling
 
@@ -239,7 +239,7 @@ The package is internally build up on the [stringr](https://github.com/tidyverse
     to_any_case("a_b_c_d", case = "upper_camel")
     ```
 
-* Sometimes further pre or postprocessing might be needed. For example you can easily write your own parsing via a sequence of calls like `str_replace_all(string, some_pattern, "_\\1_")`. It's also a `str_replace_all()` to replace special symbols like `%` or `€` with `"percent"` or `"euro"` 
+* Sometimes further pre- or postprocessing might be needed. For example you can easily write your own parsing via a sequence of calls like `str_replace_all(string, some_pattern, "_\\1_")`. It's also a `str_replace_all()` to replace special symbols like `%` or `€` with `"percent"` or `"euro"` 
 
 * You can decide yourself: Open an issue [here](https://github.com/Tazinho/snakecase/issues) or build sth. quickly yourself via packages like base, [stringr](https://github.com/tidyverse/stringr), [stringi](https://github.com/gagolews/stringi) etc.
 
@@ -380,7 +380,7 @@ In this way, we can get a good starting point on how to convert specific strings
 
 In the last sections we have seen, that it is reasonable to bring a specific conversion from an input string to some standardized case into question. We have also seen, that it is helpful to introduce some tests on the behavior of a specific conversion pattern in related cases. The latter can help to detect inappropriate conversions and also establishes a consistent behavior when converting exotic cases or switching between standardized cases. Maybe we can generalize some of these tests and introduce some kind of consistency patterns. This would enable us that whenever inappropriate or non-unique possibilities for conversions appear, we have rules that help us to deal with this situation and help to exclude some inconsistent conversion alternatives.
 
-During the development of this package I recognized three specific rules that seem reasonable to be valid whenever cases are converted. To be more general we just use `to_x()` and `to_y()` to refer to any two differing converter functions from the set of fucntions including `to_snake_case()`, `to_screaming_snake_case()`, `to_lower_camel_case` and `to_upper_camel_case()`. (Other cases like "lower_upper" or "upper_lower" could be included, if we consider `parsing_option = 2` within the equations.)
+During the development of this package I recognized three specific rules that seem reasonable to be valid whenever cases are converted. To be more general we just use `to_x()` and `to_y()` to refer to any two differing converter functions from the set of functions including `to_snake_case()`, `to_screaming_snake_case()`, `to_lower_camel_case` and `to_upper_camel_case()`. (Other cases like "lower_upper" or "upper_lower" could be included, if we consider `parsing_option = 2` within the equations.)
 
 1. When we have converted to a standardized case, a new conversion to the case should not change the output:
 

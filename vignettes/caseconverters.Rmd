@@ -18,24 +18,6 @@ library(snakecase)
 to_any_case("veryComplicatedString")
 ```
 
-Dots and other special characters may have a special intention
-
-```{r, collapse = TRUE}
-to_any_case("malte.grosser@gmail.com")
-```
-
-When it is clear that they are separators, you can supply them as a regex to the `sep_in` argument
-
-```{r, collapse = TRUE}
-to_any_case(names(iris), sep_in = "\\.")
-```
-
-This is especially handy, when special characters have a meaning as a separator or for example as a decimal mark
-
-```{r, collapse = TRUE}
-to_any_case("Pi.Value:3.14", sep_in = ":|(?<!\\d)\\.")
-```
-
 Of course other cases are supported (`case`) and separators can be adjusted (`sep_out`)
 
 ```{r, collapse = TRUE}
