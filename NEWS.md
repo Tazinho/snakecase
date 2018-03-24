@@ -1,5 +1,6 @@
 # snakecase 0.9.1
 
+* CRAN release
 * Change default `sep_in` from `NULL` to `"[^[:alnum:]]"`. This will make it easier for beginners and in general also faster to modify cases from names like `names(iris)`. Updated the regarding sections in the vignette and readme.
 
 # snakecase 0.9.0
@@ -10,7 +11,7 @@
 
   * parsing_options:
     * old parsing_options 3 and 4 are replaced now by new
-      * parsing_option 3, which suppreses case conversion around alpha numerics
+      * parsing_option 3, which suppresses case conversion around alpha numerics
       * parsing_option 4, which introduces less formatting of numerals in the output,
       and leaves them very close to the way that they appeared in the input strings.
   * abbreviations:
@@ -37,7 +38,7 @@
 # snakecase 0.8.3
 
 * replaced `parsing_option`s 3 and 4 with 5 and 6. 
-* removed __purrr__ dependecy
+* removed __purrr__ dependency
 * removed __magrittr__ dependency
 
 # snakecase 0.8.2.9002
@@ -70,12 +71,12 @@
 
 * changes since last CRAN submission include:
     * to_xxx_case shortcuts are now exact wrappers around to_any_case
-    * `process` is deprecated after changing implementation and setting a reosonable default.
+    * `process` is deprecated after changing implementation and setting a reasonable default.
     * added `abbreviations` argument to `any_case()`
     * case none is now a lot more general for formatting
     * added `abbreviation` specific behaviour for mixed case
     * new parsing_option 5, which suppresses conversion after ., @, etc
-    * renamig of:
+    * renaming of:
         * to_small / to_big_camel_case have been renamed to to_lower / to_upper_camel_case. The old names are and will still be supported in to_any_case
         * `parsingoption` to `parsing_option`
     * introduced rule that parsing_option <= 0 suppresses parsing from now on
@@ -110,7 +111,7 @@
 
 # snakecase 0.5.2.9000
 
-* improve consistency with stringr pkg regarding special input handlig
+* improve consistency with stringr pkg regarding special input handling
   
   `if(identical(stringr::str_length(string), integer())){return(character())}`
 
@@ -122,7 +123,7 @@
 
 # snakecase 0.5.0.9001
 
-* `to_any_case()` and the other converter function now preserve the names attribute. (Thanks to @straegejacke)
+* `to_any_case()` and the other converter function now preserve the names attribute. (Thanks to @strengejacke)
 
 # snakecase 0.5.0
 
@@ -151,9 +152,9 @@
 
 # snakecase 0.4.0.9013
 
-Implemented two further parsingoptopions:
+Implemented two further parsing options:
 
-* 3: parses the first UPPER letter group like parsingoption 2 and the rest like option 1  
+* 3: parses the first UPPER letter group like parsing option 2 and the rest like option 1  
 * 4: parses the first UPPERlowercase letter group like parsingoption 1 and the rest like option 2
 
 # snakecase 0.4.0.9012
@@ -273,7 +274,7 @@ for whitespaces in output postprocess = " " is recommended.
 # snakecase 0.3.0
 
 * supports behaviour for german umlauts on all platforms
-* intoduced internal function `to_snake_case_internal()` which does the preprocessing and simplifies all other functions (especially `to_any_case()`) a little bit.
+* introduced internal function `to_snake_case_internal()` which does the preprocessing and simplifies all other functions (especially `to_any_case()`) a little bit.
 * introduced `to_screaming_snake_case()`
 * added arguments prefix, postfix and replace_special_characters to `to_any_case()`.
 * completely renewed readme
