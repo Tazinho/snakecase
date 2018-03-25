@@ -299,7 +299,8 @@ Shortcut wrappers like `to_snake_case()`, `to_lower_camel_case()` etc. are avail
 <div id="scope" class="section level3">
 <h3 class="hasAnchor">
 <a href="#scope" class="anchor"></a>Scope</h3>
-<p><code><a href="reference/to_any_case.html">to_any_case()</a></code> is an attempt to provide good low level control, while still being high level enough for daily usage. If you want case conversion with good default settings, you can look into the <code>clean_names()</code> function from the <a href="https://github.com/sfirke/janitor">janitor</a> package, which works directly on data frames. You can also look into the <a href="https://github.com/strengejacke/sjPlot">sjPlot</a> package, where automatic case conversion is used to provide nice default labels within graphics.</p>
+<p><code><a href="reference/to_any_case.html">to_any_case()</a></code> is an attempt to provide good low level control, while still being high level enough for daily usage. For another example of case conversion with good default settings, you can look into the <code>clean_names()</code> function from the <a href="https://github.com/sfirke/janitor">janitor</a> package, which works directly on data frames. You can also look into the <a href="https://github.com/strengejacke/sjPlot">sjPlot</a> package, where automatic case conversion is used to provide nice default labels within graphics.</p>
+<p>For daily usage (especially when preparing fixed scripts) I recommend to combine <code><a href="reference/to_any_case.html">to_any_case()</a></code> with <code>dput()</code>. In this way, you can quickly inspect, if the output is as intended and hardcode the results (which is basically safer and good practice in my opinion). In very complex cases you might just want to manually fix the output instead of tweeking with the arguments too much.</p>
 </div>
 <div id="dependencies-vectorisation-speed-and-special-input-handling" class="section level3">
 <h3 class="hasAnchor">

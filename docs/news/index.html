@@ -113,6 +113,7 @@
 <a href="#snakecase-0-9-1" class="anchor"></a>snakecase 0.9.1<small> Unreleased </small>
 </h1>
 <ul>
+<li>CRAN release</li>
 <li>Change default <code>sep_in</code> from <code>NULL</code> to <code>"[^[:alnum:]]"</code>. This will make it easier for beginners and in general also faster to modify cases from names like <code>names(iris)</code>. Updated the regarding sections in the vignette and readme.</li>
 </ul>
 </div>
@@ -129,7 +130,7 @@
 <ul>
 <li>old parsing_options 3 and 4 are replaced now by new
 <ul>
-<li>parsing_option 3, which suppreses case conversion around alpha numerics</li>
+<li>parsing_option 3, which suppresses case conversion around alpha numerics</li>
 <li>parsing_option 4, which introduces less formatting of numerals in the output, and leaves them very close to the way that they appeared in the input strings.</li>
 </ul>
 </li>
@@ -192,7 +193,7 @@
 </h1>
 <ul>
 <li>replaced <code>parsing_option</code>s 3 and 4 with 5 and 6.</li>
-<li>removed <strong>purrr</strong> dependecy</li>
+<li>removed <strong>purrr</strong> dependency</li>
 <li>removed <strong>magrittr</strong> dependency</li>
 </ul>
 </div>
@@ -252,13 +253,13 @@
 <ul>
 <li>to_xxx_case shortcuts are now exact wrappers around to_any_case</li>
 <li>
-<code>process</code> is deprecated after changing implementation and setting a reosonable default.</li>
+<code>process</code> is deprecated after changing implementation and setting a reasonable default.</li>
 <li>added <code>abbreviations</code> argument to <code>any_case()</code>
 </li>
 <li>case none is now a lot more general for formatting</li>
 <li>added <code>abbreviation</code> specific behaviour for mixed case</li>
 <li>new parsing_option 5, which suppresses conversion after ., @, etc</li>
-<li>renamig of:
+<li>renaming of:
 <ul>
 <li>to_small / to_big_camel_case have been renamed to to_lower / to_upper_camel_case. The old names are and will still be supported in to_any_case</li>
 <li>
@@ -327,7 +328,7 @@
 </h1>
 <ul>
 <li>
-<p>improve consistency with stringr pkg regarding special input handlig</p>
+<p>improve consistency with stringr pkg regarding special input handling</p>
 <p><code>if(identical(stringr::str_length(string), integer())){return(character())}</code></p>
 </li>
 </ul>
@@ -352,7 +353,7 @@
 </h1>
 <ul>
 <li>
-<code><a href="../reference/to_any_case.html">to_any_case()</a></code> and the other converter function now preserve the names attribute. (Thanks to <a href='http://github.com/straegejacke'>@straegejacke</a>)</li>
+<code><a href="../reference/to_any_case.html">to_any_case()</a></code> and the other converter function now preserve the names attribute. (Thanks to <a href='http://github.com/strengejacke'>@strengejacke</a>)</li>
 </ul>
 </div>
     <div id="snakecase-0-5-0" class="section level1">
@@ -403,9 +404,9 @@
 <h1 class="page-header">
 <a href="#snakecase-0-4-0-9013" class="anchor"></a>snakecase 0.4.0.9013<small> Unreleased </small>
 </h1>
-<p>Implemented two further parsingoptopions:</p>
+<p>Implemented two further parsing options:</p>
 <ul>
-<li>3: parses the first UPPER letter group like parsingoption 2 and the rest like option 1<br>
+<li>3: parses the first UPPER letter group like parsing option 2 and the rest like option 1<br>
 </li>
 <li>4: parses the first UPPERlowercase letter group like parsingoption 1 and the rest like option 2</li>
 </ul>
@@ -600,7 +601,7 @@
 </h1>
 <ul>
 <li>supports behaviour for german umlauts on all platforms</li>
-<li>intoduced internal function <code>to_snake_case_internal()</code> which does the preprocessing and simplifies all other functions (especially <code><a href="../reference/to_any_case.html">to_any_case()</a></code>) a little bit.</li>
+<li>introduced internal function <code>to_snake_case_internal()</code> which does the preprocessing and simplifies all other functions (especially <code><a href="../reference/to_any_case.html">to_any_case()</a></code>) a little bit.</li>
 <li>introduced <code><a href="../reference/caseconverter.html">to_screaming_snake_case()</a></code>
 </li>
 <li>added arguments prefix, postfix and replace_special_characters to <code><a href="../reference/to_any_case.html">to_any_case()</a></code>.</li>
