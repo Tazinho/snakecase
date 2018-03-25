@@ -6,10 +6,10 @@
 \usage{
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
   "screaming_snake", "parsed", "mixed", "lower_upper", "upper_lower", "swap",
-  "all_caps", "lower_camel", "upper_camel", "internal_parsing", "none", "flip"),
-  abbreviations = NULL, sep_in = "[^[:alnum:]]", parsing_option = 1,
-  transliterations = NULL, sep_out = NULL, unique_sep = NULL,
-  empty_fill = NULL, prefix = "", postfix = "")
+  "all_caps", "lower_camel", "upper_camel", "internal_parsing", "none", "flip",
+  "sentence"), abbreviations = NULL, sep_in = "[^[:alnum:]]",
+  parsing_option = 1, transliterations = NULL, sep_out = NULL,
+  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
@@ -22,6 +22,7 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
  \item{ALL_CAPS: \code{"all_caps"} or \code{"screaming_snake"}}
  \item{lowerUPPER: \code{"lower_upper"}}
  \item{UPPERlower: \code{"upper_lower"}}
+ \item{Sentence case: \code{"sentence"}}
  }
 
  There are five "special" cases available:
@@ -114,6 +115,7 @@ to_any_case(strings, case = "upper_camel") # same as "big_camel"
 to_any_case(strings, case = "all_caps") # same as "screaming_snake"
 to_any_case(strings, case = "lower_upper")
 to_any_case(strings, case = "upper_lower")
+to_any_case(strings, case = "sentence")
 to_any_case(strings, case = "parsed")
 to_any_case(strings, case = "mixed")
 to_any_case(strings, case = "internal_parsing")

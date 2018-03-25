@@ -11,6 +11,7 @@
 \alias{to_lower_upper_case}
 \alias{to_upper_lower_case}
 \alias{to_swap_case}
+\alias{to_sentence_case}
 \title{Specific case converter shortcuts}
 \usage{
 to_snake_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
@@ -47,6 +48,10 @@ to_upper_lower_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
 to_swap_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
+  parsing_option = 1, transliterations = NULL, sep_out = NULL,
+  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
+
+to_sentence_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
   parsing_option = 1, transliterations = NULL, sep_out = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 }
@@ -126,6 +131,7 @@ to_upper_lower_case(strings)
 to_parsed_case(strings)
 to_mixed_case(strings)
 to_swap_case(strings)
+to_sentence_case(strings)
 
 
 }

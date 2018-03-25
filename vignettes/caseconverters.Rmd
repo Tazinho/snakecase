@@ -31,7 +31,7 @@ to_any_case("Doppelgänger is originally german",
             transliterations = "german", case = "upper_camel")
 ```
 
-All of the cases like: snake, lower_camel, upper_camel, all_caps, lower_upper, upper_lower and mixed are based on parsed case
+All of the cases like: snake, lower_camel, upper_camel, all_caps, lower_upper, upper_lower, mixed and sentence are based on parsed case
 
 ```{r, collapse = TRUE}
 to_any_case("THISIsHOW IAmPARSED!", case = "parsed")

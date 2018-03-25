@@ -1,3 +1,7 @@
+# snakecase 0.9.2
+
+* added `to_sentence_case()` (same as snake, but first letter is uppercase and default sep_out is space).
+
 # snakecase 0.9.1
 
 * CRAN release

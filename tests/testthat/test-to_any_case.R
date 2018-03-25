@@ -246,6 +246,10 @@ test_that("empty_fill",
           expect_equal(to_any_case("", empty_fill = "bla"),
           "bla"))
 
+test_that("sentence",
+          expect_equal(to_any_case("bla bla_bal", case = "sentence"),
+                       "Bla_bla_bal"))
+  
 test_that("flip and swap", {
           expect_equal(to_any_case("rSTUDIO", case = "flip"), "Rstudio")
           

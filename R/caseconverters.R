@@ -78,6 +78,7 @@
 #' to_parsed_case(strings)
 #' to_mixed_case(strings)
 #' to_swap_case(strings)
+#' to_sentence_case(strings)
 #' 
 #' 
 #' @rdname caseconverter
@@ -293,17 +294,43 @@ to_upper_lower_case <- function(string,
 #' @export
 
 to_swap_case <- function(string,
-                                abbreviations = NULL,
-                                sep_in = "[^[:alnum:]]",
-                                parsing_option = 1,
-                                transliterations = NULL,
-                                sep_out = NULL,
-                                unique_sep = NULL,
-                                empty_fill = NULL,
-                                prefix = "",
-                                postfix = ""){
+                         abbreviations = NULL,
+                         sep_in = "[^[:alnum:]]",
+                         parsing_option = 1,
+                         transliterations = NULL,
+                         sep_out = NULL,
+                         unique_sep = NULL,
+                         empty_fill = NULL,
+                         prefix = "",
+                         postfix = ""){
   to_any_case(string = string,
               case = "swap",
+              sep_in = sep_in,
+              transliterations = transliterations,
+              sep_out = sep_out,
+              prefix = prefix,
+              postfix = postfix,
+              unique_sep = unique_sep,
+              empty_fill = empty_fill,
+              parsing_option = parsing_option,
+              abbreviations = abbreviations)
+}
+
+#' @rdname caseconverter
+#' @export
+
+to_sentence_case <- function(string,
+                         abbreviations = NULL,
+                         sep_in = "[^[:alnum:]]",
+                         parsing_option = 1,
+                         transliterations = NULL,
+                         sep_out = NULL,
+                         unique_sep = NULL,
+                         empty_fill = NULL,
+                         prefix = "",
+                         postfix = ""){
+  to_any_case(string = string,
+              case = "sentence",
               sep_in = sep_in,
               transliterations = transliterations,
               sep_out = sep_out,

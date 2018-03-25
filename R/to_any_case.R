@@ -12,6 +12,7 @@
 #'  \item{ALL_CAPS: \code{"all_caps"} or \code{"screaming_snake"}}
 #'  \item{lowerUPPER: \code{"lower_upper"}}
 #'  \item{UPPERlower: \code{"upper_lower"}}
+#'  \item{Sentence case: \code{"sentence"}}
 #'  }
 #'
 #'  There are five "special" cases available:
@@ -102,6 +103,7 @@
 #' to_any_case(strings, case = "all_caps") # same as "screaming_snake"
 #' to_any_case(strings, case = "lower_upper")
 #' to_any_case(strings, case = "upper_lower")
+#' to_any_case(strings, case = "sentence")
 #' to_any_case(strings, case = "parsed")
 #' to_any_case(strings, case = "mixed")
 #' to_any_case(strings, case = "internal_parsing")
@@ -157,7 +159,7 @@ to_any_case <- function(string,
                         case = c("snake", "small_camel", "big_camel", "screaming_snake", 
                                  "parsed", "mixed", "lower_upper", "upper_lower", "swap",
                                  "all_caps", "lower_camel", "upper_camel", "internal_parsing", 
-                                 "none", "flip"),
+                                 "none", "flip", "sentence"),
                         abbreviations = NULL,
                         sep_in = "[^[:alnum:]]",
                         parsing_option = 1,
@@ -231,9 +233,9 @@ if (case != "swap") {
 ### "mixed", "snake", "small_camel", "big_camel", "screaming_case", "parsed"
   if(case %in% c("mixed", "snake", "small_camel",
                  "big_camel", "screaming_snake", "parsed",
-                 "lower_upper", "upper_lower")){
+                 "lower_upper", "upper_lower", "sentence")){
 ### split-----------------------------------------------------------------------
-    if(case %in% c("mixed", "snake", "screaming_snake", "parsed", "lower_upper", "upper_lower")){
+    if(case %in% c("mixed", "snake", "screaming_snake", "parsed", "lower_upper", "upper_lower", "sentence")){
       string <- stringr::str_split(string, "_")
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
@@ -255,7 +257,7 @@ if (case != "swap") {
         )
       }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-    if(case == "snake"){
+    if(case %in% c("snake", "sentence")){
       string <- lapply(string, stringr::str_to_lower)
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
@@ -325,7 +327,8 @@ if (case != "swap") {
     }
 ### collapsing------------------------------------------------------------------
     if(case %in% c("none", "mixed", "snake", "screaming_snake", "parsed",
-                   "small_camel", "big_camel", "lower_upper", "upper_lower")) {
+                   "small_camel", "big_camel", "lower_upper", "upper_lower",
+                   "sentence")) {
       string <- vapply(string, 
                        function(x) stringr::str_c(x, collapse = "_"), "",
                        USE.NAMES = FALSE)
@@ -354,6 +357,13 @@ if (case != "swap") {
     if(is.null(sep_out) & case %in% c("small_camel", "big_camel", 
                                             "lower_upper", "upper_lower")){
       string <- stringr::str_replace_all(string, "(?<!\\d)_|_(?!\\d)", "")
+    }
+    
+    if(is.null(sep_out) & case == "sentence"){
+      string <- vapply(string, 
+                       function(x) stringr::str_c(stringr::str_to_upper(stringr::str_sub(x, 1, 1)),
+                                                  stringr::str_sub(x, 2)), "",
+                       USE.NAMES = FALSE)
     }
 ### ____________________________________________________________________________
 ### "none"

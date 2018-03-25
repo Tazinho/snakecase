@@ -48,8 +48,8 @@ to_any_case(string)
 ```
 
 One can choose between many other cases like `"lower_camel"`,
-`"upper_camel"`, `"all_caps"`, `"lower_upper"`, `"upper_lower"` and
-`"mixed"`, which are based on `"parsed"` case:
+`"upper_camel"`, `"all_caps"`, `"lower_upper"`, `"upper_lower"`,
+`"sentence"` and `"mixed"`, which are based on `"parsed"` case:
 
 ``` r
 to_any_case(string, case = "parsed")
@@ -202,6 +202,7 @@ issue](https://github.com/Tazinho/snakecase/issues/107).
   - ALL\_CAPS: `"all_caps"` or `"screaming_snake"`
   - lowerUPPER: `"lower_upper"`
   - UPPERlower: `"upper_lower"`
+  - Sentence case: `"sentence"`
 
 There are five “special” cases available:
 
