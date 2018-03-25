@@ -185,16 +185,6 @@ to_any_case <- function(string,
 ### save names-attribute
   string_names <- names(string)
 ### ____________________________________________________________________________
-### helper for "lower_upper", "upper_lower"
-  # this helper returns a logical vector with TRUE for the first and every
-  # second string of those which contain an alphabetic character
-  if(case == "upper_lower" | case == "lower_upper") {
-    relevant <- function(string){
-      relevant <- stringr::str_detect(string, "[:alpha:]")
-      relevant[relevant] <- rep_len(c(TRUE, FALSE), sum(relevant))
-      relevant
-    }
-  }
 ### Aliases
   case[case == "all_caps"] <- "screaming_snake"
   case[case == "lower_camel"] <- "small_camel"
