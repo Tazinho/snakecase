@@ -180,7 +180,7 @@ to_any_case <- function(string,
   ### Argument matching and checking
   case <- match.arg(case)
 ### check input length (necessary for NULL and atomic(0))
-  if(identical(stringr::str_length(string), integer())){return(character())}
+  if(identical(stringr::str_length(string), integer())) {return(character())}
 ### ____________________________________________________________________________
 ### save names-attribute
   string_names <- names(string)
@@ -191,14 +191,12 @@ to_any_case <- function(string,
   case[case == "upper_camel"] <- "big_camel"
   case[case == "flip"] <- "swap"
 ### Handle swap case
-  
   if (case == "swap") {
     string <- gsub(pattern = "([[:upper:]])|([[:lower:]])",
                    perl = TRUE,
                    replacement = "\\L\\1\\U\\2",
                    string)
   }
-  
 ### abbreviation handling
   # mark abbreviation with an underscore behind (in front of the parsing)
   # useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2
