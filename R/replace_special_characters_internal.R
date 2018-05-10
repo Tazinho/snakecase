@@ -18,7 +18,13 @@ replace_special_characters_internal <- function(string, transliterations, case){
   dictionary <- list(
     german = c("\u00C4" = "Ae", "\u00D6" = "Oe", "\u00DC" = "Ue",
                "\u00E4" = "ae", "\u00F6" = "oe", "\u00FC" = "ue",
-               "\u00DF" = "ss")
+               "\u00DF" = "ss"),
+    danish = c("\u00C6" = "Ae",
+               "\u00E6" = "ae",
+               "\u00D8" = "Oe",
+               "\u00F8" = "oe",
+               "\u00C5" = "Aa",
+               "\u00E5" = "aa")
     )
   for (i in seq_along(transliterations)){
     if(transliterations[i] %in% stringi::stri_trans_list()){
