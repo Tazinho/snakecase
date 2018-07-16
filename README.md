@@ -72,6 +72,7 @@ output:
 
 ``` r
 library(magrittr)
+## Warning: package 'magrittr' was built under R version 3.5.1
 
 to_snake_case(c("SomeBAdInput", "someGoodInput")) %>% dput()
 ## c("some_b_ad_input", "some_good_input")
@@ -222,7 +223,7 @@ There are five “special” cases available:
   - `"none"`: Neither parsing nor case conversion occur. This case might
     be helpful, when one wants to call the function for the quick usage
     of the other parameters. To suppress replacement of spaces to
-    underscores set `sep_out = NULL`. Works with `sep_in`,
+    underscores set `sep_in = NULL`. Works with `sep_in`,
     `transliterations`, `sep_out`, `unique_sep`, `empty_fill`, `prefix`
     and `postfix`.
   - `"internal_parsing"`: This case is returning the internal parsing

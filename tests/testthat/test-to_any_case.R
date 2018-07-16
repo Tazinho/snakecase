@@ -364,6 +364,28 @@ test_that("complex strings", {
   expect_equal(to_any_case("\u00E5", transliterations = c("danish", "Latin-ASCII")),
                "aa")
   
+  expect_equal(to_any_case("\u00C6", transliterations = c("finnish", "Latin-ASCII")),
+               "a")
+  expect_equal(to_any_case("\u00E6", transliterations = c("finnish", "Latin-ASCII")),
+               "a")
+  expect_equal(to_any_case("\u00D8", transliterations = c("finnish", "Latin-ASCII")),
+               "o")
+  expect_equal(to_any_case("\u00F8", transliterations = c("finnish", "Latin-ASCII")),
+               "o")
+  
+  expect_equal(to_any_case("\u00C6", transliterations = c("swedish")),
+               "a")
+  expect_equal(to_any_case("\u00E6", transliterations = c("swedish")),
+               "a")
+  expect_equal(to_any_case("\u00D8", transliterations = c("swedish")),
+               "o")
+  expect_equal(to_any_case("\u00F8", transliterations = c("swedish")),
+               "o")
+  expect_equal(to_any_case("\u00C5", transliterations = c("swedish")),
+               "a")
+  expect_equal(to_any_case("\u00E5", transliterations = c("swedish")),
+               "a")
+  
   expect_equal(to_any_case("\u00E6", transliterations = "Latin-ASCII"),
                 "ae")
   

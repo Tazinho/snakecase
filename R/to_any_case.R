@@ -28,7 +28,7 @@
 #'  Doesn't work with any of the other arguments except \code{unique_sep}, \code{empty_fill}, \code{prefix} and \code{postfix}.}
 #'  \item{\code{"none"}: Neither parsing nor case conversion occur. This case might be helpful, when
 #'  one wants to call the function for the quick usage of the other parameters.
-#'  To suppress replacement of spaces to underscores set \code{sep_out = NULL}.
+#'  To suppress replacement of spaces to underscores set \code{sep_in = NULL}.
 #'  Works with \code{sep_in}, \code{transliterations}, \code{sep_out}, \code{prefix},
 #'   \code{postfix},
 #'   \code{empty_fill} and \code{unique_sep}.}

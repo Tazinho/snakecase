@@ -24,7 +24,17 @@ replace_special_characters_internal <- function(string, transliterations, case){
                "\u00D8" = "Oe",
                "\u00F8" = "oe",
                "\u00C5" = "Aa",
-               "\u00E5" = "aa")
+               "\u00E5" = "aa"),
+    finnish = c("\u00C6" = "A",
+               "\u00E6" = "a",
+               "\u00D8" = "O",
+               "\u00F8" = "o"),
+    swedish = c("\u00C6" = "A",
+                "\u00E6" = "a",
+                "\u00D8" = "O",
+                "\u00F8" = "o",
+                "\u00C5" = "A",
+                "\u00E5" = "a")
     )
   for (i in seq_along(transliterations)){
     if(transliterations[i] %in% stringi::stri_trans_list()){
