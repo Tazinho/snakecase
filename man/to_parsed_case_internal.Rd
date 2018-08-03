@@ -4,7 +4,8 @@
 \alias{to_parsed_case_internal}
 \title{Internal parser, which is relevant for preprocessing, parsing and parsing options}
 \usage{
-to_parsed_case_internal(string, parsing_option = 1L)
+to_parsed_case_internal(string, parsing_option = 1L,
+  numerals = numerals)
 }
 \arguments{
 \item{string}{A string.}
@@ -18,6 +19,8 @@ to_parsed_case_internal(string, parsing_option = 1L)
  \item{4: parses like option 1, but digits directly behind/in front non-digits, will stay as is.}
  \item{any other integer <= 0: no parsing"}
  }}
+
+\item{numerals}{A character specifying the alignment of numerals (\code{"middle"}, \code{left}, \code{right} or \code{asis}). I.e. \code{numerals = "left"} ensures that no output separator is in front of a digit.}
 }
 \value{
 A character vector separated by underscores, containing the parsed string.

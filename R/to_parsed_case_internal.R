@@ -10,13 +10,14 @@
 #'  \item{4: parses like option 1, but digits directly behind/in front non-digits, will stay as is.}
 #'  \item{any other integer <= 0: no parsing"}
 #'  }
+#' @param numerals A character specifying the alignment of numerals (\code{"middle"}, \code{left}, \code{right} or \code{asis}). I.e. \code{numerals = "left"} ensures that no output separator is in front of a digit.
 #'  
 #' @return A character vector separated by underscores, containing the parsed string.
 #'
 #' @author Malte Grosser, \email{malte.grosser@@gmail.com}
 #' @keywords utilities
 #'
-to_parsed_case_internal <- function(string, parsing_option = 1L){
+to_parsed_case_internal <- function(string, parsing_option = 1L, numerals = numerals){
   ### input checking
   if(parsing_option >= 5L){
     stop("parsing_option must be 1,2,3,4 or <= 0 for no parsing.")
@@ -65,6 +66,9 @@ to_parsed_case_internal <- function(string, parsing_option = 1L){
   ### applying parsing functions  
   # case: 1 RRRStudioSStudioStudio -> RRR_Studio_S_Studio_Studio
   if(parsing_option == 1 | parsing_option == 3){
+    if(numerals == "asis") {
+      string <- parsing_functions[["parse5_mark_digits"]](string)
+    }
     string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
     string <- parsing_functions[["parse2_pat_caps2"]](string)
     string <- parsing_functions[["parse3_pat_cap_lonely"]](string)
@@ -72,6 +76,9 @@ to_parsed_case_internal <- function(string, parsing_option = 1L){
   }
   # case: 2 RRRStudioSStudioStudio -> RRRS_tudio_SS_tudio_Studio
   if(parsing_option == 2){
+    if(numerals == "asis") {
+      string <- parsing_functions[["parse5_mark_digits"]](string)
+    }
     string <- parsing_functions[["parse2_pat_caps2"]](string)
     string <- parsing_functions[["parse1_pat_cap_smalls"]](string)
     string <- parsing_functions[["parse3_pat_cap_lonely"]](string)

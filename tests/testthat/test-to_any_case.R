@@ -1,5 +1,6 @@
 context("to_any_case")
 
+
 test_that("examples", {
   examples <- cases[["examples"]]
   
@@ -59,6 +60,132 @@ test_that("examples", {
                c("NBAGame", "NBAGame"))
   }
 )
+
+test_that("numerals", {
+  expect_equal(to_any_case("123bla123bla_434bla"),
+               "123_bla_123_bla_434_bla")
+  
+  expect_equal(to_any_case("123bla123bla_434bla", 
+                           numerals = "asis"),
+               "123bla123bla_434bla")
+  
+  expect_equal(to_any_case("123bla123bla_434bla",
+                           numerals = "left"),
+               "123_bla123_bla434_bla")
+
+  expect_equal(to_any_case("123bla123bla_434bla", 
+                           numerals = "right"),
+               "123bla_123bla_434bla")
+  
+  expect_equal(to_any_case("123bla123_123bla_434bla", numerals = "middle"),
+               "123_bla_123_123_bla_434_bla")
+  
+  expect_equal(to_any_case("123bla123_123bla_434bla", numerals = "asis"),
+               "123bla123_123bla_434bla")
+  
+  expect_equal(to_any_case("123bla123_123bla_434bla", numerals = "left"),
+               "123_bla123_123_bla434_bla")
+  
+  expect_equal(to_any_case("123bla123_123bla_434bla",
+                           numerals = "right"),
+               "123bla_123_123bla_434bla")
+
+  expect_equal(to_any_case("123bla123_123bla_434bla", numerals = "right"), 
+               "123bla_123_123bla_434bla")
+
+  expect_equal(to_any_case("123bla123_123bla_434bla", numerals = "right"),
+               "123bla_123_123bla_434bla")
+  
+  expect_equal(to_upper_camel_case("123bla123_123bla_434bla"),
+               "123Bla123_123Bla434Bla")
+  
+  expect_equal(to_any_case("123bla123_123bla_434bla", case = "upper_camel", numerals = "middle"),
+    "123Bla123_123Bla434Bla")
+  
+  expect_equal(to_any_case("123bla123_123bla_434bla", case = "upper_camel", numerals = "asis"), "123Bla123_123Bla434Bla")
+
+  expect_equal(to_any_case("123bla123_123bla_434bla", case = "upper_camel", numerals = "left"), 
+               "123Bla123_123Bla434Bla")
+  
+  expect_equal(to_any_case("123bla123_123bla_434bla", case = "upper_camel", numerals = "right"),
+               "123Bla123_123Bla434Bla")
+
+  expect_equal(to_any_case("123bla123_123bla_434bla", case = "parsed", numerals = "middle"),
+               "123_bla_123_123_bla_434_bla")
+  
+  expect_equal(to_any_case("123bla123_123bla_434bla", case = "parsed", numerals = "asis"),
+               "123bla123_123bla_434bla")
+  
+  expect_equal(to_any_case("123bla123_123bla_434bla", case = "parsed", numerals = "left"),
+               "123_bla123_123_bla434_bla")
+  
+  expect_equal(to_any_case("123bla123_123bla_434bla",
+                           case = "parsed",
+                           numerals = "right"),
+    "123bla_123_123bla_434bla")
+  
+  expect_equal(to_any_case("123bla123_123bla_434bla", 
+                           case = "none",
+                           numerals = "middle"),
+               "123bla123_123bla_434bla")
+  
+  expect_equal(to_any_case("123bla123_123bla_434bla", 
+                           case = "none", 
+                           numerals = "asis"),
+               "123bla123_123bla_434bla")
+
+  expect_equal(to_any_case("123bla123_123bla_434bla",
+                           case = "none",
+                           numerals = "left"),
+               "123bla123_123bla_434bla")
+  
+  expect_equal(to_any_case("123bla123_123bla_434bla", 
+                           case = "none",
+                           numerals = "right"),
+               "123bla123_123bla_434bla")
+
+  expect_equal(to_any_case("123bla123_123bla_434bla", 
+                           numerals = "middle"),
+               "123_bla_123_123_bla_434_bla")
+  
+  expect_equal(to_any_case("123bla123_123bla_434bla", numerals = "asis"),
+               "123bla123_123bla_434bla")
+  
+  expect_equal(to_any_case("123bla123_123bla_434bla",
+                           numerals = "left"),
+               "123_bla123_123_bla434_bla")
+  
+  expect_equal(to_any_case("123bla123_123bla_434bla",
+                           numerals = "right"),
+               "123bla_123_123bla_434bla")
+  
+  expect_equal(to_snake_case("species42value 23month",
+                             parsing_option = 4),
+               "species42value_23month")
+  
+  expect_equal(to_any_case("species42value 23month",
+                           numerals = "asis"),
+               "species42value_23month")
+  
+  expect_equal(to_any_case(c("HHcity", "IDtable1", "KEYtable2", "newUSelections"),
+                           parsing_option = 2,
+                           numerals = "middle"),
+               c("hh_city", "id_table_1", "key_table_2", "new_us_elections"))
+  
+  expect_equal(to_any_case(c("HHcity", "IDtable1", "KEYtable2", "newUSelections"),
+                           parsing_option = 2, 
+                           numerals = "asis"),
+               c("hh_city","id_table1", "key_table2", "new_us_elections"))
+  
+  expect_equal(to_any_case(c("HHcity", "IDtable1", "KEYtable2", "newUSelections"), parsing_option = 2, numerals = "left"),
+               c("hh_city", "id_table1", "key_table2","new_us_elections"))
+
+  expect_equal(to_any_case(c("HHcity", "IDtable1", "KEYtable2", "newUSelections"),
+                           parsing_option = 2,
+                           numerals = "right"),
+               c("hh_city", "id_table_1", "key_table_2",
+                 "new_us_elections"))
+})
 
 test_that("preserve-names-attribute", {
   

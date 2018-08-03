@@ -71,6 +71,8 @@
 #'  of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
 #'  might not always be what is intended.
 #' 
+#' @param numerals A character specifying the alignment of numerals (\code{"middle"}, \code{left}, \code{right} or \code{asis}). I.e. \code{numerals = "left"} ensures that no output separator is in front of a digit.
+#' 
 #' @param sep_out (short for separator output) String that will be used as separator. The defaults are \code{"_"} 
 #' and \code{""}, regarding the specified \code{case}.
 #' 
@@ -164,6 +166,7 @@ to_any_case <- function(string,
                         sep_in = "[^[:alnum:]]",
                         parsing_option = 1,
                         transliterations = NULL,
+                        numerals = c("middle", "left", "right", "asis"),
                         sep_out = NULL,
                         unique_sep = NULL,
                         empty_fill = NULL,
@@ -179,6 +182,7 @@ to_any_case <- function(string,
   # }
   ### Argument matching and checking
   case <- match.arg(case)
+  numerals <- match.arg(numerals)
 ### check input length (necessary for NULL and atomic(0))
   if(identical(stringr::str_length(string), integer())) {return(character())}
 ### ____________________________________________________________________________
@@ -210,7 +214,8 @@ if (case != "swap") {
   
   if (!case %in% c("none")){
     string <- to_parsed_case_internal(string,
-                                      parsing_option = parsing_option)
+                                      parsing_option = parsing_option,
+                                      numerals = numerals)
   } else {
     string <- vapply(string, stringr::str_replace_all, "","_+", "_", 
                      USE.NAMES = FALSE) 
@@ -324,11 +329,20 @@ if (case != "swap") {
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     # Protect (only internal, not via an argument).
     # Replace all "_" by "" which are around a not alphanumeric character
-    if (parsing_option == 4){
+    if (parsing_option == 4 | numerals == "asis") {
       string <- stringr::str_replace_all(string, " ", "")
     }
+    if (numerals == "right") {
+      # underscore with a digit before and no digit after
+      string <- stringr::str_replace_all(string, "(?<=\\d)_(?!\\d)", "")
+    }
     
-    if (case != "internal_parsing"){
+    if (numerals == "left") {
+      # underscore with no digit before and a digit after
+      string <- stringr::str_replace_all(string, "(?<!\\d)_(?=\\d)", "")
+    }
+    
+    if (case != "internal_parsing") {
       string <- stringr::str_replace_all(string, "_(?![:alnum:])|(?<![:alnum:])_", "")
     }
 ### ----------------------------------------------------------------------------
