@@ -18,18 +18,20 @@ to_snake_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
   parsing_option = 1, transliterations = NULL, sep_out = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
-to_lower_camel_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
-  parsing_option = 1, transliterations = NULL, sep_out = NULL,
-  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
+to_lower_camel_case(string, abbreviations = NULL,
+  sep_in = "[^[:alnum:]]", parsing_option = 1,
+  transliterations = NULL, sep_out = NULL, unique_sep = NULL,
+  empty_fill = NULL, prefix = "", postfix = "")
 
-to_upper_camel_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
-  parsing_option = 1, transliterations = NULL, sep_out = NULL,
-  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
+to_upper_camel_case(string, abbreviations = NULL,
+  sep_in = "[^[:alnum:]]", parsing_option = 1,
+  transliterations = NULL, sep_out = NULL, unique_sep = NULL,
+  empty_fill = NULL, prefix = "", postfix = "")
 
 to_screaming_snake_case(string, abbreviations = NULL,
-  sep_in = "[^[:alnum:]]", parsing_option = 1, transliterations = NULL,
-  sep_out = NULL, unique_sep = NULL, empty_fill = NULL, prefix = "",
-  postfix = "")
+  sep_in = "[^[:alnum:]]", parsing_option = 1,
+  transliterations = NULL, sep_out = NULL, unique_sep = NULL,
+  empty_fill = NULL, prefix = "", postfix = "")
 
 to_parsed_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
   parsing_option = 1, transliterations = NULL, sep_out = NULL,
@@ -39,13 +41,15 @@ to_mixed_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
   parsing_option = 1, transliterations = NULL, sep_out = NULL,
   unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
 
-to_lower_upper_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
-  parsing_option = 1, transliterations = NULL, sep_out = NULL,
-  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
+to_lower_upper_case(string, abbreviations = NULL,
+  sep_in = "[^[:alnum:]]", parsing_option = 1,
+  transliterations = NULL, sep_out = NULL, unique_sep = NULL,
+  empty_fill = NULL, prefix = "", postfix = "")
 
-to_upper_lower_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
-  parsing_option = 1, transliterations = NULL, sep_out = NULL,
-  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
+to_upper_lower_case(string, abbreviations = NULL,
+  sep_in = "[^[:alnum:]]", parsing_option = 1,
+  transliterations = NULL, sep_out = NULL, unique_sep = NULL,
+  empty_fill = NULL, prefix = "", postfix = "")
 
 to_swap_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
   parsing_option = 1, transliterations = NULL, sep_out = NULL,

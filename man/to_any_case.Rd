@@ -5,11 +5,12 @@
 \title{General case conversion}
 \usage{
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
-  "screaming_snake", "parsed", "mixed", "lower_upper", "upper_lower", "swap",
-  "all_caps", "lower_camel", "upper_camel", "internal_parsing", "none", "flip",
-  "sentence"), abbreviations = NULL, sep_in = "[^[:alnum:]]",
-  parsing_option = 1, transliterations = NULL, sep_out = NULL,
-  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
+  "screaming_snake", "parsed", "mixed", "lower_upper", "upper_lower",
+  "swap", "all_caps", "lower_camel", "upper_camel", "internal_parsing",
+  "none", "flip", "sentence"), abbreviations = NULL,
+  sep_in = "[^[:alnum:]]", parsing_option = 1,
+  transliterations = NULL, sep_out = NULL, unique_sep = NULL,
+  empty_fill = NULL, prefix = "", postfix = "")
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
