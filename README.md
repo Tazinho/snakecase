@@ -28,7 +28,7 @@ package](http://www.malte-grosser.com/post/introducing-the-snakecase-package/).
 
 # or the (stable) development version hosted on github
 install.packages("devtools")
-devtools::install_github("Tazinho/snakecase")
+devtools::install_github("Tazinho/snakecase", ref = "devversion-01")
 
 # load snakecase
 library(snakecase)
@@ -84,8 +84,8 @@ The `to_any_case()` function is the workhorse of the package and
 basically enables you to convert any string into any case via a well
 thought process of **parsing** (`abbreviations`, `sep_in`,
 `parsing_option`), **conversion** (`transliterations`, `case`) and
-**postprocessing** (`sep_out`). The specific arguments allow you to
-customize the pipeline.
+**postprocessing** (`numerals`, `sep_out`). The specific arguments allow
+you to customize the pipeline.
 
 On this example, you can see the pipeline including all implementation
 details.
@@ -159,19 +159,8 @@ to_upper_camel_case("look_AfterThe-hyphen andThe.dot",
 ## [1] "LookAfterThe-hyphenAndThe.dot"
 ```
 
-If you want to leave digits as is (not surrounding with a separator),
-use parsing option 4:
-
-``` r
-to_snake_case("species42value 23month",
-              parsing_option = 4)
-## [1] "species42value_23month"
-```
-
 If you are interested in a specific parsing option, which is not
-implemented, please open an issue. When typical pattern - like handling
-of numerals - arise in the future, the `parsing_option` argument might
-be split into several more low level arguments.
+implemented, please open an issue.
 
 #### Conversion
 
@@ -233,6 +222,16 @@ There are five “special” cases available:
     showcase the internal workings of `to_any_case()`.
 
 #### Postprocessing
+
+**numerals**: If you want to format the alignment of numerals use
+`numerals` (`middle` (default), `left`, `right` or `asis`). I.e. to
+leave digits as is (not surrounding with a separator), use:
+
+``` r
+to_snake_case("species42value 23month",
+              numerals = "asis")
+## [1] "species42value_23month"
+```
 
 **sep\_out**: For the creation of other well known or completely new
 cases it is possible to adjust the output separator (`sep_out`):

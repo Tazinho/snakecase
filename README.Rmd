@@ -22,7 +22,7 @@ For a short intro regarding typical use cases, see the blog article [Introducing
 
 # or the (stable) development version hosted on github
 install.packages("devtools")
-devtools::install_github("Tazinho/snakecase")
+devtools::install_github("Tazinho/snakecase", ref = "devversion-01")
 
 # load snakecase
 library(snakecase)
@@ -60,7 +60,7 @@ to_snake_case(c("SomeBAdInput", "someGoodInput")) %>% dput()
 
 ### Big picture (a parameterized workflow)
 
-The `to_any_case()` function is the workhorse of the package and basically enables you to convert any string into any case via a well thought process of __parsing__ (`abbreviations`, `sep_in`, `parsing_option`), __conversion__ (`transliterations`, `case`) and __postprocessing__ (`sep_out`). The specific arguments allow you to customize the pipeline.
+The `to_any_case()` function is the workhorse of the package and basically enables you to convert any string into any case via a well thought process of __parsing__ (`abbreviations`, `sep_in`, `parsing_option`), __conversion__ (`transliterations`, `case`) and __postprocessing__ (`numerals`, `sep_out`). The specific arguments allow you to customize the pipeline.
 
 On this example, you can see the pipeline including all implementation details.
 
@@ -116,14 +116,7 @@ to_upper_camel_case("look_AfterThe-hyphen andThe.dot",
                     parsing_option = 3)
 ```
 
-If you want to leave digits as is (not surrounding with a separator), use parsing option 4:
-
-```{r, collapse = TRUE}
-to_snake_case("species42value 23month",
-              parsing_option = 4)
-```
-
-If you are interested in a specific parsing option, which is not implemented, please open an issue. When typical pattern - like handling of numerals  - arise in the future, the `parsing_option` argument might be split into several more low level arguments.
+If you are interested in a specific parsing option, which is not implemented, please open an issue.
 
 #### Conversion
 
@@ -158,6 +151,14 @@ There are five "special" cases available:
 * `"internal_parsing"`: This case is returning the internal parsing (suppressing the internal protection mechanism), which means that alphanumeric characters will be surrounded by underscores. It should only be used in very rare use cases and is mainly implemented to showcase the internal workings of `to_any_case()`.
 
 #### Postprocessing
+
+**numerals**: If you want to format the alignment of numerals use `numerals` (`middle` (default), `left`, `right` or `asis`). I.e. to leave digits as is (not surrounding with a separator), use:
+
+```{r, collapse = TRUE}
+to_snake_case("species42value 23month",
+              numerals = "asis")
+```
+
 
 **sep_out**: For the creation of other well known or completely new cases it is possible to adjust the output separator (`sep_out`):
 
