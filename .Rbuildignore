@@ -11,3 +11,4 @@
 ^travis-tool\.sh\.cmd$
 ^docs$
 ^revdep$
+^_pkgdown\.yml$
