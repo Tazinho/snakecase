@@ -123,62 +123,30 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-general-case-conversion" class="hasAnchor"><a href="#section-general-case-conversion" class="anchor"></a>General case conversion</h2>
+          <p class="section-desc"><p>Workhorse function for general case conversion</p></p>
         </th>
       </tr>
       <tr>
         
         <td>
-          <p><code><a href="abbreviation_internal.html">abbreviation_internal()</a></code> </p>
+          <p><code><a href="to_any_case.html">to_any_case()</a></code> </p>
         </td>
-        <td><p>Internal abbreviation marker, marks abbreviations with an underscore behind.
-Useful if <code>parsing_option</code> 1 is needed, but some abbreviations need <code>parsing_option</code> 2.</p></td>
-      </tr><tr>
+        <td><p>General case conversion</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-specific-case-converter-shortcuts" class="hasAnchor"><a href="#section-specific-case-converter-shortcuts" class="anchor"></a>Specific case converter shortcuts</h2>
+          <p class="section-desc"><p>Wrappers around to_any_case() with fixed case argument.</p></p>
+        </th>
+      </tr>
+      <tr>
         
         <td>
           <p><code><a href="caseconverter.html">to_snake_case()</a></code> <code><a href="caseconverter.html">to_lower_camel_case()</a></code> <code><a href="caseconverter.html">to_upper_camel_case()</a></code> <code><a href="caseconverter.html">to_screaming_snake_case()</a></code> <code><a href="caseconverter.html">to_parsed_case()</a></code> <code><a href="caseconverter.html">to_mixed_case()</a></code> <code><a href="caseconverter.html">to_lower_upper_case()</a></code> <code><a href="caseconverter.html">to_upper_lower_case()</a></code> <code><a href="caseconverter.html">to_swap_case()</a></code> <code><a href="caseconverter.html">to_sentence_case()</a></code> </p>
         </td>
         <td><p>Specific case converter shortcuts</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="check_design_rule.html">check_design_rule()</a></code> </p>
-        </td>
-        <td><p>Internal helper to test the design rules for any string and setting of <code>to_any_case()</code></p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="preprocess_internal.html">preprocess_internal()</a></code> </p>
-        </td>
-        <td><p>Internal function that replaces regex matches with underscores</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="relevant.html">relevant()</a></code> </p>
-        </td>
-        <td><p>Internal helper for "lower_upper", "upper_lower".
-This helper returns a logical vector with TRUE for the 
-first and every second string of those which contain 
-an alphabetic character</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="replace_special_characters_internal.html">replace_special_characters_internal()</a></code> </p>
-        </td>
-        <td><p>Internal helper to replace special characters.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="to_any_case.html">to_any_case()</a></code> </p>
-        </td>
-        <td><p>General case conversion</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="to_parsed_case_internal.html">to_parsed_case_internal()</a></code> </p>
-        </td>
-        <td><p>Internal parser, which is relevant for preprocessing, parsing and parsing options</p></td>
       </tr>
     </tbody>
     </table>
@@ -187,7 +155,8 @@ an alphabetic character</p></td>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-general-case-conversion">General case conversion</a></li>
+      <li><a href="#section-specific-case-converter-shortcuts">Specific case converter shortcuts</a></li>
     </ul>
   </div>
 </div>

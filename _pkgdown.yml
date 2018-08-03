@@ -1,0 +1,18 @@
+reference:
+  - title: "General case conversion"
+    desc: "Workhorse function for general case conversion"
+    contents: 
+      - to_any_case
+  - title: "Specific case converter shortcuts"
+    desc: "Wrappers around to_any_case() with fixed case argument."
+    contents:
+      - to_snake_case
+      - to_lower_camel_case
+      - to_upper_camel_case
+      - to_screaming_snake_case
+      - to_parsed_case
+      - to_mixed_case
+      - to_lower_upper_case
+      - to_upper_lower_case
+      - to_swap_case
+      - to_sentence_case 
