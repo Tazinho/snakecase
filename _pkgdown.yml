@@ -1,5 +1,5 @@
 reference:
-  - title: "General case conversion"
+  - title: "General case conversion" 
     desc: "Workhorse function for general case conversion"
     contents: 
       - to_any_case
