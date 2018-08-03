@@ -237,6 +237,18 @@ test_that("preserve-names-attribute", {
     )
 })
 
+test_that("uniqe_sep", {
+  expect_equal(
+    to_any_case(c("bla", "bla"), unique_sep = "_"),
+    c("bla",   "bla_1")
+  )
+  
+  expect_equal(
+    to_any_case(c("bla", "bla"), unique_sep = NULL),
+    c("bla", "bla")
+  )
+})
+
 test_that("janitor-pkg-tests",{
   clean_names3 <- function(old_names, case = "snake"){
     new_names <- gsub("'", "", old_names) # remove quotation marks
