@@ -6,7 +6,10 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Internal parser, which is relevant for preprocessing, parsing and parsing options — to_parsed_case_internal • snakecase</title>
+<title>Internal helper for "lower_upper", "upper_lower".
+This helper returns a logical vector with TRUE for the 
+first and every second string of those which contain 
+an alphabetic character — relevant • snakecase</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +33,15 @@
 
 
 
-<meta property="og:title" content="Internal parser, which is relevant for preprocessing, parsing and parsing options — to_parsed_case_internal" />
+<meta property="og:title" content="Internal helper for "lower_upper", "upper_lower".
+This helper returns a logical vector with TRUE for the 
+first and every second string of those which contain 
+an alphabetic character — relevant" />
 
-<meta property="og:description" content="Internal parser, which is relevant for preprocessing, parsing and parsing options" />
+<meta property="og:description" content="Internal helper for &quot;lower_upper&quot;, &quot;upper_lower&quot;.
+This helper returns a logical vector with TRUE for the 
+first and every second string of those which contain 
+an alphabetic character" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -112,47 +121,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Internal parser, which is relevant for preprocessing, parsing and parsing options</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Tazinho/snakecase/blob/master/R/to_parsed_case_internal.R'><code>R/to_parsed_case_internal.R</code></a></small>
-    <div class="hidden name"><code>to_parsed_case_internal.Rd</code></div>
+    <h1>Internal helper for "lower_upper", "upper_lower".
+This helper returns a logical vector with TRUE for the 
+first and every second string of those which contain 
+an alphabetic character</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Tazinho/snakecase/blob/master/R/relevant.R'><code>R/relevant.R</code></a></small>
+    <div class="hidden name"><code>relevant.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Internal parser, which is relevant for preprocessing, parsing and parsing options</p>
+    <p>Internal helper for "lower_upper", "upper_lower".
+This helper returns a logical vector with TRUE for the 
+first and every second string of those which contain 
+an alphabetic character</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>to_parsed_case_internal</span>(<span class='no'>string</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
-  <span class='kw'>numerals</span> <span class='kw'>=</span> <span class='no'>numerals</span>)</pre>
+    <pre class="usage"><span class='fu'>relevant</span>(<span class='no'>string</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>string</th>
-      <td><p>A string.</p></td>
-    </tr>
-    <tr>
-      <th>parsing_option</th>
-      <td><p>An integer that will determine the parsing option.</p><ul>
-<li><p>1: <code>RRRStudio -&gt; RRR_Studio</code></p></li>
-<li><p>2: <code>RRRStudio -&gt; RRRS_tudio</code></p></li>
-<li><p>3: parses like option 1 but suppresses "_" around non alpha-numeric characters.
- In this way this option suppresses splits and resulting case conversion after these characters.</p></li>
-<li><p>4: parses like option 1, but digits directly behind/in front non-digits, will stay as is.</p></li>
-<li><p>any other integer &lt;= 0: no parsing"</p></li>
-</ul></td>
-    </tr>
-    <tr>
-      <th>numerals</th>
-      <td><p>A character specifying the alignment of numerals (<code>"middle"</code>, <code>left</code>, <code>right</code> or <code>asis</code>). I.e. <code>numerals = "left"</code> ensures that no output separator is in front of a digit.</p></td>
+      <td><p>A string (for example names of a data frame).</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A character vector separated by underscores, containing the parsed string.</p>
+    <p>A logical vector.</p>
     
 
   </div>

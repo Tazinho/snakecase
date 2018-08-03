@@ -21,14 +21,20 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="General case conversion — to_any_case" />
 
 <meta property="og:description" content="Function to convert strings to any case" />
 <meta name="twitter:card" content="summary" />
+
 
 
 <!-- mathjax -->
@@ -55,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">snakecase</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.9.1</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.9.2</span>
       </span>
     </div>
 
@@ -95,6 +101,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -102,23 +109,28 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>General case conversion</h1>
-    <small>Source: <a href='https://github.com/Tazinho/snakecase/blob/master/R/to_any_case.R'><code>R/to_any_case.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/Tazinho/snakecase/blob/master/R/to_any_case.R'><code>R/to_any_case.R</code></a></small>
+    <div class="hidden name"><code>to_any_case.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Function to convert strings to any case</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>to_any_case</span>(<span class='no'>string</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"snake"</span>, <span class='st'>"small_camel"</span>, <span class='st'>"big_camel"</span>,
-  <span class='st'>"screaming_snake"</span>, <span class='st'>"parsed"</span>, <span class='st'>"mixed"</span>, <span class='st'>"lower_upper"</span>, <span class='st'>"upper_lower"</span>, <span class='st'>"swap"</span>,
-  <span class='st'>"all_caps"</span>, <span class='st'>"lower_camel"</span>, <span class='st'>"upper_camel"</span>, <span class='st'>"internal_parsing"</span>, <span class='st'>"none"</span>, <span class='st'>"flip"</span>),
-  <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='st'>"[^[:alnum:]]"</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>transliterations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sep_out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
+  <span class='st'>"screaming_snake"</span>, <span class='st'>"parsed"</span>, <span class='st'>"mixed"</span>, <span class='st'>"lower_upper"</span>, <span class='st'>"upper_lower"</span>,
+  <span class='st'>"swap"</span>, <span class='st'>"all_caps"</span>, <span class='st'>"lower_camel"</span>, <span class='st'>"upper_camel"</span>, <span class='st'>"internal_parsing"</span>,
+  <span class='st'>"none"</span>, <span class='st'>"flip"</span>, <span class='st'>"sentence"</span>), <span class='kw'>abbreviations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sep_in</span> <span class='kw'>=</span> <span class='st'>"[^[:alnum:]]"</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>transliterations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>numerals</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"middle"</span>, <span class='st'>"left"</span>, <span class='st'>"right"</span>,
+  <span class='st'>"asis"</span>), <span class='kw'>sep_out</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>unique_sep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>empty_fill</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>postfix</span> <span class='kw'>=</span> <span class='st'>""</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -136,6 +148,7 @@
 <li><p>ALL_CAPS: <code>"all_caps"</code> or <code>"screaming_snake"</code></p></li>
 <li><p>lowerUPPER: <code>"lower_upper"</code></p></li>
 <li><p>UPPERlower: <code>"upper_lower"</code></p></li>
+<li><p>Sentence case: <code>"sentence"</code></p></li>
 </ul>
 
 <p>There are five "special" cases available:</p><ul>
@@ -150,7 +163,7 @@
  Doesn't work with any of the other arguments except <code>unique_sep</code>, <code>empty_fill</code>, <code>prefix</code> and <code>postfix</code>.</p></li>
 <li><p><code>"none"</code>: Neither parsing nor case conversion occur. This case might be helpful, when
  one wants to call the function for the quick usage of the other parameters.
- To suppress replacement of spaces to underscores set <code>sep_out = NULL</code>.
+ To suppress replacement of spaces to underscores set <code>sep_in = NULL</code>.
  Works with <code>sep_in</code>, <code>transliterations</code>, <code>sep_out</code>, <code>prefix</code>,
   <code>postfix</code>,
   <code>empty_fill</code> and <code>unique_sep</code>.</p></li>
@@ -200,6 +213,10 @@ only "german" is supported). In the order of the entries the letters of the inpu
  might not always be what is intended.</p></td>
     </tr>
     <tr>
+      <th>numerals</th>
+      <td><p>A character specifying the alignment of numerals (<code>"middle"</code>, <code>left</code>, <code>right</code> or <code>asis</code>). I.e. <code>numerals = "left"</code> ensures that no output separator is in front of a digit.</p></td>
+    </tr>
+    <tr>
       <th>sep_out</th>
       <td><p>(short for separator output) String that will be used as separator. The defaults are <code>"_"</code> 
 and <code>""</code>, regarding the specified <code>case</code>.</p></td>
@@ -237,14 +254,14 @@ by the supplied string to this argument.</p></td>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href='https://github.com/Tazinho/snakecase'>snakecase on github</a> or 
-<code><a href='caseconverter.html'>caseconverter</a></code> for some handy shortcuts.</p>
+    <div class='dont-index'><p><a href='https://github.com/Tazinho/snakecase'>snakecase on github</a> or 
+<code><a href='caseconverter.html'>caseconverter</a></code> for some handy shortcuts.</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>### Cases</span>
 <span class='no'>strings</span> <span class='kw'>&lt;-</span> <span class='fu'>c</span>(<span class='st'>"this Is a Strange_string"</span>, <span class='st'>"AND THIS ANOTHER_One"</span>)
-<span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"snake"</span>)</div><div class='output co'>#&gt; [1] "this_is_a_strange_string" "and_this_another_one"    </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"lower_camel"</span>) <span class='co'># same as "small_camel"</span></div><div class='output co'>#&gt; [1] "thisIsAStrangeString" "andThisAnotherOne"   </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"upper_camel"</span>) <span class='co'># same as "big_camel"</span></div><div class='output co'>#&gt; [1] "ThisIsAStrangeString" "AndThisAnotherOne"   </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"all_caps"</span>) <span class='co'># same as "screaming_snake"</span></div><div class='output co'>#&gt; [1] "THIS_IS_A_STRANGE_STRING" "AND_THIS_ANOTHER_ONE"    </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"lower_upper"</span>)</div><div class='output co'>#&gt; [1] "thisISaSTRANGEstring" "andTHISanotherONE"   </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"upper_lower"</span>)</div><div class='output co'>#&gt; [1] "THISisAstrangeSTRING" "ANDthisANOTHERone"   </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"parsed"</span>)</div><div class='output co'>#&gt; [1] "this_Is_a_Strange_string" "AND_THIS_ANOTHER_One"    </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"mixed"</span>)</div><div class='output co'>#&gt; [1] "this_Is_a_Strange_string" "And_This_Another_One"    </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"internal_parsing"</span>)</div><div class='output co'>#&gt; [1] "this_Is_a_Strange_string" "AND_THIS_ANOTHER_One"    </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"none"</span>)</div><div class='output co'>#&gt; [1] "this_Is_a_Strange_string" "AND_THIS_ANOTHER_One"    </div><div class='input'>
+<span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"snake"</span>)</div><div class='output co'>#&gt; [1] "this_is_a_strange_string" "and_this_another_one"    </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"lower_camel"</span>) <span class='co'># same as "small_camel"</span></div><div class='output co'>#&gt; [1] "thisIsAStrangeString" "andThisAnotherOne"   </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"upper_camel"</span>) <span class='co'># same as "big_camel"</span></div><div class='output co'>#&gt; [1] "ThisIsAStrangeString" "AndThisAnotherOne"   </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"all_caps"</span>) <span class='co'># same as "screaming_snake"</span></div><div class='output co'>#&gt; [1] "THIS_IS_A_STRANGE_STRING" "AND_THIS_ANOTHER_ONE"    </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"lower_upper"</span>)</div><div class='output co'>#&gt; [1] "thisISaSTRANGEstring" "andTHISanotherONE"   </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"upper_lower"</span>)</div><div class='output co'>#&gt; [1] "THISisAstrangeSTRING" "ANDthisANOTHERone"   </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"sentence"</span>)</div><div class='output co'>#&gt; [1] "This_is_a_strange_string" "And_this_another_one"    </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"parsed"</span>)</div><div class='output co'>#&gt; [1] "this_Is_a_Strange_string" "AND_THIS_ANOTHER_One"    </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"mixed"</span>)</div><div class='output co'>#&gt; [1] "this_Is_a_Strange_string" "And_This_Another_One"    </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"internal_parsing"</span>)</div><div class='output co'>#&gt; [1] "this_Is_a_Strange_string" "AND_THIS_ANOTHER_One"    </div><div class='input'><span class='fu'>to_any_case</span>(<span class='no'>strings</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"none"</span>)</div><div class='output co'>#&gt; [1] "this_Is_a_Strange_string" "AND_THIS_ANOTHER_One"    </div><div class='input'>
 <span class='co'>### Parsing options</span>
 <span class='co'># the default option makes no sense in this setting</span>
 <span class='fu'>to_any_case</span>(<span class='st'>"HAMBURGcity"</span>, <span class='kw'>case</span> <span class='kw'>=</span> <span class='st'>"parsed"</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; [1] "HAMBUR_Gcity"</div><div class='input'><span class='co'># so the second parsing option is the way to address this example</span>
@@ -306,6 +323,8 @@ Malte Grosser, <a href='mailto:malte.grosser@gmail.com'>malte.grosser@gmail.com<
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>
