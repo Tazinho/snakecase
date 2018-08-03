@@ -232,7 +232,7 @@ For daily usage (especially when preparing fixed scripts) I recommend to combine
 The package is internally build up on the [stringr](https://github.com/tidyverse/stringr) package, which means that many powerful features are provided "by default":
 
 * `to_any_case()` is vectorised over most of its arguments like `string`, `sep_in`, `sep_out`, `empty_fill`, `prefix` and `postfix`.
-* internal character operations are super fast c++. However, some speed is lost due to a more systematic and maintainable implementation. (This might be optimized in the long run).
+* internal character operations are super fast c++. However, some speed is lost due to a more systematic and maintainable implementation.
 * special input like `character(0)`, `NA` etc. is handled in exactly the same consistent and convenient manner as in the stringr package.
 
 ### Known limitations

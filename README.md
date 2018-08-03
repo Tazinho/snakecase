@@ -347,7 +347,7 @@ that many powerful features are provided “by default”:
     `string`, `sep_in`, `sep_out`, `empty_fill`, `prefix` and `postfix`.
   - internal character operations are super fast c++. However, some
     speed is lost due to a more systematic and maintainable
-    implementation. (This might be optimized in the long run).
+    implementation.
   - special input like `character(0)`, `NA` etc. is handled in exactly
     the same consistent and convenient manner as in the stringr package.
 
