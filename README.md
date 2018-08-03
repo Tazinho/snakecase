@@ -224,13 +224,13 @@ There are five “special” cases available:
 #### Postprocessing
 
 **numerals**: If you want to format the alignment of numerals use
-`numerals` (`middle` (default), `left`, `right` or `asis`). I.e. to
-leave digits as is (not surrounding with a separator), use:
+`numerals` (`"middle"` (default), `"left"`, `"right"` or `"asis"`). I.e.
+to add no extra separators around digits use:
 
 ``` r
-to_snake_case("species42value 23month",
+to_snake_case("species42value 23month 7-8",
               numerals = "asis")
-## [1] "species42value_23month"
+## [1] "species42value_23month_7_8"
 ```
 
 **sep\_out**: For the creation of other well known or completely new
