@@ -9,7 +9,8 @@ Status](https://travis-ci.org/Tazinho/snakecase.svg?branch=master)](https://trav
 [![Coverage
 Status](https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg)](https://codecov.io/github/Tazinho/snakecase?branch=master)
 [![downloads](http://cranlogs.r-pkg.org/badges/snakecase)](http://cranlogs.r-pkg.org/)
-[![total](http://cranlogs.r-pkg.org/badges/grand-total/snakecase)](http://cranlogs.r-pkg.org/)![](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
+[![total](http://cranlogs.r-pkg.org/badges/grand-total/snakecase)](http://cranlogs.r-pkg.org/)
+[![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
 
 ## Overview
 
@@ -617,10 +618,10 @@ within the equations.)
     
     `to_x(to_y(to_x(string))) = to_x(string)`
 
-Note that it can easily be shown, that rule three follows from the first
-and the second rule. However, it seems reasonable to express each by its
-own, since they all have an interpretation and together they give a
-really good intuition about the properties of the converter functions.
+Note that it can easily be shown, that rule three follows from the
+second rule. However, it seems reasonable to express each by its own,
+since they all have an interpretation and together they give a really
+good intuition about the properties of the converter functions.
 
 ## Testing
 
