@@ -320,10 +320,15 @@ if (case != "swap") {
     }
 ### collapsing------------------------------------------------------------------
     if(case %in% c("none", "mixed", "snake", "screaming_snake", "parsed",
-                   "small_camel", "big_camel", "lower_upper", "upper_lower",
-                   "sentence")) {
+                   "small_camel", "big_camel", "lower_upper", "upper_lower")) {
       string <- vapply(string, 
                        function(x) stringr::str_c(x, collapse = "_"), "",
+                       USE.NAMES = FALSE)
+    }
+    
+    if(case == "sentence") {
+      string <- vapply(string, 
+                       function(x) stringr::str_c(x, collapse = " "), "",
                        USE.NAMES = FALSE)
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
@@ -360,8 +365,8 @@ if (case != "swap") {
                                             "lower_upper", "upper_lower")){
       string <- stringr::str_replace_all(string, "(?<!\\d)_|_(?!\\d)", "")
     }
-    
-    if(is.null(sep_out) & case == "sentence"){
+
+    if(case == "sentence"){
       string <- vapply(string, 
                        function(x) stringr::str_c(stringr::str_to_upper(stringr::str_sub(x, 1, 1)),
                                                   stringr::str_sub(x, 2)), "",

@@ -1,6 +1,5 @@
 context("to_any_case")
 
-
 test_that("examples", {
   examples <- cases[["examples"]]
   
@@ -249,6 +248,12 @@ test_that("uniqe_sep", {
   )
 })
 
+test_that("sentence_case", {
+  expect_equal(
+  to_sentence_case("this_is_a_sentence", sep_out = " ", postfix = "."),
+  "This is a sentence.")
+})
+
 test_that("janitor-pkg-tests",{
   clean_names3 <- function(old_names, case = "snake"){
     new_names <- gsub("'", "", old_names) # remove quotation marks
@@ -396,7 +401,7 @@ test_that("empty_fill",
 
 test_that("sentence",
           expect_equal(to_any_case("bla bla_bal", case = "sentence"),
-                       "Bla_bla_bal"))
+                       "Bla bla bal"))
   
 test_that("flip and swap", {
           expect_equal(to_any_case("rSTUDIO", case = "flip"), "Rstudio")
