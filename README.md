@@ -181,6 +181,16 @@ to_snake_case("Schönes Café",
 ## [1] "schoenes_cafe"
 ```
 
+Additionally it is easy to specify tranliterations or more general any
+replacement as a named element of the character vector supplied to the
+`transliterations` argument:
+
+``` r
+to_screaming_snake_case("the_boy_likes_snake_case",
+            transliterations = c("boy" = "baby", "snake" = "screaming_snake"))
+## [1] "THE_BABY_LIKES_SCREAMING_SNAKE_CASE"
+```
+
 If you can provide transliterations for your (or any other) country,
 please drop them within [this
 issue](https://github.com/Tazinho/snakecase/issues/107).
