@@ -375,10 +375,19 @@ test_that("random examples",
 #           expect_warning(to_any_case("bla", protect = "_"),
 #                          "argument protect is deprecated; If you really need this argument, pls submit an issue on https://github.com/Tazinho/snakecase")
 #           )
+
+test_that("transliterations", {
+  
+  expect_equal(to_any_case("Älterer Herr", transliterations = c("german", "Herr" = "Mann")), "aelterer_mann")
+  
+  expect_equal(
+    to_any_case("Älterer Herr", transliterations = c( "Herr" = "Mann", "german")),
+    "aelterer_mann")
+})
+
 test_that("transliterations_error", 
           expect_error(to_any_case("bla", transliterations = "bla"),
-                       "Input to `transliterations` must be `NULL` or a string containing elements
-               from the internal lookup dictionaries or from `stringi::stri_trans_list()`.",
+                       "Input to `transliterations` must be `NULL`, a string containing elements from the internal lookup dictionaries or from `stringi::stri_trans_list()` or a named vector.",
                        fixed = TRUE))
 
 test_that("empty_fill",
