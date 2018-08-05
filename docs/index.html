@@ -86,7 +86,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#snakecase" class="anchor"></a>snakecase <img src="reference/figures/snakecase05.png" height="200" align="right">
 </h1></div>
-<p><a href="https://ci.appveyor.com/project/Tazinho/snakecase"><img src="https://ci.appveyor.com/api/projects/status/github/Tazinho/snakecase?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a> <a href="https://travis-ci.org/Tazinho/snakecase"><img src="https://travis-ci.org/Tazinho/snakecase.svg?branch=master" alt="Travis-CI Build Status"></a> <a href="https://cran.r-project.org/package=snakecase"><img src="http://www.r-pkg.org/badges/version/snakecase" alt="CRAN_Status_Badge"></a> <a href="https://codecov.io/github/Tazinho/snakecase?branch=master"><img src="https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg" alt="Coverage Status"></a> <a href="http://cranlogs.r-pkg.org/"><img src="http://cranlogs.r-pkg.org/badges/snakecase" alt="downloads"></a> <a href="http://cranlogs.r-pkg.org/"><img src="http://cranlogs.r-pkg.org/badges/grand-total/snakecase" alt="total"></a><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg"></p>
+
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
@@ -182,6 +182,10 @@
 <a class="sourceLine" id="cb12-5" data-line-number="5"><span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(<span class="st">"Schönes Café"</span>,</a>
 <a class="sourceLine" id="cb12-6" data-line-number="6">              <span class="dt">transliterations =</span> <span class="kw">c</span>(<span class="st">"german"</span>, <span class="st">"Latin-ASCII"</span>))</a>
 <a class="sourceLine" id="cb12-7" data-line-number="7">## [1] "schoenes_cafe"</a></code></pre></div>
+<p>Additionally it is easy to specify tranliterations or more general any replacement as a named element of the character vector supplied to the <code>transliterations</code> argument:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_screaming_snake_case</a></span>(<span class="st">"the_boy_likes_snake_case"</span>,</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">            <span class="dt">transliterations =</span> <span class="kw">c</span>(<span class="st">"boy"</span> =<span class="st"> "baby"</span>, <span class="st">"snake"</span> =<span class="st"> "screaming_snake"</span>))</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">## [1] "THE_BABY_LIKES_SCREAMING_SNAKE_CASE"</a></code></pre></div>
 <p>If you can provide transliterations for your (or any other) country, please drop them within <a href="https://github.com/Tazinho/snakecase/issues/107">this issue</a>.</p>
 <p><strong>case</strong>: The desired target case, provided as one of the following:</p>
 <ul>
@@ -218,21 +222,21 @@
 <h4 class="hasAnchor">
 <a href="#postprocessing" class="anchor"></a>Postprocessing</h4>
 <p><strong>numerals</strong>: If you want to format the alignment of numerals use <code>numerals</code> (<code>"middle"</code> (default), <code>"left"</code>, <code>"right"</code> or <code>"asis"</code>). I.e. to add no extra separators around digits use:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(<span class="st">"species42value 23month 7-8"</span>,</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">              <span class="dt">numerals =</span> <span class="st">"asis"</span>)</a>
-<a class="sourceLine" id="cb13-3" data-line-number="3">## [1] "species42value_23month_7_8"</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(<span class="st">"species42value 23month 7-8"</span>,</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">              <span class="dt">numerals =</span> <span class="st">"asis"</span>)</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">## [1] "species42value_23month_7_8"</a></code></pre></div>
 <p><strong>sep_out</strong>: For the creation of other well known or completely new cases it is possible to adjust the output separator (<code>sep_out</code>):</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(string, <span class="dt">sep_out =</span> <span class="st">"."</span>)</a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">## [1] "lower.camel.case"              "all.caps"                     </a>
-<a class="sourceLine" id="cb14-3" data-line-number="3">## [3] "i.dont.know.what.this.case.is"</a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="kw"><a href="reference/caseconverter.html">to_mixed_case</a></span>(string, <span class="dt">sep_out =</span> <span class="st">" "</span>)</a>
-<a class="sourceLine" id="cb14-6" data-line-number="6">## [1] "lower Camel Case"              "All Caps"                     </a>
-<a class="sourceLine" id="cb14-7" data-line-number="7">## [3] "I Dont Know What this Case is"</a>
-<a class="sourceLine" id="cb14-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb14-9" data-line-number="9"><span class="kw"><a href="reference/caseconverter.html">to_screaming_snake_case</a></span>(string, <span class="dt">sep_out =</span> <span class="st">"="</span>)</a>
-<a class="sourceLine" id="cb14-10" data-line-number="10">## [1] "LOWER=CAMEL=CASE"              "ALL=CAPS"                     </a>
-<a class="sourceLine" id="cb14-11" data-line-number="11">## [3] "I=DONT=KNOW=WHAT=THIS=CASE=IS"</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(string, <span class="dt">sep_out =</span> <span class="st">"."</span>)</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">## [1] "lower.camel.case"              "all.caps"                     </a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">## [3] "i.dont.know.what.this.case.is"</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="kw"><a href="reference/caseconverter.html">to_mixed_case</a></span>(string, <span class="dt">sep_out =</span> <span class="st">" "</span>)</a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">## [1] "lower Camel Case"              "All Caps"                     </a>
+<a class="sourceLine" id="cb15-7" data-line-number="7">## [3] "I Dont Know What this Case is"</a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="kw"><a href="reference/caseconverter.html">to_screaming_snake_case</a></span>(string, <span class="dt">sep_out =</span> <span class="st">"="</span>)</a>
+<a class="sourceLine" id="cb15-10" data-line-number="10">## [1] "LOWER=CAMEL=CASE"              "ALL=CAPS"                     </a>
+<a class="sourceLine" id="cb15-11" data-line-number="11">## [3] "I=DONT=KNOW=WHAT=THIS=CASE=IS"</a></code></pre></div>
 </div>
 <div id="cosmetics" class="section level4">
 <h4 class="hasAnchor">
@@ -321,8 +325,8 @@ Shortcut wrappers like `to_snake_case()`, `to_lower_camel_case()` etc. are avail
 <ul>
 <li>
 <p>In general combinations of one letter words are hard to convert back from cases with <code>""</code> as default separator:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"a_b_c_d"</span>, <span class="dt">case =</span> <span class="st">"upper_camel"</span>)</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2">## [1] "ABCD"</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="reference/to_any_case.html">to_any_case</a></span>(<span class="st">"a_b_c_d"</span>, <span class="dt">case =</span> <span class="st">"upper_camel"</span>)</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">## [1] "ABCD"</a></code></pre></div>
 </li>
 <li><p>Sometimes further pre- or postprocessing might be needed. For example you can easily write your own parsing via a sequence of calls like <code>str_replace_all(string, some_pattern, "_\\1_")</code>. It’s also a <code>str_replace_all()</code> to replace special symbols like <code>%</code> or <code>€</code> with <code>"percent"</code> or <code>"euro"</code></p></li>
 <li><p>You can decide yourself: Open an issue <a href="https://github.com/Tazinho/snakecase/issues">here</a> or build sth. quickly yourself via packages like base, <a href="https://github.com/tidyverse/stringr">stringr</a>, <a href="https://github.com/gagolews/stringi">stringi</a> etc.</p></li>
@@ -453,12 +457,12 @@ to_any_case(c("customer", "product"), case = "big_camel",
 <a href="#practical-influences" class="anchor"></a>Practical influences</h3>
 <p>Conversion to a specific target case is not always obvious or unique. In general a clean conversion can only be guaranteed, when the input-string is meaningful.</p>
 <p>Take for example a situation where you have IDs for some customers. Instead of calling the column “CustomerID” you abbreviate it to “CID”. Without further knowledge about the meaning of CID it will be impossible to know that it should be converted to “c_id”, when using <code><a href="reference/caseconverter.html">to_snake_case()</a></code>. Instead it will be converted to:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(<span class="st">"CID"</span>)</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2">## [1] "cid"</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(<span class="st">"CID"</span>)</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">## [1] "cid"</a></code></pre></div>
 <p>We could have also converted to “c_i_d” and if we don’t know the meaning of “CID”, we can’t decide which one is the better solution. However, it is easy to exclude specific approaches by counterexamples. So in practice it might be nicer to convert “SCREAMING_SNAKE_CASE” to “screaming_snake_case” instead of “s_c_r_e_a_m_i_n_g_s_n_a_k_e_c_a_s_e” (or “screamin_g_snak_e_cas_e” or “s_creaming_s_nake_c_ase”), which means that also “cid” is preferable to “c_i_d” (or “c_id” or “ci_d”) without further knowledge.</p>
 <p>Since the computer can’t know, that we want “c_id” by himself. It is easiest, if we provide him with the right information (here in form of a valid PascalCase syntax):</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(<span class="st">"CId"</span>)</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2">## [1] "c_id"</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw"><a href="reference/caseconverter.html">to_snake_case</a></span>(<span class="st">"CId"</span>)</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">## [1] "c_id"</a></code></pre></div>
 <p>In this way it is guaranteed to get the correct conversion and the only chance of an error lies in an accidentally wrong provided input string or a bug in the converter function <code><a href="reference/caseconverter.html">to_snake_case()</a></code> (or a sequence of one letter abbreviations, see known limitations).</p>
 </div>
 <div id="consistent-behaviour" class="section level3">
@@ -499,7 +503,7 @@ to_any_case(c("customer", "product"), case = "big_camel",
 <p><code>to_x(to_y(to_x(string))) = to_x(string)</code></p>
 </li>
 </ol>
-<p>Note that it can easily be shown, that rule three follows from the first and the second rule. However, it seems reasonable to express each by its own, since they all have an interpretation and together they give a really good intuition about the properties of the converter functions.</p>
+<p>Note that it can easily be shown, that rule three follows from the second rule. However, it seems reasonable to express each by its own, since they all have an interpretation and together they give a really good intuition about the properties of the converter functions.</p>
 </div>
 </div>
 <div id="testing" class="section level2">
@@ -557,7 +561,19 @@ following testcases, also these two equations are tested.--></p>
 </ul>
 </div>
 
-      </div>
+      <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://ci.appveyor.com/project/Tazinho/snakecase"><img src="https://ci.appveyor.com/api/projects/status/github/Tazinho/snakecase?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
+<li><a href="https://travis-ci.org/Tazinho/snakecase"><img src="https://travis-ci.org/Tazinho/snakecase.svg?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="https://cran.r-project.org/package=snakecase"><img src="http://www.r-pkg.org/badges/version/snakecase" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://codecov.io/github/Tazinho/snakecase?branch=master"><img src="https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg" alt="Coverage Status"></a></li>
+<li><a href="http://cranlogs.r-pkg.org/"><img src="http://cranlogs.r-pkg.org/badges/snakecase" alt="downloads"></a></li>
+<li><a href="http://cranlogs.r-pkg.org/"><img src="http://cranlogs.r-pkg.org/badges/grand-total/snakecase" alt="total"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#stable"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="lifecycle"></a></li>
+</ul>
+</div>
+</div>
 
 </div>
 

@@ -118,8 +118,12 @@
 <a href="#snakecase-0-9-2" class="anchor"></a>snakecase 0.9.2<small> Unreleased </small>
 </h1>
 <ul>
-<li>added <code><a href="../reference/caseconverter.html">to_sentence_case()</a></code> (same as snake, but first letter is uppercase and default sep_out is space).</li>
-<li>added <code>numerals</code> argument to all caseconverters including <code><a href="../reference/to_any_case.html">to_any_case()</a></code> to format the alignment of digits (<code>middle</code>, <code>left</code>,<code>right</code>, <code>asis</code>). Therefore <code>parsing_option</code> nr 4 might be removed in later releases, as it is the same as <code>parsing_option = 1</code> and <code>numerals = "asis"</code>.</li>
+<li>
+<strong>cases</strong>: added <code><a href="../reference/caseconverter.html">to_sentence_case()</a></code> (same as snake, but first letter is uppercase and default sep_out is space).</li>
+<li>
+<strong>numerals</strong>: added <code>numerals</code> argument to all caseconverters including <code><a href="../reference/to_any_case.html">to_any_case()</a></code> to format the alignment of digits (<code>middle</code>, <code>left</code>,<code>right</code>, <code>asis</code>). Therefore <code>parsing_option</code> nr 4 might be removed in later releases, as it is the same as <code>parsing_option = 1</code> and <code>numerals = "asis"</code>.</li>
+<li>
+<strong>transliterations</strong>: When named character elements are supplied as part of <code>transliterations</code>, anyting that mateches the name is replaced by the corresponding value.</li>
 </ul>
 </div>
     <div id="snakecase-0-9-1" class="section level1">
