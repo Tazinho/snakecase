@@ -239,6 +239,8 @@ if (case != "swap") {
     if (!is.null(transliterations)) {
       string <- lapply(string, function(x)
         replace_special_characters_internal(x, transliterations, case))
+      string <- lapply(string, function(x) 
+        stringr::str_replace_all(x, "_+", "_"))
     }
 ### caseconversion--------------------------------------------------------------
     if (case == "mixed") {
@@ -328,7 +330,7 @@ if (case != "swap") {
     
     if (case == "sentence") {
       string <- vapply(string, 
-                       function(x) stringr::str_c(x, collapse = " "), "",
+                       function(x) stringr::str_c(x, collapse = "_"), "",
                        USE.NAMES = FALSE)
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
@@ -365,6 +367,10 @@ if (case != "swap") {
     if (is.null(sep_out) & case %in% c("small_camel", "big_camel", 
                                             "lower_upper", "upper_lower")) {
       string <- stringr::str_replace_all(string, "(?<!\\d)_|_(?!\\d)", "")
+    }
+    
+    if (is.null(sep_out) & case == "sentence") {
+      string <- stringr::str_replace_all(string, "_", " ")
     }
 
     if (case == "sentence") {
