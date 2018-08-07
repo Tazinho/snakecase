@@ -184,7 +184,7 @@ to_any_case <- function(string,
   case <- match.arg(case)
   numerals <- match.arg(numerals)
 ### check input length (necessary for NULL and atomic(0))
-  if(identical(stringr::str_length(string), integer())) {return(character())}
+  if (identical(stringr::str_length(string), integer())) {return(character())}
 ### ____________________________________________________________________________
 ### save names-attribute
   string_names <- names(string)
@@ -204,7 +204,7 @@ to_any_case <- function(string,
 ### abbreviation handling
   # mark abbreviation with an underscore behind (in front of the parsing)
   # useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2
-  if (case != "swap"){
+  if (case != "swap") {
     string <- abbreviation_internal(string, abbreviations)
   }
 ### ____________________________________________________________________________
@@ -212,7 +212,7 @@ to_any_case <- function(string,
 if (case != "swap") {
     string <- preprocess_internal(string, sep_in)
   
-  if (!case %in% c("none")){
+  if (!case %in% c("none")) {
     string <- to_parsed_case_internal(string,
                                       parsing_option = parsing_option,
                                       numerals = numerals)
@@ -224,24 +224,24 @@ if (case != "swap") {
   }
 ### ____________________________________________________________________________
 ### "mixed", "snake", "small_camel", "big_camel", "screaming_case", "parsed"
-  if(case %in% c("mixed", "snake", "small_camel",
+  if (case %in% c("mixed", "snake", "small_camel",
                  "big_camel", "screaming_snake", "parsed",
-                 "lower_upper", "upper_lower", "sentence")){
+                 "lower_upper", "upper_lower", "sentence")) {
 ### split-----------------------------------------------------------------------
-    if(case %in% c("mixed", "snake", "screaming_snake", "parsed", "lower_upper", "upper_lower", "sentence")){
+    if (case %in% c("mixed", "snake", "screaming_snake", "parsed", "lower_upper", "upper_lower", "sentence")) {
       string <- stringr::str_split(string, "_")
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-    if(case %in% c("small_camel", "big_camel")){
+    if (case %in% c("small_camel", "big_camel")) {
       string <- stringr::str_split(string, pattern = "(?<!\\d)_|_(?!\\d)")
     }
 ### replacement of special characters_------------------------------------------
-    if(!is.null(transliterations)){
-      string <- lapply(string, function (x)
+    if (!is.null(transliterations)) {
+      string <- lapply(string, function(x)
         replace_special_characters_internal(x, transliterations, case))
     }
 ### caseconversion--------------------------------------------------------------
-    if(case == "mixed"){
+    if (case == "mixed") {
       string <- lapply(string,
                        function(x) ifelse(!x %in% abbreviations, 
                            stringr::str_c(stringr::str_sub(x, 1, 1),
@@ -250,13 +250,13 @@ if (case != "swap") {
         )
       }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-    if(case %in% c("snake", "sentence")){
+    if (case %in% c("snake", "sentence")) {
       string <- lapply(string, stringr::str_to_lower)
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-    if(case == "big_camel"){
+    if (case == "big_camel") {
       string <- lapply(string, stringr::str_to_lower)
-      if(!is.null(abbreviations)){
+      if (!is.null(abbreviations)) {
       string <- lapply(string, 
                        function(x) ifelse(x %in% stringr::str_to_lower(abbreviations), 
                                           stringr::str_to_upper(x),
@@ -268,7 +268,7 @@ if (case != "swap") {
                                                   stringr::str_sub(x, 2)))
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-    if(case == "small_camel"){
+    if (case == "small_camel") {
       string <- lapply(string, stringr::str_to_lower)
       string <- lapply(string, 
                        function(x) stringr::str_c(stringr::str_to_upper(stringr::str_sub(x, 1, 1)),
@@ -281,7 +281,7 @@ if (case != "swap") {
                                         stringr::str_sub(x, 2)), "",
                USE.NAMES = FALSE)
       string <- stringr::str_split(string, " ")
-      if(!is.null(abbreviations)){ # handle abbreviations
+      if (!is.null(abbreviations)) { # handle abbreviations
       string <- lapply(string,
                        function(x) c(stringr::str_to_lower(x[1]), 
                                      ifelse(stringr::str_to_lower(x[-1]) %in% stringr::str_to_lower(abbreviations),
@@ -289,11 +289,11 @@ if (case != "swap") {
       }
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-    if(case == "screaming_snake"){
+    if (case == "screaming_snake") {
       string <- lapply(string, stringr::str_to_upper)
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-    if (case == "lower_upper"){
+    if (case == "lower_upper") {
       string[!is.na(string)] <- mapply(function(x, y) { 
         # odds to lower
         x[y] <- stringr::str_to_lower(x[y]);
@@ -319,14 +319,14 @@ if (case != "swap") {
         USE.NAMES = TRUE)
     }
 ### collapsing------------------------------------------------------------------
-    if(case %in% c("none", "mixed", "snake", "screaming_snake", "parsed",
+    if (case %in% c("none", "mixed", "snake", "screaming_snake", "parsed",
                    "small_camel", "big_camel", "lower_upper", "upper_lower")) {
       string <- vapply(string, 
                        function(x) stringr::str_c(x, collapse = "_"), "",
                        USE.NAMES = FALSE)
     }
     
-    if(case == "sentence") {
+    if (case == "sentence") {
       string <- vapply(string, 
                        function(x) stringr::str_c(x, collapse = " "), "",
                        USE.NAMES = FALSE)
@@ -347,13 +347,14 @@ if (case != "swap") {
       string <- stringr::str_replace_all(string, "(?<!\\d)_(?=\\d)", "")
     }
     
+    # omit (old) protection mode
     if (case != "internal_parsing") {
       string <- stringr::str_replace_all(string, "_(?![:alnum:])|(?<![:alnum:])_", "")
     }
 ### ----------------------------------------------------------------------------
 }
 ### postprocessing (ouput separator)s--------------------------------------------
-    if(!is.null(sep_out) & !identical(string, character(0))){
+    if (!is.null(sep_out) & !identical(string, character(0))) {
       string <- mapply(function(x, y) 
         stringr::str_replace_all(x, "_", y),
                                  string,
@@ -361,12 +362,12 @@ if (case != "swap") {
         USE.NAMES = FALSE)
       }
     
-    if(is.null(sep_out) & case %in% c("small_camel", "big_camel", 
-                                            "lower_upper", "upper_lower")){
+    if (is.null(sep_out) & case %in% c("small_camel", "big_camel", 
+                                            "lower_upper", "upper_lower")) {
       string <- stringr::str_replace_all(string, "(?<!\\d)_|_(?!\\d)", "")
     }
 
-    if(case == "sentence"){
+    if (case == "sentence") {
       string <- vapply(string, 
                        function(x) stringr::str_c(stringr::str_to_upper(stringr::str_sub(x, 1, 1)),
                                                   stringr::str_sub(x, 2)), "",
@@ -374,20 +375,21 @@ if (case != "swap") {
     }
 ### ____________________________________________________________________________
 ### "none"
-  if(case == "none" & !is.null(transliterations)){
-    string <- replace_special_characters_internal(string, transliterations)
+  if (case == "none" & !is.null(transliterations)) {
+    string <- replace_special_characters_internal(string, transliterations, case = case)
   }
 ### ____________________________________________________________________________    
 } # close swap
 ### ____________________________________________________________________________
 ### fill empty strings
-  if(!is.null(empty_fill) & any(string == "")){
+  if (!is.null(empty_fill) & any(string == "")) {
     string[string == ""] <- empty_fill
   }
 ### ____________________________________________________________________________
 ### make unique
-  if(!is.null(unique_sep))
+  if (!is.null(unique_sep)) {
     string <- make.unique(string, sep = unique_sep)
+  }
 ### ____________________________________________________________________________
 ### pre and postfix
   string <- stringr::str_c(prefix, string, postfix)
