@@ -60,6 +60,17 @@ test_that("examples", {
   }
 )
 
+test_that("attributes", {
+  expect_equal(
+    {strings <- c("this Is a Strange_string", "AND THIS ANOTHER_One");
+    names(strings) <- c("String A", "String B");
+    attr(strings, "test.attr") <- "test";
+    strings},
+    structure(c(`String A` = "this Is a Strange_string", `String B` = "AND THIS ANOTHER_One"),
+              test.attr = "test"))
+    }
+  )
+
 test_that("numerals", {
   expect_equal(to_any_case("123bla123bla_434bla"),
                "123_bla_123_bla_434_bla")

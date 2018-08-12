@@ -3,6 +3,7 @@
 * **cases**: added `to_sentence_case()` (same as snake, but first letter is uppercase and default sep_out is space).
 * **numerals**: added `numerals` argument to all caseconverters including `to_any_case()` to format the alignment of digits (`middle`, `left`,`right`, `asis`). Therefore `parsing_option` nr 4 might be removed in later releases, as it is the same as `parsing_option = 1` and `numerals = "asis"`.
 * **transliterations**: When named character elements are supplied as part of `transliterations`, anyting that mateches the name is replaced by the corresponding value.
+* attributes are now preserved (not only names as before)
 
 # snakecase 0.9.1
 
