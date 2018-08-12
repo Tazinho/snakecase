@@ -187,7 +187,7 @@ to_any_case <- function(string,
   if (identical(stringr::str_length(string), integer())) {return(character())}
 ### ____________________________________________________________________________
 ### save names-attribute
-  string_names <- names(string)
+  string_attributes <- attributes(string)
 ### ____________________________________________________________________________
 ### Aliases
   case[case == "all_caps"] <- "screaming_snake"
@@ -401,7 +401,7 @@ if (case != "swap") {
   string <- stringr::str_c(prefix, string, postfix)
 ### ____________________________________________________________________________
 ### set back names-attribute
-  names(string) <- string_names
+  attributes(string) <- string_attributes
 ### ____________________________________________________________________________
 ### return
   string

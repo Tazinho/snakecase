@@ -4,8 +4,7 @@
 \alias{to_parsed_case_internal}
 \title{Internal parser, which is relevant for preprocessing, parsing and parsing options}
 \usage{
-to_parsed_case_internal(string, parsing_option = 1L,
-  numerals = numerals)
+to_parsed_case_internal(string, parsing_option = 1L, numerals = numerals)
 }
 \arguments{
 \item{string}{A string.}
