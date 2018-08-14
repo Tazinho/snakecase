@@ -1,6 +1,6 @@
 PackratFormat: 1.4
 PackratVersion: 0.4.9.1
-RVersion: 3.5.0
+RVersion: 3.5.1
 Repos: BioCsoft=https://bioconductor.org/packages/3.4/bioc,
     BioCann=https://bioconductor.org/packages/3.4/data/annotation,
     BioCexp=https://bioconductor.org/packages/3.4/data/experiment,
@@ -191,13 +191,13 @@ Requires: httr, ini, jsonlite
 
 Package: git2r
 Source: CRAN
-Version: 0.22.1
-Hash: 2b46fc65cb449ab97c7a38fdcf3ed12c
+Version: 0.23.0
+Hash: f7190a7a4b5c5f0983b4b6ee29ed7bc3
 
 Package: glue
 Source: CRAN
-Version: 1.2.0
-Hash: 381e42baedecc633c0e547a0c7ca9de7
+Version: 1.3.0
+Hash: 1fbde6dec830370be696eee8ef31c9e4
 
 Package: highlight
 Source: CRAN
@@ -277,8 +277,8 @@ Hash: 463550cf44fb6f0a2359368f42eebe62
 
 Package: openssl
 Source: CRAN
-Version: 1.0.1
-Hash: e04b8ed7b05c1f75aa81c65a086b1d0c
+Version: 1.0.2
+Hash: 12a42cbd5aecdb887782247856ccbafd
 
 Package: packrat
 Source: CRAN
@@ -397,6 +397,12 @@ Package: rstudioapi
 Source: CRAN
 Version: 0.7
 Hash: e2ebaff8160aff3e6b32e6e78a693c2d
+
+Package: rversions
+Source: CRAN
+Version: 1.0.3
+Hash: 44837671df6bf1d0b863dc6f83f42a16
+Requires: curl, xml2
 
 Package: stringdist
 Source: CRAN
