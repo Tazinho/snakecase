@@ -25,11 +25,11 @@ package](http://www.malte-grosser.com/post/introducing-the-snakecase-package/).
 
 ``` r
 # install snakecase from cran
-# install.packages("snakecase")
+install.packages("snakecase")
 
 # or the (stable) development version hosted on github
-install.packages("devtools")
-devtools::install_github("Tazinho/snakecase", ref = "devversion-01")
+# install.packages("devtools")
+# devtools::install_github("Tazinho/snakecase")
 
 # load snakecase
 library(snakecase)
@@ -73,7 +73,6 @@ output:
 
 ``` r
 library(magrittr)
-## Warning: package 'magrittr' was built under R version 3.5.1
 
 to_snake_case(c("SomeBAdInput", "someGoodInput")) %>% dput()
 ## c("some_b_ad_input", "some_good_input")

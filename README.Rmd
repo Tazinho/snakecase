@@ -17,11 +17,11 @@ For a short intro regarding typical use cases, see the blog article [Introducing
 
 ```{r, results='hide', message=FALSE, warning=FALSE, eval = TRUE}
 # install snakecase from cran
-# install.packages("snakecase")
+install.packages("snakecase")
 
 # or the (stable) development version hosted on github
-install.packages("devtools")
-devtools::install_github("Tazinho/snakecase", ref = "devversion-01")
+# install.packages("devtools")
+# devtools::install_github("Tazinho/snakecase")
 
 # load snakecase
 library(snakecase)
