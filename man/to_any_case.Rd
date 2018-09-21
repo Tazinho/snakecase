@@ -10,8 +10,8 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
   "none", "flip", "sentence"), abbreviations = NULL,
   sep_in = "[^[:alnum:]]", parsing_option = 1,
   transliterations = NULL, numerals = c("middle", "left", "right",
-  "asis"), sep_out = NULL, unique_sep = NULL, empty_fill = NULL,
-  prefix = "", postfix = "")
+  "asis", "tight"), sep_out = NULL, unique_sep = NULL,
+  empty_fill = NULL, prefix = "", postfix = "")
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
@@ -82,7 +82,7 @@ You should use this feature with care in case of \code{case = "parsed"}, \code{c
  of length 2, the second letter will be transliterated to lowercase, for example Oe, Ae, Ss, which
  might not always be what is intended. In this case you can make usage of the option to supply named elements and specify the transliterations yourself.}
 
-\item{numerals}{A character specifying the alignment of numerals (\code{"middle"}, \code{left}, \code{right} or \code{asis}). I.e. \code{numerals = "left"} ensures that no output separator is in front of a digit.}
+\item{numerals}{A character specifying the alignment of numerals (\code{"middle"}, \code{left}, \code{right}, \code{asis} or \code{tight}). I.e. \code{numerals = "left"} ensures that no output separator is in front of a digit.}
 
 \item{sep_out}{(short for separator output) String that will be used as separator. The defaults are \code{"_"} 
 and \code{""}, regarding the specified \code{case}.}

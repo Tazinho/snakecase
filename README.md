@@ -178,6 +178,10 @@ to_upper_camel_case("Doppelgänger is originally german",
 to_snake_case("Schönes Café",
               transliterations = c("german", "Latin-ASCII"))
 ## [1] "schoenes_cafe"
+
+to_snake_case("1¢ per conversion would be great", sep_in = NULL, 
+              transliterations = c("¢" = "cent"), postfix = ";-)")
+## [1] "1_cent_per_conversion_would_be_great;-)"
 ```
 
 Additionally it is easy to specify tranliterations or more general any
@@ -234,8 +238,8 @@ There are five “special” cases available:
 #### Postprocessing
 
 **numerals**: If you want to format the alignment of numerals use
-`numerals` (`"middle"` (default), `"left"`, `"right"` or `"asis"`). I.e.
-to add no extra separators around digits use:
+`numerals` (`"middle"` (default), `"left"`, `"right"`, `"asis"` or
+`"tight"`). I.e. to add no extra separators around digits use:
 
 ``` r
 to_snake_case("species42value 23month 7-8",
@@ -375,7 +379,7 @@ that many powerful features are provided “by default”:
     example you can easily write your own parsing via a sequence of
     calls like `str_replace_all(string, some_pattern, "_\\1_")`. It’s
     also a `str_replace_all()` to replace special symbols like `%` or
-    `€` with `"percent"` or `"euro"`
+    `€` with `"percent"` or `"euro"`.
 
   - You can decide yourself: Open an issue
     [here](https://github.com/Tazinho/snakecase/issues) or build sth.

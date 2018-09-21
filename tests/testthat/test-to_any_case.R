@@ -60,6 +60,12 @@ test_that("examples", {
   }
 )
 
+test_that("numerals_tight",
+          {
+            expect_equal(to_any_case("bla_la_123_123_1_bla", numerals = "tight"),
+                         "bla_la123_123_1bla")
+          })
+
 test_that("attributes", {
   expect_equal(
     {strings <- c("this Is a Strange_string", "AND THIS ANOTHER_One");
