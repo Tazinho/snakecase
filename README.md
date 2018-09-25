@@ -178,10 +178,6 @@ to_upper_camel_case("Doppelgänger is originally german",
 to_snake_case("Schönes Café",
               transliterations = c("german", "Latin-ASCII"))
 ## [1] "schoenes_cafe"
-
-to_snake_case("1¢ per conversion would be great", sep_in = NULL, 
-              transliterations = c("¢" = "cent"), postfix = ";-)")
-## [1] "1_cent_per_conversion_would_be_great;-)"
 ```
 
 Additionally it is easy to specify tranliterations or more general any
@@ -192,6 +188,10 @@ replacement as a named element of the character vector supplied to the
 to_screaming_snake_case("the_boy_likes_snake_case",
             transliterations = c("boy" = "baby", "snake" = "screaming_snake"))
 ## [1] "THE_BABY_LIKES_SCREAMING_SNAKE_CASE"
+
+to_snake_case("column names 100 % snake case", sep_in = NULL, 
+              transliterations = c("%" = "percent"), postfix = ";-)")
+## [1] "column_names_100_percent_snake_case;-)"
 ```
 
 If you can provide transliterations for your (or any other) country,
@@ -377,9 +377,7 @@ that many powerful features are provided “by default”:
 
   - Sometimes further pre- or postprocessing might be needed. For
     example you can easily write your own parsing via a sequence of
-    calls like `str_replace_all(string, some_pattern, "_\\1_")`. It’s
-    also a `str_replace_all()` to replace special symbols like `%` or
-    `€` with `"percent"` or `"euro"`.
+    calls like `str_replace_all(string, some_pattern, "_\\1_")`.
 
   - You can decide yourself: Open an issue
     [here](https://github.com/Tazinho/snakecase/issues) or build sth.
