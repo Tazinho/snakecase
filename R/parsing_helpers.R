@@ -10,7 +10,7 @@
 #' 
 #' @keywords utilities
 #' 
-#' @name parsing helpers
+#' @name parsing_helpers
 #'
 #' @rdname parsing_helpers
 #' 
