@@ -172,38 +172,33 @@ to_any_case <- function(string,
                         empty_fill = NULL,
                         prefix = "",
                         postfix = ""){
-  ### Deprecations:
-  # if (!identical(preprocess, NULL)) {
-  #   warning("argument preprocess is renamed to sep_in and will be removed in later versions",
-  #           call. = FALSE)
-  #   if (identical(sep_in, NULL)) {
-  #     sep_in = preprocess
-  #   }
-  # }
-  ### Argument matching and checking
+### ____________________________________________________________________________
+### Argument matching
   case <- match.arg(case)
   numerals <- match.arg(numerals)
-### check input length (necessary for NULL and atomic(0))
+### ____________________________________________________________________________
+### Argument checking (check input length -> necessary for NULL and atomic(0))
   if (identical(stringr::str_length(string), integer())) {return(character())}
 ### ____________________________________________________________________________
-### save names-attribute
+### Save attributes
   string_attributes <- attributes(string)
 ### ____________________________________________________________________________
-### Aliases
+### Handle aliases
   case[case == "all_caps"] <- "screaming_snake"
   case[case == "lower_camel"] <- "small_camel"
   case[case == "upper_camel"] <- "big_camel"
   case[case == "flip"] <- "swap"
+### ____________________________________________________________________________
 ### Handle swap case
   if (case == "swap") {
     string <- gsub(pattern = "([[:upper:]])|([[:lower:]])",
                    perl = TRUE,
                    replacement = "\\L\\1\\U\\2",
-                   string)
-  }
-### abbreviation handling
-  # mark abbreviation with an underscore behind (in front of the parsing)
-  # useful if parsinoption 1 is needed, but some abbreviations need parsing_option 2
+                   string)}
+### ____________________________________________________________________________
+### Match abbreviations
+  # mark abbreviation by placing an underscore behind them (in front of the parsing)
+  # useful if parsingoption 1 is needed, but some abbreviations need parsing_option 2
   if (case != "swap") {
     string <- abbreviation_internal(string, abbreviations)
   }
@@ -212,7 +207,7 @@ to_any_case <- function(string,
 if (case != "swap") {
     string <- preprocess_internal(string, sep_in)
   
-  if (!case %in% c("none")) {
+  if (case != "none") {
     string <- to_parsed_case_internal(string,
                                       parsing_option = parsing_option,
                                       numerals = numerals)

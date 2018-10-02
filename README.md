@@ -105,7 +105,7 @@ Some further **cosmetics** (`unique_sep`, `empty_fill`, `prefix`,
 “mixed cases”. These might be introduced due to country codes or other
 abbreviations, which are usually written in upper case. Before you
 consider a different `parsing_option` (see below), you might just want
-to use the abbreviations argument:
+to use the `abbreviations` argument:
 
 ``` r
 to_snake_case(c("HHcity", "IDTable1", "KEYtable2", "newUSElections"),

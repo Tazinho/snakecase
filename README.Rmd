@@ -75,7 +75,7 @@ Some further **cosmetics** (`unique_sep`, `empty_fill`, `prefix`, `postfix`) can
 
 #### Parsing
 
-**abbreviations**: One challenge in case conversion are odd looking "mixed cases". These might be introduced due to country codes or other abbreviations, which are usually written in upper case. Before you consider a different `parsing_option` (see below), you might just want to use the abbreviations argument:
+**abbreviations**: One challenge in case conversion are odd looking "mixed cases". These might be introduced due to country codes or other abbreviations, which are usually written in upper case. Before you consider a different `parsing_option` (see below), you might just want to use the `abbreviations` argument:
 
 ```{r, collapse = TRUE}
 to_snake_case(c("HHcity", "IDTable1", "KEYtable2", "newUSElections"),
