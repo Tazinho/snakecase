@@ -203,25 +203,39 @@ to_any_case <- function(string,
     string <- abbreviation_internal(string, abbreviations)
   }
 ### ____________________________________________________________________________
-### preprocess (regex into "_") and parsing (surrounding by "_")
-if (case != "swap") {
+### Preprocessing:
+## Turn mateches of `sep_in` into "_" and
+## surround matechs of the parsing by "_" (parsed_case)
+  if (case != "swap") {
     string <- preprocess_internal(string, sep_in)
-  
-  if (case != "none") {
-    string <- to_parsed_case_internal(string,
-                                      parsing_option = parsing_option,
-                                      numerals = numerals)
-  } else {
-    string <- vapply(string, stringr::str_replace_all, "","_+", "_", 
-                     USE.NAMES = FALSE) 
-    string <- vapply(string, stringr::str_replace_all, "","^_|_$", "",
-                     USE.NAMES = FALSE)
-  }
+    
+    if (case != "none") {
+      string <- to_parsed_case_internal(string,
+                                        parsing_option = parsing_option,
+                                        numerals = numerals)
+    } else {
+      string <- vapply(string, stringr::str_replace_all, "","_+", "_", 
+                       USE.NAMES = FALSE) 
+      string <- vapply(string, stringr::str_replace_all, "","^_|_$", "",
+                       USE.NAMES = FALSE)
+    }
+### ____________________________________________________________________________
+### Case Conversion (without translations involved)
+    if (case == "snake" & is.null(transliterations) & numerals == "middle" & parsing_option != 4) {
+      string <- stringr::str_to_lower(string)
+      
+      
+      # omit (old) protection mode
+      if (case != "internal_parsing") {
+        string <- stringr::str_replace_all(string, "_(?![:alnum:])|(?<![:alnum:])_", "")
+      }
+    }
 ### ____________________________________________________________________________
 ### "mixed", "snake", "small_camel", "big_camel", "screaming_case", "parsed"
-  if (case %in% c("mixed", "snake", "small_camel",
+  if ((case %in% c("mixed", "small_camel",
                  "big_camel", "screaming_snake", "parsed",
-                 "lower_upper", "upper_lower", "sentence")) {
+                 "lower_upper", "upper_lower", "sentence")) |
+      (case == "snake" & (!is.null(transliterations) | numerals != "middle" | parsing_option == 4))) {
 ### split-----------------------------------------------------------------------
     if (case %in% c("mixed", "snake", "screaming_snake", "parsed", "lower_upper", "upper_lower", "sentence")) {
       string <- stringr::str_split(string, "_")
