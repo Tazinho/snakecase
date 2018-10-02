@@ -1,6 +1,7 @@
-# snakecase 0.9.2.9001
+# snakecase 0.9.2.9002
 
 * **numerals**: new alignment option `"tight"` which allows to suppress all underscores between numerals and letters.
+* **improved speed**: time of internal parsing could be reduced about a factor of ten, due to some `vapply` replacements.
 
 # snakecase 0.9.2
 
