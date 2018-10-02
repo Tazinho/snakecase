@@ -2,7 +2,8 @@
 #'
 #' @param string A string.
 #'  
-#' @return A character vector separated by underscores, containing the parsed string.
+#' @name caseconverter
+#' @return A partly parsed character vector.
 #'
 #' @author Malte Grosser, \email{malte.grosser@@gmail.com}
 #' @keywords utilities
