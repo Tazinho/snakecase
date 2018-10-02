@@ -59,9 +59,9 @@ to_parsed_case_internal <- function(string, parsing_option = 1L, numerals = nume
   
   ### customize the output
   # remove more than one "_" and starting/ending "_"
-  string <- gsub("_+", "_", string)
+  string <- stringr::str_replace_all(string, "_+", "_")
 
-  string <- gsub("^_|_$", "", string)
+  string <- stringr::str_replace_all(string, "^_|_$", "")
   
   if (parsing_option == 3) {
     string <- stringr::str_replace_all(string, "_(?![:alnum:])|(?<![:alnum:])_", "")

@@ -8,8 +8,6 @@
 #' @keywords utilities
 #' 
 #'
-### define parsing functions
-
 #' @rdname parsing_helpers
 # Inserts underscores around groups of one upper case letter followed
 # by lower case letters
