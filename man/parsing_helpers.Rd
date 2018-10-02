@@ -7,7 +7,7 @@
 \alias{parse3_pat_cap_lonely}
 \alias{parse4_separate_non_characters}
 \alias{parse5_mark_digits}
-\title{Parsing helpers for parsed_case_internal}
+\title{Parsing helpers}
 \usage{
 parse1_pat_cap_smalls(string)
 
@@ -26,7 +26,7 @@ parse5_mark_digits(string)
 A partly parsed character vector.
 }
 \description{
-Parsing helpers for parsed_case_internal
+Mainly for usage within to_parsed_case_internal
 }
 \author{
 Malte Grosser, \email{malte.grosser@gmail.com}
