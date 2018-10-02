@@ -26,7 +26,7 @@ parse5_mark_digits(string)
 A partly parsed character vector.
 }
 \description{
-Mainly for usage within to_parsed_case_internal
+Mainly for usage within \code{to_parsed_case_internal}
 }
 \author{
 Malte Grosser, \email{malte.grosser@gmail.com}

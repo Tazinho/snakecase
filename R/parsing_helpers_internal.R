@@ -1,6 +1,6 @@
 #' Parsing helpers
 #' 
-#' Mainly for usage within to_parsed_case_internal
+#' Mainly for usage within \code{to_parsed_case_internal}
 #'
 #' @param string A string.
 #'  
