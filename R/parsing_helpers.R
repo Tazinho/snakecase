@@ -10,7 +10,7 @@
 #' 
 #' @keywords utilities
 #' 
-#' @name caseconverter
+#' @name parsing helpers
 #'
 #' @rdname parsing_helpers
 #' 
