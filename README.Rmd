@@ -252,7 +252,7 @@ The package is internally build up on the [stringr](https://github.com/tidyverse
     to_any_case("a_b_c_d", case = "upper_camel")
     ```
     
-  However, it it not impossible:
+  However, it it not impossible: 
   
     ```{r, collapse= TRUE}
     to_snake_case("ABCD", sep_out = ".",
