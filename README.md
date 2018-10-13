@@ -367,12 +367,24 @@ that many powerful features are provided “by default”:
 
 ### Known limitations
 
-  - In general combinations of one letter words are hard to convert back
-    from cases with `""` as default separator:
+  - In general combinations of one letter words or abbreviations are
+    hard to convert back from cases with `""` as default separator:
     
     ``` r
     to_any_case("a_b_c_d", case = "upper_camel")
     ## [1] "ABCD"
+    ```
+    
+    However, it it not impossible:
+    
+    ``` r
+    to_snake_case("ABCD", sep_out = ".",
+                  transliterations = c("^ABCD$" = "A_B_C_D"))
+    ## [1] "a.b.c.d"
+    
+    to_snake_case("BVBFCB:5-2", sep_in = ":",
+                  transliterations = c("^BVBFCB" = "BVB_FCB"))
+    ## [1] "bvb_fcb_5-2"
     ```
 
   - Sometimes further pre- or postprocessing might be needed. For
@@ -544,7 +556,7 @@ to_snake_case("CId")
 In this way it is guaranteed to get the correct conversion and the only
 chance of an error lies in an accidentally wrong provided input string
 or a bug in the converter function `to_snake_case()` (or a sequence of
-one letter abbreviations, see known limitations).
+(one letter) abbreviations, see known limitations).
 
 ### Consistent behaviour
 

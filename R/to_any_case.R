@@ -397,7 +397,7 @@ to_any_case <- function(string,
 ### pre and postfix
   string <- stringr::str_c(prefix, string, postfix)
 ### ____________________________________________________________________________
-### set back names-attribute
+### set back attributes
   attributes(string) <- string_attributes
 ### ____________________________________________________________________________
 ### return

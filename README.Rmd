@@ -246,10 +246,20 @@ The package is internally build up on the [stringr](https://github.com/tidyverse
 
 ### Known limitations
 
-* In general combinations of one letter words are hard to convert back from cases with `""` as default separator:
+* In general combinations of one letter words or abbreviations are hard to convert back from cases with `""` as default separator:
 
     ```{r, collapse=TRUE}
     to_any_case("a_b_c_d", case = "upper_camel")
+    ```
+    
+  However, it it not impossible:
+  
+    ```{r, collapse= TRUE}
+    to_snake_case("ABCD", sep_out = ".",
+                  transliterations = c("^ABCD$" = "A_B_C_D"))
+    
+    to_snake_case("BVBFCB:5-2", sep_in = ":",
+                  transliterations = c("^BVBFCB" = "BVB_FCB"))
     ```
 
 * Sometimes further pre- or postprocessing might be needed. For example you can easily write your own parsing via a sequence of calls like `str_replace_all(string, some_pattern, "_\\1_")`.
@@ -367,7 +377,7 @@ Since the computer can't know, that we want "c_id" by himself. It is easiest, if
 to_snake_case("CId")
 ```
 
-In this way it is guaranteed to get the correct conversion and the only chance of an error lies in an accidentally wrong provided input string or a bug in the converter function `to_snake_case()` (or a sequence of one letter abbreviations, see known limitations).
+In this way it is guaranteed to get the correct conversion and the only chance of an error lies in an accidentally wrong provided input string or a bug in the converter function `to_snake_case()` (or a sequence of (one letter) abbreviations, see known limitations).
 
 ### Consistent behaviour
 
