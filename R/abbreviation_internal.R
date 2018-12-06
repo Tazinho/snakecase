@@ -12,7 +12,7 @@
 #' @keywords utilities
 #'
 abbreviation_internal <- function(string, abbreviations = NULL){
-  if(!is.null(abbreviations)){
+  if (!is.null(abbreviations)) {
     # replace at start
     pattern_start <- stringr::str_c("(", stringr::str_c("^", abbreviations, collapse = "|"), ")", "([^[:upper:]])")
     string <- stringr::str_replace_all(string, pattern_start, replacement = "\\1_\\2")

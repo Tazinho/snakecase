@@ -348,8 +348,8 @@ For daily usage (especially when preparing fixed scripts) I recommend to
 combine `to_any_case()` with `dput()`. In this way, you can quickly
 inspect, if the output is as intended and hardcode the results (which is
 basically safer and good practice in my opinion). In very complex cases
-you might just want to manually fix the output instead of tweeking with
-the arguments too much.
+you might just want to manually fix the output from `dput()` instead of
+tweeking with the arguments too much.
 
 ### Dependencies, vectorisation, speed and special input handling
 

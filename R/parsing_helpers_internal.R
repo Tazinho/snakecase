@@ -48,7 +48,7 @@ parse4_separate_non_characters = function(string){
 parse5_mark_digits = function(string) {
 # Inserts _ and space between non-alpanumerics and digits
   digit_marker_before <- "(?<=[^_|\\d])(\\d)"
-  digit_marker_after <- "(\\d)(?=[^_|\\d])"
+  digit_marker_after  <- "(\\d)(?=[^_|\\d])"
   string <- stringr::str_replace_all(string, digit_marker_before, "_ \\1")
   string <- stringr::str_replace_all(string, digit_marker_after , "\\1 _")
   string
