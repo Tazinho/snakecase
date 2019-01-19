@@ -3,6 +3,7 @@
 * **numerals**: new alignment option `"tight"` which allows to suppress all underscores between numerals and letters.
 * **improved speed**: time of internal parsing could be reduced about a factor of ten, due to some `vapply()` replacements.
 * **UTF8 Conversion**: Input is now always converted to UTF-8 and returned as UTF8. Also the `transliterations` argument is now aware of non-UTF8 encoded input.
+* **Improved vecorization of `sep_out`**: `sep_out` now behaves btter for vector input (length > 1). Instead of returning different strings, the return is now one string, which uses separators according to the supplied order. When `length(sep_out) > 1`, the last element of `sep_out` gets recycled. 
 
 # snakecase 0.9.2
 
