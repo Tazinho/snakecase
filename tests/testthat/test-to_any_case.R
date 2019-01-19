@@ -914,5 +914,5 @@ test_that("sep_out", {
   expect_equal(to_any_case(c("2018_01_01_bla_bla_bla"), sep_out = c("-", "_")), "2018-01_01_bla_bla_bla")
   expect_equal(to_any_case(c("2018_01_01_bla_bla_bla"), sep_out = "-"), "2018-01-01-bla-bla-bla")
   expect_equal(to_any_case(c("2018_01_01_bla_bla"), sep_out = c("-", "-", "_", "_", "_", "_", "_")),  "2018-01-01_bla_bla")
-  expect_equal(to_any_case(character(0), y = c("_", "_")), character(0))
+  expect_equal(to_any_case(character(0), sep_out = c("_", "_")), character(0))
 })
