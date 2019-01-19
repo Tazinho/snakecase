@@ -177,6 +177,9 @@ to_any_case <- function(string,
   case <- match.arg(case)
   numerals <- match.arg(numerals)
 ### ____________________________________________________________________________
+### Set encoding to utf8
+  string <- enc2utf8(string)
+### ____________________________________________________________________________
 ### Argument checking (check input length -> necessary for NULL and atomic(0))
   if (identical(stringr::str_length(string), integer())) {return(character())}
 ### ____________________________________________________________________________
@@ -399,6 +402,9 @@ to_any_case <- function(string,
 ### ____________________________________________________________________________
 ### set back attributes
   attributes(string) <- string_attributes
+### ____________________________________________________________________________
+### guarantee that output is really UTF-8
+  string <- enc2utf8(string)
 ### ____________________________________________________________________________
 ### return
   string
