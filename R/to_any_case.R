@@ -356,13 +356,28 @@ to_any_case <- function(string,
 ### ----------------------------------------------------------------------------
 }
 ### postprocessing (ouput separator)s--------------------------------------------
+    # if (!is.null(sep_out) & !identical(string, character(0))) {
+    #   string <- mapply(function(x, y) 
+    #     stringr::str_replace_all(x, "_", y),
+    #                              string,
+    #                              sep_out,
+    #     USE.NAMES = FALSE)
+    #   }
     if (!is.null(sep_out) & !identical(string, character(0))) {
-      string <- mapply(function(x, y) 
-        stringr::str_replace_all(x, "_", y),
-                                 string,
-                                 sep_out,
-        USE.NAMES = FALSE)
+      paste_along <- function(x, along = "_") {
+        if (length(x) <= 1L) return(x)
+        if (length(along) == 1L) return(paste0(x, collapse = along))
+        
+        along <- c(along, rep_len(along[length(along)], max(length(x) - length(along), 0L)))
+        paste0(paste0(x[seq_len(length(x) - 1)], along[seq_len(length(x) - 1)] ,
+                      collapse = ""), x[length(x)])
       }
+      
+      string <- stringr::str_split(string, pattern = "_")
+      string <- vapply(string, 
+                       function(x) paste_along(x, along = sep_out), "",
+                       USE.NAMES = FALSE)
+    }
     
     if (is.null(sep_out) & case %in% c("small_camel", "big_camel", 
                                             "lower_upper", "upper_lower")) {

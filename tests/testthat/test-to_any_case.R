@@ -601,7 +601,7 @@ test_that("complex strings", {
 
 
 test_that("stackoverflow answers", {
-  expect_equal(to_any_case(c("ThisText", "NextText"), case = "snake", sep_out = "\\."),
+  expect_equal(to_any_case(c("ThisText", "NextText"), case = "snake", sep_out = "."),
                c("this.text", "next.text"))
   
   expect_equal(to_any_case(c("BobDylanUSA",
@@ -893,3 +893,27 @@ test_that("expand.grid", {
                  "start.AGE.GROUP.end"))
   }
 )
+
+
+
+test_that("sep_out", {
+  paste_along <- function(x, along = "_") {
+    if (length(x) <= 1L) return(x)
+    if (length(along) == 1L) return(paste0(x, collapse = along))
+    
+    along <- c(along, rep_len(along[length(along)], max(length(x) - length(along), 0L)))
+    paste0(paste0(x[seq_len(length(x) - 1)], along[seq_len(length(x) - 1)],
+                  collapse = ""), x[length(x)])
+  }
+
+  expect_equal(to_any_case("a", sep_out = "-"), "a")
+  expect_equal(to_any_case(""), "")
+  expect_equal(to_any_case("a"), "a")
+  expect_equal(to_any_case(c("bla_bla_bla"), sep_out = c("-", "_")),  "bla-bla_bla")
+  
+  expect_equal(to_any_case(c("2018_01_01_bla_bla_bla"), sep_out = c("-", "_")), "2018-01_01_bla_bla_bla")
+  expect_equal(to_any_case(c("2018_01_01_bla_bla_bla"), sep_out = "-"), "2018-01-01-bla-bla-bla")
+  expect_equal(to_any_case(c("2018_01_01_bla_bla"), sep_out = c("-", "-", "_", "_", "_", "_", "_")),  "2018-01-01_bla_bla")
+  expect_equal(to_any_case(Inf), "inf")
+  expect_equal(to_any_case(character(0), y = c("_", "_")), character(0))
+})
