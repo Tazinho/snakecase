@@ -41,12 +41,17 @@ replace_special_characters_internal <- function(string, transliterations, case){
                 "\u00C5" = "A",
                 "\u00E5" = "a")
     )
+  
   for (i in seq_along(transliterations)){
     if(isTRUE(!is.null(names(transliterations)[i]) &
               names(transliterations)[i] != "")){
+      names(transliterations)[i] <- enc2utf8(names(transliterations))[i]
+      
       string <- stringr::str_replace_all(string, transliterations[i])
     } else if(transliterations[i] %in% names(dictionary)){
-        string <- stringr::str_replace_all(string, dictionary[[transliterations[i]]]) 
+      
+      names(dictionary[[transliterations[i]]]) <- enc2utf8(names(dictionary[[transliterations[i]]]))
+        string <- stringr::str_replace_all(enc2utf8(string), dictionary[[transliterations[i]]]) 
       } else if(transliterations[i] %in% stringi::stri_trans_list()){
         string <- stringi::stri_trans_general(string, transliterations[i])
       } else {
