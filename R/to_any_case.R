@@ -74,7 +74,7 @@
 #' @param numerals A character specifying the alignment of numerals (\code{"middle"}, \code{left}, \code{right}, \code{asis} or \code{tight}). I.e. \code{numerals = "left"} ensures that no output separator is in front of a digit.
 #' 
 #' @param sep_out (short for separator output) String that will be used as separator. The defaults are \code{"_"} 
-#' and \code{""}, regarding the specified \code{case}.
+#' and \code{""}, regarding the specified \code{case}. When \code{length(sep_out) > 1}, the last element of \code{sep_out} gets recycled and separators are incorporated per string according to their order.
 #' 
 #' @param unique_sep A string. If not \code{NULL}, then duplicated names will get 
 #' a suffix integer
