@@ -403,6 +403,9 @@ to_any_case <- function(string,
 ### set back attributes
   attributes(string) <- string_attributes
 ### ____________________________________________________________________________
+### guarantee that output is really UTF-8
+  string <- enc2utf8(string)
+### ____________________________________________________________________________
 ### return
   string
 }
