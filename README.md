@@ -25,11 +25,11 @@ package](http://www.malte-grosser.com/post/introducing-the-snakecase-package/).
 
 ``` r
 # install snakecase from cran
-install.packages("snakecase")
+# install.packages("snakecase")
 
 # or the (stable) development version hosted on github
 # install.packages("devtools")
-# devtools::install_github("Tazinho/snakecase")
+devtools::install_github("Tazinho/snakecase")
 
 # load snakecase
 library(snakecase)
@@ -262,6 +262,19 @@ to_mixed_case(string, sep_out = " ")
 to_screaming_snake_case(string, sep_out = "=")
 ## [1] "LOWER=CAMEL=CASE"              "ALL=CAPS"                     
 ## [3] "I=DONT=KNOW=WHAT=THIS=CASE=IS"
+```
+
+When `length(sep_out) > 1`, its last element gets recycled and the
+output separators are incorporated per string according the order in
+`sep_in`. This might come in handy when i.e. formatting file names:
+
+``` r
+to_any_case(
+  string = c("YYYY_MM.DD_bla_bla_bla",
+             "2019_01-09_bla_bla_bla"),
+  sep_out = c("", "", "-", "_"),
+  postfix = ".txt")
+## [1] "yyyymmdd-bla_bla_bla.txt" "20190109-bla_bla_bla.txt"
 ```
 
 #### Cosmetics
