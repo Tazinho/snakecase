@@ -223,6 +223,9 @@ There are five “special” cases available:
     versa. Also `case = "flip"` will work. Doesn’t work with any of the
     other arguments except `unique_sep`, `empty_fill`, `prefix` and
     `postfix`.
+  - `"random"`: Each letter will be randomly turned into lower or upper
+    case. Doesn’t work with any of the other arguments except
+    `unique_sep`, `empty_fill`, `prefix` and `postfix`.
   - `"none"`: Neither parsing nor case conversion occur. This case might
     be helpful, when one wants to call the function for the quick usage
     of the other parameters. To suppress replacement of spaces to

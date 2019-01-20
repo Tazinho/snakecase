@@ -41,7 +41,7 @@
 #' @param numerals A character specifying the alignment of numerals (\code{"middle"}, \code{left}, \code{right} or \code{asis}). I.e. \code{numerals = "left"} ensures that no output separator is in front of a digit.
 #' 
 #' @param sep_out (short for separator output) String that will be used as separator. The defaults are \code{"_"} 
-#' and \code{""}, regarding the specified \code{case}.
+#' and \code{""}, regarding the specified \code{case}. When \code{length(sep_out) > 1}, the last element of \code{sep_out} gets recycled and separators are incorporated per string according to their order.
 #' 
 #' @param unique_sep A string. If not \code{NULL}, then duplicated names will get 
 #' a suffix integer
@@ -81,6 +81,7 @@
 #' to_mixed_case(strings)
 #' to_swap_case(strings)
 #' to_sentence_case(strings)
+#' to_random_case(stringr)
 #' 
 #' 
 #' @rdname caseconverter
@@ -147,7 +148,8 @@ to_upper_camel_case <- function(string,
                                 abbreviations = NULL,
                                 sep_in = "[^[:alnum:]]",
                                 parsing_option = 1,
-                                transliterations = NULL,                           numerals = "middle",                                  
+                                transliterations = NULL,                           
+                                numerals = "middle",                                  
                                 sep_out = NULL,
                                 unique_sep = NULL,
                                 empty_fill = NULL,
@@ -174,7 +176,8 @@ to_screaming_snake_case <- function(string,
                                     abbreviations = NULL,
                                     sep_in = "[^[:alnum:]]",
                                     parsing_option = 1,
-                                    transliterations = NULL,                           numerals = "middle",                                  
+                                    transliterations = NULL,                      
+                                    numerals = "middle",                                  
                                     sep_out = NULL,
                                     unique_sep = NULL,
                                     empty_fill = NULL,
@@ -201,7 +204,8 @@ to_parsed_case <- function(string,
                            abbreviations = NULL,
                            sep_in = "[^[:alnum:]]",
                            parsing_option = 1,
-                           transliterations = NULL,                           numerals = "middle",                                  
+                           transliterations = NULL,                     
+                           numerals = "middle",                                  
                            sep_out = NULL,
                            unique_sep = NULL,
                            empty_fill = NULL,
@@ -341,7 +345,8 @@ to_sentence_case <- function(string,
                          sep_in = "[^[:alnum:]]",
                          parsing_option = 1,
                          transliterations = NULL,       
-                         numerals = "middle",                                             sep_out = NULL,
+                         numerals = "middle",                     
+                         sep_out = NULL,
                          unique_sep = NULL,
                          empty_fill = NULL,
                          prefix = "",
@@ -350,6 +355,34 @@ to_sentence_case <- function(string,
               case = "sentence",
               sep_in = sep_in,
               transliterations = transliterations,  
+              numerals = numerals,
+              sep_out = sep_out,
+              prefix = prefix,
+              postfix = postfix,
+              unique_sep = unique_sep,
+              empty_fill = empty_fill,
+              parsing_option = parsing_option,
+              abbreviations = abbreviations)
+}
+
+#' @rdname caseconverter
+#' @export
+
+to_random_case <- function(string,
+                         abbreviations = NULL,
+                         sep_in = "[^[:alnum:]]",
+                         parsing_option = 1,
+                         transliterations = NULL,             
+                         numerals = "middle",                   
+                         sep_out = NULL,
+                         unique_sep = NULL,
+                         empty_fill = NULL,
+                         prefix = "",
+                         postfix = ""){
+  to_any_case(string = string,
+              case = "random",
+              sep_in = sep_in,
+              transliterations = transliterations,              
               numerals = numerals,
               sep_out = sep_out,
               prefix = prefix,

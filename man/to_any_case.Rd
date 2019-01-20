@@ -7,7 +7,7 @@
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
   "screaming_snake", "parsed", "mixed", "lower_upper", "upper_lower",
   "swap", "all_caps", "lower_camel", "upper_camel", "internal_parsing",
-  "none", "flip", "sentence"), abbreviations = NULL,
+  "none", "flip", "sentence", "random"), abbreviations = NULL,
   sep_in = "[^[:alnum:]]", parsing_option = 1,
   transliterations = NULL, numerals = c("middle", "left", "right",
   "asis", "tight"), sep_out = NULL, unique_sep = NULL,
@@ -38,6 +38,7 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
  or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will stay in upper case.}
  \item{\code{"swap"}: Upper case letters will be turned into lower case and vice versa. Also \code{case = "flip"} will work.
  Doesn't work with any of the other arguments except \code{unique_sep}, \code{empty_fill}, \code{prefix} and \code{postfix}.}
+ \item{\code{"random"}: Each letter will be randomly turned into lower or upper case. Doesn't work with any of the other arguments except \code{unique_sep}, \code{empty_fill}, \code{prefix} and \code{postfix}.}
  \item{\code{"none"}: Neither parsing nor case conversion occur. This case might be helpful, when
  one wants to call the function for the quick usage of the other parameters.
  To suppress replacement of spaces to underscores set \code{sep_in = NULL}.

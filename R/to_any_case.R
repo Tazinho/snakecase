@@ -26,6 +26,7 @@
 #'  or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will stay in upper case.}
 #'  \item{\code{"swap"}: Upper case letters will be turned into lower case and vice versa. Also \code{case = "flip"} will work.
 #'  Doesn't work with any of the other arguments except \code{unique_sep}, \code{empty_fill}, \code{prefix} and \code{postfix}.}
+#'  \item{\code{"random"}: Each letter will be randomly turned into lower or upper case. Doesn't work with any of the other arguments except \code{unique_sep}, \code{empty_fill}, \code{prefix} and \code{postfix}.}
 #'  \item{\code{"none"}: Neither parsing nor case conversion occur. This case might be helpful, when
 #'  one wants to call the function for the quick usage of the other parameters.
 #'  To suppress replacement of spaces to underscores set \code{sep_in = NULL}.
@@ -161,7 +162,7 @@ to_any_case <- function(string,
                         case = c("snake", "small_camel", "big_camel", "screaming_snake", 
                                  "parsed", "mixed", "lower_upper", "upper_lower", "swap",
                                  "all_caps", "lower_camel", "upper_camel", "internal_parsing", 
-                                 "none", "flip", "sentence"),
+                                 "none", "flip", "sentence", "random"),
                         abbreviations = NULL,
                         sep_in = "[^[:alnum:]]",
                         parsing_option = 1,
@@ -199,17 +200,36 @@ to_any_case <- function(string,
                    replacement = "\\L\\1\\U\\2",
                    string)}
 ### ____________________________________________________________________________
+### Handle random case
+  if (case == "random") {
+    random_case <- function(string) {
+      upper_or_lower <- function(string) {
+        if(sample(c(TRUE, FALSE), 1)) {return(toupper(string))}
+        tolower(string)
+      }
+      
+      unlist(
+        lapply(
+          strsplit(string, split = character(0)),
+          function(x) paste0(unlist(lapply(x, upper_or_lower)), collapse = "")
+        )
+      )
+    }
+    
+    string <- random_case(string)
+  }
+### ____________________________________________________________________________
 ### Match abbreviations
   # mark abbreviation by placing an underscore behind them (in front of the parsing)
   # useful if parsingoption 1 is needed, but some abbreviations need parsing_option 2
-  if (case != "swap") {
+  if (!case %in% c("swap", "random")) {
     string <- abbreviation_internal(string, abbreviations)
   }
 ### ____________________________________________________________________________
 ### Preprocessing:
 ## Turn mateches of `sep_in` into "_" and
 ## surround matechs of the parsing by "_" (parsed_case)
-  if (case != "swap") {
+  if (!case %in% c("swap", "random")) {
     string <- preprocess_internal(string, sep_in)
     
     if (case != "none") {

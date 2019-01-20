@@ -916,3 +916,10 @@ test_that("sep_out", {
   expect_equal(to_any_case(c("2018_01_01_bla_bla"), sep_out = c("-", "-", "_", "_", "_", "_", "_")),  "2018-01-01_bla_bla")
   expect_equal(to_any_case(character(0), sep_out = c("_", "_")), character(0))
 })
+
+test_that("random case", {
+  expect_equal(
+    {set.seed(123); to_any_case("almost RANDOM", case = "random")},
+    "AlMosT raNdOm"
+    )
+})
