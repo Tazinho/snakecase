@@ -81,7 +81,7 @@
 #' to_mixed_case(strings)
 #' to_swap_case(strings)
 #' to_sentence_case(strings)
-#' to_random_case(stringr)
+#' to_random_case(strings)
 #' 
 #' 
 #' @rdname caseconverter
