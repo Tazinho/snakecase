@@ -151,7 +151,7 @@ If you can provide transliterations for your (or any other) country, please drop
 * UPPERlower: `"upper_lower"`
 * Sentence case: `"sentence"`
 
-There are five "special" cases available:
+There are six "special" cases available:
 
 * `"parsed"`: This case is underlying all other cases. Every substring a string consists of becomes surrounded by an underscore (depending on the parsing_option). Underscores at the start and end are trimmed. No lower or upper case pattern from the input string are changed.
 * `"mixed"`: Almost the same as `case = "parsed"`. Every letter which is not at the start or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will stay in upper case.

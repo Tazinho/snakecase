@@ -208,7 +208,7 @@ issue](https://github.com/Tazinho/snakecase/issues/107).
   - UPPERlower: `"upper_lower"`
   - Sentence case: `"sentence"`
 
-There are five “special” cases available:
+There are six “special” cases available:
 
   - `"parsed"`: This case is underlying all other cases. Every substring
     a string consists of becomes surrounded by an underscore (depending
