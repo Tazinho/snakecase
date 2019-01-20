@@ -402,7 +402,7 @@ that many powerful features are provided “by default”:
 
   - Sometimes further pre- or postprocessing might be needed. For
     example you can easily write your own parsing via a sequence of
-    calls like `str_replace_all(string, some_pattern, "_\\1_")`.
+    calls like `str_replace_all(string, (some_pattern), "_\\1_")`.
 
   - You can decide yourself: Open an issue
     [here](https://github.com/Tazinho/snakecase/issues) or build sth.
