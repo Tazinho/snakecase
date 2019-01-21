@@ -1,6 +1,6 @@
 # Contributing to snakecase
 
-This outlines how to propose a change to DBI.
+This outlines how to propose a change to snakecase.
 
 
 ### Fixing typos
