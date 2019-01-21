@@ -500,3 +500,7 @@ knitr::kable(tibble::tibble(nr = seq_along(cases),
 * [`clean_names()` function](https://github.com/sfirke/janitor/blob/master/R/clean_names.R) from the [janitor package](https://github.com/sfirke/janitor)
 * [`to_camel()` function](https://github.com/Rapporter/rapportools/blob/master/R/utils.R) from the [rapporttools package](https://github.com/Rapporter/rapportools)
 * [lettercase-pkg](https://cran.r-project.org/web/packages/lettercase/index.html)
+
+---
+
+Please note that the _snakecase_ package is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.

@@ -695,3 +695,9 @@ following testcases, also these two equations are tested.-->
     from the [rapporttools
     package](https://github.com/Rapporter/rapportools)
   - [lettercase-pkg](https://cran.r-project.org/web/packages/lettercase/index.html)
+
+-----
+
+Please note that the *snakecase* package is released with a [Contributor
+Code of Conduct](.github/CODE_OF_CONDUCT.md). By contributing to this
+project, you agree to abide by its terms.
