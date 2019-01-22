@@ -37,8 +37,8 @@ library(snakecase)
 
 ### Basic usage
 
-The workhorse function of this package, `to_any_case()`, converts by
-default into snake case:
+The workhorse function of this package is `to_any_case()`. It converts
+strings (by default) into snake case:
 
 ``` r
 string <- c("lowerCamelCase", "ALL_CAPS", "I-DontKNOWWhat_thisCASE_is")
@@ -48,9 +48,10 @@ to_any_case(string)
 ## [3] "i_dont_know_what_this_case_is"
 ```
 
-One can choose between many other cases like `"lower_camel"`,
-`"upper_camel"`, `"all_caps"`, `"lower_upper"`, `"upper_lower"`,
-`"sentence"` and `"mixed"`, which are based on `"parsed"` case:
+However, one can choose between many other cases like
+i.e. `"lower_camel"`, `"upper_camel"`, `"all_caps"`, `"lower_upper"`,
+`"upper_lower"`, `"sentence"` and `"mixed"`, which are based on
+`"parsed"` case:
 
 ``` r
 to_any_case(string, case = "parsed")
@@ -58,7 +59,7 @@ to_any_case(string, case = "parsed")
 ## [3] "I_Dont_KNOW_What_this_CASE_is"
 ```
 
-Also shortcuts (wrappers around `to_any_case()`) are available:
+Also shortcuts (wrappers around `to_any_case()`) are provided:
 
 ``` r
 to_upper_camel_case(string)
@@ -67,9 +68,9 @@ to_upper_camel_case(string)
 ```
 
 Be aware that automatic case conversion depends on the input string and
-it is recommended to verify the results. So you might want to pipe these
-into `dput()` and hardcode name changes instead of blindly trusting the
-output:
+it is therefore recommended to verify the results. You might want to
+pipe these into `dput()` and hardcode name changes instead of blindly
+trusting the output:
 
 ``` r
 library(magrittr)
@@ -80,15 +81,15 @@ to_snake_case(c("SomeBAdInput", "someGoodInput")) %>% dput()
 
 ### Big picture (a parameterized workflow)
 
-The `to_any_case()` function is the workhorse of the package and
-basically enables you to convert any string into any case via a well
-thought process of **parsing** (`abbreviations`, `sep_in`,
-`parsing_option`), **conversion** (`transliterations`, `case`) and
-**postprocessing** (`numerals`, `sep_out`). The specific arguments allow
-you to customize the pipeline.
+The `to_any_case()` function basically enables you to convert any string
+into any case. This is achieved via a well thought process of
+**parsing** (`abbreviations`, `sep_in`, `parsing_option`),
+**conversion** (`transliterations`, `case`) and **postprocessing**
+(`numerals`, `sep_out`). The specific arguments allow you to customize
+the pipeline.
 
-On this example, you can see the pipeline including all implementation
-details.
+On this example, you can see the whole pipeline including some
+implementation details.
 
 <img src="./man/figures/Workflow02.PNG" width="100%" />
 

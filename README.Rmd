@@ -29,7 +29,7 @@ library(snakecase)
 
 ### Basic usage
 
-The workhorse function of this package, `to_any_case()`, converts by default into snake case:
+The workhorse function of this package is `to_any_case()`. It converts strings (by default) into snake case:
 
 ```{r, collapse = TRUE}
 string <- c("lowerCamelCase", "ALL_CAPS", "I-DontKNOWWhat_thisCASE_is")
@@ -37,19 +37,19 @@ string <- c("lowerCamelCase", "ALL_CAPS", "I-DontKNOWWhat_thisCASE_is")
 to_any_case(string)
 ```
 
-One can choose between many other cases like `"lower_camel"`, `"upper_camel"`, `"all_caps"`, `"lower_upper"`, `"upper_lower"`, `"sentence"` and `"mixed"`, which are based on `"parsed"` case:
+However, one can choose between many other cases like i.e. `"lower_camel"`, `"upper_camel"`, `"all_caps"`, `"lower_upper"`, `"upper_lower"`, `"sentence"` and `"mixed"`, which are based on `"parsed"` case:
 
 ```{r, collapse = TRUE}
 to_any_case(string, case = "parsed")
 ```
 
-Also shortcuts (wrappers around `to_any_case()`) are available:
+Also shortcuts (wrappers around `to_any_case()`) are provided:
 
 ```{r, collapse = TRUE}
 to_upper_camel_case(string)
 ```
 
-Be aware that automatic case conversion depends on the input string and it is recommended to verify the results. So you might want to pipe these into `dput()` and hardcode name changes instead of blindly trusting the output:
+Be aware that automatic case conversion depends on the input string and it is therefore recommended to verify the results. You might want to pipe these into `dput()` and hardcode name changes instead of blindly trusting the output:
 
 ```{r, collapse = TRUE}
 library(magrittr)
@@ -59,9 +59,9 @@ to_snake_case(c("SomeBAdInput", "someGoodInput")) %>% dput()
 
 ### Big picture (a parameterized workflow)
 
-The `to_any_case()` function is the workhorse of the package and basically enables you to convert any string into any case via a well thought process of __parsing__ (`abbreviations`, `sep_in`, `parsing_option`), __conversion__ (`transliterations`, `case`) and __postprocessing__ (`numerals`, `sep_out`). The specific arguments allow you to customize the pipeline.
+The `to_any_case()` function basically enables you to convert any string into any case. This is achieved via a well thought process of __parsing__ (`abbreviations`, `sep_in`, `parsing_option`), __conversion__ (`transliterations`, `case`) and __postprocessing__ (`numerals`, `sep_out`). The specific arguments allow you to customize the pipeline.
 
-On this example, you can see the pipeline including all implementation details.
+On this example, you can see the whole pipeline including some implementation details.
 
 ```{r echo=FALSE, out.width='100%'}
 # knitr::include_graphics('./man/figures/Workflow01.PNG')
