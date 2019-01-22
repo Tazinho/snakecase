@@ -90,7 +90,7 @@ you to customize the pipeline.
 On this example, you can see the pipeline including all implementation
 details.
 
-<img src="./man/figures/Workflow01.PNG" width="100%" />
+<img src="./man/figures/Workflow02.PNG" width="100%" />
 
 Some further **cosmetics** (`unique_sep`, `empty_fill`, `prefix`,
 `postfix`) can be applied to the output, see arguments.
