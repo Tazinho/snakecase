@@ -41,7 +41,7 @@ The workhorse function of this package, `to_any_case()`, converts by
 default into snake case:
 
 ``` r
-string <- c("lowerCamelCase", "ALL_CAPS", "IDontKNOWWhat_thisCASE_is")
+string <- c("lowerCamelCase", "ALL_CAPS", "I-DontKNOWWhat_thisCASE_is")
 
 to_any_case(string)
 ## [1] "lower_camel_case"              "all_caps"                     
