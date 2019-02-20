@@ -13,7 +13,7 @@
 #'  \item{lowerUPPER: \code{"lower_upper"}}
 #'  \item{UPPERlower: \code{"upper_lower"}}
 #'  \item{Sentence case: \code{"sentence"}}
-#'  \item{Title Case: \code "title"} - This one is basically the same as "parsed" case below, but in addition it is wrapped into \code{tools::toTitleCase}.
+#'  \item{Title Case: \code{"title"} - This one is basically the same as "parsed" case below, but in addition it is wrapped into \code{tools::toTitleCase}.}
 #'  }
 #'
 #'  There are five "special" cases available:
