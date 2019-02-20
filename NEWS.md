@@ -5,6 +5,7 @@
 * **UTF8 Conversion**: Input is now always converted to UTF-8 and returned as UTF8. Also the `transliterations` argument is now aware of non-UTF8 encoded input.
 * **Improved vecorization of `sep_out`**: `sep_out` now behaves btter for vector input (length > 1). Instead of returning different strings, the return is now one string, which uses separators according to the supplied order. When `length(sep_out) > 1`, the last element of `sep_out` gets recycled. 
 * **random_case**: added `to_random_case()`, which will randomly convert letters into upper or lower case.
+* **title_case**: added `to_title_case()`, which is basically `to_parsed_case()` with `sep_out =  " "` wrapped within `tools::toTitleCase()` and should be especially useful for proper labels within graphics or business reports.
 
 # snakecase 0.9.2
 

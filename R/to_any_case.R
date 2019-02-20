@@ -13,6 +13,7 @@
 #'  \item{lowerUPPER: \code{"lower_upper"}}
 #'  \item{UPPERlower: \code{"upper_lower"}}
 #'  \item{Sentence case: \code{"sentence"}}
+#'  \item{Title Case: \code "title"} - This one is basically the same as "parsed" case below, but in addition it is wrapped into \code{tools::toTitleCase}.
 #'  }
 #'
 #'  There are five "special" cases available:
@@ -162,7 +163,7 @@ to_any_case <- function(string,
                         case = c("snake", "small_camel", "big_camel", "screaming_snake", 
                                  "parsed", "mixed", "lower_upper", "upper_lower", "swap",
                                  "all_caps", "lower_camel", "upper_camel", "internal_parsing", 
-                                 "none", "flip", "sentence", "random"),
+                                 "none", "flip", "sentence", "random", "title"),
                         abbreviations = NULL,
                         sep_in = "[^[:alnum:]]",
                         parsing_option = 1,
@@ -192,6 +193,10 @@ to_any_case <- function(string,
   case[case == "lower_camel"] <- "small_camel"
   case[case == "upper_camel"] <- "big_camel"
   case[case == "flip"] <- "swap"
+### ____________________________________________________________________________
+### Prepare title case
+  title <- if (case == "title") TRUE else FALSE
+  case[case == "title"] <- "parsed"
 ### ____________________________________________________________________________
 ### Handle swap case
   if (case == "swap") {
@@ -341,11 +346,20 @@ to_any_case <- function(string,
         USE.NAMES = TRUE)
     }
 ### collapsing------------------------------------------------------------------
-    if (case %in% c("none", "mixed", "snake", "screaming_snake", "parsed",
-                   "small_camel", "big_camel", "lower_upper", "upper_lower")) {
+    if (case %in% c("none", "mixed", "snake", "screaming_snake", 
+                   "small_camel", "big_camel", "lower_upper", "upper_lower") | 
+        (case == "parsed" & !title)) {
       string <- vapply(string, 
                        function(x) stringr::str_c(x, collapse = "_"), "",
                        USE.NAMES = FALSE)
+    }
+    
+    if (case == "parsed" & title){
+      string <- vapply(string, 
+                       function(x) stringr::str_c(x, collapse = " "), "",
+                       USE.NAMES = FALSE)
+      string <- tools::toTitleCase(string)
+      string <- stringr::str_replace_all(string, " ", "_")
     }
     
     if (case == "sentence") {
@@ -404,7 +418,7 @@ to_any_case <- function(string,
       string <- stringr::str_replace_all(string, "(?<!\\d)_|_(?!\\d)", "")
     }
     
-    if (is.null(sep_out) & case == "sentence") {
+    if (is.null(sep_out) & (case == "sentence" | (case == "parsed" & title))) {
       string <- stringr::str_replace_all(string, "_", " ")
     }
 

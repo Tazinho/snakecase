@@ -7,7 +7,7 @@
 to_any_case(string, case = c("snake", "small_camel", "big_camel",
   "screaming_snake", "parsed", "mixed", "lower_upper", "upper_lower",
   "swap", "all_caps", "lower_camel", "upper_camel", "internal_parsing",
-  "none", "flip", "sentence", "random"), abbreviations = NULL,
+  "none", "flip", "sentence", "random", "title"), abbreviations = NULL,
   sep_in = "[^[:alnum:]]", parsing_option = 1,
   transliterations = NULL, numerals = c("middle", "left", "right",
   "asis", "tight"), sep_out = NULL, unique_sep = NULL,
@@ -25,6 +25,7 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
  \item{lowerUPPER: \code{"lower_upper"}}
  \item{UPPERlower: \code{"upper_lower"}}
  \item{Sentence case: \code{"sentence"}}
+ \item{Title Case: \code "title"} - This one is basically the same as "parsed" case below, but in addition it is wrapped into \code{tools::toTitleCase}.
  }
 
  There are five "special" cases available:

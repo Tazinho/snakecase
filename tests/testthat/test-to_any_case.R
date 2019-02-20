@@ -923,3 +923,10 @@ test_that("random case", {
     "AlMosT raNdOm"
     )
 })
+
+test_that("title case", {
+  expect_equal(
+    to_any_case(c("on_andOn", "AndON", " and on", "and so on", "seems like it works", "also abbreviations ETC"), case = "title", abbreviations = "ETC"),
+    c("On and on", "And on", "And on", "And so on", "Seems Like it Works", "also Abbreviations ETC") 
+  )
+})

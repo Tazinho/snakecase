@@ -13,6 +13,7 @@
 \alias{to_swap_case}
 \alias{to_sentence_case}
 \alias{to_random_case}
+\alias{to_title_case}
 \title{Specific case converter shortcuts}
 \usage{
 to_snake_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
@@ -66,6 +67,11 @@ to_sentence_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
   prefix = "", postfix = "")
 
 to_random_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
+  parsing_option = 1, transliterations = NULL, numerals = "middle",
+  sep_out = NULL, unique_sep = NULL, empty_fill = NULL,
+  prefix = "", postfix = "")
+
+to_title_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
   parsing_option = 1, transliterations = NULL, numerals = "middle",
   sep_out = NULL, unique_sep = NULL, empty_fill = NULL,
   prefix = "", postfix = "")
@@ -149,6 +155,7 @@ to_mixed_case(strings)
 to_swap_case(strings)
 to_sentence_case(strings)
 to_random_case(strings)
+to_title_case(strings)
 
 
 }
