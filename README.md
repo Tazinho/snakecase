@@ -208,6 +208,9 @@ issue](https://github.com/Tazinho/snakecase/issues/107).
   - lowerUPPER: `"lower_upper"`
   - UPPERlower: `"upper_lower"`
   - Sentence case: `"sentence"`
+  - Title Case: `"title` - This one is basically the same as “parsed”
+    case (see below) with `sep_out = " "`, but in addition it is wrapped
+    into `tools::toTitleCase()`.
 
 There are six “special” cases available:
 
