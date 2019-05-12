@@ -272,6 +272,8 @@ test_that("sentence_case", {
 })
 
 test_that("janitor-pkg-tests",{
+  skip_if_not( l10n_info()$`UTF-8`)
+  
   clean_names3 <- function(old_names, case = "snake"){
     new_names <- gsub("'", "", old_names) # remove quotation marks
     new_names <- gsub("\"", "", new_names) # remove quotation marks
@@ -400,6 +402,8 @@ test_that("random examples",
 
 test_that("transliterations", {
   
+  skip_if_not( l10n_info()$`UTF-8`)
+  
   expect_equal(to_any_case("Älterer Herr", transliterations = c("german", "Herr" = "Mann")), "aelterer_mann")
   
   expect_equal(
@@ -427,6 +431,9 @@ test_that("flip and swap", {
 })
 
 test_that("complex strings", {
+  
+  skip_if_not( l10n_info()$`UTF-8`)
+  
   strings2 <- c("this - Is_-: a Strange_string", "\u00C4ND THIS ANOTHER_One")
   
   expect_equal(to_any_case(strings2, case = "snake", sep_in = "-|\\:"),
