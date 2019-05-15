@@ -3,9 +3,10 @@
 * **numerals**: new alignment option `"tight"` which allows to suppress all underscores between numerals and letters.
 * **improved speed**: time of internal parsing could be reduced about a factor of ten, due to some `vapply()` replacements.
 * **UTF8 Conversion**: Input is now always converted to UTF-8 and returned as UTF8. Also the `transliterations` argument is now aware of non-UTF8 encoded input.
-* **Improved vecorization of `sep_out`**: `sep_out` now behaves btter for vector input (length > 1). Instead of returning different strings, the return is now one string, which uses separators according to the supplied order. When `length(sep_out) > 1`, the last element of `sep_out` gets recycled. 
+* **Improved vecorization of `sep_out`**: `sep_out` now behaves better for vector input (length > 1). Instead of returning different strings, the return is now one string, which uses separators according to the supplied order. When `length(sep_out) > 1`, the last element of `sep_out` gets recycled. 
 * **random_case**: added `to_random_case()`, which will randomly convert letters into upper or lower case.
 * **title_case**: added `to_title_case()`, which is basically `to_parsed_case()` with `sep_out =  " "` wrapped within `tools::toTitleCase()` and should be especially useful for proper labels within graphics or business reports.
+* increase R Version dependency from 3.1 up to 3.2 regarding the usage of `tools::toTitleCase()`.
 * skip `to_any_case()` tests (janitor-pkg-tests, transliterations and complex strings) when platform charset is not UTF-8.
 
 # snakecase 0.9.2

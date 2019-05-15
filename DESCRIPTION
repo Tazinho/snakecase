@@ -1,13 +1,13 @@
 Package: snakecase
-Version: 0.9.2.9002
-Date: 2018-10-03
+Version: 0.9.3
+Date: 2019-05-15
 Title: Convert Strings into any Case
 Description: A consistent, flexible and easy to use tool to parse and convert strings into cases like snake or camel among others.
 Authors@R: c(
     person("Malte", "Grosser", , "malte.grosser@gmail.com", role = c("aut", "cre")))
 Maintainer: Malte Grosser <malte.grosser@gmail.com>
 Depends:
-    R (>= 3.1)
+    R (>= 3.2)
 Imports:
     stringr,
     stringi
