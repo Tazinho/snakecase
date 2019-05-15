@@ -175,10 +175,6 @@ test_that("numerals", {
                            numerals = "right"),
                "123bla_123_123bla_434bla")
   
-  expect_equal(to_snake_case("species42value 23month",
-                             parsing_option = 4),
-               "species42value_23month")
-  
   expect_equal(to_any_case("species42value 23month",
                            numerals = "asis"),
                "species42value_23month")
@@ -936,4 +932,16 @@ test_that("title case", {
     to_any_case(c("on_andOn", "AndON", " and on", "and so on", "seems like it works", "also abbreviations ETC"), case = "title", abbreviations = "ETC"),
     c("On and on", "And on", "And on", "And so on", "Seems Like it Works", "also Abbreviations ETC") 
   )
+})
+
+test_that("case none", {
+  expect_equal(
+    to_any_case(c("blabla", "blablub", "blaBlub"),case = "none", transliterations = c(blab = "blub")),
+    c("blubla", "blublub", "blaBlub") 
+  )
+})
+
+test_that("special_input", {
+  expect_identical(to_any_case(NA_character_), NA_character_)
+  expect_equal(to_any_case(character(0)), character(0))
 })

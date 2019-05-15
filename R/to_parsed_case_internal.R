@@ -19,8 +19,8 @@
 #'
 to_parsed_case_internal <- function(string, parsing_option = 1L, numerals = numerals){
   ### input checking
-  if (parsing_option >= 5L) {
-    stop("parsing_option must be 1,2,3,4 or <= 0 for no parsing.")
+  if (parsing_option >= 4L) {
+    stop("parsing_option must be 1,2,3 or <= 0 for no parsing.")
   }
   ### preprocessing:
   # catch everything that should be handled like underscores
@@ -48,13 +48,13 @@ to_parsed_case_internal <- function(string, parsing_option = 1L, numerals = nume
     string <- parse3_pat_cap_lonely(string)
     string <- parse4_separate_non_characters(string)}
   # case:6 email1_2 -> email 1_2
-  if (parsing_option == 4) {
-    string <- parse5_mark_digits(string)
-    string <- parse1_pat_cap_smalls(string)
-    string <- parse2_pat_caps2(string)
-    string <- parse3_pat_cap_lonely(string)
-    string <- parse4_separate_non_characters(string)
-  }
+  # if (parsing_option == 4) {
+  #   string <- parse5_mark_digits(string)
+  #   string <- parse1_pat_cap_smalls(string)
+  #   string <- parse2_pat_caps2(string)
+  #   string <- parse3_pat_cap_lonely(string)
+  #   string <- parse4_separate_non_characters(string)
+  # }
   
   ### customize the output
   # remove more than one "_" and starting/ending "_"

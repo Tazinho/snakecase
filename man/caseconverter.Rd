@@ -98,7 +98,6 @@ the strings into substrings and specify the word boundaries.}
  \item{2: \code{RRRStudio -> RRRS_tudio}}
  \item{3: This \code{parsing_option} will suppress the conversion after non-alphanumeric
  values. See examples.}
- \item{4: digits directly behind/in front non-digits, will stay as is.}
  \item{any other integer <= 0: no parsing"}
  }}
 
