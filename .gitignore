@@ -5,4 +5,5 @@
 packrat/lib*/
 inst/doc
 packrat/src/
+packrat
 /revdep/.cache.rds
