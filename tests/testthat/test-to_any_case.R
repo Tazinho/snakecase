@@ -597,9 +597,6 @@ test_that("complex strings", {
   expect_equal(to_any_case("some11 21 31numbers_11 21 32_With11 11_diffs11 22 d", case = "lower_upper"),
                "some11_21_31NUMBERS11_21_32with11_11DIFFS11_22d")
   
-  expect_equal(to_any_case("email22Version_33 test", parsing_option = 4),
-               "email22version_33_test")
-  
 })
 
 
