@@ -44,7 +44,11 @@ artifacts:
   - path: '\*_*.zip'
     name: Bits
 
-matrix:
-  - R_VERSION: release
-    RTOOLS_VERSION: 33
-    CRAN: http://cran.rstudio.com
+environment:
+  global:
+  WARNINGS_ARE_ERRORS: 1
+
+  matrix:
+    - R_VERSION: release
+      RTOOLS_VERSION: 33
+      CRAN: http://cran.rstudio.com
