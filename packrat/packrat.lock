@@ -112,6 +112,12 @@ Source: CRAN
 Version: 0.6.15
 Hash: 1f202ebd812ac7192be3739245746a13
 
+Package: dplyr
+Source: CRAN
+Version: 0.7.4
+Hash: 53ab2b8ebc0b1aa4a75aa2f0909fe341
+Requires: BH, R6, Rcpp, assertthat, glue, magrittr, pkgconfig, plogr, rlang, bindrcpp, tibble
+
 Package: evaluate
 Source: CRAN
 Version: 0.11

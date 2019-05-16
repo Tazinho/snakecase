@@ -471,15 +471,6 @@ to_any_case("look_AfterThe-hyphen andThe.dot",
 ## [1] "LookAfterTheHyphenAndTheDot"
 ```
 
-* If you want to leave digits as is (not surrounging with a separator), use parsing option 4
-
-
-```r
-to_any_case("species42value 23month", 
-            case = "snake", parsing_option = 4)
-## [1] "species42value_23month"
-```
-
 If you are interested in a specific parsing option, which is not implemented, pls open an issue.
 
 * `transliterations`: To transliterate exotic characters you can use any option from `stringi::stri_trans_list()` (especially "Latin-ASCII" is useful) or provided lookups introduced (country specific) by this package. Currently only "german" is supported. When more than one is supplied, the transliterations are performed iteratively
