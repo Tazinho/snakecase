@@ -1,3 +1,7 @@
+# snakecase 0.10.0 (16.05.19)
+
+* CRAN release
+
 # snakecase 0.9.2.9002
 
 * **numerals**: new alignment option `"tight"` which allows to suppress all underscores between numerals and letters.
