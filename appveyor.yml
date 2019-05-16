@@ -10,6 +10,9 @@ init:
 install:
   ps: Bootstrap
 
+cache:
+  - C:\RLibrary
+
 # Adapt as necessary starting from here
 
 build_script:
@@ -40,7 +43,3 @@ artifacts:
 
   - path: '\*_*.zip'
     name: Bits
-
-environment:
-  global:
-    WARNINGS_ARE_ERORRS: 1
