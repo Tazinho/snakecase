@@ -28,8 +28,8 @@ package](http://www.malte-grosser.com/post/introducing-the-snakecase-package/).
 # install.packages("snakecase")
 
 # or the (stable) development version hosted on github
-# install.packages("devtools")
-devtools::install_github("Tazinho/snakecase")
+# install.packages("remotes")
+remotes::install_github("Tazinho/snakecase")
 
 # load snakecase
 library(snakecase)

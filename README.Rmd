@@ -20,8 +20,8 @@ For a short intro regarding typical use cases, see the blog article [Introducing
 # install.packages("snakecase")
 
 # or the (stable) development version hosted on github
-# install.packages("devtools")
-devtools::install_github("Tazinho/snakecase")
+# install.packages("remotes")
+remotes::install_github("Tazinho/snakecase")
 
 # load snakecase
 library(snakecase)
