@@ -919,7 +919,7 @@ test_that("sep_out", {
 
 test_that("random case", {
   expect_equal(
-    {set.seed(123); to_any_case("almost RANDOM", case = "random")},
+    {suppressWarnings(RNGversion("3.1")); set.seed(123); to_any_case("almost RANDOM", case = "random")},
     "AlMosT raNdOm"
     )
 })
