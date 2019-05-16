@@ -12,3 +12,7 @@
 ^docs$
 ^revdep$
 ^_pkgdown\.yml$
+^\.github$
+^\.github\/$
+^.github$
+.github
