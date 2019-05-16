@@ -7,7 +7,7 @@
 * **numerals**: new alignment option `"tight"` which allows to suppress all underscores between numerals and letters.
 * **improved speed**: time of internal parsing could be reduced about a factor of ten, due to some `vapply()` replacements.
 * **UTF8 Conversion**: Input is now always converted to UTF-8 and returned as UTF8. Also the `transliterations` argument is now aware of non-UTF8 encoded input.
-* **Improved vecorization of `sep_out`**: `sep_out` now behaves better for vector input (length > 1). Instead of returning different strings, the return is now one string, which uses separators according to the supplied order. When `length(sep_out) > 1`, the last element of `sep_out` gets recycled. 
+* **Improved vecorisation of `sep_out`**: `sep_out` now behaves better for vector input (length > 1). Instead of returning different strings, the return is now one string, which uses separators according to the supplied order. When `length(sep_out) > 1`, the last element of `sep_out` gets recycled. 
 * **random_case**: added `to_random_case()`, which will randomly convert letters into upper or lower case.
 * **title_case**: added `to_title_case()`, which is basically `to_parsed_case()` with `sep_out =  " "` wrapped within `tools::toTitleCase()` and should be especially useful for proper labels within graphics or business reports.
 * increase R Version dependency from 3.1 up to 3.2 regarding the usage of `tools::toTitleCase()`.
@@ -17,7 +17,7 @@
 
 * **cases**: added `to_sentence_case()` (same as snake, but first letter is uppercase and default sep_out is space).
 * **numerals**: added `numerals` argument to all caseconverters including `to_any_case()` to format the alignment of digits (`middle`, `left`,`right`, `asis`). Therefore `parsing_option` nr 4 might be removed in later releases, as it is the same as `parsing_option = 1` and `numerals = "asis"`.
-* **transliterations**: When named character elements are supplied as part of `transliterations`, anyting that mateches the name is replaced by the corresponding value.
+* **transliterations**: When named character elements are supplied as part of `transliterations`, anything that mathches the name is replaced by the corresponding value.
 * attributes are now preserved (not only names as before)
 
 # snakecase 0.9.1
@@ -181,7 +181,7 @@ Implemented two further parsing options:
 
 # snakecase 0.4.0.9012
 
-bug fix in devversion: protect works now for beginning and end of substrings and not anymore only for complete substrings.
+bug fix in dev version: protect works now for beginning and end of substrings and not anymore only for complete substrings.
 
 # snakecase 0.4.0.9011
 
@@ -321,9 +321,9 @@ the old name before, since the package was in early dev-stage anyway).
 * introduced tests for more hard coded examples and the logic behind it (still more
 hardcoded examples and a third part of the logic have to be tested)
 * internal logic has been simplified and modularised a lot, which makes it easier
-to maintain and introduce more highlevel features in the future
-* added integrated tests via appveyor on windows
-* added badges for cran status and codecoverage to readme
+to maintain and introduce more high-level features in the future
+* added integrated tests via AppVeyor on windows
+* added badges for cran status and code coverage to readme
 
 # snakecase 0.1.0
 
