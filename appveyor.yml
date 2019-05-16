@@ -46,5 +46,5 @@ artifacts:
 
   matrix:
   - R_VERSION: release
-    RTOOLS_VERSION: 33
+    RTOOLS_VERSION: 34
     CRAN: http://cran.rstudio.com
