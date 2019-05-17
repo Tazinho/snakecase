@@ -942,3 +942,30 @@ test_that("special_input", {
   expect_identical(to_any_case(NA_character_), NA_character_)
   expect_equal(to_any_case(character(0)), character(0))
 })
+
+test_that("special_input_2", {
+  # atomics
+  expect_equal(to_any_case(character()), character())
+  expect_error(to_any_case(logical()), "argument is not a character vector", fixed = TRUE)
+  expect_error(to_any_case(integer()), "argument is not a character vector", fixed = TRUE)
+  expect_error(to_any_case(double()), "argument is not a character vector", fixed = TRUE)
+  # data structures
+  expect_error(to_any_case(data.frame()), "argument is not a character vector", fixed = TRUE)
+  expect_error(to_any_case(list())      , "argument is not a character vector", fixed = TRUE)
+  expect_error(to_any_case(matrix())    , "argument is not a character vector", fixed = TRUE)
+  # special input or wrong type
+  expect_error(to_any_case(NA)    , "argument is not a character vector", fixed = TRUE)
+  expect_error(to_any_case(NA_integer_)    , "argument is not a character vector", fixed = TRUE)
+  expect_error(to_any_case(NA_real_)    , "argument is not a character vector", fixed = TRUE)
+  expect_equal(to_any_case(NA_character_)    , NA_character_)
+
+  expect_error(to_any_case(TRUE)    , "argument is not a character vector", fixed = TRUE)
+  expect_error(to_any_case(1.0)    , "argument is not a character vector", fixed = TRUE)
+  expect_error(to_any_case(1L)    , "argument is not a character vector", fixed = TRUE)
+  expect_equal(to_any_case(c("a", 1L))    , c("a", "1"))
+  
+  expect_error(to_any_case(NULL)    , "argument is not a character vector", fixed = TRUE)
+  expect_error(to_any_case(NaN)    , "argument is not a character vector", fixed = TRUE)
+  expect_error(to_any_case(Inf)    , "argument is not a character vector", fixed = TRUE)
+  })
+
