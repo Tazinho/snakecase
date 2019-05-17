@@ -25,7 +25,7 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
  \item{lowerUPPER: \code{"lower_upper"}}
  \item{UPPERlower: \code{"upper_lower"}}
  \item{Sentence case: \code{"sentence"}}
- \item{Title Case: \code{"title"} - This one is basically the same as "snake" case with \code{sep_out = " "}, but in addition it is wrapped into \code{tools::toTitleCase}, the first letter and any \code{abbreviations} are always turned into upper case.}
+ \item{Title Case: \code{"title"} - This one is basically the same as sentence case, but in addition it is wrapped into \code{tools::toTitleCase} and any \code{abbreviations} are always turned into upper case.}
 }
 
  There are five "special" cases available:
