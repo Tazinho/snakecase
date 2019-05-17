@@ -193,7 +193,7 @@ to_any_case <- function(string,
 ### ____________________________________________________________________________
 ### Prepare title case
   title <- if (case == "title") TRUE else FALSE
-  case[case == "title"] <- "snake"
+  case[case == "title"] <- "sentence"
 ### ____________________________________________________________________________
 ### Handle swap case
   if (case == "swap") {
@@ -343,15 +343,14 @@ to_any_case <- function(string,
         USE.NAMES = TRUE)
     }
 ### collapsing------------------------------------------------------------------
-    if (case %in% c("none", "parsed", "mixed", "screaming_snake", 
-                   "small_camel", "big_camel", "lower_upper", "upper_lower") | 
-        (case == "snake" & !title)) {
+    if (case %in% c("snake", "none", "parsed", "mixed", "screaming_snake", 
+                   "small_camel", "big_camel", "lower_upper", "upper_lower")) {
       string <- vapply(string, 
                        function(x) stringr::str_c(x, collapse = "_"), "",
                        USE.NAMES = FALSE)
     }
     
-    if (case == "snake" & title){
+    if (case == "sentence" & title){
       
       if (!is.null(abbreviations)) {
         string <- lapply(string, 
