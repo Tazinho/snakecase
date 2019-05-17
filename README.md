@@ -213,8 +213,8 @@ issue](https://github.com/Tazinho/snakecase/issues/107).
   - Sentence case: `"sentence"`
   - Title Case: `"title` - This one is basically the same as “snake”
     case with `sep_out = " "`, but in addition it is wrapped into
-    `tools::toTitleCase()` and abbreviations are always turned into
-    upper case.
+    `tools::toTitleCase()` and the first letter and abbreviations are
+    always turned into upper case.
 
 There are six “special” cases available:
 

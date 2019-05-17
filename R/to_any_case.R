@@ -13,7 +13,8 @@
 #'  \item{lowerUPPER: \code{"lower_upper"}}
 #'  \item{UPPERlower: \code{"upper_lower"}}
 #'  \item{Sentence case: \code{"sentence"}}
-#'  \item{Title Case: \code{"title"} - This one is basically the same as "snake" case with \code{sep_out = " "}, but in addition it is wrapped into \code{tools::toTitleCase} and abbreviations are always turned into upper case.}
+#'  \item{Title Case: \code{"title"} - This one is basically the same as "snake" case with \code{sep_out = " "}, but in addition it is wrapped into \code{tools::toTitleCase}, the first letter and any \code{abbreviations} are always turned into upper case.}
+#'}
 #'
 #'  There are five "special" cases available:
 #' \itemize{
@@ -38,9 +39,7 @@
 #'  It should only be used in very rare use cases and is mainly implemented to showcase the internal workings of \code{to_any_case()}}
 #'  }
 #' 
-#' @param abbreviations character with (uppercase) abbreviations. This marks
-#'  abbreviations with an underscore behind (in front of the parsing).
-#'  Useful if \code{parsing_option} 1 is needed, but some abbreviations within the string need \code{parsing_option} 2. Abbreviations are consistently turned into upper case for title-, mixed-, lower-camel- and upper-camel-case.
+#' @param abbreviations character (case insensitive). Matched abbreviations are surrounded with underscores so that they are recognized by the parsing. Useful when \code{parsing_option} 1 is needed, but some abbreviations within the string need \code{parsing_option} 2. Abbreviations are consistently turned into upper case for title-, mixed-, lower-camel- and upper-camel-case.
 #'  
 #'  Use this feature with care: One letter abbreviations and abbreviations next to each other may not be handled correctly, since those cases would introduce ambiguity in parsing.
 #'  
@@ -366,6 +365,11 @@ to_any_case <- function(string,
                        USE.NAMES = FALSE)
       string <- tools::toTitleCase(string)
       string <- stringr::str_replace_all(string, " ", "_")
+      
+      string <- vapply(string,
+                       function(x) stringr::str_c(stringr::str_to_upper(stringr::str_sub(x, 1, 1)),
+                                                  stringr::str_sub(x, 2)), "",
+                       USE.NAMES = FALSE)
     }
     
     if (case == "sentence") {
