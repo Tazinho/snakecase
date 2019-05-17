@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">snakecase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -151,7 +151,7 @@
 <li><p>lowerUPPER: <code>"lower_upper"</code></p></li>
 <li><p>UPPERlower: <code>"upper_lower"</code></p></li>
 <li><p>Sentence case: <code>"sentence"</code></p></li>
-<li><p>Title Case: <code>"title"</code> - This one is basically the same as "parsed" case below, but in addition it is wrapped into <code><a href='https://www.rdocumentation.org/packages/tools/topics/toTitleCase'>tools::toTitleCase</a></code>.</p></li>
+<li><p>Title Case: <code>"title"</code> - This one is basically the same as "snake" case with <code>sep_out = " "</code>, but in addition it is wrapped into <code><a href='https://www.rdocumentation.org/packages/tools/topics/toTitleCase'>tools::toTitleCase</a></code>, the first letter and any <code>abbreviations</code> are always turned into upper case.</p></li>
 </ul>
 
 <p>There are five "special" cases available:</p><ul>
@@ -178,10 +178,8 @@
     </tr>
     <tr>
       <th>abbreviations</th>
-      <td><p>character with (uppercase) abbreviations. This marks
-abbreviations with an underscore behind (in front of the parsing).
-Useful if <code>parsing_option</code> 1 is needed, but some abbreviations within the string need <code>parsing_option</code> 2.
-Use this feature with care: One letter abbreviations and abbreviations next to each other may not be handled correctly, since those cases would introduce ambiguity in parsing.</p></td>
+      <td><p>character (case insensitive). Matched abbreviations are surrounded with underscores so that they are recognized by the parsing. Useful when <code>parsing_option</code> 1 is needed, but some abbreviations within the string need <code>parsing_option</code> 2. Abbreviations are consistently turned into upper case for title-, mixed-, lower-camel- and upper-camel-case.</p>
+<p>Use this feature with care: One letter abbreviations and abbreviations next to each other may not be handled correctly, since those cases would introduce ambiguity in parsing.</p></td>
     </tr>
     <tr>
       <th>sep_in</th>

@@ -36,7 +36,7 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
   Underscores at the start and end are trimmed. No lower or 
  upper case pattern from the input string are changed.}
  \item{\code{"mixed"}: Almost the same as \code{case = "parsed"}. Every letter which is not at the start
- or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will stay in upper case.}
+ or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will be turned into upper case.}
  \item{\code{"swap"}: Upper case letters will be turned into lower case and vice versa. Also \code{case = "flip"} will work.
  Doesn't work with any of the other arguments except \code{unique_sep}, \code{empty_fill}, \code{prefix} and \code{postfix}.}
  \item{\code{"random"}: Each letter will be randomly turned into lower or upper case. Doesn't work with any of the other arguments except \code{unique_sep}, \code{empty_fill}, \code{prefix} and \code{postfix}.}

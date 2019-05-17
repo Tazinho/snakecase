@@ -63,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">snakecase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -194,10 +194,8 @@
     </tr>
     <tr>
       <th>abbreviations</th>
-      <td><p>character with (uppercase) abbreviations. This marks
-abbreviations with an underscore behind (in front of the parsing).
-Useful if <code>parsing_option</code> 1 is needed, but some abbreviations within the string need <code>parsing_option</code> 2.
-Use this feature with care: One letter abbreviations and abbreviations next to each other may not be handled correctly, since those cases would introduce ambiguity in parsing.</p></td>
+      <td><p>character (case insensitive). Matched abbreviations are surrounded with underscores so that they are recognized by the parsing. Useful when <code>parsing_option</code> 1 is needed, but some abbreviations within the string need <code>parsing_option</code> 2. Abbreviations are consistently turned into upper case for title-, mixed-, lower-camel- and upper-camel-case.</p>
+<p>Use this feature with care: One letter abbreviations and abbreviations next to each other may not be handled correctly, since those cases would introduce ambiguity in parsing.</p></td>
     </tr>
     <tr>
       <th>sep_in</th>
@@ -286,7 +284,7 @@ by the supplied string to this argument.</p></td>
 #&gt; [3] NA                        </div><div class='input'><span class='fu'>to_swap_case</span>(<span class='no'>strings</span>)</div><div class='output co'>#&gt; [1] "THIS iS A sTRANGE_STRING" "and this another_oNE"    
 #&gt; [3] NA                        </div><div class='input'><span class='fu'>to_sentence_case</span>(<span class='no'>strings</span>)</div><div class='output co'>#&gt; [1] "This is a strange string" "And this another one"    
 #&gt; [3] NA                        </div><div class='input'><span class='fu'>to_random_case</span>(<span class='no'>strings</span>)</div><div class='output co'>#&gt; [1] "THiS iS A sTRANgE_stRInG" "ANd thIS anOThER_OnE"    
-#&gt; [3] "NA"                      </div><div class='input'><span class='fu'>to_title_case</span>(<span class='no'>strings</span>)</div><div class='output co'>#&gt; [1] "this is a Strange String" "AND THIS ANOTHER One"    
+#&gt; [3] "NA"                      </div><div class='input'><span class='fu'>to_title_case</span>(<span class='no'>strings</span>)</div><div class='output co'>#&gt; [1] "This is a Strange String" "And this Another One"    
 #&gt; [3] NA                        </div><div class='input'>
 
 </div></pre>

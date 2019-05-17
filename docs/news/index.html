@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">snakecase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
       </span>
     </div>
 
@@ -115,6 +115,23 @@
       <small>Source: <a href='https://github.com/Tazinho/snakecase/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="snakecase-0109000" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0109000" class="anchor"></a>snakecase 0.10.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>changed title case to build up on snake_case instead of parsed_case.</li>
+<li>abbreviations are no case-insensitive and consistently always turned into upper case for title-, upper-camel-, lower-camel- and mixed-case.</li>
+</ul>
+</div>
+    <div id="snakecase-0100-160519" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-0100-160519" class="anchor"></a>snakecase 0.10.0 (16.05.19)<small> 2019-05-16 </small>
+</h1>
+<ul>
+<li>CRAN release</li>
+</ul>
+</div>
     <div id="snakecase-0929002" class="section level1">
 <h1 class="page-header">
 <a href="#snakecase-0929002" class="anchor"></a>snakecase 0.9.2.9002<small> Unreleased </small>
@@ -127,7 +144,7 @@
 <li>
 <strong>UTF8 Conversion</strong>: Input is now always converted to UTF-8 and returned as UTF8. Also the <code>transliterations</code> argument is now aware of non-UTF8 encoded input.</li>
 <li>
-<strong>Improved vecorization of <code>sep_out</code></strong>: <code>sep_out</code> now behaves better for vector input (length &gt; 1). Instead of returning different strings, the return is now one string, which uses separators according to the supplied order. When <code>length(sep_out) &gt; 1</code>, the last element of <code>sep_out</code> gets recycled.</li>
+<strong>Improved vecorisation of <code>sep_out</code></strong>: <code>sep_out</code> now behaves better for vector input (length &gt; 1). Instead of returning different strings, the return is now one string, which uses separators according to the supplied order. When <code>length(sep_out) &gt; 1</code>, the last element of <code>sep_out</code> gets recycled.</li>
 <li>
 <strong>random_case</strong>: added <code><a href="../reference/caseconverter.html">to_random_case()</a></code>, which will randomly convert letters into upper or lower case.</li>
 <li>
@@ -146,7 +163,7 @@
 <li>
 <strong>numerals</strong>: added <code>numerals</code> argument to all caseconverters including <code><a href="../reference/to_any_case.html">to_any_case()</a></code> to format the alignment of digits (<code>middle</code>, <code>left</code>,<code>right</code>, <code>asis</code>). Therefore <code>parsing_option</code> nr 4 might be removed in later releases, as it is the same as <code>parsing_option = 1</code> and <code>numerals = "asis"</code>.</li>
 <li>
-<strong>transliterations</strong>: When named character elements are supplied as part of <code>transliterations</code>, anyting that mateches the name is replaced by the corresponding value.</li>
+<strong>transliterations</strong>: When named character elements are supplied as part of <code>transliterations</code>, anything that mathches the name is replaced by the corresponding value.</li>
 <li>attributes are now preserved (not only names as before)</li>
 </ul>
 </div>
@@ -457,7 +474,7 @@
 <h1 class="page-header">
 <a href="#snakecase-0409012" class="anchor"></a>snakecase 0.4.0.9012<small> Unreleased </small>
 </h1>
-<p>bug fix in devversion: protect works now for beginning and end of substrings and not anymore only for complete substrings.</p>
+<p>bug fix in dev version: protect works now for beginning and end of substrings and not anymore only for complete substrings.</p>
 </div>
     <div id="snakecase-0409011" class="section level1">
 <h1 class="page-header">
@@ -679,9 +696,9 @@
 <li>renamed the single input parameters consistent to <code>string</code> (without deprecating the old name before, since the package was in early dev-stage anyway).</li>
 <li>started a to develop and implement consistent logic (which still has to be better documented in the readme)</li>
 <li>introduced tests for more hard coded examples and the logic behind it (still more hardcoded examples and a third part of the logic have to be tested)</li>
-<li>internal logic has been simplified and modularised a lot, which makes it easier to maintain and introduce more highlevel features in the future</li>
-<li>added integrated tests via appveyor on windows</li>
-<li>added badges for cran status and codecoverage to readme</li>
+<li>internal logic has been simplified and modularised a lot, which makes it easier to maintain and introduce more high-level features in the future</li>
+<li>added integrated tests via AppVeyor on windows</li>
+<li>added badges for cran status and code coverage to readme</li>
 </ul>
 </div>
     <div id="snakecase-010" class="section level1">
@@ -701,6 +718,8 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#snakecase-0109000">0.10.9000</a></li>
+        <li><a href="#snakecase-0100-160519">0.10.0</a></li>
         <li><a href="#snakecase-0929002">0.9.2.9002</a></li>
         <li><a href="#snakecase-092">0.9.2</a></li>
         <li><a href="#snakecase-091">0.9.1</a></li>
