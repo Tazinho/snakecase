@@ -11,10 +11,7 @@
 There were no ERRORs or WARNINGs.
 
 NOTEs:  
-* For win-builder release (R3.6): "Found the following hidden files and directories:
-  .github
-These were most likely included in error. See section 'Package
-structure' in the 'Writing R Extensions' manual."  
+* For win-builder release (R3.6): "Found the following hidden files and directories: .github. These were most likely included in error. See section 'Package structure' in the 'Writing R Extensions' manual."  
 I added the line "^\.github$" to .Rbuildignore, but for some reason this doesn't always resolve this on the win-builder builds.
 
 ## Downstream dependencies
