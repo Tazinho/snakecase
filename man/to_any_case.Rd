@@ -25,7 +25,7 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
  \item{lowerUPPER: \code{"lower_upper"}}
  \item{UPPERlower: \code{"upper_lower"}}
  \item{Sentence case: \code{"sentence"}}
- \item{Title Case: \code{"title"} - This one is basically the same as "snake" case with \code{sep_out = " "}, but in addition it is wrapped into \code{tools::toTitleCase} and abbreviations are always turned into upper case.}
+ \item{Title Case: \code{"title"} - This one is basically the same as "snake" case with \code{sep_out = " "}, but in addition it is wrapped into \code{tools::toTitleCase}, the first letter and any \code{abbreviations} are always turned into upper case.}
 }
 
  There are five "special" cases available:
@@ -51,7 +51,7 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
  It should only be used in very rare use cases and is mainly implemented to showcase the internal workings of \code{to_any_case()}}
  }}
 
-\item{abbreviations}{character (case insensitive). This surround abbreviations with underscores so that they are recognized by the parsing. Useful when \code{parsing_option} 1 is needed, but some abbreviations within the string need \code{parsing_option} 2. Abbreviations are consistently turned into upper case for title-, mixed-, lower-camel- and upper-camel-case.
+\item{abbreviations}{character (case insensitive). Matched abbreviations are surrounded with underscores so that they are recognized by the parsing. Useful when \code{parsing_option} 1 is needed, but some abbreviations within the string need \code{parsing_option} 2. Abbreviations are consistently turned into upper case for title-, mixed-, lower-camel- and upper-camel-case.
 
 Use this feature with care: One letter abbreviations and abbreviations next to each other may not be handled correctly, since those cases would introduce ambiguity in parsing.}
 

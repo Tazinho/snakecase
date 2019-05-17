@@ -225,8 +225,8 @@ There are six “special” cases available:
     changed.
   - `"mixed"`: Almost the same as `case = "parsed"`. Every letter which
     is not at the start or behind an underscore is turned into
-    lowercase. If a substring is set as an abbreviation, it will stay in
-    upper case.
+    lowercase. If a substring is set as an abbreviation, it will be
+    turned into upper case.
   - `"swap"`: Upper case letters will be turned into lower case and vice
     versa. Also `case = "flip"` will work. Doesn’t work with any of the
     other arguments except `unique_sep`, `empty_fill`, `prefix` and

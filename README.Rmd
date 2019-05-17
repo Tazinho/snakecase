@@ -158,7 +158,7 @@ If you can provide transliterations for your (or any other) country, please drop
 There are six "special" cases available:
 
 * `"parsed"`: This case is underlying all other cases. Every substring a string consists of becomes surrounded by an underscore (depending on the parsing_option). Underscores at the start and end are trimmed. No lower or upper case pattern from the input string are changed.
-* `"mixed"`: Almost the same as `case = "parsed"`. Every letter which is not at the start or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will stay in upper case.
+* `"mixed"`: Almost the same as `case = "parsed"`. Every letter which is not at the start or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will be turned into upper case.
 * `"swap"`: Upper case letters will be turned into lower case and vice versa. Also `case = "flip"` will work. Doesn't work with any of the other arguments except `unique_sep`, `empty_fill`, `prefix` and `postfix`.
 * `"random"`: Each letter will be randomly turned into lower or upper case. Doesn't work with any of the other arguments except `unique_sep`, `empty_fill`, `prefix` and `postfix`.
 * `"none"`: Neither parsing nor case conversion occur. This case might be helpful, when one wants to call the function for the quick usage of the other parameters. To suppress replacement of spaces to underscores set `sep_in = NULL`. Works with `sep_in`, `transliterations`, `sep_out`, `unique_sep`, `empty_fill`, `prefix` and `postfix`.

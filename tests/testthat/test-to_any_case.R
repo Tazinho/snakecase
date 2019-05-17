@@ -566,7 +566,7 @@ test_that("complex strings", {
                "bla_bla")
   
   expect_equal(to_any_case("blaUSABlaGERBlaZDFBla", abbreviations = c("USA", "GER", "ZDF", "BLA"), case = "mixed"),
-               "bla_USA_Bla_GER_Bla_ZDF_Bla")
+               "BLA_USA_BLA_GER_BLA_ZDF_BLA")
   
   expect_equal(to_any_case("someUSPeople", abbreviations = "US", case = "mixed", sep_out = " "),
                "some US People")
@@ -927,7 +927,7 @@ test_that("random case", {
 test_that("title case", {
   expect_equal(
     to_any_case(c("on_andOn", "AndON", " and on", "and so on", "seems like it works", "also abbreviations ETC"), case = "title", abbreviations = "ETC"),
-    c("On and on", "And on", "And on", "And so on", "Seems Like it Works", "also Abbreviations ETC") 
+    c("On and on", "And on", "And on", "And so on", "Seems Like it Works", "Also Abbreviations ETC") 
   )
 })
 
