@@ -6,3 +6,11 @@ test_that("title case", {
     c("On and on", "And on", "And on", "And so on", "Seems Like it Works", "also Abbreviations ETC") 
   )
 })
+
+
+test_that("title case and abbreviations", {
+  expect_equal(
+    to_title_case("so sieht es aus", abbreviations = "ES"),
+    "So Sieht ES Aus" 
+  )
+})

@@ -1,3 +1,8 @@
+# snakecase 0.10.9000
+
+* changed title case to build up on snake_case instead of parsed_case.
+* abbreviations are no case-insensitive and consistently always turned into upper case for title-, upper-camel-, lower-camel- and mixed-case.
+
 # snakecase 0.10.0 (16.05.19)
 
 * CRAN release

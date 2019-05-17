@@ -194,7 +194,7 @@ to_any_case <- function(string,
 ### ____________________________________________________________________________
 ### Prepare title case
   title <- if (case == "title") TRUE else FALSE
-  case[case == "title"] <- "parsed"
+  case[case == "title"] <- "snake"
 ### ____________________________________________________________________________
 ### Handle swap case
   if (case == "swap") {
@@ -207,8 +207,8 @@ to_any_case <- function(string,
   if (case == "random") {
     random_case <- function(string) {
       upper_or_lower <- function(string) {
-        if(sample(c(TRUE, FALSE), 1)) {return(toupper(string))}
-        tolower(string)
+        if(sample(c(TRUE, FALSE), 1)) {return(stringr::str_to_upper(string))}
+        stringr::str_to_lower(string)
       }
       
       unlist(
@@ -231,7 +231,7 @@ to_any_case <- function(string,
 ### ____________________________________________________________________________
 ### Preprocessing:
 ## Turn mateches of `sep_in` into "_" and
-## surround matechs of the parsing by "_" (parsed_case)
+## surround matches of the parsing by "_" (parsed_case)
   if (!case %in% c("swap", "random")) {
     string <- preprocess_internal(string, sep_in)
     
@@ -268,10 +268,10 @@ to_any_case <- function(string,
 ### caseconversion--------------------------------------------------------------
     if (case == "mixed") {
       string <- lapply(string,
-                       function(x) ifelse(!x %in% abbreviations, 
+                       function(x) ifelse(!stringr::str_to_lower(x) %in% stringr::str_to_lower(abbreviations), 
                            stringr::str_c(stringr::str_sub(x, 1, 1),
                                           stringr::str_to_lower(stringr::str_sub(x, 2))),
-                           x)
+                           stringr::str_to_upper(x))
         )
       }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
@@ -283,7 +283,7 @@ to_any_case <- function(string,
       string <- lapply(string, stringr::str_to_lower)
       if (!is.null(abbreviations)) {
       string <- lapply(string, 
-                       function(x) ifelse(x %in% stringr::str_to_lower(abbreviations), 
+                       function(x) ifelse(stringr::str_to_lower(x) %in% stringr::str_to_lower(abbreviations), 
                                           stringr::str_to_upper(x),
                                           x)
       )
@@ -344,15 +344,23 @@ to_any_case <- function(string,
         USE.NAMES = TRUE)
     }
 ### collapsing------------------------------------------------------------------
-    if (case %in% c("none", "mixed", "snake", "screaming_snake", 
+    if (case %in% c("none", "parsed", "mixed", "screaming_snake", 
                    "small_camel", "big_camel", "lower_upper", "upper_lower") | 
-        (case == "parsed" & !title)) {
+        (case == "snake" & !title)) {
       string <- vapply(string, 
                        function(x) stringr::str_c(x, collapse = "_"), "",
                        USE.NAMES = FALSE)
     }
     
-    if (case == "parsed" & title){
+    if (case == "snake" & title){
+      
+      if (!is.null(abbreviations)) {
+        string <- lapply(string, 
+                         function(x) ifelse(stringr::str_to_lower(x) %in% stringr::str_to_lower(abbreviations), 
+                                            stringr::str_to_upper(x),
+                                            x))
+      }
+      
       string <- vapply(string, 
                        function(x) stringr::str_c(x, collapse = " "), "",
                        USE.NAMES = FALSE)
@@ -416,7 +424,7 @@ to_any_case <- function(string,
       string <- stringr::str_replace_all(string, "(?<!\\d)_|_(?!\\d)", "")
     }
     
-    if (is.null(sep_out) & (case == "sentence" | (case == "parsed" & title))) {
+    if (is.null(sep_out) & (case == "sentence" | (case == "snake" & title))) {
       string <- stringr::str_replace_all(string, "_", " ")
     }
 
