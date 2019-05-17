@@ -13,8 +13,7 @@
 #'  \item{lowerUPPER: \code{"lower_upper"}}
 #'  \item{UPPERlower: \code{"upper_lower"}}
 #'  \item{Sentence case: \code{"sentence"}}
-#'  \item{Title Case: \code{"title"} - This one is basically the same as "parsed" case below, but in addition it is wrapped into \code{tools::toTitleCase}.}
-#'  }
+#'  \item{Title Case: \code{"title"} - This one is basically the same as "snake" case with \code{sep_out = " "}, but in addition it is wrapped into \code{tools::toTitleCase} and abbreviations are always turned into upper case.}
 #'
 #'  There are five "special" cases available:
 #' \itemize{
@@ -41,7 +40,8 @@
 #' 
 #' @param abbreviations character with (uppercase) abbreviations. This marks
 #'  abbreviations with an underscore behind (in front of the parsing).
-#'  Useful if \code{parsing_option} 1 is needed, but some abbreviations within the string need \code{parsing_option} 2.
+#'  Useful if \code{parsing_option} 1 is needed, but some abbreviations within the string need \code{parsing_option} 2. Abbreviations are consistently turned into upper case for title-, mixed-, lower-camel- and upper-camel-case.
+#'  
 #'  Use this feature with care: One letter abbreviations and abbreviations next to each other may not be handled correctly, since those cases would introduce ambiguity in parsing.
 #'  
 #' @param sep_in (short for separator input) if character, is interpreted as a

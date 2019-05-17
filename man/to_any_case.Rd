@@ -16,44 +16,10 @@ to_any_case(string, case = c("snake", "small_camel", "big_camel",
 \arguments{
 \item{string}{A string (for example names of a data frame).}
 
-\item{case}{The desired target case, provided as one of the following:
-\itemize{
- \item{snake_case: \code{"snake"}}
- \item{lowerCamel: \code{"lower_camel"} or \code{"small_camel"}}
- \item{UpperCamel: \code{"upper_camel"} or \code{"big_camel"}}
- \item{ALL_CAPS: \code{"all_caps"} or \code{"screaming_snake"}}
- \item{lowerUPPER: \code{"lower_upper"}}
- \item{UPPERlower: \code{"upper_lower"}}
- \item{Sentence case: \code{"sentence"}}
- \item{Title Case: \code{"title"} - This one is basically the same as "parsed" case below, but in addition it is wrapped into \code{tools::toTitleCase}.}
- }
-
- There are five "special" cases available:
-\itemize{
- \item{\code{"parsed"}: This case is underlying all other cases. 
- Every substring a string consists
- of becomes surrounded by an underscore (depending on the \code{parsing_option}).
-  Underscores at the start and end are trimmed. No lower or 
- upper case pattern from the input string are changed.}
- \item{\code{"mixed"}: Almost the same as \code{case = "parsed"}. Every letter which is not at the start
- or behind an underscore is turned into lowercase. If a substring is set as an abbreviation, it will stay in upper case.}
- \item{\code{"swap"}: Upper case letters will be turned into lower case and vice versa. Also \code{case = "flip"} will work.
- Doesn't work with any of the other arguments except \code{unique_sep}, \code{empty_fill}, \code{prefix} and \code{postfix}.}
- \item{\code{"random"}: Each letter will be randomly turned into lower or upper case. Doesn't work with any of the other arguments except \code{unique_sep}, \code{empty_fill}, \code{prefix} and \code{postfix}.}
- \item{\code{"none"}: Neither parsing nor case conversion occur. This case might be helpful, when
- one wants to call the function for the quick usage of the other parameters.
- To suppress replacement of spaces to underscores set \code{sep_in = NULL}.
- Works with \code{sep_in}, \code{transliterations}, \code{sep_out}, \code{prefix},
-  \code{postfix},
-  \code{empty_fill} and \code{unique_sep}.}
- \item{\code{"internal_parsing"}: This case is returning the internal parsing
- (suppressing the internal protection mechanism), which means that alphanumeric characters will be surrounded by underscores.
- It should only be used in very rare use cases and is mainly implemented to showcase the internal workings of \code{to_any_case()}}
- }}
-
 \item{abbreviations}{character with (uppercase) abbreviations. This marks
 abbreviations with an underscore behind (in front of the parsing).
-Useful if \code{parsing_option} 1 is needed, but some abbreviations within the string need \code{parsing_option} 2.
+Useful if \code{parsing_option} 1 is needed, but some abbreviations within the string need \code{parsing_option} 2. Abbreviations are consistently turned into upper case for title-, mixed-, lower-camel- and upper-camel-case.
+
 Use this feature with care: One letter abbreviations and abbreviations next to each other may not be handled correctly, since those cases would introduce ambiguity in parsing.}
 
 \item{sep_in}{(short for separator input) if character, is interpreted as a

@@ -115,6 +115,9 @@ to_snake_case(c("HHcity", "IDTable1", "KEYtable2", "newUSElections"),
 ## [4] "new_us_elections"
 ```
 
+Abbreviations are consistently turned into upper case for title-,
+mixed-, lower-camel- and upper-camel-case.
+
 **sep\_in**: By default non-alphanumeric characters are treated as
 separators:
 
@@ -208,9 +211,10 @@ issue](https://github.com/Tazinho/snakecase/issues/107).
   - lowerUPPER: `"lower_upper"`
   - UPPERlower: `"upper_lower"`
   - Sentence case: `"sentence"`
-  - Title Case: `"title` - This one is basically the same as “parsed”
-    case (see below) with `sep_out = " "`, but in addition it is wrapped
-    into `tools::toTitleCase()`.
+  - Title Case: `"title` - This one is basically the same as “snake”
+    case with `sep_out = " "`, but in addition it is wrapped into
+    `tools::toTitleCase()` and abbreviations are always turned into
+    upper case.
 
 There are six “special” cases available:
 
