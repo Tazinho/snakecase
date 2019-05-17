@@ -211,7 +211,7 @@ issue](https://github.com/Tazinho/snakecase/issues/107).
   - lowerUPPER: `"lower_upper"`
   - UPPERlower: `"upper_lower"`
   - Sentence case: `"sentence"`
-  - Title Case: `"title` - This one is basically the same as sentence
+  - Title Case: `"title"` - This one is basically the same as sentence
     case with, but in addition it is wrapped into `tools::toTitleCase()`
     and abbreviations are always turned into upper case.
 
