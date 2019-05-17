@@ -79,7 +79,7 @@ to_snake_case(c("SomeBAdInput", "someGoodInput")) %>% dput()
 ## c("some_b_ad_input", "some_good_input")
 ```
 
-### Big picture (a parameterized workflow)
+## Big picture (a parameterized workflow)
 
 The `to_any_case()` function basically enables you to convert any string
 into any case. This is achieved via a well thought process of
@@ -100,7 +100,7 @@ Some further **cosmetics** (`unique_sep`, `empty_fill`, `prefix`,
 
 **string**: A character vector, containing the input strings.
 
-#### Parsing
+### Parsing
 
 **abbreviations**: One challenge in case conversion are odd looking
 “mixed cases”. These might be introduced due to country codes or other
@@ -166,7 +166,7 @@ to_upper_camel_case("look_AfterThe-hyphen andThe.dot",
 If you are interested in a specific parsing option, which is not
 implemented, please open an issue.
 
-#### Conversion
+### Conversion
 
 **transliterations**: To turn special characters (for example) into
 ASCII one can incorporate transliterations from
@@ -245,7 +245,7 @@ There are six “special” cases available:
     only be used in very rare use cases and is mainly implemented to
     showcase the internal workings of `to_any_case()`.
 
-#### Postprocessing
+### Postprocessing
 
 **numerals**: If you want to format the alignment of numerals use
 `numerals` (`"middle"` (default), `"left"`, `"right"`, `"asis"` or
@@ -287,7 +287,7 @@ to_any_case(
 ## [1] "yyyymmdd-bla_bla_bla.txt" "20190109-bla_bla_bla.txt"
 ```
 
-#### Cosmetics
+### Cosmetics
 
 **unique\_sep**: (character): When not `NULL` non unique output strings
 will get an integer suffix separated with the supplied string.
