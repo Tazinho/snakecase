@@ -56,7 +56,7 @@
 #'  \item{1: \code{"RRRStudio" -> "RRR_Studio"}}
 #'  \item{2: \code{"RRRStudio" -> "RRRS_tudio"}}
 #'  \item{3: \code{"RRRStudio" -> "RRRSStudio"}. This will become for example \code{"Rrrstudio"} when we convert to lower camel case.}
-#'  \item{-1, -2, -3: bla}
+#'  \item{-1, -2, -3: These \code{parsing_options}'s will suppress the conversion after non-alphanumeric values. E.g. \code{parsing_option = -1} and \code{case = "upper_camel"} will convert \code{"this.text"} into \code{This.text} instead of \code{"This.Text}.}
 #'  \item{0: no parsing}
 #'  }
 #'
