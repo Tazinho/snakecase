@@ -56,6 +56,7 @@
 #'  \item{1: \code{"RRRStudio" -> "RRR_Studio"}}
 #'  \item{2: \code{"RRRStudio" -> "RRRS_tudio"}}
 #'  \item{3: \code{"RRRStudio" -> "RRRSStudio"}. This will become for example \code{"Rrrstudio"} when we convert to lower camel case.}
+#'  \item{0: no parsing}
 #'  }
 #'
 #' @param transliterations A character vector (if not \code{NULL}). The entries of this argument
