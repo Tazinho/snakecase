@@ -29,7 +29,7 @@ package](http://www.malte-grosser.com/post/introducing-the-snakecase-package/).
 
 # or the (stable) development version hosted on github
 # install.packages("remotes")
-remotes::install_github("Tazinho/snakecase")
+remotes::install_github("Tazinho/snakecase", ref = "devversion-01")
 
 # load snakecase
 library(snakecase)
@@ -158,8 +158,7 @@ as one word:
 ``` r
 to_snake_case(c("HHcity", "IDtable1", "KEYtable2", "newUSelections"),
               parsing_option = 3)
-## [1] "h_hcity"          "i_dtable_1"       "ke_ytable_2"     
-## [4] "new_u_selections"
+## [1] "hhcity"          "idtable_1"       "keytable_2"      "new_uselections"
 ```
 
 To suppress conversion after a non-alphanumeric characters (except
@@ -169,7 +168,7 @@ To suppress conversion after a non-alphanumeric characters (except
 to_upper_camel_case("look_AfterThe-hyphen andThe.dot",
                     sep_in = NULL,
                     parsing_option = -1)
-## [1] "LookAfterthe-hyphenAndthe.dot"
+## [1] "LookAfterThe-hyphenAndThe.dot"
 ```
 
 And to suppress the parsing set `parsing_option = 0`.
