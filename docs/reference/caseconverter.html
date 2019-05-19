@@ -210,10 +210,11 @@ the strings into substrings and specify the word boundaries.</p></td>
     <tr>
       <th>parsing_option</th>
       <td><p>An integer that will determine the parsing_option.</p><ul>
-<li><p>1: <code>RRRStudio -&gt; RRR_Studio</code></p></li>
-<li><p>2: <code>RRRStudio -&gt; RRRS_tudio</code></p></li>
-<li><p>3: This <code>parsing_option</code> will suppress the conversion after non-alphanumeric values. See examples.</p></li>
-<li><p>any other integer &lt;= 0: no parsing"</p></li>
+<li><p>1: <code>"RRRStudio" -&gt; "RRR_Studio"</code></p></li>
+<li><p>2: <code>"RRRStudio" -&gt; "RRRS_tudio"</code></p></li>
+<li><p>3: <code>"RRRStudio" -&gt; "RRRSStudio"</code>. This will become for example <code>"Rrrstudio"</code> when we convert to lower camel case.</p></li>
+<li><p>-1, -2, -3: These <code>parsing_options</code>'s will suppress the conversion after non-alphanumeric values.</p></li>
+<li><p>0: no parsing</p></li>
 </ul></td>
     </tr>
     <tr>
