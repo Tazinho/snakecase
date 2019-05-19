@@ -91,7 +91,14 @@ non-alphanumeric values. All matches will be replaced by underscores
 if \code{NULL} is supplied). These underscores are used internally to split
 the strings into substrings and specify the word boundaries.}
 
-\item{parsing_option}{An integer that will determine the parsing_option.}
+\item{parsing_option}{An integer that will determine the parsing_option.
+\itemize{
+ \item{1: \code{"RRRStudio" -> "RRR_Studio"}}
+ \item{2: \code{"RRRStudio" -> "RRRS_tudio"}}
+ \item{3: \code{"RRRStudio" -> "RRRSStudio"}. This will become for example \code{"Rrrstudio"} when we convert to lower camel case.}
+ \item{-1, -2, -3: These \code{parsing_options}'s will suppress the conversion after non-alphanumeric values.}
+ \item{0: no parsing}
+ }}
 
 \item{transliterations}{A character vector (if not \code{NULL}). The entries of this argument
 need to be elements of \code{stringi::stri_trans_list()} (like "Latin-ASCII", which is often useful) or names of lookup tables (currently
