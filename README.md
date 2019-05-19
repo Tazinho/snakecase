@@ -48,10 +48,9 @@ to_any_case(string)
 ## [3] "i_dont_know_what_this_case_is"
 ```
 
-However, one can choose between many other cases like
-i.e. `"lower_camel"`, `"upper_camel"`, `"all_caps"`, `"lower_upper"`,
-`"upper_lower"`, `"sentence"` and `"mixed"`, which are based on
-`"parsed"` case:
+However, one can choose between many other cases like `"lower_camel"`,
+`"upper_camel"`, `"all_caps"`, `"lower_upper"`, `"upper_lower"`,
+`"sentence"` and `"mixed"`, which are based on `"parsed"` case:
 
 ``` r
 to_any_case(string, case = "parsed")
@@ -153,18 +152,30 @@ to_snake_case(c("HHcity", "IDtable1", "KEYtable2", "newUSelections"),
 ## [4] "new_us_elections"
 ```
 
-To suppress conversion after a non-alphanumeric character (except
-`"_"`), you can choose parsing option 3:
+Sometimes it might make sense to treat mixes of words and abbreviations
+as one word:
+
+``` r
+to_snake_case(c("HHcity", "IDtable1", "KEYtable2", "newUSelections"),
+              parsing_option = 3)
+## [1] "h_hcity"          "i_dtable_1"       "ke_ytable_2"     
+## [4] "new_u_selections"
+```
+
+To suppress conversion after a non-alphanumeric characters (except
+`"_"`), you can add a minus infront of the `parsing_option`, e.g.:
 
 ``` r
 to_upper_camel_case("look_AfterThe-hyphen andThe.dot",
                     sep_in = NULL,
-                    parsing_option = 3)
-## [1] "LookAfterThe-hyphenAndThe.dot"
+                    parsing_option = -1)
+## [1] "LookAfterthe-hyphenAndthe.dot"
 ```
 
-If you are interested in a specific parsing option, which is not
-implemented, please open an issue.
+And to suppress the parsing set `parsing_option = 0`.
+
+If you are interested in the implementaion of a specific
+`parsing_option`, please open an issue.
 
 ### Conversion
 
@@ -249,7 +260,7 @@ There are six “special” cases available:
 
 **numerals**: If you want to format the alignment of numerals use
 `numerals` (`"middle"` (default), `"left"`, `"right"`, `"asis"` or
-`"tight"`). I.e. to add no extra separators around digits use:
+`"tight"`). E.g. to add no extra separators around digits use:
 
 ``` r
 to_snake_case("species42value 23month 7-8",
@@ -276,7 +287,7 @@ to_screaming_snake_case(string, sep_out = "=")
 
 When `length(sep_out) > 1`, its last element gets recycled and the
 output separators are incorporated per string according the order in
-`sep_in`. This might come in handy when i.e. formatting file names:
+`sep_in`. This might come in handy when e.g. formatting file names:
 
 ``` r
 to_any_case(

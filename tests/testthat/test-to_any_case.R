@@ -970,3 +970,34 @@ test_that("special_input_2", {
   expect_error(to_any_case(Inf)    , "argument is not a character vector", fixed = TRUE)
   })
 
+test_that("abbreviations", {
+  expect_equal(to_any_case("IDENTICALid3", abbreviations = "iD3"), "identical_id_3")
+})
+
+test_that("parsing_options", {
+  
+  expect_equal(to_any_case("RRRStudioSStudioStudio", case = "parsed", parsing_option = 1),
+               "RRR_Studio_S_Studio_Studio"
+               )
+  
+  expect_equal(to_any_case("RRRStudioSStudioStudio", case = "parsed", parsing_option = -1),
+               "RRR_Studio_S_Studio_Studio"
+               )
+  
+  expect_equal(to_any_case("RRRStudioSStudioStudio", case = "parsed", parsing_option = 2),
+              "RRRS_tudio_SS_tudio_Studio"
+              )
+  
+  expect_equal(to_any_case("RRRStudioSStudioStudio", case = "parsed", parsing_option = -2),
+               "RRRS_tudio_SS_tudio_Studio"
+               )
+  
+  expect_equal(to_any_case("RRRStudioSStudioStudio", case = "parsed", parsing_option = 3),
+               "RRRStudio_SStudio_Studio"
+               )
+  
+  expect_equal(to_any_case("RRRStudioSStudioStudio", case = "parsed", parsing_option = -3),
+               "RRRStudio_SStudio_Studio"
+               )
+})
+

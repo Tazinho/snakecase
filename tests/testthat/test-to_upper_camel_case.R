@@ -32,3 +32,23 @@ test_that("preserve-names-attribute",{
               structure(c("AbcDef", "BbccEe", "TeEStIt"), 
                         .Names = c("a", "b", "c")))
 })
+
+test_that("parsing_options",{
+  expect_equal(to_upper_camel_case("look_AfterThe-hyphen andThe.dot", parsing_option = 1, numerals = "asis", sep_in = NULL),
+               "LookAfterThe-HyphenAndThe.Dot")
+  
+  expect_equal(to_upper_camel_case("look_AfterThe-hyphen andThe.dot", parsing_option = -1, numerals = "asis", sep_in = NULL),
+               "LookAfterThe-hyphenAndThe.dot")
+  
+  expect_equal(to_upper_camel_case("look_AfterThe-hyphen andThe.dot", parsing_option = 2, numerals = "asis", sep_in = NULL),
+               "LookAfterThe-HyphenAndThe.Dot")
+  
+  expect_equal(to_upper_camel_case("look_AfterThe-hyphen andThe.dot", parsing_option = -2, numerals = "asis", sep_in = NULL),
+               "LookAfterThe-hyphenAndThe.dot")
+  
+  expect_equal(to_upper_camel_case("look_AfterThe-hyphen andThe.dot", parsing_option = 3, numerals = "asis", sep_in = NULL),
+               "LookAfterThe-HyphenAndThe.Dot")
+  
+  expect_equal(to_upper_camel_case("look_AfterThe-hyphen andThe.dot", parsing_option = -3, numerals = "asis", sep_in = NULL),
+               "LookAfterThe-hyphenAndThe.dot")
+})

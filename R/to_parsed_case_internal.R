@@ -17,8 +17,8 @@
 #'
 to_parsed_case_internal <- function(string, parsing_option = 1L, numerals = numerals){
   ### input checking
-  if (parsing_option >= 4L) {
-    stop("parsing_option must be 1,2,3 or <= 0 for no parsing.")
+  if (parsing_option >= 4L | parsing_option <= -4) {
+    stop("parsing_option must be between -4 and +4.", call. = FALSE)
   }
   ### preprocessing:
   # catch everything that should be handled like underscores
@@ -27,31 +27,45 @@ to_parsed_case_internal <- function(string, parsing_option = 1L, numerals = nume
   
   ### applying parsing functions  
   # case: 1 RRRStudioSStudioStudio -> RRR_Studio_S_Studio_Studio
-  if (parsing_option == 1 | parsing_option == 3) {
+  if (parsing_option == 1 | parsing_option == -1) {
     if (numerals == "asis") {
-      string <- parse5_mark_digits(string)
+      string <- parse6_mark_digits(string)
     }
-    string <- parse1_pat_cap_smalls(string)
-    string <- parse2_pat_caps2(string)
-    string <- parse3_pat_cap_lonely(string)
-    string <- parse4_separate_non_characters(string)
+    string <- parse1_pat_cap_smalls(string) # RStudio.V11 -> R_Studio_.V11
+    string <- parse2_pat_digits(string)     # RStudio.V11 -> RStudio.V_11_
+    string <- parse3_pat_caps(string)       # RStudio.V11 -> _RS_tudio.V11
+    string <- parse4_pat_cap(string)        # RStudio.V11 -> RStudio._V_11
+    string <- parse5_pat_non_alnums(string) # RStudio.V11 -> RStudio_._V11
   }
   # case: 2 RRRStudioSStudioStudio -> RRRS_tudio_SS_tudio_Studio
-  if (parsing_option == 2) {
+  if (parsing_option == 2 | parsing_option == -2) {
     if (numerals == "asis") {
-      string <- parse5_mark_digits(string)
+      string <- parse6_mark_digits(string)
     }
-    string <- parse2_pat_caps2(string)
+    string <- parse3_pat_caps(string)
     string <- parse1_pat_cap_smalls(string)
-    string <- parse3_pat_cap_lonely(string)
-    string <- parse4_separate_non_characters(string)}
+    string <- parse2_pat_digits(string)
+    string <- parse4_pat_cap(string)
+    string <- parse5_pat_non_alnums(string)
+  }
+  # case: 3 RRRStudioSStudioStudio -> RRRStudio_SStudio_Studio
+  if (parsing_option == 3 | parsing_option == -3) {
+    if (numerals == "asis") {
+      string <- parse6_mark_digits(string)
+    }
+    string <- parse7_pat_caps_smalls(string)
+    string <- parse8_pat_smalls_after_non_alnums(string)
+    string <- parse2_pat_digits(string)
+    string <- parse4_pat_cap(string)
+    string <- parse5_pat_non_alnums(string)
+  }
   # case:6 email1_2 -> email 1_2
   # if (parsing_option == 4) {
   #   string <- parse5_mark_digits(string)
   #   string <- parse1_pat_cap_smalls(string)
   #   string <- parse2_pat_caps2(string)
   #   string <- parse3_pat_cap_lonely(string)
-  #   string <- parse4_separate_non_characters(string)
+  #   string <- parse4_separate_non_alnums(string)
   # }
   
   ### customize the output
@@ -60,7 +74,7 @@ to_parsed_case_internal <- function(string, parsing_option = 1L, numerals = nume
 
   string <- stringr::str_replace_all(string, "^_|_$", "")
   
-  if (parsing_option == 3) {
+  if (parsing_option %in% c(-1, -2, -3)) {
     string <- stringr::str_replace_all(string, "_(?![:alnum:])|(?<![:alnum:])_", "")
   }
   # return
