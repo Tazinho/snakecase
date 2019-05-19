@@ -21,7 +21,7 @@ For a short intro regarding typical use cases, see the blog article [Introducing
 
 # or the (stable) development version hosted on github
 # install.packages("remotes")
-remotes::install_github("Tazinho/snakecase")
+remotes::install_github("Tazinho/snakecase", ref = "devversion-01")
 
 # load snakecase
 library(snakecase)
