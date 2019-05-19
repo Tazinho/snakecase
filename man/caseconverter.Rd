@@ -93,10 +93,11 @@ the strings into substrings and specify the word boundaries.}
 
 \item{parsing_option}{An integer that will determine the parsing_option.
 \itemize{
- \item{1: \code{RRRStudio -> RRR_Studio}}
- \item{2: \code{RRRStudio -> RRRS_tudio}}
- \item{3: This \code{parsing_option} will suppress the conversion after non-alphanumeric values. See examples.}
- \item{any other integer <= 0: no parsing"}
+ \item{1: \code{"RRRStudio" -> "RRR_Studio"}}
+ \item{2: \code{"RRRStudio" -> "RRRS_tudio"}}
+ \item{3: \code{"RRRStudio" -> "RRRSStudio"}. I.e. this will become \code{"Rrrstudio"} when we convert to lower camel case for example.}
+ \item{-1, -2 and -3: These \code{parsing_option}'s will suppress the conversion after non-alphanumeric values. E.g. \code{parsing_option = -1} and \code{case = "upper_camel"} will convert \code{"this.text"} into \code{This.text} instead of \code{"This.Text}.}
+ \item{0: no parsing"}
  }}
 
 \item{transliterations}{A character vector (if not \code{NULL}). The entries of this argument
