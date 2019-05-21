@@ -121,7 +121,7 @@ input:
 
 ``` r
 to_upper_camel_case(c("user_id", "finals_mvp"), abbreviations = c("Id", "MVP"))
-## [1] "UserID"    "FinalsMVP"
+## [1] "UserId"    "FinalsMVP"
 ```
 
 **sep\_in**: By default non-alphanumeric characters are treated as
