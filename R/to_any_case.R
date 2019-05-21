@@ -39,9 +39,9 @@
 #'  It should only be used in very rare use cases and is mainly implemented to showcase the internal workings of \code{to_any_case()}}
 #'  }
 #' 
-#' @param abbreviations character (case insensitive). Matched abbreviations are surrounded with underscores so that they are recognized by the parsing. Useful when \code{parsing_option} 1 is needed, but some abbreviations within the string need \code{parsing_option} 2. Abbreviations are consistently turned into upper case for title-, mixed-, lower-camel- and upper-camel-case.
+#' @param abbreviations character. (Case insensitive) matched abbreviations are surrounded by underscores. In this way, they can get recognized by the parser. This is useful when e.g. \code{parsing_option} 1 is needed for the use case, but some abbreviations but some substrings would require \code{parsing_option} 2. Furthermore, this argument also specifies the formatting of abbreviations in the output for the cases title, mixed, lower and upper camel. E.g. for upper camel the first letter is always in upper case, but when the abbreviation is supplied in upper case, this will also be visible in the output.
 #'  
-#'  Use this feature with care: One letter abbreviations and abbreviations next to each other may not be handled correctly, since those cases would introduce ambiguity in parsing.
+#'  Use this feature with care: One letter abbreviations and abbreviations next to each other are hard to read and also not easy to parse for further processing.
 #'  
 #' @param sep_in (short for separator input) if character, is interpreted as a
 #'  regular expression (wrapped internally into \code{stringr::regex()}). 
@@ -191,6 +191,12 @@ to_any_case <- function(string,
   case[case == "upper_camel"] <- "big_camel"
   case[case == "flip"] <- "swap"
 ### ____________________________________________________________________________
+### Prepare abbreviations
+  if(!is.null(abbreviations)) {
+    abbreviations <- unique(abbreviations)
+    names(abbreviations) <- stringr::str_to_lower(abbreviations)
+  }
+### ____________________________________________________________________________
 ### Prepare title case
   title <- if (case == "title") TRUE else FALSE
   case[case == "title"] <- "sentence"
@@ -266,11 +272,13 @@ to_any_case <- function(string,
     }
 ### caseconversion--------------------------------------------------------------
     if (case == "mixed") {
+      # Was muss passieren? Es muss in den no part ein Vektor derselben länge aber mit den Abbreviations.
+      # x[abbreviations %in% x]
       string <- lapply(string,
                        function(x) ifelse(!stringr::str_to_lower(x) %in% stringr::str_to_lower(abbreviations), 
                            stringr::str_c(stringr::str_sub(x, 1, 1),
                                           stringr::str_to_lower(stringr::str_sub(x, 2))),
-                           stringr::str_to_upper(x))
+                           abbreviations[stringr::str_to_lower(x)])
         )
       }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
@@ -283,7 +291,7 @@ to_any_case <- function(string,
       if (!is.null(abbreviations)) {
       string <- lapply(string, 
                        function(x) ifelse(stringr::str_to_lower(x) %in% stringr::str_to_lower(abbreviations), 
-                                          stringr::str_to_upper(x),
+                                          abbreviations[stringr::str_to_lower(x)],
                                           x)
       )
       }
@@ -294,6 +302,14 @@ to_any_case <- function(string,
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if (case == "small_camel") {
       string <- lapply(string, stringr::str_to_lower)
+      
+      if (!is.null(abbreviations)) { # handle abbreviations
+        string <- lapply(string,
+                         function(x) c(x[1], 
+                                       ifelse(x[-1] %in% stringr::str_to_lower(abbreviations),
+                                              abbreviations[x[-1]], x[-1])))
+      }
+      
       string <- lapply(string, 
                        function(x) stringr::str_c(stringr::str_to_upper(stringr::str_sub(x, 1, 1)),
                                     stringr::str_sub(x, 2)))
@@ -305,12 +321,6 @@ to_any_case <- function(string,
                                         stringr::str_sub(x, 2)), "",
                USE.NAMES = FALSE)
       string <- stringr::str_split(string, " ")
-      if (!is.null(abbreviations)) { # handle abbreviations
-      string <- lapply(string,
-                       function(x) c(stringr::str_to_lower(x[1]), 
-                                     ifelse(stringr::str_to_lower(x[-1]) %in% stringr::str_to_lower(abbreviations),
-                                            stringr::str_to_upper(x[-1]), x[-1])))
-      }
     }
     #. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     if (case == "screaming_snake") {
@@ -355,7 +365,7 @@ to_any_case <- function(string,
       if (!is.null(abbreviations)) {
         string <- lapply(string, 
                          function(x) ifelse(stringr::str_to_lower(x) %in% stringr::str_to_lower(abbreviations), 
-                                            stringr::str_to_upper(x),
+                                            abbreviations[stringr::str_to_lower(x)],
                                             x))
       }
       

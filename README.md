@@ -114,8 +114,15 @@ to_snake_case(c("HHcity", "IDTable1", "KEYtable2", "newUSElections"),
 ## [4] "new_us_elections"
 ```
 
-Abbreviations are consistently turned into upper case for title-,
-mixed-, lower-camel- and upper-camel-case.
+Abbreviations are consistently formatted regarding the supplied `case`.
+However, for title-, mixed-, lower-camel- and upper-camel-case the
+formatting is specified by the formatting of the
+input:
+
+``` r
+to_upper_camel_case(c("user_id", "finals_mvp"), abbreviations = c("Id", "MVP"))
+## [1] "UserID"    "FinalsMVP"
+```
 
 **sep\_in**: By default non-alphanumeric characters are treated as
 separators:

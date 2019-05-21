@@ -1001,3 +1001,147 @@ test_that("parsing_options", {
                )
 })
 
+test_that("individual abbreviations", {
+  
+  expect_equal(
+    to_any_case("NBAGame", abbreviations = "NBA", case = "mixed"),
+    "NBA_Game"
+  )
+  
+  expect_equal(
+    to_any_case("NBAGame", abbreviations = "NBa", case = "mixed"),
+    "NBa_Game"
+  )
+  
+  expect_equal(
+    to_any_case("NBAGame", abbreviations = "baa", case = "mixed"),
+    "Nba_Game"
+  )
+  
+  expect_equal(
+    to_any_case("GameMVP", abbreviations = "MVP", case = "mixed"),
+    "Game_MVP"
+  )
+  
+  expect_equal(
+    to_any_case("GameMVP", abbreviations = "MVp", case = "mixed"),
+    "Game_MVp"
+  )
+  
+  expect_equal(
+    to_any_case("GameMVP", abbreviations = "mvp", case = "mixed"),
+    "Game_mvp"
+  )
+  
+  
+  expect_equal(
+    to_any_case("GameMVP", abbreviations = "mvp", case = "upper_camel"),
+    "GameMvp"
+  )
+  
+  expect_equal(
+    to_any_case("GameMVP", abbreviations = "MVP", case = "upper_camel"),
+    "GameMVP"
+  )
+  
+  expect_equal(
+    to_any_case("GameMVP", abbreviations = "MVp", case = "upper_camel"),
+    "GameMVp"
+  )
+  
+  expect_equal(
+    to_any_case("GameMVP", abbreviations = "mvp", case = "title"),
+    "Game Mvp"
+  )
+  
+  expect_equal(
+    to_any_case("GameMVP", abbreviations = "MVP", case = "title"),
+    "Game MVP"
+  )
+  
+  expect_equal(
+    to_any_case("GameMVP", abbreviations = "MVp", case = "title"),
+    "Game MVp"
+  )
+  
+  expect_equal(
+    to_any_case("UserID", abbreviations = "id", case = "title"),
+    "User Id"
+  )
+
+  expect_equal(
+    to_any_case("UserID", abbreviations = "ID", case = "title"),
+    "User ID"
+  )
+  
+  expect_equal(
+    to_any_case("UserID", abbreviations = "id", case = "upper_camel"),
+    "UserId"
+  )
+  
+  expect_equal(
+    to_any_case("UserID", abbreviations = "ID", case = "upper_camel"),
+    "UserID"
+  )
+  
+  expect_equal(
+    to_any_case("UserID", abbreviations = "id", case = "mixed"),
+    "User_id"
+  )
+  
+  expect_equal(
+    to_any_case("UserID", abbreviations = "ID", case= "mixed"),
+    "User_ID"
+  )
+  
+  expect_equal(
+    to_any_case("UserID", abbreviations = "Id", case = "mixed"),
+    "User_Id"
+  )
+  
+  expect_equal(
+    to_any_case("GameMVP", abbreviations = "mvp", case = "lower_camel"),
+    "gameMvp"
+  )
+  
+  expect_equal(
+    to_any_case("GameMVP", abbreviations = "MVP", case = "lower_camel"),
+    "gameMVP"
+  )
+
+  expect_equal(
+    to_any_case("GameMVP", abbreviations = "MVp", case = "lower_camel"),
+    "gameMVp"
+  )
+  
+  expect_equal(
+    to_any_case("GameMVP", abbreviations = "GAME", case = "lower_camel"),
+    "gameMvp"
+  )
+  
+  expect_equal(
+    to_any_case("GameMVP", abbreviations = "game", case = "lower_camel"),
+    "gameMvp"
+  )
+  
+  expect_equal(
+    to_any_case("GameMVP", abbreviations = "gGame", case = "lower_camel"),
+    "gameMvp"
+  )
+  
+  expect_equal(
+    to_any_case("GameMVP", abbreviations = "Game", case = "lower_camel"),
+    "gameMvp"
+    )
+  
+  expect_equal(
+    to_any_case("nba_finals_mvp", abbreviations = c("nba", "MVP"), case = "upper_camel"),
+    "NbaFinalsMVP"
+  )
+  
+  expect_equal(
+    to_any_case("nba_finals_mvp", abbreviations = c("nba", "MVp"), case = "upper_camel"),
+    "NbaFinalsMVp"
+  )
+})
+
