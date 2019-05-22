@@ -278,7 +278,7 @@ test_that("janitor-pkg-tests",{
     new_names <- gsub("^[[:space:][:punct:]]+", "", new_names)
     new_names <- make.names(new_names)
     new_names <- to_any_case(new_names, case = case, sep_in = "\\.", 
-                  transliterations = c("Latin-ASCII"), parsin_option = 1, numerals = "asis")
+                  transliterations = c("Latin-ASCII"), parsing_option = 1, numerals = "asis")
     # Handle duplicated names - they mess up dplyr pipelines
     # This appends the column number to repeated instances of duplicate variable names
     dupe_count <- vapply(1:length(new_names), function(i) { 
