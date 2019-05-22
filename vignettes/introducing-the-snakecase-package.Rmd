@@ -1,0 +1,87 @@
+---
+title: "Introducing the snakecase package"
+author: "Malte Grosser"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introducing the snakecase package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      comment = "#>",
+                      collapse = TRUE
+                      )
+```
+
+There are many style guides out there which recommend specific naming conventions for programming languages. At 2017’s useR conference Rasmus Bååth showed quite impressively the variety of cases which even exist within base R in his talk ["The current state of naming conventions in R"](https://www.youtube.com/watch?v=Pv5dfsHBBKE).
+
+However, consistent style is not only about naming new objects.
+
+## Import
+
+When you do a data analysis, most of the data already exists and you import it from disk, an API or a database. Here is the first moment in your data analysis when you have to decide if you want to rename your data or leave it as it is.
+
+Let’s say you have some data named in any of the following conventions
+
+```{r}
+string <- c("lowerCamelCase", "ALL_CAPS", "IDontKNOWWhat_thisCASE_is")
+```
+
+You can now easily convert this string for example to snake case via
+
+```{r}
+library(snakecase)
+to_snake_case(string)
+```
+
+## Graphics
+
+Whenever you want to construct a graphic and you don’t like your conventions to come up in it, you can easily convert strings to a more humanly readable output like
+
+```{r}
+to_mixed_case(string, sep_out = " ")
+```
+
+You might have noticed the `sep_out` argument. This allows you to combine any case with any output separator to create other well known cases like
+
+```{r}
+to_snake_case(string, sep_out = ".")
+to_snake_case(string, sep_out = "-")
+```
+
+or completely new ones like
+
+```{r}
+to_screaming_snake_case(string, sep_out = "=")
+```
+
+## Export
+
+Finally, when you are done with your analysis and want to write data back into a .CSV file or your customers database, which has a camel case convention, you can just use
+
+```{r}
+to_upper_camel_case(string)
+```
+
+## Further information
+
+The snakecase package goes quite deep into the little quirks which arise in automatic case conversion. However, it is well tweaked, to handle almost every edge case in an intuitive and elegant manner.
+
+To get a complete overview of its functionality like other cases, handling of abbreviations, special input characters, different parsing options, transliterations and more, I recommend you to have a look into the quite extensive [readme on its github repository](https://github.com/Tazinho/snakecase).
+
+As the package is relatively small and basically consists of its workhorse function `to_any_case()`, I can also react quite fast on new [issues](https://github.com/Tazinho/snakecase/issues).
+
+And of course I [tweet](https://twitter.com/malte_grosser) occasionally about new functionality.
+
+To round this up let me give you one advice about best practices: be aware that automatic case conversion depends on the input string and it is recommended to verify the results. Hence you might want to pipe them into `dput()` and hard-code name changes instead of blindly trusting the output
+
+```{r}
+library(magrittr)
+to_any_case(c("SomeBAdInput", "someGoodInput")) %>% dput()
+```
+
+Happy snakecasing everyone ;)
