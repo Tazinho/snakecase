@@ -193,6 +193,7 @@ to_any_case <- function(string,
 ### ____________________________________________________________________________
 ### Prepare abbreviations
   if(!is.null(abbreviations)) {
+    abbreviations <- abbreviations[!is.na(abbreviations)]
     abbreviations <- unique(abbreviations)
     names(abbreviations) <- stringr::str_to_lower(abbreviations)
   }
