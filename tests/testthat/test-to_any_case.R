@@ -290,14 +290,14 @@ test_that("janitor-pkg-tests",{
     new_names
   }
   
-  expect_equal(clean_names3(c("sp ace", "repeated", "a**#@", "%", "#",
+  expect_equal(clean_names3(c("sp ace", "repeated", "a**^@", "%", "*",
                  "!", "d(!)9", "REPEATED", "can\"'t", "hi_`there`",
                  "  leading spaces", "\u20AC", "a\u00E7\u00E3o", "far\u0153", "r.st\u00FCdio:v.1.0.143")),
                c("sp_ace", "repeated", "a", "percent", "x", "x_2", "d_9", "repeated_2", 
                  "cant", "hi_there", "leading_spaces", "x_3", "acao", "faroe", 
                  "r_studio_v_1_0_143"))
   
-  expect_equal(clean_names3(c("sp ace", "repeated", "a**#@", "%", "#",
+  expect_equal(clean_names3(c("sp ace", "repeated", "a**^@", "%", "*",
                               "!", "d(!)9", "REPEATED", "can\"'t", "hi_`there`",
                               "  leading spaces", "\u20AC", "a\u00E7\u00E3o", "far\u0153", "r.st\u00FCdio:v.1.0.143"),
                             case = "parsed"),
@@ -305,7 +305,7 @@ test_that("janitor-pkg-tests",{
                  "cant", "hi_there", "leading_spaces", "X_3", "acao", "faroe", 
                  "r_studio_v_1_0_143"))
   
-  expect_equal(clean_names3(c("sp ace", "repeated", "a**#@", "%", "#",
+  expect_equal(clean_names3(c("sp ace", "repeated", "a**^@", "%", "*",
                               "!", "d(!)9", "REPEATED", "can\"'t", "hi_`there`",
                               "  leading spaces", "\u20AC", "a\u00E7\u00E3o", "far\u0153", "r.st\u00FCdio:v.1.0.143"),
                             case = "screaming_snake"),
@@ -314,7 +314,7 @@ test_that("janitor-pkg-tests",{
                  "R_STUDIO_V_1_0_143")
   )
   
-  expect_equal(clean_names3(c("sp ace", "repeated", "a**#@", "%", "#",
+  expect_equal(clean_names3(c("sp ace", "repeated", "a**^@", "%", "*",
                               "!", "d(!)9", "REPEATED", "can\"'t", "hi_`there`",
                               "  leading spaces", "\u20AC", "a\u00E7\u00E3o", "far\u0153", "r.st\u00FCdio:v.1.0.143"),
                             case = "small_camel"),
@@ -323,7 +323,7 @@ test_that("janitor-pkg-tests",{
                )
   )
   
-  expect_equal(clean_names3(c("sp ace", "repeated", "a**#@", "%", "#",
+  expect_equal(clean_names3(c("sp ace", "repeated", "a**^@", "%", "*",
                               "!", "d(!)9", "REPEATED", "can\"'t", "hi_`there`",
                               "  leading spaces", "\u20AC", "a\u00E7\u00E3o", "far\u0153", "r.st\u00FCdio:v.1.0.143"),
                             case = "big_camel"),
@@ -332,7 +332,7 @@ test_that("janitor-pkg-tests",{
                )
   )
   
-  expect_equal(clean_names3(c("sp ace", "repeated", "a**#@", "%", "#",
+  expect_equal(clean_names3(c("sp ace", "repeated", "a**^@", "%", "*",
                               "!", "d(!)9", "REPEATED", "can\"'t", "hi_`there`",
                               "  leading spaces", "\u20AC", "a\u00E7\u00E3o", "far\u0153", "r.st\u00FCdio:v.1.0.143"),
                             case = "lower_upper"),
@@ -341,7 +341,7 @@ test_that("janitor-pkg-tests",{
                )
   )
   
-  expect_equal(clean_names3(c("sp ace", "repeated", "a**#@", "%", "#",
+  expect_equal(clean_names3(c("sp ace", "repeated", "a**^@", "%", "*",
                               "!", "d(!)9", "REPEATED", "can\"'t", "hi_`there`",
                               "  leading spaces", "\u20AC", "a\u00E7\u00E3o", "far\u0153", "r.st\u00FCdio:v.1.0.143"),
                             case = "upper_lower"),
@@ -350,7 +350,7 @@ test_that("janitor-pkg-tests",{
                )
   )
   
-  expect_equal(clean_names3(c("sp ace", "repeated", "a**#@", "%", "#",
+  expect_equal(clean_names3(c("sp ace", "repeated", "a**^@", "%", "*",
                               "!", "d(!)9", "REPEATED", "can\"'t", "hi_`there`",
                               "  leading spaces", "\u20AC", "a\u00E7\u00E3o", "far\u0153", "r.st\u00FCdio:v.1.0.143"),
                             case = "mixed"),
@@ -359,10 +359,9 @@ test_that("janitor-pkg-tests",{
                  "r_studio_v_1_0_143")
   )
   
-  expect_equal(clean_names3(c("sp ace", "repeated", "a**#@", "%",
-                              "#", "!", "d(!)9", "REPEATED",
-                              "can\"'t", "hi_`there`", "  leading spaces", "\u20AC",
-                              "a\u00E7\u00E3o", "far\u0153", "r.st\u00FCdio:v.1.0.143"),
+  expect_equal(clean_names3(c("sp ace", "repeated", "a**^@", "%", "*",
+                              "!", "d(!)9", "REPEATED", "can\"'t", "hi_`there`",
+                              "  leading spaces", "\u20AC", "a\u00E7\u00E3o", "far\u0153", "r.st\u00FCdio:v.1.0.143"),
                             case = "none"),
                c("sp_ace", "repeated", "a", "percent",
                  "X", "X_2", "d_9", "REPEATED",
