@@ -230,8 +230,8 @@ to_any_case <- function(string,
 ### ____________________________________________________________________________
 ### Match abbreviations
   # mark abbreviation by placing an underscore behind them (in front of the parsing)
-  # useful if parsingoption 1 is needed, but some abbreviations need parsing_option 2
-  if (!case %in% c("swap", "random")) {
+  if (!case %in% c("swap", "random", "none")) {
+    string <- stringr::str_replace_all(string, "[:blank:]", "_") # important, as I'd like to use sth like "_ l abbr r_" around abbreviations
     string <- abbreviation_internal(string, abbreviations)
   }
 ### ____________________________________________________________________________
@@ -239,12 +239,17 @@ to_any_case <- function(string,
 ## Turn mateches of `sep_in` into "_" and
 ## surround matches of the parsing by "_" (parsed_case)
   if (!case %in% c("swap", "random")) {
-    string <- preprocess_internal(string, sep_in)
+    
+    if(case == "none") {
+      string <- preprocess_internal(string, sep_in = sep_in)
+    }
     
     if (case != "none") {
       string <- to_parsed_case_internal(string,
                                         parsing_option = parsing_option,
-                                        numerals = numerals)
+                                        numerals = numerals,
+                                        abbreviations = abbreviations,
+                                        sep_in = sep_in)
     } else {
       string <- vapply(string, stringr::str_replace_all, "","_+", "_", 
                        USE.NAMES = FALSE) 

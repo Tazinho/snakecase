@@ -4,8 +4,8 @@
 \alias{to_parsed_case_internal}
 \title{Internal parser, which is relevant for preprocessing, parsing and parsing options}
 \usage{
-to_parsed_case_internal(string, parsing_option = 1L,
-  numerals = numerals)
+to_parsed_case_internal(string, parsing_option = 1L, numerals,
+  abbreviations, sep_in)
 }
 \arguments{
 \item{string}{A string.}
@@ -19,6 +19,10 @@ to_parsed_case_internal(string, parsing_option = 1L,
  }}
 
 \item{numerals}{A character specifying the alignment of numerals (\code{"middle"}, \code{left}, \code{right} or \code{asis}). I.e. \code{numerals = "left"} ensures that no output separator is in front of a digit.}
+
+\item{abbreviations}{A character string specifying abbreviations that should be marked to be recognized by later parsing.}
+
+\item{sep_in}{A character (regular expression) used to specify input separators.}
 }
 \value{
 A character vector separated by underscores, containing the parsed string.

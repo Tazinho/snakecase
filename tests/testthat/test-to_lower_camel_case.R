@@ -34,3 +34,8 @@ test_that("preserve-name-attribute",{
                                                            "c"))
   )
 })
+
+test_that("abbreviations", {
+  expect_equal(to_lower_camel_case("t2d_status", abbreviations = "t2d"),
+               "t2dStatus")
+})
