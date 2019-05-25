@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">snakecase</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.10.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.11.0</span>
       </span>
     </div>
 
@@ -118,9 +118,70 @@
       <small>Source: <a href='https://github.com/Tazinho/snakecase/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="snakecase-0109000" class="section level1">
+    <div id="snakecase-0110-250519" class="section level1">
 <h1 class="page-header">
-<a href="#snakecase-0109000" class="anchor"></a>snakecase 0.10.9000<small> Unreleased </small>
+<a href="#snakecase-0110-250519" class="anchor"></a>snakecase 0.11.0 (25.05.19)<small> Unreleased </small>
+</h1>
+<p><strong>Changes in 0.10.0 and 0.10.0.9000</strong></p>
+<p>New functionality:</p>
+<ul>
+<li>
+<strong>abbreviations</strong>: Abbreviations are now …
+<ul>
+<li>… matched case-insensitive inside of groups of conneceted lower/upper case sequences.</li>
+<li>… consistently formatted according to the supplied case.</li>
+<li>… formatted exactly as supplied for the cases title, mixed, lower and upper camel.</li>
+<li>… protected from the parsing. This means that
+<ul>
+<li>special characters in abbreviations don’t need to be taken care of anymore. The formatting of digits or special characters like hyphens, colons etc. will be formatted as specified.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<strong>parsing_option</strong>:
+<ul>
+<li>new parsing option 3 parses “SOmeNIceSTUFf”.</li>
+<li>parsing options starting with a minus (-1, -2, -3) interprete non-alphanumeric characters as word boundaries. E.g. “This.text” will stay “This.text” in upper camel case.</li>
+</ul>
+</li>
+<li>
+<strong>cases</strong>
+<ul>
+<li>
+<strong>title</strong>: New case which should be especially useful for automatic generation of proper labels within graphics or business reports. Builds up on sentence case which is wrapped within <code><a href="https://www.rdocumentation.org/packages/tools/topics/toTitleCase">tools::toTitleCase()</a></code>.</li>
+<li>
+<strong>random</strong>: New case, which will randomly convert letters into upper or lower case.</li>
+</ul>
+</li>
+<li>
+<strong>numerals</strong>: new alignment option <code>"tight"</code> which allows to suppress all underscores between numerals and letters.</li>
+<li>
+<strong>sep_out</strong>: <code>sep_out</code> gets proper vectorization. In case of <code>length(sep_out) &gt; 1</code> differing substrings are connected by the (possibly) differing elements of <code>sep_out</code>. Therefore, <code>sep_out</code> gets accordingly shortened or the last element of <code>sep_out</code> gets recycled to match the number of needed separators for each element of <code>string</code>.</li>
+<li>
+<strong>UTF8 Conversion</strong>: Input is now always converted to UTF-8 and returned as UTF8. Also the <code>transliterations</code> argument is now aware of non-UTF8 encoded input.</li>
+</ul>
+<p>Infrastructure:</p>
+<ul>
+<li>
+<strong>CII best practices badge</strong>: Achieved the criteria for the best practices badge. Current status is under <a href="https://bestpractices.coreinfrastructure.org/de/projects/2475" class="uri">https://bestpractices.coreinfrastructure.org/de/projects/2475</a><br>
+</li>
+<li>
+<strong>R Version</strong>: Increase from 3.1 to 3.2 regarding the usage of <code><a href="https://www.rdocumentation.org/packages/tools/topics/toTitleCase">tools::toTitleCase()</a></code> inside <code><a href="../reference/caseconverter.html">to_title_case()</a></code>.<br>
+</li>
+<li>
+<strong>Tests</strong>: Skip <code><a href="../reference/to_any_case.html">to_any_case()</a></code> tests (janitor-pkg-tests, transliterations and complex strings) when platform charset is not UTF-8 to resolve CRAN notification regarding character encoding.<br>
+</li>
+<li>
+<strong>Vignettes</strong>: The blog article “Introducing the snakecase package” was added as a vignette.<br>
+</li>
+<li>
+<strong>Documentation</strong>: The readme, the examples and the function documentation were updated according to the new functionality.</li>
+</ul>
+</div>
+    <div id="snakecase-01009000" class="section level1">
+<h1 class="page-header">
+<a href="#snakecase-01009000" class="anchor"></a>snakecase 0.10.0.9000<small> Unreleased </small>
 </h1>
 <ul>
 <li>
@@ -741,7 +802,8 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#snakecase-0109000">0.10.9000</a></li>
+        <li><a href="#snakecase-0110-250519">0.11.0</a></li>
+        <li><a href="#snakecase-01009000">0.10.0.9000</a></li>
         <li><a href="#snakecase-0100-160519">0.10.0</a></li>
         <li><a href="#snakecase-0929002">0.9.2.9002</a></li>
         <li><a href="#snakecase-092">0.9.2</a></li>
