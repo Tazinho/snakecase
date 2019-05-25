@@ -127,7 +127,7 @@ to_parsed_case("HAMBURGcity", parsing_option = 1)
 to_parsed_case("HAMBURGcity", parsing_option = 2)
 # By default (option 1) characters are converted after non alpha numeric characters.
 # To suppress this behaviour add a minus to the parsing_option
-to_upper_camel("lookBehindThe.dot", parsing_option = -1)
+to_upper_camel_case("lookBehindThe.dot", parsing_option = -1)
 # For some exotic cases parsing option 3 might be of interest
 to_parsed_case("PARSingOption3", parsing_option = 3)
 # There may be reasons to suppress the parsing

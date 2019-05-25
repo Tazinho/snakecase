@@ -128,8 +128,8 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>to_parsed_case_internal</span>(<span class='no'>string</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1L</span>,
-  <span class='kw'>numerals</span> <span class='kw'>=</span> <span class='no'>numerals</span>)</pre>
+    <pre class="usage"><span class='fu'>to_parsed_case_internal</span>(<span class='no'>string</span>, <span class='kw'>parsing_option</span> <span class='kw'>=</span> <span class='fl'>1L</span>, <span class='no'>numerals</span>,
+  <span class='no'>abbreviations</span>, <span class='no'>sep_in</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -150,6 +150,14 @@
     <tr>
       <th>numerals</th>
       <td><p>A character specifying the alignment of numerals (<code>"middle"</code>, <code>left</code>, <code>right</code> or <code>asis</code>). I.e. <code>numerals = "left"</code> ensures that no output separator is in front of a digit.</p></td>
+    </tr>
+    <tr>
+      <th>abbreviations</th>
+      <td><p>A character string specifying abbreviations that should be marked to be recognized by later parsing.</p></td>
+    </tr>
+    <tr>
+      <th>sep_in</th>
+      <td><p>A character (regular expression) used to specify input separators.</p></td>
     </tr>
     </table>
     

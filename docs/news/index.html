@@ -123,8 +123,28 @@
 <a href="#snakecase-0109000" class="anchor"></a>snakecase 0.10.9000<small> Unreleased </small>
 </h1>
 <ul>
-<li>changed title case to build up on sentence case instead of parsed_case.</li>
-<li>abbreviations are no matched case-insensitive and for title-, upper-camel-, lower-camel- and mixed case the supplied input specifies the formatting of the output.</li>
+<li>
+<strong>cases</strong>: Title case now builds up on sentence case (instead of parsed_case).</li>
+<li>
+<strong>abbreviations</strong>: Abbreviations are now
+<ul>
+<li>matched case-insensitive</li>
+<li>formatted as they are supplied for title-, upper-camel-, lower-camel- and mixed case. Apart of that abbreviations are still formatted according to the specified case.
+<ul>
+<li>protected from the parsing. This means that</li>
+<li>special characters in abbreviations don’t need to be excluded via a regex in the <code>sep_in</code> parameter</li>
+<li>the formatting of digits or special characters like hyphens, colons etc. will be formatted as specified.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<strong>parsing_option</strong>:
+<ul>
+<li>new parsing option 3 implemented which parses “SOmeNIceSTUFf”.</li>
+<li>each parsing option can now be prefixed by a minus (-1, -2, -3). In this way</li>
+</ul>
+</li>
 </ul>
 </div>
     <div id="snakecase-0100-160519" class="section level1">
