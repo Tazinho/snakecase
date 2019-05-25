@@ -1145,3 +1145,11 @@ test_that("individual abbreviations", {
   )
 })
 
+test_that("parsing_option 2", {
+  expect_equal(to_any_case("blaBLA", abbreviations = "BLA", parsing_option = 2),
+               "bla_bla")
+})
+test_that("parsing_option 3", {
+  expect_equal(to_any_case("blaBLA", abbreviations = "BLA", parsing_option = 3),
+               "bla_bla")
+})
