@@ -11,6 +11,8 @@ Status](https://img.shields.io/codecov/c/github/Tazinho/snakecase/master.svg)](h
 [![downloads](http://cranlogs.r-pkg.org/badges/snakecase)](http://cranlogs.r-pkg.org/)
 [![total](http://cranlogs.r-pkg.org/badges/grand-total/snakecase)](http://cranlogs.r-pkg.org/)
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
+[![CII Best
+Practices](https://bestpractices.coreinfrastructure.org/projects/2475/badge)](https://bestpractices.coreinfrastructure.org/projects/2475)
 
 ## Overview
 
