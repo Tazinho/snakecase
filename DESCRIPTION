@@ -17,7 +17,8 @@ Suggests:
     tibble,
     purrrlyr,
     knitr,
-    rmarkdown
+    rmarkdown,
+    magrittr
 URL: https://github.com/Tazinho/snakecase
 BugReports: https://github.com/Tazinho/snakecase/issues
 Encoding: UTF-8

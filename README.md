@@ -171,7 +171,7 @@ to_snake_case(c("HHcity", "IDtable1", "KEYtable2", "newUSelections"),
 ```
 
 To suppress conversion after a non-alphanumeric characters (except
-`"_"`), you can add a minus infront of the `parsing_option`, e.g.:
+`"_"`), you can add a minus in front of the `parsing_option`, e.g.:
 
 ``` r
 to_upper_camel_case("look_AfterThe-hyphen andThe.dot",
@@ -182,7 +182,7 @@ to_upper_camel_case("look_AfterThe-hyphen andThe.dot",
 
 And to suppress the parsing set `parsing_option = 0`.
 
-If you are interested in the implementaion of a specific
+If you are interested in the implementation of a specific
 `parsing_option`, please open an issue.
 
 ### Conversion
