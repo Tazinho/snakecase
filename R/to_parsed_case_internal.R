@@ -56,7 +56,9 @@ to_parsed_case_internal <- function(string, parsing_option = 1L, numerals, abbre
     string <- parsing_option_1(string = string, numerals = numerals, sep_in = sep_in)
   }
   if ((parsing_option == 1 | parsing_option == -1) & !is.null(abbreviations)) {
-    string <- parsing_option_1_abbr(string = string, numerals = numerals, sep_in = sep_in)
+    string_index <- stringr::str_detect(string, pattern = "\\s")
+    string[string_index] <- parsing_option_1_abbr(string = string[string_index], numerals = numerals, sep_in = sep_in)
+    string[!string_index] <- parsing_option_1(string = string[!string_index], numerals = numerals, sep_in = sep_in)
   }
   # case: 2 RRRStudioSStudioStudio -> RRRS_tudio_SS_tudio_Studio
   parsing_option_2 <- function(string, numerals, sep_in) {
@@ -90,7 +92,9 @@ to_parsed_case_internal <- function(string, parsing_option = 1L, numerals, abbre
     string <- parsing_option_2(string = string, numerals = numerals, sep_in = sep_in)
   }
   if ((parsing_option == 2 | parsing_option == -2) & !is.null(abbreviations)) {
-    string <- parsing_option_2_abbr(string = string, numerals = numerals, sep_in = sep_in)
+    string_index <- stringr::str_detect(string, pattern = "\\s")
+    string[string_index] <- parsing_option_2_abbr(string = string[string_index], numerals = numerals, sep_in = sep_in)
+    string[!string_index] <- parsing_option_2(string = string[!string_index], numerals = numerals, sep_in = sep_in)
   }
   # case: 3 RRRStudioSStudioStudio -> RRRStudio_SStudio_Studio
   parsing_option_3 <- function(string, numerals, sep_in) {
@@ -124,7 +128,10 @@ to_parsed_case_internal <- function(string, parsing_option = 1L, numerals, abbre
     string <- parsing_option_3(string, numerals, sep_in = sep_in)
   }
   if ((parsing_option == 3 | parsing_option == -3) & !is.null(abbreviations)) {
-    string <- parsing_option_3_abbr(string, numerals, sep_in = sep_in)
+    string_index <- stringr::str_detect(string, pattern = "\\s")
+    string[string_index] <- parsing_option_3_abbr(string = string[string_index], numerals = numerals, sep_in = sep_in)
+    string[!string_index] <- parsing_option_3(string = string[!string_index], numerals = numerals, sep_in = sep_in)
+    
   }
   # case:6 email1_2 -> email 1_2
   # if (parsing_option == 4) {
