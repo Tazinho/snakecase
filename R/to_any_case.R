@@ -96,7 +96,34 @@
 #' @keywords utilities
 #'
 #' @examples
-#' ### Cases
+#' ### abbreviations
+#' to_snake_case(c("HHcity", "newUSElections"), abbreviations = c("HH", "US"))
+#' to_upper_camel_case("succesfullGMBH", abbreviations = "GmbH")
+#' to_title_case("succesfullGMBH", abbreviations = "GmbH")
+#' 
+#' ### sep_in (input separator)
+#' string <- "R.St\u00FCdio: v.1.0.143"
+#' to_any_case(string)
+#' to_any_case(string, sep_in = ":|\\.")
+#' to_any_case(string, sep_in = ":|(?<!\\d)\\.")
+#'             
+#' ### parsing_option
+#' # the default option makes no sense in this setting
+#' to_parsed_case("HAMBURGcity", parsing_option = 1)
+#' # so the second parsing option is the way to address this example
+#' to_parsed_case("HAMBURGcity", parsing_option = 2)
+#' # By default (option 1) characters are converted after non alpha numeric characters.
+#' # To suppress this behaviour add a minus to the parsing_option
+#' to_upper_camel("lookBehindThe.dot", parsing_option = -1)
+#' # For some exotic cases parsing option 3 might be of interest
+#' to_parsed_case("PARSingOption3", parsing_option = 3)
+#' # There may be reasons to suppress the parsing
+#' to_any_case("HAMBURGcity", parsing_option = 0)
+#' 
+#' ### transliterations
+#' to_any_case("\u00E4ngstlicher Has\u00EA", transliterations = c("german", "Latin-ASCII"))
+#' 
+#' ### case
 #' strings <- c("this Is a Strange_string", "AND THIS ANOTHER_One")
 #' to_any_case(strings, case = "snake")
 #' to_any_case(strings, case = "lower_camel") # same as "small_camel"
@@ -105,51 +132,36 @@
 #' to_any_case(strings, case = "lower_upper")
 #' to_any_case(strings, case = "upper_lower")
 #' to_any_case(strings, case = "sentence")
+#' to_any_case(strings, case = "title")
 #' to_any_case(strings, case = "parsed")
 #' to_any_case(strings, case = "mixed")
-#' to_any_case(strings, case = "internal_parsing")
+#' to_any_case(strings, case = "swap")
+#' to_any_case(strings, case = "random")
 #' to_any_case(strings, case = "none")
+#' to_any_case(strings, case = "internal_parsing")
 #' 
-#' ### Parsing options
-#' # the default option makes no sense in this setting
-#' to_any_case("HAMBURGcity", case = "parsed", parsing_option = 1)
-#' # so the second parsing option is the way to address this example
-#' to_any_case("HAMBURGcity", case = "parsed", parsing_option = 2)
-#' # By default (option 1) characters are converted after non alpha numeric characters.
-#' # This option (3) suppresses this behaviour
-#' to_any_case("blaBla.bla", case = "big_camel", parsing_option = 3)
-#' # Numbers are always separated from characters via an underscore. 
-#' # To suppress this behaviour choose \code{numerals = "tight"}
-#' to_any_case("d3 library", case = "upper_camel", sep_out = " ", numerals = "tight")
-#' # there might be reasons to suppress the parsing, while choosing neither one or two
-#' to_any_case("HAMBURGcity", case = "parsed", parsing_option = 0)
+#' ### numerals
+#' to_snake_case("species42value 23month 7-8", numerals = "asis")
+#' to_snake_case("species42value 23month 7-8", numerals = "left")
+#' to_snake_case("species42value 23month 7-8", numerals = "right")
+#' to_snake_case("species42value 23month 7-8", numerals = "middle")
+#' to_snake_case("species42value 23month 7-8", numerals = "tight")
 #' 
-#' ### Abbreviations
-#' to_any_case(c("RSSfeedRSSfeed", "USPassport", "USpassport"), abbreviations = c("RSS", "US"))
+#' ### sep_out (output separator)
+#' string <- c("lowerCamelCase", "ALL_CAPS", "I-DontKNOWWhat_thisCASE_is")
+#' to_snake_case(string, sep_out = ".")
+#' to_mixed_case(string, sep_out = " ")
+#' to_screaming_snake_case(string, sep_out = "=")
 #' 
-#' ### Separator input
-#' string <- "R.St\u00FCdio: v.1.0.143"
-#' to_any_case(string)
-#' to_any_case(string, case = "snake", sep_in = ":|\\.")
-#' to_any_case(string, case = "snake",
-#'             sep_in = ":|(?<!\\d)\\.")
-#' 
-#' ### Transliterations
-#' to_any_case("\u00E4ngstlicher Has\u00EA", transliterations = c("german", "Latin-ASCII"))
-#' 
-#' ### sep_out
-#' strings2 <- c("this - Is_-: a Strange_string", "AND THIS ANOTHER_One")
-#' to_any_case(strings2, case = "snake", sep_in = "-|\\:", sep_out = " ")
-#' to_any_case(strings2, case = "big_camel", sep_in = "-|\\:", sep_out = "//")
-#' 
-#' ### Empty fill and unique sep
+#' ### empty_fill
 #' to_any_case(c("","",""), empty_fill = c("empty", "empty", "also empty"))
 #' 
+#' ### unique_sep
 #' to_any_case(c("same", "same", "same", "other"), unique_sep = c(">"))
 #' 
-#' ### Pre -and postfix
-#' to_any_case(strings2, case = "big_camel", sep_in = "-|\\:", sep_out = "//",
-#'             prefix = "USER://", postfix = ".exe")
+#' ### prefix and postfix
+#' to_upper_camel_case("some_path", sep_out = "//", 
+#'   prefix = "USER://", postfix = ".exe")
 #'
 #' @seealso \href{https://github.com/Tazinho/snakecase}{snakecase on github} or 
 #' \code{\link{caseconverter}} for some handy shortcuts.
