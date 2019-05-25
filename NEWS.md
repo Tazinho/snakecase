@@ -1,7 +1,15 @@
 # snakecase 0.10.9000
 
-* changed title case to build up on sentence case instead of parsed_case.
-* abbreviations are no matched case-insensitive and for title-, upper-camel-, lower-camel- and mixed case the supplied input specifies the formatting of the output. 
+* **cases**: Title case now builds up on sentence case (instead of parsed_case).
+* **abbreviations**: Abbreviations are now
+  * matched case-insensitive
+  * formatted as they are supplied for title-, upper-camel-, lower-camel- and mixed case. Apart of that abbreviations are still formatted according to the specified case.
+    * protected from the parsing. This means that 
+    * special characters in abbreviations don't need to be excluded via a regex in the `sep_in` parameter
+    * the formatting of digits or special characters like hyphens, colons etc. will be formatted as specified. 
+* **parsing_option**: 
+  * new parsing option 3 implemented which parses "SOmeNIceSTUFf". 
+  * each parsing option can now be prefixed by a minus (-1, -2, -3). In this way
 
 # snakecase 0.10.0 (16.05.19)
 
