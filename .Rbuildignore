@@ -17,3 +17,4 @@
 ^.github$
 .github
 ^CRAN-RELEASE$
+^LICENSE\.md$
