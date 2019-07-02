@@ -3,4 +3,4 @@ data/* binary
 src/* text=lf
 R/* text=lf
 * linguist-vendored
-*.js linguist-vendored=false
+*.r linguist-vendored=false
