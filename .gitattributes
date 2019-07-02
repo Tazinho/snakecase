@@ -2,5 +2,4 @@
 data/* binary
 src/* text=lf
 R/* text=lf
-* linguist-vendored
-*.r linguist-vendored=false
+*.HTML linguist-language=R
