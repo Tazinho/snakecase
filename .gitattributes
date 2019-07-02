@@ -2,4 +2,4 @@
 data/* binary
 src/* text=lf
 R/* text=lf
-*.HTML linguist-language=R
+*.html linguist-language=R
