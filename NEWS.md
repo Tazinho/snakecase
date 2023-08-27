@@ -1,3 +1,7 @@
+# snakecase 0.11.1 (27.08.23)
+
+* Fix getRversion type (requested by CRAN)
+
 # snakecase 0.11.0 (25.05.19)
 
 **Changes in 0.10.0 and 0.10.0.9000**
