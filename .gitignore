@@ -3,6 +3,8 @@
 .RData
 .Ruserdata
 packrat/lib*/
+renv
+renv.lock
 inst/doc
 packrat/src/
 /revdep/.cache.rds

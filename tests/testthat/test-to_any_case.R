@@ -944,7 +944,7 @@ test_that("special_input", {
 })
 
 test_that("special_input_2", {
-  skip_if(getRversion() < 3.4)
+  skip_if(getRversion() < "3.4")
   # atomics
   expect_equal(to_any_case(character()), character())
   expect_error(to_any_case(logical()), "argument is not a character vector", fixed = TRUE)
