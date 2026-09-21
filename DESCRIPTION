@@ -19,7 +19,7 @@ Suggests:
     knitr,
     rmarkdown,
     magrittr
-URL: https://github.com/Tazinho/snakecase
+URL: https://tazinho.github.io/snakecase/, https://github.com/Tazinho/snakecase
 BugReports: https://github.com/Tazinho/snakecase/issues
 Encoding: UTF-8
 License: GPL-3
