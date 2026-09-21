@@ -4,14 +4,22 @@
 \alias{to_any_case}
 \title{General case conversion}
 \usage{
-to_any_case(string, case = c("snake", "small_camel", "big_camel",
-  "screaming_snake", "parsed", "mixed", "lower_upper", "upper_lower",
-  "swap", "all_caps", "lower_camel", "upper_camel", "internal_parsing",
-  "none", "flip", "sentence", "random", "title"), abbreviations = NULL,
-  sep_in = "[^[:alnum:]]", parsing_option = 1,
-  transliterations = NULL, numerals = c("middle", "left", "right",
-  "asis", "tight"), sep_out = NULL, unique_sep = NULL,
-  empty_fill = NULL, prefix = "", postfix = "")
+to_any_case(
+  string,
+  case = c("snake", "small_camel", "big_camel", "screaming_snake", "parsed", "mixed",
+    "lower_upper", "upper_lower", "swap", "all_caps", "lower_camel", "upper_camel",
+    "internal_parsing", "none", "flip", "sentence", "random", "title"),
+  abbreviations = NULL,
+  sep_in = "[^[:alnum:]]",
+  parsing_option = 1,
+  transliterations = NULL,
+  numerals = c("middle", "left", "right", "asis", "tight"),
+  sep_out = NULL,
+  unique_sep = NULL,
+  empty_fill = NULL,
+  prefix = "",
+  postfix = ""
+)
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
@@ -67,7 +75,7 @@ the strings into substrings and specify the word boundaries.}
 \itemize{
  \item{1: \code{"RRRStudio" -> "RRR_Studio"}}
  \item{2: \code{"RRRStudio" -> "RRRS_tudio"}}
- \item{3: \code{"RRRStudio" -> "RRRSStudio"}. This will become for example \code{"Rrrstudio"} when we convert to lower camel case.}
+ \item{3: \code{"RRRStudio" -> "RRRStudio"}. This will become for example \code{"Rrrstudio"} when we convert to lower camel case.}
  \item{-1, -2, -3: These \code{parsing_options}'s will suppress the conversion after non-alphanumeric values.}
  \item{0: no parsing}
  }}
@@ -115,7 +123,7 @@ to_upper_camel_case("succesfullGMBH", abbreviations = "GmbH")
 to_title_case("succesfullGMBH", abbreviations = "GmbH")
 
 ### sep_in (input separator)
-string <- "R.St\\u00FCdio: v.1.0.143"
+string <- "R.St\u00FCdio: v.1.0.143"
 to_any_case(string)
 to_any_case(string, sep_in = ":|\\\\.")
 to_any_case(string, sep_in = ":|(?<!\\\\d)\\\\.")
@@ -134,7 +142,7 @@ to_parsed_case("PARSingOption3", parsing_option = 3)
 to_any_case("HAMBURGcity", parsing_option = 0)
 
 ### transliterations
-to_any_case("\\u00E4ngstlicher Has\\u00EA", transliterations = c("german", "Latin-ASCII"))
+to_any_case("\u00E4ngstlicher Has\u00EA", transliterations = c("german", "Latin-ASCII"))
 
 ### case
 strings <- c("this Is a Strange_string", "AND THIS ANOTHER_One")

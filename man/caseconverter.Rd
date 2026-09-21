@@ -16,65 +16,173 @@
 \alias{to_title_case}
 \title{Specific case converter shortcuts}
 \usage{
-to_snake_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
-  parsing_option = 1, transliterations = NULL, numerals = "middle",
-  sep_out = NULL, unique_sep = NULL, empty_fill = NULL,
-  prefix = "", postfix = "")
+to_snake_case(
+  string,
+  abbreviations = NULL,
+  sep_in = "[^[:alnum:]]",
+  parsing_option = 1,
+  transliterations = NULL,
+  numerals = "middle",
+  sep_out = NULL,
+  unique_sep = NULL,
+  empty_fill = NULL,
+  prefix = "",
+  postfix = ""
+)
 
-to_lower_camel_case(string, abbreviations = NULL,
-  sep_in = "[^[:alnum:]]", parsing_option = 1,
-  transliterations = NULL, numerals = "middle", sep_out = NULL,
-  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
+to_lower_camel_case(
+  string,
+  abbreviations = NULL,
+  sep_in = "[^[:alnum:]]",
+  parsing_option = 1,
+  transliterations = NULL,
+  numerals = "middle",
+  sep_out = NULL,
+  unique_sep = NULL,
+  empty_fill = NULL,
+  prefix = "",
+  postfix = ""
+)
 
-to_upper_camel_case(string, abbreviations = NULL,
-  sep_in = "[^[:alnum:]]", parsing_option = 1,
-  transliterations = NULL, numerals = "middle", sep_out = NULL,
-  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
+to_upper_camel_case(
+  string,
+  abbreviations = NULL,
+  sep_in = "[^[:alnum:]]",
+  parsing_option = 1,
+  transliterations = NULL,
+  numerals = "middle",
+  sep_out = NULL,
+  unique_sep = NULL,
+  empty_fill = NULL,
+  prefix = "",
+  postfix = ""
+)
 
-to_screaming_snake_case(string, abbreviations = NULL,
-  sep_in = "[^[:alnum:]]", parsing_option = 1,
-  transliterations = NULL, numerals = "middle", sep_out = NULL,
-  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
+to_screaming_snake_case(
+  string,
+  abbreviations = NULL,
+  sep_in = "[^[:alnum:]]",
+  parsing_option = 1,
+  transliterations = NULL,
+  numerals = "middle",
+  sep_out = NULL,
+  unique_sep = NULL,
+  empty_fill = NULL,
+  prefix = "",
+  postfix = ""
+)
 
-to_parsed_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
-  parsing_option = 1, transliterations = NULL, numerals = "middle",
-  sep_out = NULL, unique_sep = NULL, empty_fill = NULL,
-  prefix = "", postfix = "")
+to_parsed_case(
+  string,
+  abbreviations = NULL,
+  sep_in = "[^[:alnum:]]",
+  parsing_option = 1,
+  transliterations = NULL,
+  numerals = "middle",
+  sep_out = NULL,
+  unique_sep = NULL,
+  empty_fill = NULL,
+  prefix = "",
+  postfix = ""
+)
 
-to_mixed_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
-  parsing_option = 1, transliterations = NULL, numerals = "middle",
-  sep_out = NULL, unique_sep = NULL, empty_fill = NULL,
-  prefix = "", postfix = "")
+to_mixed_case(
+  string,
+  abbreviations = NULL,
+  sep_in = "[^[:alnum:]]",
+  parsing_option = 1,
+  transliterations = NULL,
+  numerals = "middle",
+  sep_out = NULL,
+  unique_sep = NULL,
+  empty_fill = NULL,
+  prefix = "",
+  postfix = ""
+)
 
-to_lower_upper_case(string, abbreviations = NULL,
-  sep_in = "[^[:alnum:]]", parsing_option = 1,
-  transliterations = NULL, numerals = "middle", sep_out = NULL,
-  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
+to_lower_upper_case(
+  string,
+  abbreviations = NULL,
+  sep_in = "[^[:alnum:]]",
+  parsing_option = 1,
+  transliterations = NULL,
+  numerals = "middle",
+  sep_out = NULL,
+  unique_sep = NULL,
+  empty_fill = NULL,
+  prefix = "",
+  postfix = ""
+)
 
-to_upper_lower_case(string, abbreviations = NULL,
-  sep_in = "[^[:alnum:]]", parsing_option = 1,
-  transliterations = NULL, numerals = "middle", sep_out = NULL,
-  unique_sep = NULL, empty_fill = NULL, prefix = "", postfix = "")
+to_upper_lower_case(
+  string,
+  abbreviations = NULL,
+  sep_in = "[^[:alnum:]]",
+  parsing_option = 1,
+  transliterations = NULL,
+  numerals = "middle",
+  sep_out = NULL,
+  unique_sep = NULL,
+  empty_fill = NULL,
+  prefix = "",
+  postfix = ""
+)
 
-to_swap_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
-  parsing_option = 1, transliterations = NULL, numerals = "middle",
-  sep_out = NULL, unique_sep = NULL, empty_fill = NULL,
-  prefix = "", postfix = "")
+to_swap_case(
+  string,
+  abbreviations = NULL,
+  sep_in = "[^[:alnum:]]",
+  parsing_option = 1,
+  transliterations = NULL,
+  numerals = "middle",
+  sep_out = NULL,
+  unique_sep = NULL,
+  empty_fill = NULL,
+  prefix = "",
+  postfix = ""
+)
 
-to_sentence_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
-  parsing_option = 1, transliterations = NULL, numerals = "middle",
-  sep_out = NULL, unique_sep = NULL, empty_fill = NULL,
-  prefix = "", postfix = "")
+to_sentence_case(
+  string,
+  abbreviations = NULL,
+  sep_in = "[^[:alnum:]]",
+  parsing_option = 1,
+  transliterations = NULL,
+  numerals = "middle",
+  sep_out = NULL,
+  unique_sep = NULL,
+  empty_fill = NULL,
+  prefix = "",
+  postfix = ""
+)
 
-to_random_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
-  parsing_option = 1, transliterations = NULL, numerals = "middle",
-  sep_out = NULL, unique_sep = NULL, empty_fill = NULL,
-  prefix = "", postfix = "")
+to_random_case(
+  string,
+  abbreviations = NULL,
+  sep_in = "[^[:alnum:]]",
+  parsing_option = 1,
+  transliterations = NULL,
+  numerals = "middle",
+  sep_out = NULL,
+  unique_sep = NULL,
+  empty_fill = NULL,
+  prefix = "",
+  postfix = ""
+)
 
-to_title_case(string, abbreviations = NULL, sep_in = "[^[:alnum:]]",
-  parsing_option = 1, transliterations = NULL, numerals = "middle",
-  sep_out = NULL, unique_sep = NULL, empty_fill = NULL,
-  prefix = "", postfix = "")
+to_title_case(
+  string,
+  abbreviations = NULL,
+  sep_in = "[^[:alnum:]]",
+  parsing_option = 1,
+  transliterations = NULL,
+  numerals = "middle",
+  sep_out = NULL,
+  unique_sep = NULL,
+  empty_fill = NULL,
+  prefix = "",
+  postfix = ""
+)
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
@@ -161,8 +269,6 @@ to_title_case(strings)
 \href{https://github.com/Tazinho/snakecase}{snakecase on github}, \code{\link{to_any_case}} for flexible high level conversion and more examples.
 }
 \author{
-Malte Grosser, \email{malte.grosser@gmail.com}
-
 Malte Grosser, \email{malte.grosser@gmail.com}
 }
 \keyword{utilities}

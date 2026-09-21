@@ -4,9 +4,17 @@
 \alias{check_design_rule}
 \title{Internal helper to test the design rules for any string and setting of \code{to_any_case()}}
 \usage{
-check_design_rule(string, sep_in = NULL, transliterations = NULL,
-  sep_out = NULL, prefix = "", postfix = "", unique_sep = NULL,
-  empty_fill = NULL, parsing_option = 1)
+check_design_rule(
+  string,
+  sep_in = NULL,
+  transliterations = NULL,
+  sep_out = NULL,
+  prefix = "",
+  postfix = "",
+  unique_sep = NULL,
+  empty_fill = NULL,
+  parsing_option = 1
+)
 }
 \arguments{
 \item{string}{A string (for example names of a data frame).}
